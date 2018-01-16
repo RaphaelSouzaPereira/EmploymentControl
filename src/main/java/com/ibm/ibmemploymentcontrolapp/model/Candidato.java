@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.ibm.treinamento.exercicio.ibmemploymentcontrolapp.model;
+package com.ibm.ibmemploymentcontrolapp.model;
 
 import java.io.Serializable;
 import java.util.Collection;

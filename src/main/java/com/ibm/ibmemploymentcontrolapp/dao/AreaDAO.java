@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.ibm.ibmemploymentcontrol.dao;
+package com.ibm.ibmemploymentcontrolapp.dao;
 
-import br.com.ibm.ibmemploymentcontrol.beans.AreaBean;
-import br.com.ibm.ibmemploymentcontrol.models.Area;
+import com.ibm.ibmemploymentcontrolapp.beans.AreaBean;
+import com.ibm.ibmemploymentcontrolapp.model.Area;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;

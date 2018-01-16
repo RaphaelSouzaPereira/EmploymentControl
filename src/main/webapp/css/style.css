@@ -1,0 +1,20 @@
+.menu {
+  background-color: #000;
+  box-sizing: border-box;
+}
+
+.menu-item {
+  width: 25%;
+  text-align: center;
+}
+
+.menu-link {
+  padding: 1.4rem 1rem;
+  color: #fff;
+  border-bottom: 3px solid #000;
+}
+
+.menu-link:hover {
+  color: #aeaeae;
+  border-bottom: 3px solid rgb(0,120,215);
+}
