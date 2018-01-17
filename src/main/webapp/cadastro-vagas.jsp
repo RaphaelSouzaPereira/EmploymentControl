@@ -37,7 +37,7 @@
             <div class="row">
                 <div class="offset-1 col-10">
                     <!-- TODO: Ajustar o action do form para a camada de inserção no banco -->
-                    <form class="cadastra-vagas" action="" method="post" onchange="validaCamposDeCadastroDeVagas()">
+                    <form class="cadastra-vagas" action="./ControlServlet" method="post" onchange="validaCamposDeCadastroDeVagas()">
                         <div class="form-row">
                             <div class="form-group col-3">
                                 <label for="inputCategoria">Categoria:</label>
