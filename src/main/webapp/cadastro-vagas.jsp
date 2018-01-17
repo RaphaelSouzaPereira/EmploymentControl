@@ -149,7 +149,9 @@
                             </div>
                             <div class="form-group col-3">
                                 <label for="inputImpacto">Impacto Financeiro:</label>
+
                                 <input type="number" min="1" step="any" class="form-control" id="inputImpacto" placeholder="Impacto" name="impacto_financeiro">
+
                             </div>
                         </div>
 
