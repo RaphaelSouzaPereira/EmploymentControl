@@ -15,7 +15,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 public class TecnologiaBean implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 7553779831676874461L;
+
     private Integer id;
     private String nome;
     private Collection<VagaBean> vagaCollection;

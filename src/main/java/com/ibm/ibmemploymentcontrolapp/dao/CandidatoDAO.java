@@ -15,12 +15,15 @@ import org.modelmapper.ModelMapper;
 
 /**
  *
- * @author FabioHenriqueGoulart
+
+ * @author PedroFranceschinideF
+
  */
 public class CandidatoDAO {
     
     private EntityManager em;
     private final ModelMapper modelMapper;
+
 
     public CandidatoDAO(EntityManager em) {
         this.em = em;
@@ -50,3 +53,5 @@ public class CandidatoDAO {
     }
 
 }
+
+    

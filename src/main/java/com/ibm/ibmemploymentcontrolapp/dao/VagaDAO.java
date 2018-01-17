@@ -15,6 +15,7 @@ import org.modelmapper.ModelMapper;
 
 /**
  *
+
  * @author FabioHenriqueGoulart
  */
 public class VagaDAO {
@@ -22,26 +23,36 @@ public class VagaDAO {
     private EntityManager em;
     private final ModelMapper modelMapper;
 
+
+
     public VagaDAO(EntityManager em) {
         this.em = em;
         this.modelMapper = new ModelMapper();
     }
-    
-    public void salvarVaga(VagaBean c){
-        Vaga destObject = modelMapper.map(c, Vaga.class); 
-        em.persist(destObject);
+
+
+    public void salvarVaga(VagaBean v) {
+        Vaga objDestino = modelMapper.map(v, Vaga.class);
+        em.persist(objDestino);
+
     }
     
     public List<VagaBean> listarVagas() {
 
-        Query query = em.createNamedQuery("Vaga.findAll");
-        List<VagaBean> listVagas = new ArrayList<VagaBean>();
-                
-        for (Vaga candidato : (List<Vaga>) query.getResultList()) {
-            listVagas.add(modelMapper.map(candidato, VagaBean.class));
-        }
 
-        return listVagas;
+    public List<VagaBean> listarVagas() {
+
+        Query query = em.createNamedQuery("Vaga.findAll");
+        List<VagaBean> listarVagasBean = new ArrayList<>();
+
+        for (Vaga vagas : (List<Vaga>) query.getResultList()) {
+
+            listarVagasBean.add(modelMapper.map(vagas, VagaBean.class));
+
+        }
+        return listarVagasBean;
+
+
     }
-    
+
 }
