@@ -15,35 +15,43 @@ import org.modelmapper.ModelMapper;
 
 /**
  *
+
  * @author PedroFranceschinideF
+
  */
 public class CandidatoDAO {
     
     private EntityManager em;
     private final ModelMapper modelMapper;
-    
-    public CandidatoDAO(EntityManager em){
+
+
+    public CandidatoDAO(EntityManager em) {
         this.em = em;
         this.modelMapper = new ModelMapper();
     }
     
     public void salvarCandidato(CandidatoBean c){
-   
-        Candidato objDestino = modelMapper.map(c, Candidato.class); 
-        em.persist(objDestino);
+        Candidato destObject = modelMapper.map(c, Candidato.class); 
+        em.persist(destObject);
     }
     
-    public List <CandidatoBean> listarCandidatos(){
-        
+    public void deletarCandidato(CandidatoBean cb) {
+        Candidato destObject = modelMapper.map(cb, Candidato.class);
+        em.remove(destObject);
+    }
+
+    public List<CandidatoBean> listarCandidatos() {
+
         Query query = em.createNamedQuery("Candidato.findAll");
-        List <CandidatoBean> listarCandidatosBean = new ArrayList<>();
-        
-        for (Candidato candidatos : (List <Candidato>)query.getResultList()){
-            
-            listarCandidatosBean.add(modelMapper.map(candidatos,CandidatoBean.class));
+        List<CandidatoBean> listCandidatos = new ArrayList<>();
+                
+        for (Candidato candidato : (List<Candidato>) query.getResultList()) {
+            listCandidatos.add(modelMapper.map(candidato, CandidatoBean.class));
         }
-        return listarCandidatosBean; 
-   
-   }
-    
+
+        return listCandidatos;
+    }
+
 }
+
+    
