@@ -19,33 +19,28 @@ import org.modelmapper.ModelMapper;
  */
 public class TecnologiaDAO {
 
-    private ModelMapper modelMapper;
     private EntityManager em;
-    private Query query;
+    private final ModelMapper modelMapper;
 
-    public TecnologiaDAO(EntityManager em, Query query) {
+    public TecnologiaDAO(EntityManager em) {
         this.em = em;
-        this.query = query;
+        this.modelMapper = new ModelMapper();
     }
-
-    public void save(TecnologiaBean tb) {
-        Tecnologia destObject = modelMapper.map(tb, Tecnologia.class);
+    
+    public void salvarTecnologia(TecnologiaBean c){
+        Tecnologia destObject = modelMapper.map(c, Tecnologia.class); 
         em.persist(destObject);
     }
+    
+    public List<TecnologiaBean> listarTecnologias() {
 
-    public void delete(TecnologiaBean tb) {
-        Tecnologia destObject = modelMapper.map(tb, Tecnologia.class);
-        em.remove(destObject);
-    }
-
-    public List<TecnologiaBean> list() {
-        query = em.createNamedQuery("Tecnologia.findAll");
-        List<TecnologiaBean> listTecnologiaBean = new ArrayList<TecnologiaBean>();
-
-        for (Tecnologia itemLst : (List<Tecnologia>) query.getResultList()) {
-            listTecnologiaBean.add(modelMapper.map(itemLst, TecnologiaBean.class));
+        Query query = em.createNamedQuery("Tecnologia.findAll");
+        List<TecnologiaBean> listTecnologias = new ArrayList<TecnologiaBean>();
+                
+        for (Tecnologia candidato : (List<Tecnologia>) query.getResultList()) {
+            listTecnologias.add(modelMapper.map(candidato, TecnologiaBean.class));
         }
 
-        return listTecnologiaBean;
+        return listTecnologias;
     }
 }
