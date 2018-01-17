@@ -15,39 +15,43 @@ import org.modelmapper.ModelMapper;
 
 /**
  *
- * @author DiegoCansiMatte
+
+ * @author PedroFranceschinideF
+
  */
 public class CandidatoDAO {
-
-    private ModelMapper modelMapper;
+    
     private EntityManager em;
-    private Query query;
+    private final ModelMapper modelMapper;
 
-    public CandidatoDAO(EntityManager em, Query query) {
+
+    public CandidatoDAO(EntityManager em) {
         this.em = em;
-        this.query = query;
+        this.modelMapper = new ModelMapper();
     }
-
-    public void save(CandidatoBean ab) {
-        Candidato destObject = modelMapper.map(ab, Candidato.class);
+    
+    public void salvarCandidato(CandidatoBean c){
+        Candidato destObject = modelMapper.map(c, Candidato.class); 
         em.persist(destObject);
     }
-
-    public void delete(CandidatoBean ab) {
-        Candidato destObject = modelMapper.map(ab, Candidato.class);
+    
+    public void deletarCandidato(CandidatoBean cb) {
+        Candidato destObject = modelMapper.map(cb, Candidato.class);
         em.remove(destObject);
     }
 
-    public List<CandidatoBean> list() {
-        query = em.createNamedQuery("Candidato.findAll");
-        List<CandidatoBean> listCandidatoBean = new ArrayList<CandidatoBean>();
+    public List<CandidatoBean> listarCandidatos() {
 
-        for (Candidato itemLst : (List<Candidato>) query.getResultList()) {
-            listCandidatoBean.add(modelMapper.map(itemLst, CandidatoBean.class));
+        Query query = em.createNamedQuery("Candidato.findAll");
+        List<CandidatoBean> listCandidatos = new ArrayList<>();
+                
+        for (Candidato candidato : (List<Candidato>) query.getResultList()) {
+            listCandidatos.add(modelMapper.map(candidato, CandidatoBean.class));
         }
 
-        return listCandidatoBean;
-
+        return listCandidatos;
     }
 
 }
+
+    

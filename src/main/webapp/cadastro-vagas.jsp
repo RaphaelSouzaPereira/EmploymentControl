@@ -163,9 +163,32 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary" id="btn-salvar-cadastro" disabled>Salvar</button>
                             <!-- TODO: Ajustar o botão Cancelar -->
-                            <button type="button" class="btn btn-default" id="reset" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-default" id="reset" data-toggle="modal" data-target="#myModal">Cancelar</button>
                         </div>
                     </form>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!--                                    <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                                    <h4 class="modal-title">Tem certeza?</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Esta ação irá descartar os dados do formulário.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" 
+                                            onClick="redireciona('index.jsp')">Sim</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

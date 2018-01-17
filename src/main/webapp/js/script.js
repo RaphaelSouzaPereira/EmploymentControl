@@ -38,4 +38,6 @@ function redirectToHome() {
     window.location.replace("./teste");
 }
 
-
+function redireciona(url) {
+    window.location.href = url;
+}

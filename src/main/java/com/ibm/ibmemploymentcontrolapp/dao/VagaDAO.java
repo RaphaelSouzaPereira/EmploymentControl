@@ -15,38 +15,41 @@ import org.modelmapper.ModelMapper;
 
 /**
  *
- * @author DiegoCansiMatte
+
+ * @author FabioHenriqueGoulart
  */
 public class VagaDAO {
     
-    private ModelMapper modelMapper;
     private EntityManager em;
-    private Query query;
+    private final ModelMapper modelMapper;
 
-    public VagaDAO(EntityManager em, Query query) {
+
+
+    public VagaDAO(EntityManager em) {
         this.em = em;
-        this.query = query;
+        this.modelMapper = new ModelMapper();
     }
 
-    public void save(VagaBean tb) {
-        Vaga destObject = modelMapper.map(tb, Vaga.class);
-        em.persist(destObject);
-    }
 
-    public void delete(VagaBean tb) {
-        Vaga destObject = modelMapper.map(tb, Vaga.class);
-        em.remove(destObject);
-    }
+    public void salvarVaga(VagaBean v) {
+        Vaga objDestino = modelMapper.map(v, Vaga.class);
+        em.persist(objDestino);
 
-    public List<VagaBean> list() {
-        query = em.createNamedQuery("Vaga.findAll");
-        List<VagaBean> listTecnologiaBean = new ArrayList<VagaBean>();
-
-        for (Vaga itemLst : (List<Vaga>) query.getResultList()) {
-            listTecnologiaBean.add(modelMapper.map(itemLst, VagaBean.class));
-        }
-
-        return listTecnologiaBean;
     }
     
+    public List<VagaBean> listarVagas() {
+
+        Query query = em.createNamedQuery("Vaga.findAll");
+        List<VagaBean> listarVagasBean = new ArrayList<>();
+
+        for (Vaga vagas : (List<Vaga>) query.getResultList()) {
+
+            listarVagasBean.add(modelMapper.map(vagas, VagaBean.class));
+
+        }
+        return listarVagasBean;
+
+
+    }
+
 }
