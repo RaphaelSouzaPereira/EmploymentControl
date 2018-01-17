@@ -163,16 +163,45 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Salvar</button>
                             <!-- TODO: Ajustar o botão Cancelar -->
-                            <button type="button" class="btn btn-default" id="reset" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-default" id="reset" data-toggle="modal" data-target="#myModal">Cancelar</button>
                         </div>
                     </form>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!--                                    <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                                    <h4 class="modal-title">Tem certeza?</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Esta ação irá descartar os dados do formulário.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" 
+                                            onClick="redireciona('index.jsp')">Sim</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        function redireciona(url) {
+            window.location.href = url;
+        }
+    </script>
 </body>
 </html>
