@@ -42,8 +42,7 @@ public class VagaBean implements Serializable {
     private AreaBean area;
     private TecnologiaBean tecnologia;
 
-    public VagaBean(Integer id, String status, Integer pmp, Date dataDeAbertura, Date expectativaDeEntrada, Integer expectativaDeAbertura, String banda, String tipo, String detalhe, Date aprovacaoBoardBrasil, Integer desdeAberturaBrasil, Date aprovacaoBoardGlobal, Integer desdeAberturaGlobal, String profissionalSelecionado, Date entrouNaOperacao, Integer desdeAberturaAprovacao, Double rate, Integer desdeExpectativa, Double impactoFinanceiro, String comentario, String categoria, Collection<CandidatoBean> candidatoCollection, AreaBean area, TecnologiaBean tecnologia) {
-        this.id = id;
+    public VagaBean(String status, Integer pmp, Date dataDeAbertura, Date expectativaDeEntrada, Integer expectativaDeAbertura, String banda, String tipo, String detalhe, Date aprovacaoBoardBrasil, Integer desdeAberturaBrasil, Date aprovacaoBoardGlobal, Integer desdeAberturaGlobal, String profissionalSelecionado, Date entrouNaOperacao, Integer desdeAberturaAprovacao, Double rate, Integer desdeExpectativa, Double impactoFinanceiro, String comentario, String categoria, Collection<CandidatoBean> candidatoCollection, AreaBean area, TecnologiaBean tecnologia) {
         this.status = status;
         this.pmp = pmp;
         this.dataDeAbertura = dataDeAbertura;

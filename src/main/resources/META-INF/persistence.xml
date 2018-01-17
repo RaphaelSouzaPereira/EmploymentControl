@@ -11,7 +11,7 @@
         <class>br.com.ibm.ibmemploymentcontrol.model.Tecnologia</class>
         <class>br.com.ibm.ibmemploymentcontrol.model.Vaga</class>
         
-      <!--<property name="javax.persistence.schema-generation.database.action" value="create"/>-->-->
+      <!--<property name="javax.persistence.schema-generation.database.action" value="create"/>-->
       <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://us-cdbr-sl-dfw-01.cleardb.net:3306/ibmx_77866116d611e98?zeroDateTimeBehavior=convertToNull" />

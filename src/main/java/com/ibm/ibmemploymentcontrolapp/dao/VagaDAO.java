@@ -22,6 +22,7 @@ public class VagaDAO {
     
     private EntityManager em;
     private final ModelMapper modelMapper;
+    
 
 
 
@@ -37,9 +38,6 @@ public class VagaDAO {
 
     }
     
-    public List<VagaBean> listarVagas() {
-
-
     public List<VagaBean> listarVagas() {
 
         Query query = em.createNamedQuery("Vaga.findAll");
