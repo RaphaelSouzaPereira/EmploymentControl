@@ -15,39 +15,35 @@ import org.modelmapper.ModelMapper;
 
 /**
  *
- * @author DiegoCansiMatte
+ * @author PedroFranceschinideF
  */
 public class CandidatoDAO {
-
-    private ModelMapper modelMapper;
+    
     private EntityManager em;
-    private Query query;
-
-    public CandidatoDAO(EntityManager em, Query query) {
+    private final ModelMapper modelMapper;
+    
+    public CandidatoDAO(EntityManager em){
         this.em = em;
-        this.query = query;
+        this.modelMapper = new ModelMapper();
     }
-
-    public void save(CandidatoBean ab) {
-        Candidato destObject = modelMapper.map(ab, Candidato.class);
-        em.persist(destObject);
+    
+    public void salvarCandidato(CandidatoBean c){
+   
+        Candidato objDestino = modelMapper.map(c, Candidato.class); 
+        em.persist(objDestino);
     }
-
-    public void delete(CandidatoBean ab) {
-        Candidato destObject = modelMapper.map(ab, Candidato.class);
-        em.remove(destObject);
-    }
-
-    public List<CandidatoBean> list() {
-        query = em.createNamedQuery("Candidato.findAll");
-        List<CandidatoBean> listCandidatoBean = new ArrayList<CandidatoBean>();
-
-        for (Candidato itemLst : (List<Candidato>) query.getResultList()) {
-            listCandidatoBean.add(modelMapper.map(itemLst, CandidatoBean.class));
+    
+    public List <CandidatoBean> listarCandidatos(){
+        
+        Query query = em.createNamedQuery("Candidato.findAll");
+        List <CandidatoBean> listarCandidatosBean = new ArrayList<>();
+        
+        for (Candidato candidatos : (List <Candidato>)query.getResultList()){
+            
+            listarCandidatosBean.add(modelMapper.map(candidatos,CandidatoBean.class));
         }
-
-        return listCandidatoBean;
-
-    }
-
+        return listarCandidatosBean; 
+   
+   }
+    
 }
