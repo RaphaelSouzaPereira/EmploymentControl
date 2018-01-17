@@ -3,23 +3,22 @@
   
     
     <persistence-unit name="com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <!--<jta-data-source>java:app/Test_test</jta-data-source>--> //deixar comentado por ora, pois nao estamos usando JTA
-    
-        <class>br.com.ibm.ibmemploymentcontrol.model.Area</class>
-        <class>br.com.ibm.ibmemploymentcontrol.model.Candidato</class>
-        <class>br.com.ibm.ibmemploymentcontrol.model.Tecnologia</class>
-        <class>br.com.ibm.ibmemploymentcontrol.model.Vaga</class>
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+            
+        <class>br.com.ibm.ibmemploymentcontrolapp.model.Area</class>
+        <class>br.com.ibm.ibmemploymentcontrolapp.model.Candidato</class>
+        <class>br.com.ibm.ibmemploymentcontrolapp.model.Tecnologia</class>
+        <class>br.com.ibm.ibmemploymentcontrolapp.model.Vaga</class>
         
-      <!--<property name="javax.persistence.schema-generation.database.action" value="create"/>-->-->
-      <properties>
+        
+        <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://us-cdbr-sl-dfw-01.cleardb.net:3306/ibmx_77866116d611e98?zeroDateTimeBehavior=convertToNull" />
             <property name="javax.persistence.jdbc.user" value="b47f5cf46f4ecb" />
             <property name="javax.persistence.jdbc.password" value="3c0cb953" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
             <property name="hibernate.show_sql" value="true" />
-           <!--<property name="hibernate.hbm2ddl.auto" value="create" /> deixar comentado por ora--> 
-    </properties>
-  </persistence-unit>
+            <!--<property name="hibernate.hbm2ddl.auto" value="create" /> deixar comentado por ora--> 
+        </properties>
+    </persistence-unit>
 </persistence>
