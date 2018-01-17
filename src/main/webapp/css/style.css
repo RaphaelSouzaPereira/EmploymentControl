@@ -1,21 +1,25 @@
-.menu {
-  background-color: #000;
-  box-sizing: border-box;
+.bd-navbar {
+    background-color: #000;
+    min-height: 4rem;
+    padding: 0 5rem;
 }
 
-.menu-item {
-  width: 25%;
-  text-align: center;
+.logo {
+  color: #fff;
+  margin: 0;
+}
+
+.logo-ibm {
+  color: rgb(0,120,215);
 }
 
 .menu-link {
-  padding: 1.4rem 1rem;
-  color: #fff;
+  color: #fff!important;
   border-bottom: 3px solid #000;
 }
 
 .menu-link:hover {
-  color: #aeaeae;
+  color: #aeaeae!important;
   border-bottom: 3px solid rgb(0,120,215);
 }
 

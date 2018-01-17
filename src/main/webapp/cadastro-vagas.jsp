@@ -13,30 +13,27 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
-        <title>Cadastro</title>
+        <title>Cadastro de Vagas</title>
     </head>
     <body>
-        <div class="conatainer">
-            <div class="row">
-                <div class="col-12 menu">
-                    <div class="offset-2 col-8">
-                        <ul class="nav">
-                            <li class="nav-item menu-item">
-                                <a class="nav-link menu-link" href="./">Home</a>
-                            </li>
-                            <li class="nav-item menu-item">
-                                <a class="nav-link menu-link" href="./cadastro.jsp">Consultar Vagas</a>
-                            </li>
-                            <li class="nav-item menu-item">
-                                <a class="nav-link menu-link" href="#">Cadastrar Vagas</a>
-                            </li>
-                            <li class="nav-item menu-item">
-                                <a class="nav-link menu-link" href="#">Cadastrar Candidato</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+            <h1 class="navbar-brand mr-0 mr-md-2 logo"><span class="logo-ibm">IBM </span>Employment Control</h1>
+            <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+                <li class="nav-item">
+                    <a class="nav-link py-4 px-4 menu-link" href="./">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-4 px-4 menu-link" href="#">Consultar Vagas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-4 px-4 menu-link" href="./cadastro-vagas.jsp">Cadastrar Vagas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-4 px-4 menu-link" href="#">Cadastrar Candidato</a>
+                </li>
+            </ul>
+        </header>
+        <div class="container">
             <div class="row">
                 <div class="offset-1 col-10">
                     <!-- TODO: Ajustar o action do form para a camada de inserção no banco -->
@@ -172,10 +169,10 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-        </div>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-    </body>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+</body>
 </html>
