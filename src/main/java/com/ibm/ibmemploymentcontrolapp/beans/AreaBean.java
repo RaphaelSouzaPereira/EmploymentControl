@@ -15,7 +15,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 public class AreaBean implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -2552554245655954326L;
+    
     private Integer id;
     private String nome;
     private Collection<VagaBean> vagaCollection;
