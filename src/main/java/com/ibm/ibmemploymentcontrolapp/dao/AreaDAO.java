@@ -15,33 +15,37 @@ import org.modelmapper.ModelMapper;
 
 /**
  *
- * @author DiegoCansiMatte
+ * @author PedroFranceschinideF
  */
 public class AreaDAO {
 
     private EntityManager em;
     private final ModelMapper modelMapper;
 
+
     public AreaDAO(EntityManager em) {
         this.em = em;
         this.modelMapper = new ModelMapper();
     }
-    
-    public void salvarArea(AreaBean c){
-        Area destObject = modelMapper.map(c, Area.class); 
-        em.persist(destObject);
+
+
+    public void salvarArea(AreaBean a) {
+
+        Area objDestino = modelMapper.map(a, Area.class);
+        em.persist(objDestino);
     }
-    
+
     public List<AreaBean> listarAreas() {
 
         Query query = em.createNamedQuery("Area.findAll");
-        List<AreaBean> listAreas = new ArrayList<AreaBean>();
-                
-        for (Area candidato : (List<Area>) query.getResultList()) {
-            listAreas.add(modelMapper.map(candidato, AreaBean.class));
-        }
+        List<AreaBean> listarAreaBean = new ArrayList<>();
 
-        return listAreas;
+        for (Area itemLst : (List<Area>) query.getResultList()) {
+
+            listarAreaBean.add(modelMapper.map(itemLst, AreaBean.class));
+        }
+        return listarAreaBean;
+
     }
 
 }

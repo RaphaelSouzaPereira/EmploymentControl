@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 public class VagaBean implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 8114869675080308333L; 
     private Integer id;
     private String status;
     private Integer pmp;

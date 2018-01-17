@@ -15,7 +15,7 @@ import org.modelmapper.ModelMapper;
 
 /**
  *
- * @author DiegoCansiMatte
+ * @author PedroFranceschinideF
  */
 public class TecnologiaDAO {
 
@@ -26,21 +26,25 @@ public class TecnologiaDAO {
         this.em = em;
         this.modelMapper = new ModelMapper();
     }
-    
-    public void salvarTecnologia(TecnologiaBean c){
-        Tecnologia destObject = modelMapper.map(c, Tecnologia.class); 
-        em.persist(destObject);
+
+
+    public void salvarTecnologia(TecnologiaBean t) {
+
+        Tecnologia objDestino = modelMapper.map(t, Tecnologia.class);
+        em.persist(objDestino);
     }
-    
+
     public List<TecnologiaBean> listarTecnologias() {
 
         Query query = em.createNamedQuery("Tecnologia.findAll");
-        List<TecnologiaBean> listTecnologias = new ArrayList<TecnologiaBean>();
-                
-        for (Tecnologia candidato : (List<Tecnologia>) query.getResultList()) {
-            listTecnologias.add(modelMapper.map(candidato, TecnologiaBean.class));
-        }
+        List<TecnologiaBean> listarTecsBean = new ArrayList<>();
 
-        return listTecnologias;
+        for (Tecnologia tecs : (List<Tecnologia>) query.getResultList()) {
+
+            listarTecsBean.add(modelMapper.map(tecs, TecnologiaBean.class));
+        }
+        return listarTecsBean;
+
     }
+
 }
