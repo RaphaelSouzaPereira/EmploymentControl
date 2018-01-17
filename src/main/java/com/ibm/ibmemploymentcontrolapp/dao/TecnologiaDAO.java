@@ -27,6 +27,7 @@ public class TecnologiaDAO {
         this.modelMapper = new ModelMapper();
     }
 
+
     public void salvarTecnologia(TecnologiaBean t) {
 
         Tecnologia objDestino = modelMapper.map(t, Tecnologia.class);
@@ -43,6 +44,7 @@ public class TecnologiaDAO {
             listarTecsBean.add(modelMapper.map(tecs, TecnologiaBean.class));
         }
         return listarTecsBean;
+
     }
 
 }

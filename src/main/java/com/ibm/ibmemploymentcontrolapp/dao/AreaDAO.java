@@ -19,13 +19,15 @@ import org.modelmapper.ModelMapper;
  */
 public class AreaDAO {
 
+    private EntityManager em;
     private final ModelMapper modelMapper;
-    private final EntityManager em;
+
 
     public AreaDAO(EntityManager em) {
         this.em = em;
         this.modelMapper = new ModelMapper();
     }
+
 
     public void salvarArea(AreaBean a) {
 
@@ -43,6 +45,7 @@ public class AreaDAO {
             listarAreaBean.add(modelMapper.map(itemLst, AreaBean.class));
         }
         return listarAreaBean;
+
     }
 
 }
