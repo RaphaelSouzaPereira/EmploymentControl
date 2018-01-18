@@ -35,7 +35,6 @@ public class VagaDAO {
         em.getTransaction().commit();
         em.close();
         em = null;
-       
     }
 
     public List<VagaBean> listarVagas() {
@@ -67,8 +66,8 @@ public class VagaDAO {
         em = null;
         return listarVagaAreaData;
     }
-    
-     public List<VagaBean> listarPorOrdemCronologica() {
+
+    public List<VagaBean> listarPorOrdemCronologica() {
 
         Query query = em.createNamedQuery("Vaga.findOpenOnHoldByOrdemCronologica");
         List<VagaBean> listarOrdemCronologica = new ArrayList<>();
