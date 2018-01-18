@@ -5,9 +5,13 @@
  */
 package com.ibm.ibmemploymentcontrolapp.services;
 
+import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
+import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
+import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
@@ -32,13 +36,6 @@ public class ControlServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        //Inicializa configuracoes de persistencia
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("controleVaga_PU");
-
-        //Instancia um CandidatoDAO
-        VagaDAO candidatoDAO = new VagaDAO(emf.createEntityManager());
-        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -48,7 +45,6 @@ public class ControlServlet extends HttpServlet {
             out.println("<title>Servlet ControlServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ControlServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

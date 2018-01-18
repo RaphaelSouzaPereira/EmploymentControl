@@ -15,15 +15,12 @@ import org.modelmapper.ModelMapper;
 
 /**
  *
-
- * @author PedroFranceschinideF
-
+ * @author FabioHenriqueGoulart
  */
 public class CandidatoDAO {
     
-    private EntityManager em;
+    private final EntityManager em;
     private final ModelMapper modelMapper;
-
 
     public CandidatoDAO(EntityManager em) {
         this.em = em;
@@ -31,15 +28,12 @@ public class CandidatoDAO {
     }
     
     public void salvarCandidato(CandidatoBean c){
-        Candidato destObject = modelMapper.map(c, Candidato.class); 
+        Candidato destObject = modelMapper.map(c, Candidato.class);
+        em.getTransaction().begin();
         em.persist(destObject);
+        em.getTransaction().commit();
     }
     
-    public void deletarCandidato(CandidatoBean cb) {
-        Candidato destObject = modelMapper.map(cb, Candidato.class);
-        em.remove(destObject);
-    }
-
     public List<CandidatoBean> listarCandidatos() {
 
         Query query = em.createNamedQuery("Candidato.findAll");
@@ -48,10 +42,6 @@ public class CandidatoDAO {
         for (Candidato candidato : (List<Candidato>) query.getResultList()) {
             listCandidatos.add(modelMapper.map(candidato, CandidatoBean.class));
         }
-
         return listCandidatos;
     }
-
 }
-
-    

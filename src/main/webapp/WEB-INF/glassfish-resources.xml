@@ -11,4 +11,5 @@
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/Test_test" object-type="user" pool-name="mysql_ibmx_77866116d611e98_b47f5cf46f4ecbPool"/>
+    <jdbc-resource enabled="true" jndi-name="java:app/ibmx_77866116d611e98" object-type="user" pool-name="mysql_ibmx_77866116d611e98_b47f5cf46f4ecbPool"/>
 </resources>
