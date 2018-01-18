@@ -15,11 +15,11 @@ import org.modelmapper.ModelMapper;
 
 /**
  *
-
+ *
  * @author FabioHenriqueGoulart
  */
 public class VagaDAO {
-    
+
     private EntityManager em;
     private final ModelMapper modelMapper;
 
@@ -28,14 +28,13 @@ public class VagaDAO {
         this.modelMapper = new ModelMapper();
     }
 
-
     public void salvarVaga(VagaBean v) {
         Vaga objDestino = modelMapper.map(v,Vaga.class);
         em.getTransaction().begin();
         em.persist(objDestino);
         em.getTransaction().commit();
     }
-   
+
     public List<VagaBean> listarVagas() {
 
         Query query = em.createNamedQuery("Vaga.findAll");
@@ -47,7 +46,6 @@ public class VagaDAO {
 
         }
         return listarVagasBean;
-
 
     }
 

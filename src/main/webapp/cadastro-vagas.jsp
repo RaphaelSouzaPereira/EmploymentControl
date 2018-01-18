@@ -37,11 +37,11 @@
             <div class="row">
                 <div class="offset-1 col-10">
                     <!-- TODO: Ajustar o action do form para a camada de inserção no banco -->
-                    <form class="cadastra-vagas">
+                    <form class="cadastra-vagas" action="./ControlServlet" method="post" onchange="validaCamposDeCadastroDeVagas()">
                         <div class="form-row">
                             <div class="form-group col-3">
                                 <label for="inputCategoria">Categoria:</label>
-                                <select id="inputCategoria" class="form-control" required>
+                                <select id="inputCategoria" class="form-control" name="categoria" required>
                                     <!-- TODO: pegar valores de um Enum? Ou deixamos chumbado aqui? -->
                                     <option value="">Selecione...</option>
                                     <option>Regular</option>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="form-group col-3">
                                 <label for="inputStatus">Status:</label>
-                                <select id="inputStatus" class="form-control">
+                                <select id="inputStatus" class="form-control" name="status">
                                     <!-- TODO: pegar valores do Enum? Ou deixamos chumbado aqui? -->
                                     <option>Open</option>
                                     <option>Closed</option>
@@ -60,11 +60,11 @@
                             </div>
                             <div class="form-group col-3">
                                 <label for="inputDtAbertura">Data Abertura:</label>
-                                <input type="date" class="form-control" id="inputDtAbertura" required>
+                                <input type="date" class="form-control" id="inputDtAbertura" name="data_abertura" required>
                             </div>
                             <div class="form-group col-3">
                                 <label for="inputArea">Área:</label>
-                                <select id="inputArea" class="form-control" required>
+                                <select id="inputArea" class="form-control" name="area" required>
                                     <option value="">Selecione...</option>
                                     <!-- TODO: pegar valores do Enum? Ou deixamos chumbado aqui? -->
                                     <option>Arquitetura</option>
@@ -79,7 +79,7 @@
                         <div class="form-row">
                             <div class="form-group col-4">
                                 <label for="inputTec">Tecnologia:</label>
-                                <select id="inputTec" class="form-control" required>
+                                <select id="inputTec" class="form-control" name="tecnologia" required>
                                     <option value="">Selecione...</option>
                                     <!-- TODO: pegar valores da tabela Tecnologia -->
                                     <option>Java</option>
@@ -93,12 +93,12 @@
 
                             <div class="form-group col-4">
                                 <label for="inputDtExpecEntrada">Expectativa Entrada:</label>
-                                <input type="date" class="form-control" id="inputDtExpecEntrada" required>
+                                <input type="date" class="form-control" id="inputDtExpecEntrada" name="data_exp_entrada" required>
                             </div>
 
                             <div class="form-group col-4">
                                 <label for="inputTipo">Tipo:</label>
-                                <select id="inputTipo" class="form-control" required>
+                                <select id="inputTipo" class="form-control" name="tipo" required>
                                     <option value="">Selecione...</option>
                                     <option>Backfill</option>
                                     <option>Growth</option>
@@ -110,30 +110,30 @@
                         <div class="form-row">
                             <div class="form-group col-3">
                                 <label for="inputBanda">Banda:</label>
-                                <input type="text" class="form-control" id="inputBanda" required>
+                                <input type="text" class="form-control" id="inputBanda" name="banda" required>
                             </div>
                             <div class="form-group col-9">
                                 <label for="inputDetalhe">Detalhe:</label>
-                                <input type="text" class="form-control" id="inputDetalhe" placeholder="Detalhes da vaga" required>
+                                <input type="text" class="form-control" id="inputDetalhe" placeholder="Detalhes da vaga" name="detalhe" required>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-3">
                                 <label for="inputPmp">PMP:</label>
-                                <input type="text" class="form-control" id="inputPmp" placeholder="Número PMP">
+                                <input type="text" class="form-control" id="inputPmp" placeholder="Número PMP" name="pmp">
                             </div>
                             <div class="form-group col-3">
                                 <label for="inputDtAprovaBrasil">Aprovação Board Brasil:</label>
-                                <input type="date" class="form-control" id="inputDtAprovaBrasil">
+                                <input type="date" class="form-control" id="inputDtAprovaBrasil" name="aprovacao_board_brasil">
                             </div>
                             <div class="form-group col-3">
                                 <label for="inputDtAprovaGlobal">Aprovação Board Global:</label>
-                                <input type="date" class="form-control" id="inputDtAprovaGlobal">
+                                <input type="date" class="form-control" id="inputDtAprovaGlobal" name="aprovacao_board_global">
                             </div>
                             <div class="form-group col-3">
                                 <label for="inputDtEntrouOperac">Entrou na Operação:</label>
-                                <input type="date" class="form-control" id="inputDtEntrouOperac">
+                                <input type="date" class="form-control" id="inputDtEntrouOperac" name="entrou_operacao">
                             </div>
                         </div>
 
@@ -141,27 +141,29 @@
                             <div class="form-group col-7">
                                 <label for="inputProfSel">Profissional selecionado:</label>
                                 <!-- TODO: Substituir por um Select com dados da tabela Candidatos -->
-                                <input type="text" class="form-control" id="inputProfSel" placeholder="Nome do Profissional">
+                                <input type="text" class="form-control" id="inputProfSel" placeholder="Nome do Profissional" name="profissional_selecionado">
                             </div>
                             <div class="form-group col-2">
                                 <label for="inpuRate">Rate:</label>
-                                <input type="number" min="1" step="any" class="form-control" id="inputRate" placeholder="Rate">
+                                <input type="number" min="1" step="any" class="form-control" id="inputRate" placeholder="Rate" name="rate">
                             </div>
                             <div class="form-group col-3">
                                 <label for="inputImpacto">Impacto Financeiro:</label>
-                                <input type="number" min="1" step="any" class="form-control" id="inputImpacto" placeholder="Impacto">
+
+                                <input type="number" min="1" step="any" class="form-control" id="inputImpacto" placeholder="Impacto" name="impacto_financeiro">
+
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col-12">
                                 <label for="inputComentario">Comentários:</label>
-                                <input type="text" class="form-control" id="inputComentario" placeholder="Comentários">
+                                <input type="text" class="form-control" id="inputComentario" placeholder="Comentários" name="comentarios">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Salvar</button>
+                            <button type="submit" class="btn btn-primary" id="btn-salvar-cadastro" disabled>Salvar</button>
                             <!-- TODO: Ajustar o botão Cancelar -->
                             <button type="button" class="btn btn-default" id="reset" data-toggle="modal" data-target="#myModal">Cancelar</button>
                         </div>
@@ -197,11 +199,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-
-    <script type="text/javascript">
-        function redireciona(url) {
-            window.location.href = url;
-        }
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
