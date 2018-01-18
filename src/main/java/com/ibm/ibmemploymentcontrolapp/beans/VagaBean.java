@@ -75,37 +75,6 @@ public class VagaBean implements Serializable {
         this.candidatoCollection = candidatoCollection;
     }
 
-    public VagaBean(String status, Integer pmp, Date dataDeAbertura, Date expectativaDeEntrada,
-            Integer expectativaDeAbertura, String banda, String tipo, String detalhe, Date aprovacaoBoardBrasil,
-            Integer desdeAberturaBrasil, Date aprovacaoBoardGlobal, Integer desdeAberturaGlobal,
-            String profissionalSelecionado, Date entrouNaOperacao, Integer desdeAberturaAprovacao,
-            Double rate, Integer desdeExpectativa, Double impactoFinanceiro, String comentario,
-            String categoria, Collection<CandidatoBean> candidatoCollection, String area, String tecnologia) {
-        this.status = status;
-        this.pmp = pmp;
-        this.dataDeAbertura = dataDeAbertura;
-        this.expectativaDeEntrada = expectativaDeEntrada;
-        this.expectativaDeAbertura = expectativaDeAbertura;
-        this.banda = banda;
-        this.tipo = tipo;
-        this.detalhe = detalhe;
-        this.aprovacaoBoardBrasil = aprovacaoBoardBrasil;
-        this.desdeAberturaBrasil = desdeAberturaBrasil;
-        this.aprovacaoBoardGlobal = aprovacaoBoardGlobal;
-        this.desdeAberturaGlobal = desdeAberturaGlobal;
-        this.profissionalSelecionado = profissionalSelecionado;
-        this.entrouNaOperacao = entrouNaOperacao;
-        this.desdeAberturaAprovacao = desdeAberturaAprovacao;
-        this.rate = rate;
-        this.desdeExpectativa = desdeExpectativa;
-        this.impactoFinanceiro = impactoFinanceiro;
-        this.comentario = comentario;
-        this.categoria = categoria;
-//        this.candidatoCollection = candidatoCollection;
-        this.area = area;
-        this.tecnologia = tecnologia;
-    }
-
     public VagaBean() {
     }
 

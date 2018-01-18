@@ -1,19 +1,19 @@
 <%-- 
-    Document   : index.jsp
-    Created on : 16/01/2018, 14:53:23
+    Document   : consultar-vagas
+    Created on : 18/01/2018, 10:19:24
     Author     : PriscilaRicardoArrud
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
-        <title>Home</title>
+        <title>Consulta de Vagas</title>
     </head>
     <body>
         <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar mb-5">
@@ -36,9 +36,39 @@
         <div class="container">
             <div class="row">
                 <div class="offset-1 col-10">
-                    <h2 class="title mb-3">Vagas Cadastradas</h2>
+                    <h2 class="title mb-3">Consulta de Vagas</h2>
                     <hr>
-                    <table class="table table-bordered">
+                    <form class="consulta-vagas" action="" method="post">
+                        <div class="form-row">
+                            <div class="form-group col-5">
+                                <label for="inputStatus">Área:</label>
+                                <select id="inputAreaConsulta" class="form-control" name="area-consulta">
+                                    <option>Arquitetura</option>
+                                    <option selected>Canais</option>
+                                    <option>Digital</option>
+                                    <option>Especial</option>
+                                    <option>Suporte</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-5">
+                                <label for="inputStatus">Status:</label>
+                                <select id="inputStatusConsulta" class="form-control" name="status-consulta">
+                                    <option selected>Open</option>
+                                    <option>Closed</option>
+                                    <option>On hold</option>
+                                    <option>Cancelada</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-2">
+                                <button type="submit" class="btn btn-primary btn-block" id="btn-consulta-vaga" style="margin-top:32px">Consultar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-1 col-10">
+                    <table class="table table-bordered" style="margin-top:45px">
                         <thead>
                             <tr>
                                 <th>Status</th>
@@ -50,7 +80,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>On Hold</td>
+                                <td>Open</td>
                                 <td>123456</td>
                                 <td>01/02/2018</td>
                                 <td>Canais</td>
@@ -112,7 +142,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>On Hold</td>
+                                <td>Open</td>
                                 <td>654321</td>
                                 <td>19/01/2018</td>
                                 <td>Canais</td>
@@ -174,7 +204,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>On Hold</td>
+                                <td>Open</td>
                                 <td>78901</td>
                                 <td>20/01/2018</td>
                                 <td>Canais</td>

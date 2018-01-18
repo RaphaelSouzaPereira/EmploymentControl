@@ -16,14 +16,14 @@
         <title>Cadastro de Vagas</title>
     </head>
     <body>
-        <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+        <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar mb-5">
             <h1 class="navbar-brand mr-0 mr-md-2 logo"><span class="logo-ibm">IBM </span>Employment Control</h1>
             <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
                 <li class="nav-item">
                     <a class="nav-link py-4 px-4 menu-link" href="./">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link py-4 px-4 menu-link" href="#">Consultar Vagas</a>
+                    <a class="nav-link py-4 px-4 menu-link" href="./consulta-vagas.jsp">Consultar Vagas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link py-4 px-4 menu-link" href="./cadastro-vagas.jsp">Cadastrar Vagas</a>
@@ -36,6 +36,8 @@
         <div class="container">
             <div class="row">
                 <div class="offset-1 col-10">
+                    <h2 class="title mb-3">Cadastro de Vagas</h2>
+                    <hr>
                     <!-- TODO: Ajustar o action do form para a camada de inserção no banco -->
                     <form class="cadastra-vagas" action="./ControlServlet" method="post" onchange="validaCamposDeCadastroDeVagas()">
                         <div class="form-row">

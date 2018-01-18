@@ -29,7 +29,7 @@ public class VagaDAO {
     }
 
     public void salvarVaga(VagaBean v) {
-        Vaga objDestino = modelMapper.map(v,Vaga.class);
+        Vaga objDestino = modelMapper.map(v, Vaga.class);
         em.getTransaction().begin();
         em.persist(objDestino);
         em.getTransaction().commit();
@@ -49,6 +49,30 @@ public class VagaDAO {
         }
         return listarVagasBean;
 
+    }
+
+    public List<VagaBean> listarPorAreaData() {
+
+        Query query = em.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa");
+        List<VagaBean> listarVagaAreaData = new ArrayList<>();
+
+        for (Vaga vagas : (List<Vaga>) query.getResultList()) {
+
+            listarVagaAreaData.add(modelMapper.map(vagas, VagaBean.class));
+        }
+        return listarVagaAreaData;
+    }
+    
+     public List<VagaBean> listarPorOrdemCronologica() {
+
+        Query query = em.createNamedQuery("Vaga.findOpenOnHoldByOrdemCronologica");
+        List<VagaBean> listarOrdemCronologica = new ArrayList<>();
+
+        for (Vaga vagas : (List<Vaga>) query.getResultList()) {
+
+            listarOrdemCronologica.add(modelMapper.map(vagas, VagaBean.class));
+        }
+        return listarOrdemCronologica;
     }
 
 }
