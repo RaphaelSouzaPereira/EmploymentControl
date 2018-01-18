@@ -4,6 +4,10 @@
     Author     : PriscilaRicardoArrud
 --%>
 
+<jsp:include page="./ListaServlet" flush="true" />
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.ibm.ibmemploymentcontrolapp.beans.VagaBean"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -37,7 +41,11 @@
             <div class="row">
                 <div class="offset-1 col-10">
                     <h2 class="title mb-3">Vagas Cadastradas</h2>
+                    <c:forEach var="item" items="${list}">
+                        ${item}
+                    </c:forEach>
                     <hr>
+                    
                     <table class="table table-bordered">
                         <thead>
                             <tr>

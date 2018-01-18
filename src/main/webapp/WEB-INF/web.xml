@@ -13,6 +13,10 @@
         <servlet-name>ControlServlet</servlet-name>
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.ControlServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListaServlet</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.ListaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -20,6 +24,10 @@
     <servlet-mapping>
         <servlet-name>ControlServlet</servlet-name>
         <url-pattern>/ControlServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListaServlet</servlet-name>
+        <url-pattern>/ListaServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

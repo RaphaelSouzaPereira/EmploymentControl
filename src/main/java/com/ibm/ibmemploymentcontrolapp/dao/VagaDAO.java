@@ -34,6 +34,7 @@ public class VagaDAO {
         em.persist(objDestino);
         em.getTransaction().commit();
         em.close();
+        em = null;
        
     }
 
@@ -47,6 +48,8 @@ public class VagaDAO {
             listarVagasBean.add(modelMapper.map(vagas, VagaBean.class));
 
         }
+        em.close();
+        em = null;
         return listarVagasBean;
 
     }
@@ -60,6 +63,8 @@ public class VagaDAO {
 
             listarVagaAreaData.add(modelMapper.map(vagas, VagaBean.class));
         }
+        em.close();
+        em = null;
         return listarVagaAreaData;
     }
     
@@ -72,6 +77,8 @@ public class VagaDAO {
 
             listarOrdemCronologica.add(modelMapper.map(vagas, VagaBean.class));
         }
+        em.close();
+        em = null;
         return listarOrdemCronologica;
     }
 
