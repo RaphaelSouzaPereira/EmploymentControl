@@ -23,11 +23,7 @@
   border-bottom: 3px solid rgb(0,120,215);
 }
 
-.cadastra-vagas {
-    margin-top: 45px;
+.title {
+    color: rgb(0,120,215);
+    font-size: 18px;
 }
-
-.tb-vagas {
-    margin-bottom: 45px;
-}
-
