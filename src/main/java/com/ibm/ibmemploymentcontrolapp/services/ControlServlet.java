@@ -22,6 +22,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.math.NumberUtils;
+
+
 
 /**
  *
@@ -59,7 +62,7 @@ public class ControlServlet extends HttpServlet {
         String rate = request.getParameter("rate");
         String impactoFinanceiro = request.getParameter("impacto_financeiro");
         String comentarios = request.getParameter("comentarios");
-        
+
         // campos de calculo de data nao mostrados no form
         int expectativaDeAbertura;
 
@@ -75,7 +78,7 @@ public class ControlServlet extends HttpServlet {
         dateAprovacaoBr = conversaoData(dataaprovacaoBoardBrForm, dateAprovacaoBr);
         dateAprovacaoGlobal = conversaoData(dataaprovacaoBoardGlobalForm, dateAprovacaoGlobal);
         dateEntrouOperacao = conversaoData(dataEntrouOperacaoForm, dateEntrouOperacao);
-        
+
         expectativaDeAbertura = diferencaDatas(dateAbertura, dateExpectativaEntrada);
 
         //Inicializa configuracoes de persistencia
@@ -96,27 +99,22 @@ public class ControlServlet extends HttpServlet {
         vaga.setBanda(banda);
         vaga.setDetalhe(detalhe);
 // nao obrigatorios:
-        vaga.setPmp(Integer.parseInt(pmp));
-        System.out.println("PMP:" + Integer.parseInt(pmp));
+
+        vaga.setPmp(NumberUtils.toInt(pmp, 0));
         vaga.setAprovacaoBoardBrasil(dateAprovacaoBr);
         vaga.setAprovacaoBoardGlobal(dateAprovacaoGlobal);
         vaga.setEntrouNaOperacao(dateEntrouOperacao);
         vaga.setProfissionalSelecionado(profSelecionado);
-        vaga.setRate(Double.parseDouble(rate));
-        vaga.setImpactoFinanceiro(Double.parseDouble(impactoFinanceiro));
+        vaga.setRate(NumberUtils.toDouble(rate, 0));
+        vaga.setImpactoFinanceiro(NumberUtils.toDouble(impactoFinanceiro, 0));
         vaga.setComentario(comentarios);
-        
+
         // campos de calculo de data
         vaga.setExpectativaDeAbertura(expectativaDeAbertura);
 
         // salva no banco
         vagaDAO.salvarVaga(vaga);
-
-//        dateAbertura = null;
-//        dateExpectativaEntrada = null;
-//        dateAprovacaoBr = null;
-//        dateAprovacaoGlobal = null;
-//        dateEntrouOperacao = null;
+        emf.close();
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -137,7 +135,7 @@ public class ControlServlet extends HttpServlet {
      *
      * @param form String pega do form feito no jsp
      * @param date variavel criada para receber a data convertida
-     * 
+     *
      * @return
      */
     public Date conversaoData(String form, Date date) {
@@ -152,16 +150,17 @@ public class ControlServlet extends HttpServlet {
 
         return date;
     }
-    
+
     /**
-     * 
+     *
      * @param dataAbertura
      * @param dataExpectativa
-     * @return retorna a diferenca, em dias, da data Expectativa de entrada x Abertura da vaga
+     * @return retorna a diferenca, em dias, da data Expectativa de entrada x
+     * Abertura da vaga
      */
     public int diferencaDatas(Date dataAbertura, Date dataExpectativa) {
         long dif = dataExpectativa.getTime() - dataAbertura.getTime();
-        return (int)TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS);
+        return (int) TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
