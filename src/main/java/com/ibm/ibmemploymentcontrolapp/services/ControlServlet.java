@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
@@ -58,6 +59,9 @@ public class ControlServlet extends HttpServlet {
         String rate = request.getParameter("rate");
         String impactoFinanceiro = request.getParameter("impacto_financeiro");
         String comentarios = request.getParameter("comentarios");
+        
+        // campos de calculo de data nao mostrados no form
+        int expectativaDeAbertura;
 
         // Conversao dados de data
         Date dateAbertura = null;
@@ -71,6 +75,8 @@ public class ControlServlet extends HttpServlet {
         dateAprovacaoBr = conversaoData(dataaprovacaoBoardBrForm, dateAprovacaoBr);
         dateAprovacaoGlobal = conversaoData(dataaprovacaoBoardGlobalForm, dateAprovacaoGlobal);
         dateEntrouOperacao = conversaoData(dataEntrouOperacaoForm, dateEntrouOperacao);
+        
+        expectativaDeAbertura = diferencaDatas(dateAbertura, dateExpectativaEntrada);
 
         //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
@@ -99,15 +105,18 @@ public class ControlServlet extends HttpServlet {
         vaga.setRate(Double.parseDouble(rate));
         vaga.setImpactoFinanceiro(Double.parseDouble(impactoFinanceiro));
         vaga.setComentario(comentarios);
+        
+        // campos de calculo de data
+        vaga.setExpectativaDeAbertura(expectativaDeAbertura);
 
         // salva no banco
         vagaDAO.salvarVaga(vaga);
 
-        dateAbertura = null;
-        dateExpectativaEntrada = null;
-        dateAprovacaoBr = null;
-        dateAprovacaoGlobal = null;
-        dateEntrouOperacao = null;
+//        dateAbertura = null;
+//        dateExpectativaEntrada = null;
+//        dateAprovacaoBr = null;
+//        dateAprovacaoGlobal = null;
+//        dateEntrouOperacao = null;
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -123,13 +132,12 @@ public class ControlServlet extends HttpServlet {
         }
     }
 
-    // fazendo a conversão da data
-    //TODO: ENCAPSULAR EM UM METODO
+    // fazendo a conversão da data   
     /**
      *
      * @param form String pega do form feito no jsp
      * @param date variavel criada para receber a data convertida
-     * @param corrigida string correta onde foi tirado - para /
+     * 
      * @return
      */
     public Date conversaoData(String form, Date date) {
@@ -143,6 +151,17 @@ public class ControlServlet extends HttpServlet {
         }
 
         return date;
+    }
+    
+    /**
+     * 
+     * @param dataAbertura
+     * @param dataExpectativa
+     * @return retorna a diferenca, em dias, da data Expectativa de entrada x Abertura da vaga
+     */
+    public int diferencaDatas(Date dataAbertura, Date dataExpectativa) {
+        long dif = dataExpectativa.getTime() - dataAbertura.getTime();
+        return (int)TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
