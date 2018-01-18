@@ -34,7 +34,6 @@ public class VagaDAO {
         em.persist(objDestino);
         em.getTransaction().commit();
         em.close();
-       
     }
 
     public List<VagaBean> listarVagas() {
@@ -47,6 +46,7 @@ public class VagaDAO {
             listarVagasBean.add(modelMapper.map(vagas, VagaBean.class));
 
         }
+        em.close();
         return listarVagasBean;
 
     }
@@ -60,10 +60,11 @@ public class VagaDAO {
 
             listarVagaAreaData.add(modelMapper.map(vagas, VagaBean.class));
         }
+        em.close();
         return listarVagaAreaData;
     }
-    
-     public List<VagaBean> listarPorOrdemCronologica() {
+
+    public List<VagaBean> listarPorOrdemCronologica() {
 
         Query query = em.createNamedQuery("Vaga.findOpenOnHoldByOrdemCronologica");
         List<VagaBean> listarOrdemCronologica = new ArrayList<>();
@@ -72,6 +73,7 @@ public class VagaDAO {
 
             listarOrdemCronologica.add(modelMapper.map(vagas, VagaBean.class));
         }
+        em.close();
         return listarOrdemCronologica;
     }
 
