@@ -6,25 +6,21 @@
 package com.ibm.ibmemploymentcontrolapp.beans;
 
 import java.io.Serializable;
-import java.util.Collection;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author DiegoCansiMatte
+ * @author FabioHenriqueGoulart
  */
+
 public class AreaBean implements Serializable {
 
-    private static final long serialVersionUID = -2552554245655954326L;
-    
+    private static final long serialVersionUID = -4824536645530013029L;
+
     private Integer id;
     private String nome;
-    private Collection<VagaBean> vagaCollection;
 
-    public AreaBean(Integer id, String nome, Collection<VagaBean> vagaCollection) {
-        this.id = id;
+    public AreaBean(String nome) {
         this.nome = nome;
-        this.vagaCollection = vagaCollection;
     }
     
     public AreaBean() {
@@ -49,14 +45,4 @@ public class AreaBean implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    @XmlTransient
-    public Collection<VagaBean> getVagaCollection() {
-        return vagaCollection;
-    }
-
-    public void setVagaCollection(Collection<VagaBean> vagaCollection) {
-        this.vagaCollection = vagaCollection;
-    }
-    
 }

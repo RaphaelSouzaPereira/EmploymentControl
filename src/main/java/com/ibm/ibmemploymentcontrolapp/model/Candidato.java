@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.ibm.ibmemploymentcontrolapp.model;
 
 import java.io.Serializable;
@@ -26,9 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
- * @param
- * @return   
+ * @author FabioHenriqueGoulart
  */
 @Entity
 @Table(name = "candidato")
@@ -133,7 +130,7 @@ public class Candidato implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ibm.treinamento.exercicio.ibmemploymentcontrolapp.model.Candidato[ id=" + id + " ]";
+        return "com.ibm.ibmemploymentcontrolapp.model.Candidato[ id=" + id + " ]";
     }
-
+    
 }

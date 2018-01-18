@@ -29,9 +29,10 @@ public class VagaDAO {
     }
 
     public void salvarVaga(VagaBean v) {
-        Vaga objDestino = modelMapper.map(v, Vaga.class);
+        Vaga objDestino = modelMapper.map(v,Vaga.class);
+        em.getTransaction().begin();
         em.persist(objDestino);
-
+        em.getTransaction().commit();
     }
 
     public List<VagaBean> listarVagas() {

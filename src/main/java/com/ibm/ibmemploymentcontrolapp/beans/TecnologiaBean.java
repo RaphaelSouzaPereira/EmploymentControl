@@ -6,25 +6,20 @@
 package com.ibm.ibmemploymentcontrolapp.beans;
 
 import java.io.Serializable;
-import java.util.Collection;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author DiegoCansiMatte
+ * @author FabioHenriqueGoulart
  */
-public class TecnologiaBean implements Serializable {
+public class TecnologiaBean implements Serializable{
 
-    private static final long serialVersionUID = 7553779831676874461L;
-
+    private static final long serialVersionUID = -2151013937427088871L;
+    
     private Integer id;
     private String nome;
-    private Collection<VagaBean> vagaCollection;
 
-    public TecnologiaBean(Integer id, String nome, Collection<VagaBean> vagaCollection) {
-        this.id = id;
+    public TecnologiaBean(String nome) {
         this.nome = nome;
-        this.vagaCollection = vagaCollection;
     }
 
     public TecnologiaBean() {
@@ -49,14 +44,4 @@ public class TecnologiaBean implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    @XmlTransient
-    public Collection<VagaBean> getVagaCollection() {
-        return vagaCollection;
-    }
-
-    public void setVagaCollection(Collection<VagaBean> vagaCollection) {
-        this.vagaCollection = vagaCollection;
-    }
-
 }

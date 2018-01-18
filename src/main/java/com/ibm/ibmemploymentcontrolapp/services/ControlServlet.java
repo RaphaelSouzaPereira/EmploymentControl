@@ -5,6 +5,7 @@
  */
 package com.ibm.ibmemploymentcontrolapp.services;
 
+
 import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import java.io.IOException;
@@ -37,6 +38,7 @@ public class ControlServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String categoria = request.getParameter("categoria");
         String status = request.getParameter("status");
         String dtAberturaTexto = request.getParameter("data_abertura");
@@ -105,7 +107,7 @@ public class ControlServlet extends HttpServlet {
         vaga.setDetalhe(detalhe);
         
         vagaDAO.salvarVaga(vaga);
-        
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -115,7 +117,6 @@ public class ControlServlet extends HttpServlet {
             out.println("<title>Servlet ControlServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ControlServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
