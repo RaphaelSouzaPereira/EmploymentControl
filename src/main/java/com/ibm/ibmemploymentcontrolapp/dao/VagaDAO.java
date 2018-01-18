@@ -33,6 +33,8 @@ public class VagaDAO {
         em.getTransaction().begin();
         em.persist(objDestino);
         em.getTransaction().commit();
+        em.close();
+       
     }
 
     public List<VagaBean> listarVagas() {

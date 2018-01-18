@@ -5,15 +5,16 @@
  */
 package com.ibm.ibmemploymentcontrolapp.services;
 
-
 import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
@@ -41,53 +42,35 @@ public class ControlServlet extends HttpServlet {
 
         String categoria = request.getParameter("categoria");
         String status = request.getParameter("status");
-        String dtAberturaTexto = request.getParameter("data_abertura");
+        String dataAberturaForm = request.getParameter("data_abertura");
         String area = request.getParameter("area");
         String tecnologia = request.getParameter("tecnologia");
-        String dtExpEntradaTexto = request.getParameter("dt_exp_entrada");
+        String dataExpectativaEntradaForm = request.getParameter("data_exp_entrada");
         String tipo = request.getParameter("tipo");
         String banda = request.getParameter("banda");
         String detalhe = request.getParameter("detalhe");
         //campos nao obrigatorios
         String pmp = request.getParameter("pmp");
-        String aprovacaoBoardBr = request.getParameter("aprovacao_board_brasil");
-        String aprovacaoBoardGlobal = request.getParameter("aprovacao_board_global");
-        String entrouOperacao = request.getParameter("entrou_operacao");
+        String dataaprovacaoBoardBrForm = request.getParameter("aprovacao_board_brasil");
+        String dataaprovacaoBoardGlobalForm = request.getParameter("aprovacao_board_global");
+        String dataEntrouOperacaoForm = request.getParameter("entrou_operacao");
         String profSelecionado = request.getParameter("profissional_selecionado");
         String rate = request.getParameter("rate");
         String impactoFinanceiro = request.getParameter("impacto_financeiro");
         String comentarios = request.getParameter("comentarios");
 
-        // dados de data
-        Calendar dtAbertura = null;
-        Calendar dtExpEntrada = null;
-        Date dateAbertura;
-        Date dateExpEnt;
+        // Conversao dados de data
+        Date dateAbertura = null;
+        Date dateExpectativaEntrada = null;
+        Date dateAprovacaoBr = null;
+        Date dateAprovacaoGlobal = null;
+        Date dateEntrouOperacao = null;
 
-        // fazendo a conversão da data
-//        try {
-//            dateExpEnt
-//                    = new SimpleDateFormat("dd/MM/yyyy")
-//                            .parse(dtExpEntradaTexto);
-//            dtExpEntrada = Calendar.getInstance();
-//            dtExpEntrada.setTime(dateExpEnt);
-//        } catch (ParseException e) {
-//           // TODO : TRATAR EXCEPTION COM MODAL
-////            out.println("Erro de conversão da data");
-//            return; //para a execução do método
-//        }
-//        
-//      try {
-//            dateAbertura
-//                    = new SimpleDateFormat("dd/MM/yyyy")
-//                            .parse(dtAberturaTexto);
-//            dtExpEntrada = Calendar.getInstance();
-//            dtExpEntrada.setTime(dateAbertura);
-//        } catch (ParseException e) {
-//           // TODO : TRATAR EXCEPTION COM MODAL
-////            out.println("Erro de conversão da data");
-//            return; //para a execução do método
-//        }
+        dateAbertura = conversaoData(dataAberturaForm, dateAbertura);
+        dateExpectativaEntrada = conversaoData(dataExpectativaEntradaForm, dateExpectativaEntrada);
+        dateAprovacaoBr = conversaoData(dataaprovacaoBoardBrForm, dateAprovacaoBr);
+        dateAprovacaoGlobal = conversaoData(dataaprovacaoBoardGlobalForm, dateAprovacaoGlobal);
+        dateEntrouOperacao = conversaoData(dataEntrouOperacaoForm, dateEntrouOperacao);
 
         //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
@@ -96,17 +79,35 @@ public class ControlServlet extends HttpServlet {
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
 
         VagaBean vaga = new VagaBean();
-        
-//        vaga.setArea();
+
         vaga.setCategoria(categoria);
         vaga.setStatus(status);
-//        vaga.setDataDeAbertura(dateAbertura);
-//        vaga.setExpectativaDeEntrada(dateExpEnt);
+        vaga.setDataDeAbertura(dateAbertura);
+        vaga.setArea(area);
+        vaga.setTecnologia(tecnologia);
+        vaga.setExpectativaDeEntrada(dateExpectativaEntrada);
         vaga.setTipo(tipo);
         vaga.setBanda(banda);
         vaga.setDetalhe(detalhe);
-        
+// nao obrigatorios:
+        vaga.setPmp(Integer.parseInt(pmp));
+        System.out.println("PMP:" + Integer.parseInt(pmp));
+        vaga.setAprovacaoBoardBrasil(dateAprovacaoBr);
+        vaga.setAprovacaoBoardGlobal(dateAprovacaoGlobal);
+        vaga.setEntrouNaOperacao(dateEntrouOperacao);
+        vaga.setProfissionalSelecionado(profSelecionado);
+        vaga.setRate(Double.parseDouble(rate));
+        vaga.setImpactoFinanceiro(Double.parseDouble(impactoFinanceiro));
+        vaga.setComentario(comentarios);
+
+        // salva no banco
         vagaDAO.salvarVaga(vaga);
+
+        dateAbertura = null;
+        dateExpectativaEntrada = null;
+        dateAprovacaoBr = null;
+        dateAprovacaoGlobal = null;
+        dateEntrouOperacao = null;
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -120,6 +121,28 @@ public class ControlServlet extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         }
+    }
+
+    // fazendo a conversão da data
+    //TODO: ENCAPSULAR EM UM METODO
+    /**
+     *
+     * @param form String pega do form feito no jsp
+     * @param date variavel criada para receber a data convertida
+     * @param corrigida string correta onde foi tirado - para /
+     * @return
+     */
+    public Date conversaoData(String form, Date date) {
+        String corrigida = form.replace('-', '/');
+        try {
+            date = new SimpleDateFormat("yyyy/MM/dd").parse(corrigida);
+        } catch (ParseException e) {
+            // TODO : TRATAR EXCEPTION COM MODAL
+            System.out.println("Erro no parse" + corrigida);
+
+        }
+
+        return date;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

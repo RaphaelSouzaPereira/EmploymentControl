@@ -18,7 +18,7 @@ import java.util.Date;
 public class VagaBean implements Serializable {
 
     private static final long serialVersionUID = -4160396633631037368L;
-        
+
     private Integer id;
     private String status;
     private Integer pmp;
@@ -47,8 +47,8 @@ public class VagaBean implements Serializable {
     public VagaBean(String status, Integer pmp, Date dataDeAbertura, Date expectativaDeEntrada,
             Integer expectativaDeAbertura, String area, String banda, String tipo, String tecnologia,
             String detalhe, Date aprovacaoBoardBrasil, Integer desdeAberturaBrasil, Date aprovacaoBoardGlobal,
-            Integer desdeAberturaGlobal, String profissionalSelecionado, Date entrouNaOperacao, 
-            Integer desdeAberturaAprovacao, Double rate, Integer desdeExpectativa, 
+            Integer desdeAberturaGlobal, String profissionalSelecionado, Date entrouNaOperacao,
+            Integer desdeAberturaAprovacao, Double rate, Integer desdeExpectativa,
             Double impactoFinanceiro, String comentario, String categoria, Collection<Candidato> candidatoCollection) {
         this.status = status;
         this.pmp = pmp;
@@ -74,8 +74,13 @@ public class VagaBean implements Serializable {
         this.categoria = categoria;
         this.candidatoCollection = candidatoCollection;
     }
-    
-    public VagaBean(String status, Integer pmp, Date dataDeAbertura, Date expectativaDeEntrada, Integer expectativaDeAbertura, String banda, String tipo, String detalhe, Date aprovacaoBoardBrasil, Integer desdeAberturaBrasil, Date aprovacaoBoardGlobal, Integer desdeAberturaGlobal, String profissionalSelecionado, Date entrouNaOperacao, Integer desdeAberturaAprovacao, Double rate, Integer desdeExpectativa, Double impactoFinanceiro, String comentario, String categoria, Collection<CandidatoBean> candidatoCollection, AreaBean area, TecnologiaBean tecnologia) {
+
+    public VagaBean(String status, Integer pmp, Date dataDeAbertura, Date expectativaDeEntrada,
+            Integer expectativaDeAbertura, String banda, String tipo, String detalhe, Date aprovacaoBoardBrasil,
+            Integer desdeAberturaBrasil, Date aprovacaoBoardGlobal, Integer desdeAberturaGlobal,
+            String profissionalSelecionado, Date entrouNaOperacao, Integer desdeAberturaAprovacao,
+            Double rate, Integer desdeExpectativa, Double impactoFinanceiro, String comentario,
+            String categoria, Collection<CandidatoBean> candidatoCollection, String area, String tecnologia) {
         this.status = status;
         this.pmp = pmp;
         this.dataDeAbertura = dataDeAbertura;
@@ -96,7 +101,7 @@ public class VagaBean implements Serializable {
         this.impactoFinanceiro = impactoFinanceiro;
         this.comentario = comentario;
         this.categoria = categoria;
-        this.candidatoCollection = candidatoCollection;
+//        this.candidatoCollection = candidatoCollection;
         this.area = area;
         this.tecnologia = tecnologia;
     }
