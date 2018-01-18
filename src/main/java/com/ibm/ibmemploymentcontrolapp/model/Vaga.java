@@ -55,7 +55,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Vaga.findByDesdeExpectativa", query = "SELECT v FROM Vaga v WHERE v.desdeExpectativa = :desdeExpectativa")
     , @NamedQuery(name = "Vaga.findByImpactoFinanceiro", query = "SELECT v FROM Vaga v WHERE v.impactoFinanceiro = :impactoFinanceiro")
     , @NamedQuery(name = "Vaga.findByComentario", query = "SELECT v FROM Vaga v WHERE v.comentario = :comentario")
-    , @NamedQuery(name = "Vaga.findByCategoria", query = "SELECT v FROM Vaga v WHERE v.categoria = :categoria")})
+    , @NamedQuery(name = "Vaga.findByCategoria", query = "SELECT v FROM Vaga v WHERE v.categoria = :categoria")
+    , @NamedQuery(name = "Vaga.findByAreaExpectativa", query = "SELECT v FROM Vaga v WHERE v.status = 'Open' OR v.status = 'On Hold' ORDER BY v.area, v.expectativaDeEntrada")
+    })
 public class Vaga implements Serializable {
 
     private static final long serialVersionUID = 1L;
