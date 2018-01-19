@@ -26,7 +26,7 @@
                     <a class="nav-link py-4 px-4 menu-link" href="./">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link py-4 px-4 menu-link" href="./consulta-vagas.jsp">Consultar Vagas</a>
+                    <a class="nav-link py-4 px-4 menu-link" href="./ConsultaServlet">Consultar Vagas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link py-4 px-4 menu-link" href="./cadastro-vagas.jsp">Cadastrar Vagas</a>
@@ -40,11 +40,7 @@
             <div class="row">
                 <div class="offset-1 col-10">
                     <h2 class="title mb-3">Vagas Cadastradas</h2>
-                    <hr>
-                    <%
-                        Object listaDeVagas = request.getAttribute("listaVagas");
-                        out.println(listaDeVagas);
-                    %>                 
+                    <hr>                
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -56,192 +52,76 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <%
+                                List<VagaBean> listaDeVagas = (List<VagaBean>) request.getAttribute("listaVagas");
+                                int i = 0;
+                                for (VagaBean v : listaDeVagas) {
+                                    i++;
+                            %>
+
                             <tr>
-                                <td>On Hold</td>
-                                <td>123456</td>
-                                <td>01/02/2018</td>
-                                <td>Canais</td>
+                                <td><%= v.getStatus()%></td>
+                                <td><%= v.getPmp()%></td>
+                                <td><%= v.getExpectativaDeEntrada()%></td>
+                                <td><%= v.getArea()%></td>
                                 <td>
                                     <button
                                         class="btn btn-primary"
                                         type="button"
                                         data-toggle="collapse"
-                                        data-target="#vaga-1"
+                                        data-target="#vaga-<%= i%>"
                                         aria-expanded="false"
-                                        aria-controls="vaga-1">
+                                        aria-controls="vaga-<%= i%>">
                                         +
                                     </button>
                                 </td>
                             </tr>
-                            <tr class="collapse multi-collapse" id="vaga-1">
+                            <tr class="collapse multi-collapse" id="vaga-<%= i%>">
                                 <td colspan="5">
                                     <ul class="list-group">
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Categoria: </strong></span><span class="vaga-value">BTP</span> 
+                                            <span class="vaga-item"><strong>Categoria: </strong></span><span class="vaga-value"><%= v.getCategoria()%></span> 
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Tecnologia: </strong></span><span class="vaga-value">Java</span>
+                                            <span class="vaga-item"><strong>Tecnologia: </strong></span><span class="vaga-value"><%= v.getTecnologia()%></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Data de Abertura: </strong></span><span class="vaga-value">18/01/2018</span>
+                                            <span class="vaga-item"><strong>Data de Abertura: </strong></span><span class="vaga-value"><%= v.getDataDeAbertura()%></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Tipo: </strong></span><span class="vaga-value">Backfill</span>
+                                            <span class="vaga-item"><strong>Tipo: </strong></span><span class="vaga-value"><%= v.getTipo()%></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Banda: </strong></span><span class="vaga-value">Banda</span>
+                                            <span class="vaga-item"><strong>Banda: </strong></span><span class="vaga-value"><%= v.getBanda()%></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Detalhe: </strong></span><span class="vaga-value">Detalhe</span>
+                                            <span class="vaga-item"><strong>Detalhe: </strong></span><span class="vaga-value"><%= v.getDetalhe()%></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value">16/02/2018</span>
+                                            <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardBrasil()%></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value">17/02/2018</span>
+                                            <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardGlobal()%></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value">03/02/2018</span>
+                                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= v.getEntrouNaOperacao()%></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Profissional Selecionado: </strong></span><span class="vaga-value">Marcos Eduardo</span>
+                                            <span class="vaga-item"><strong>Profissional Selecionado: </strong></span><span class="vaga-value"><%= v.getProfissionalSelecionado()%></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value">129.0</span>
+                                            <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= v.getRate()%></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value">4000.00</span>
+                                            <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value"><%= v.getImpactoFinanceiro()%></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Comentários: </strong></span><span class="vaga-value">comentários</span>
+                                            <span class="vaga-item"><strong>Comentários: </strong></span><span class="vaga-value"><%= v.getComentario()%></span>
                                         </li>
                                     </ul>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>On Hold</td>
-                                <td>654321</td>
-                                <td>19/01/2018</td>
-                                <td>Canais</td>
-                                <td>
-                                    <button
-                                        class="btn btn-primary"
-                                        type="button"
-                                        data-toggle="collapse"
-                                        data-target="#vaga-2"
-                                        aria-expanded="false"
-                                        aria-controls="vaga-2">
-                                        +
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="collapse multi-collapse" id="vaga-2">
-                                <td colspan="5">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Categoria: </strong></span><span class="vaga-value">BTP</span> 
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Tecnologia: </strong></span><span class="vaga-value">Java</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Data de Abertura: </strong></span><span class="vaga-value">18/01/2018</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Tipo: </strong></span><span class="vaga-value">Backfill</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Banda: </strong></span><span class="vaga-value">Banda</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Detalhe: </strong></span><span class="vaga-value">Detalhe</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value">16/02/2018</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value">17/02/2018</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value">03/02/2018</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Profissional Selecionado: </strong></span><span class="vaga-value">Marcos Eduardo</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value">129.0</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value">4000.00</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Comentários: </strong></span><span class="vaga-value">comentários</span>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>On Hold</td>
-                                <td>78901</td>
-                                <td>20/01/2018</td>
-                                <td>Canais</td>
-                                <td>
-                                    <button
-                                        class="btn btn-primary"
-                                        type="button"
-                                        data-toggle="collapse"
-                                        data-target="#vaga-3"
-                                        aria-expanded="false"
-                                        aria-controls="vaga-3">
-                                        +
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="collapse multi-collapse" id="vaga-3">
-                                <td colspan="5">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Categoria: </strong></span><span class="vaga-value">BTP</span> 
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Tecnologia: </strong></span><span class="vaga-value">Java</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Data de Abertura: </strong></span><span class="vaga-value">18/01/2018</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Tipo: </strong></span><span class="vaga-value">Backfill</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Banda: </strong></span><span class="vaga-value">Banda</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Detalhe: </strong></span><span class="vaga-value">Detalhe</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value">16/02/2018</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value">17/02/2018</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value">03/02/2018</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Profissional Selecionado: </strong></span><span class="vaga-value">Marcos Eduardo</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value">129.0</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value">4000.00</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Comentários: </strong></span><span class="vaga-value">comentários</span>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
+                            <% }%>
                         </tbody>
                     </table>
                 </div>

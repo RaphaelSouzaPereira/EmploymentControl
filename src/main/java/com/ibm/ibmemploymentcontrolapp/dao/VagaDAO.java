@@ -40,7 +40,7 @@ public class VagaDAO {
     public List<VagaBean> listarVagas() {
 
         Query query = em.createNamedQuery("Vaga.findAll");
-        List<VagaBean> listarVagasBean = new ArrayList<>();
+        List<VagaBean> listarVagasBean = new ArrayList<VagaBean>();
 
         for (Vaga vagas : (List<Vaga>) query.getResultList()) {
 
@@ -56,7 +56,7 @@ public class VagaDAO {
     public List<VagaBean> listarPorAreaData() {
 
         Query query = em.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa");
-        List<VagaBean> listarVagaAreaData = new ArrayList<>();
+        List<VagaBean> listarVagaAreaData = new ArrayList<VagaBean>();
 
         for (Vaga vagas : (List<Vaga>) query.getResultList()) {
 
