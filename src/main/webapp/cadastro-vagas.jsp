@@ -23,7 +23,7 @@
                     <a class="nav-link py-4 px-4 menu-link" href="./">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link py-4 px-4 menu-link" href="./consulta-vagas.jsp">Consultar Vagas</a>
+                    <a class="nav-link py-4 px-4 menu-link" href="./ConsultaServlet">Consultar Vagas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link py-4 px-4 menu-link" href="./cadastro-vagas.jsp">Cadastrar Vagas</a>

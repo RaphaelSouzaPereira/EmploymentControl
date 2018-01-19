@@ -1,10 +1,9 @@
-package com.ibm.ibmemploymentcontrolapp.services;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package com.ibm.ibmemploymentcontrolapp.services;
 
 import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
@@ -16,15 +15,17 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author PriscilaRicardoArrud
+ * @author RenanFontouraBoldrin
  */
-public class ListaServlet extends HttpServlet {
+@WebServlet(name = "ConsultaServlet", urlPatterns = {"/ConsultaServlet"})
+public class ConsultaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,10 +47,10 @@ public class ListaServlet extends HttpServlet {
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
         
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();
-        listaVagas = vagaDAO.listarVagas();
+        listaVagas = vagaDAO.listarPorAreaData();
         
 	request.setAttribute("listaVagas", listaVagas);
-	RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
+	RequestDispatcher view = request.getRequestDispatcher("./consulta-vagas.jsp");
 	view.forward(request, response);
         
         emf.close();
