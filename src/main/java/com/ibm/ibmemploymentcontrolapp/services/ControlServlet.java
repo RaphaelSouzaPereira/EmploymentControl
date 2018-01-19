@@ -24,8 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.math.NumberUtils;
 
-
-
 /**
  *
  * @author FabioHenriqueGoulart
@@ -117,14 +115,17 @@ public class ControlServlet extends HttpServlet {
         emf.close();
 
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+        try (PrintWriter out = response.getWriter()) {            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControlServlet</title>");
+            out.println("<title>Cadastro de vagas IBM</title>");
             out.println("</head>");
             out.println("<body>");
+//            out.println("<h3>Cadastro realizado com sucesso.</h3>");
+            out.println("<script type=\"text/javascript\">");            
+            out.println("setTimeout(function(){window.location.href='cadastro-response.jsp';},500)");
+            out.println("</script>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -175,7 +176,10 @@ public class ControlServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /* processRequest deve ser comentado devido a resposta da pergunta no link abaixo?
+        https://stackoverflow.com/questions/2349633/doget-and-dopost-in-servlets */
         processRequest(request, response);
+
     }
 
     /**
