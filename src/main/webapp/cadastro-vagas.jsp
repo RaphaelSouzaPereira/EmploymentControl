@@ -37,8 +37,7 @@
             <div class="row">
                 <div class="offset-1 col-10">
                     <h2 class="title mb-3">Cadastro de Vagas</h2>
-                    <hr>
-                    <!-- TODO: Ajustar o action do form para a camada de inserção no banco -->
+                    <hr>                   
                     <form class="cadastra-vagas" action="./ControlServlet" method="post" onchange="validaCamposDeCadastroDeVagas()">
                         <div class="form-row">
                             <div class="form-group col-3">
@@ -165,8 +164,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary" id="btn-salvar-cadastro" disabled>Salvar</button>
-                            <!-- TODO: Ajustar o botão Cancelar -->
+                            <button type="submit" class="btn btn-primary" id="btn-salvar-cadastro" disabled>Salvar</button>                            
                             <button type="button" class="btn btn-default" id="reset" data-toggle="modal" data-target="#myModal">Cancelar</button>
                         </div>
                     </form>
