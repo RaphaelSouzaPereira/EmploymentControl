@@ -51,7 +51,7 @@
                         <button type="button" class="btn btn-primary" data-dismiss="modal" 
                                 onClick="redireciona('cadastro-vagas.jsp')">Sim</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal"
-                                onClick="redireciona('./index.jsp')">Não</button>
+                                onClick="redireciona('./')">Não</button>
                     </div>
                 </div>
 
