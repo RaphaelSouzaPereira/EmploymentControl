@@ -6,10 +6,12 @@ package com.ibm.ibmemploymentcontrolapp.services;
  * and open the template in the editor.
  */
 
+import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
@@ -37,28 +39,20 @@ public class ListaServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        ArrayList list = new ArrayList();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        list.add("5");
-        request.setAttribute("list", list);
-        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-        rd.forward(request, response);               
-                
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ListaServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ListaServlet at </h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        //Inicializa configuracoes de persistencia
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
+
+        //Instancia uma VagaDAO
+        VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
+        
+        List<VagaBean> listaVagas = new ArrayList<>();
+        listaVagas = vagaDAO.listarVagas();
+        
+	request.setAttribute("listaVagas", listaVagas);
+	RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
+	view.forward(request, response);
+        
+        emf.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
