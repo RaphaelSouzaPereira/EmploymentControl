@@ -184,7 +184,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-dismiss="modal" 
-                                            onClick="redireciona('index.jsp')">Sim</button>
+                                            onClick="redireciona('./')">Sim</button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
                                 </div>
                             </div>

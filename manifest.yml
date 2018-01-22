@@ -1,0 +1,8 @@
+## YAML Template.
+---
+  applications:
+   - name: IBMEmploymentControl
+     random-route: true
+     path: target/IBMEmploymentControl.war
+     memory: 512M
+     instances: 1
