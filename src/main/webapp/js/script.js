@@ -17,7 +17,7 @@ function validaCamposDeCadastroDeVagas() {
     var tipo = document.getElementById("inputTipo").value;
     var banda = document.getElementById("inputBanda").value;
     var detalhe = document.getElementById("inputDetalhe").value;
-    
+
     var disabled = (verificaSeCampoEstaVazio(categoria)
             || verificaSeCampoEstaVazio(data_abertura)
             || verificaSeCampoEstaVazio(area)
@@ -25,23 +25,23 @@ function validaCamposDeCadastroDeVagas() {
             || verificaSeCampoEstaVazio(data_exp_entrada)
             || verificaSeCampoEstaVazio(tipo)
             || verificaSeCampoEstaVazio(banda)
-            || verificaSeCampoEstaVazio(detalhe))? true : false;
+            || verificaSeCampoEstaVazio(detalhe)) ? true : false;
     var btnDisabled = document.getElementById("btn-salvar-cadastro");
-    if(disabled === true) {
+    if (disabled === true) {
         btnDisabled.disabled = true;
     } else {
         btnDisabled.disabled = false;
     }
 }
 
-function validaCamposDeCadastroDeCandidatos(){
+function validaCamposDeCadastroDeCandidatos() {
     //campos obrigatorios: email, nome
     var email = document.getElementById("inputEmail").value;
     var nome = document.getElementById("inputNome").value;
     var disabled = (verificaSeCampoEstaVazio(email)
             || verificaSeCampoEstaVazio(nome)) ? true : false;
     var btnDisabled = document.getElementById("btn-salvar-candidato");
-    if(disabled === true) {
+    if (disabled === true) {
         btnDisabled.disabled = true;
     } else {
         btnDisabled.disabled = false;
@@ -60,6 +60,6 @@ function redireciona(url) {
  * 
  * http://igorescobar.github.io/jQuery-Mask-Plugin/
  */
-$(document).ready(function(){
+$(document).ready(function () {
     $('.inputRate').mask("#.##0,00", {reverse: true});
 });
