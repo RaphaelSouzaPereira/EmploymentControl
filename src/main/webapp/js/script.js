@@ -34,6 +34,20 @@ function validaCamposDeCadastroDeVagas() {
     }
 }
 
+function validaCamposDeCadastroDeCandidatos(){
+    //campos obrigatorios: email, nome
+    var email = document.getElementById("inputEmail").value;
+    var nome = document.getElementById("inputNome").value;
+    var disabled = (verificaSeCampoEstaVazio(email)
+            || verificaSeCampoEstaVazio(nome)) ? true : false;
+    var btnDisabled = document.getElementById("btn-salvar-candidato");
+    if(disabled === true) {
+        btnDisabled.disabled = true;
+    } else {
+        btnDisabled.disabled = false;
+    }
+}
+
 function redirectToHome() {
     window.location.replace("./teste");
 }

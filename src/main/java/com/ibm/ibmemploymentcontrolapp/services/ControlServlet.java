@@ -54,6 +54,7 @@ public class ControlServlet extends HttpServlet {
         String tipo = request.getParameter("tipo");
         String banda = request.getParameter("banda");
         String detalhe = request.getParameter("detalhe");
+
         //campos nao obrigatorios
         String pmp = request.getParameter("pmp");
         String dataaprovacaoBoardBrForm = request.getParameter("aprovacao_board_brasil");
@@ -66,23 +67,20 @@ public class ControlServlet extends HttpServlet {
         // campos de calculo de data nao mostrados no form
         int expectativaDeAbertura;
 
-        // Conversao dados de data
+        // Declaracao das variaveis data para conversao
         Date dateAbertura = null;
         Date dateExpectativaEntrada = null;
         Date dateAprovacaoBr = null;
         Date dateAprovacaoGlobal = null;
         Date dateEntrouOperacao = null;
-
+        
+        // Variaveis datas sendo convertidas
         dateAbertura = conversaoData(dataAberturaForm, dateAbertura);
         dateExpectativaEntrada = conversaoData(dataExpectativaEntradaForm, dateExpectativaEntrada);
         dateAprovacaoBr = conversaoData(dataaprovacaoBoardBrForm, dateAprovacaoBr);
         dateAprovacaoGlobal = conversaoData(dataaprovacaoBoardGlobalForm, dateAprovacaoGlobal);
         dateEntrouOperacao = conversaoData(dataEntrouOperacaoForm, dateEntrouOperacao);
-
-        System.out.println("teste: ---> " + rate);
         rate = conversaoRate(rate);
-        System.out.println("teste: ---> " + rate);
-
         expectativaDeAbertura = diferencaDatas(dateAbertura, dateExpectativaEntrada);
 
         //Inicializa configuracoes de persistencia
@@ -92,7 +90,6 @@ public class ControlServlet extends HttpServlet {
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
 
         VagaBean vaga = new VagaBean();
-
         vaga.setCategoria(categoria);
         vaga.setStatus(status);
         vaga.setDataDeAbertura(dateAbertura);
@@ -121,6 +118,9 @@ public class ControlServlet extends HttpServlet {
         vagaDAO.salvarVaga(vaga);
         emf.close();
 
+        vagaDAO = null;
+        vaga = null;
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
@@ -129,7 +129,6 @@ public class ControlServlet extends HttpServlet {
             out.println("<title>Cadastro de vagas IBM</title>");
             out.println("</head>");
             out.println("<body>");
-//            out.println("<h3>Cadastro realizado com sucesso.</h3>");
             out.println("<script type=\"text/javascript\">");
             out.println("setTimeout(function(){window.location.href='cadastro-response.jsp';},500)");
             out.println("</script>");
@@ -140,11 +139,9 @@ public class ControlServlet extends HttpServlet {
 
     // fazendo a conversão da data   
     /**
-     *
      * @param form String pega do form feito no jsp
      * @param date variavel criada para receber a data convertida
-     *
-     * @return
+     * @return uma data convertidada para o padrao yyyy/MM/dd
      */
     public Date conversaoData(String form, Date date) {
         String corrigida = form.replace('-', '/');

@@ -5,26 +5,22 @@
  */
 package com.ibm.ibmemploymentcontrolapp.services;
 
-import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
-import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
+import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
+import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author RenanFontouraBoldrin
+ * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
  */
-@WebServlet(name = "ConsultaServlet", urlPatterns = {"/ConsultaServlet"})
-public class ConsultaServlet extends HttpServlet {
+public class CandidatoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,22 +33,40 @@ public class ConsultaServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        //Inicializa configuracoes de persistencia
+
+        //campos obrigatorios no cadastro
+        String nome = request.getParameter("nomeCandidato");
+        String email = request.getParameter("emailCandidato");
+
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
 
-        //Instancia uma VagaDAO
-        VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
+        //instacia do DAO e BEAN do candidato para fazer o cadastro
+        CandidatoDAO candidadatoDAO = new CandidatoDAO(emf.createEntityManager());
+        CandidatoBean candidato = new CandidatoBean();
+
+        candidato.setNome(nome);
+        candidato.setEmail(email);
         
-        List<VagaBean> listaVagas = new ArrayList<VagaBean>();
-        listaVagas = vagaDAO.listarPorAreaData();
-        
-	request.setAttribute("listaVagas", listaVagas);
-	RequestDispatcher view = request.getRequestDispatcher("./consulta-vagas.jsp");
-	view.forward(request, response);
-        
+        //salva no banco o novo candidato
+        candidadatoDAO.salvarCandidato(candidato);
         emf.close();
+        candidadatoDAO = null;
+        candidato = null;
+
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<script type=\"text/javascript\">");
+            out.println("setTimeout(function(){window.location.href='cadastrocandidato-response.jsp';},100)");
+            out.println("</script>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
