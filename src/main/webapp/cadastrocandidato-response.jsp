@@ -13,7 +13,7 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
-        <title>Sucesso!!!</title>
+        <title>Cadastro Candidato</title>
         
     </head>
     <body>
@@ -24,10 +24,13 @@
                     <a class="nav-link py-4 px-4 menu-link" href="./">Home</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link py-4 px-4 menu-link" href="./consulta-vagas.jsp">Consultar Vagas</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link py-4 px-4 menu-link" href="./cadastro-vagas.jsp">Cadastrar Vagas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link py-4 px-4 menu-link" href="./cadastro-candidato.jsp">Cadastrar Candidato</a>
+                    <a class="nav-link py-4 px-4 menu-link" href="./cadastro-candidatos.jsp">Cadastrar Candidato</a>
                 </li>
             </ul>
         </header>
@@ -39,14 +42,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
 
-                        <h4 class="modal-title">Feito!</h4>
+                        <h4 class="modal-title">Cadastro realizado com sucesso!</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Deseja cadastrar mais vagas?</p>
+                        <p>Deseja cadastrar mais candidatos?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal" 
-                                onClick="redireciona('cadastro-vagas.jsp')">Sim</button>
+                                onClick="redireciona('cadastro-candidato.jsp')">Sim</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal"
                                 onClick="redireciona('./')">Não</button>
                     </div>

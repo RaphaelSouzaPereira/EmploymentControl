@@ -17,6 +17,10 @@
         <servlet-name>ListaServlet</servlet-name>
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.ListaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CandidatoServlet</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.CandidatoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -28,6 +32,10 @@
     <servlet-mapping>
         <servlet-name>ListaServlet</servlet-name>
         <url-pattern>/ListaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CandidatoServlet</servlet-name>
+        <url-pattern>/CandidatoServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
