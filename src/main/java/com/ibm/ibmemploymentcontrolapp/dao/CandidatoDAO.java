@@ -48,11 +48,11 @@ public class CandidatoDAO {
         em = null;
         return listCandidatos;
     }
-    
+
     public void salvarCandidatoComVerificacao(CandidatoBean c) {
         List<Candidato> listCandidatos = new ArrayList<Candidato>();
         listCandidatos = em.createNamedQuery("Candidato.findByEmail").setParameter("email", c.getEmail()).getResultList();
-        
+
         if (listCandidatos.isEmpty()) {
             Candidato destObject = modelMapper.map(c, Candidato.class);
             em.getTransaction().begin();
@@ -60,7 +60,8 @@ public class CandidatoDAO {
             em.getTransaction().commit();
         } else {
             IllegalArgumentException erro = new IllegalArgumentException();
-            throw erro; 
+            throw erro;
         }
     }
+
 }

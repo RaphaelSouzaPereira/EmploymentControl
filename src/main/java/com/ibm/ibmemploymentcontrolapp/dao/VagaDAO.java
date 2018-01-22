@@ -39,32 +39,36 @@ public class VagaDAO {
             em.getTransaction().rollback();
             throw ex;
         }
-        em.close();
-        em = null;
     }
-    
+
     /* metodo UPDATE com merge() conforme aqui:
     https://www.devmedia.com.br/crud-completo-com-hibernate-e-jpa/32711 */
-    
-    public void atualizarVaga (VagaBean v) {
+    public void atualizarVaga(VagaBean v) {
         Vaga objDestino = modelMapper.map(v, Vaga.class);
-        try{
+        try {
             em.getTransaction().begin();
-            em.merge(objDestino);            
+            em.merge(objDestino);
             em.getTransaction().commit();
-        } catch(Exception ex){
+        } catch (Exception ex) {
             em.getTransaction().rollback();
             throw ex;
         }
+
     }
-    
+
     // DELETE 
-//    public void removerVaga (VagaBean v) {
-//        Vaga objDestino = modelMapper.map(v, Vaga.class);
-//        try {
-//            objDestino = em.find(type, v)
-//        }
-//    }
+    public void removerVaga(VagaBean v) {
+        Vaga objDestino = modelMapper.map(v, Vaga.class);
+        try {
+            objDestino = em.find(Vaga.class, objDestino.getId());
+            em.remove(objDestino);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+            throw ex;
+        }
+
+    }
 
     public List<VagaBean> listarVagas() {
 
@@ -76,11 +80,9 @@ public class VagaDAO {
             listarVagasBean.add(modelMapper.map(vagas, VagaBean.class));
 
         }
-        em.close();
-        em = null;
         return listarVagasBean;
     }
-    
+
     public List<VagaBean> listarPorAreaData() {
 
         Query query = em.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa");
@@ -90,8 +92,8 @@ public class VagaDAO {
 
             listarVagaAreaData.add(modelMapper.map(vagas, VagaBean.class));
         }
-        em.close();
-        em = null;
+        //    em.close();
+        //    em = null;
         return listarVagaAreaData;
     }
 
@@ -104,8 +106,6 @@ public class VagaDAO {
 
             listarOrdemCronologica.add(modelMapper.map(vagas, VagaBean.class));
         }
-        em.close();
-        em = null;
         return listarOrdemCronologica;
     }
 
