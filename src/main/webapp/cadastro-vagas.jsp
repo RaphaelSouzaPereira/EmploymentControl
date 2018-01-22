@@ -23,9 +23,6 @@
                     <a class="nav-link py-4 px-4 menu-link" href="./">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link py-4 px-4 menu-link" href="./ConsultaServlet">Consultar Vagas</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link py-4 px-4 menu-link" href="./cadastro-vagas.jsp">Cadastrar Vagas</a>
                 </li>
                 <li class="nav-item">
@@ -53,9 +50,9 @@
                                 <label for="inputStatus">Status:</label>
                                 <select id="inputStatus" class="form-control" name="status">
                                     <!-- TODO: pegar valores do Enum? Ou deixamos chumbado aqui? -->
-                                    <option>Open</option>
+                                    <option selected>Open</option>
                                     <option>Closed</option>
-                                    <option selected>On hold</option>
+                                    <option>On hold</option>
                                     <option>Cancelada</option>
                                 </select>
                             </div>
@@ -73,10 +70,11 @@
                                     <option>Digital</option>
                                     <option>Especial</option>
                                     <option>Suporte</option>
+                                    <option>CRM</option>
+                                    <option>Legado</option>
                                 </select>
                             </div>
                         </div>
-
                         <div class="form-row">
                             <div class="form-group col-4">
                                 <label for="inputTec">Tecnologia:</label>
@@ -91,12 +89,10 @@
                                     <option>...</option>
                                 </select>
                             </div>
-
                             <div class="form-group col-4">
                                 <label for="inputDtExpecEntrada">Expectativa Entrada:</label>
                                 <input type="date" class="form-control" id="inputDtExpecEntrada" name="data_exp_entrada" required>
                             </div>
-
                             <div class="form-group col-4">
                                 <label for="inputTipo">Tipo:</label>
                                 <select id="inputTipo" class="form-control" name="tipo" required>
@@ -106,69 +102,60 @@
                                 </select>
                             </div>
                         </div>
-
-
                         <div class="form-row">
-                            <div class="form-group col-3">
+                            <div class="form-group col-4">
                                 <label for="inputBanda">Banda:</label>
-                                <input type="text" class="form-control" id="inputBanda" name="banda" required>
+                                <select id="inputBanda" class="form-control" name="banda" required>
+                                    <option value="">Selecione...</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                </select>
                             </div>
-                            <div class="form-group col-9">
-                                <label for="inputDetalhe">Detalhe:</label>
-                                <input type="text" class="form-control" id="inputDetalhe" placeholder="Detalhes da vaga" name="detalhe" required>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-3">
+                            <div class="form-group col-4">
+                                <label for="inpuRate">Rate(R$):</label>
+                                <input type="text" class="form-control inputRate" id="inputRate" placeholder="Rate(R$)" name="rate" maxlength="6">
+                            </div>   
+                            <div class="form-group col-4">
                                 <label for="inputPmp">PMP:</label>
                                 <input type="text" class="form-control" id="inputPmp" placeholder="Número PMP" name="pmp">
                             </div>
-                            <div class="form-group col-3">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <label for="inputDetalhe">Detalhe:</label>
+                                <textarea class="form-control" id="inputDetalhe" rows="3" name="detalhe"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-4">
                                 <label for="inputDtAprovaBrasil">Aprovação Board Brasil:</label>
                                 <input type="date" class="form-control" id="inputDtAprovaBrasil" name="aprovacao_board_brasil">
                             </div>
-                            <div class="form-group col-3">
+                            <div class="form-group col-4">
                                 <label for="inputDtAprovaGlobal">Aprovação Board Global:</label>
                                 <input type="date" class="form-control" id="inputDtAprovaGlobal" name="aprovacao_board_global">
                             </div>
-                            <div class="form-group col-3">
+                            <div class="form-group col-4">
                                 <label for="inputDtEntrouOperac">Entrou na Operação:</label>
                                 <input type="date" class="form-control" id="inputDtEntrouOperac" name="entrou_operacao">
                             </div>
                         </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-7">
-                                <label for="inputProfSel">Profissional selecionado:</label>
-                                <!-- TODO: Substituir por um Select com dados da tabela Candidatos -->
-                                <input type="text" class="form-control" id="inputProfSel" placeholder="Nome do Profissional" name="profissional_selecionado">
-                            </div>
-                            <div class="form-group col-2">
-                                <label for="inpuRate">Rate:</label>
-                                <input type="number" min="1" step="any" class="form-control" id="inputRate" placeholder="Rate" name="rate">
-                            </div>
-                            <div class="form-group col-3">
-                                <label for="inputImpacto">Impacto Financeiro:</label>
-
-                                <input type="number" min="1" step="any" class="form-control" id="inputImpacto" placeholder="Impacto" name="impacto_financeiro">
-
-                            </div>
-                        </div>
-
                         <div class="form-row">
                             <div class="form-group col-12">
                                 <label for="inputComentario">Comentários:</label>
                                 <input type="text" class="form-control" id="inputComentario" placeholder="Comentários" name="comentarios">
                             </div>
                         </div>
-
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary" id="btn-salvar-cadastro" disabled>Salvar</button>                            
                             <button type="button" class="btn btn-default" id="reset" data-toggle="modal" data-target="#myModal">Cancelar</button>
                         </div>
                     </form>
-
                     <!-- Modal -->
                     <div class="modal fade" id="myModal" role="dialog">
                         <div class="modal-dialog">
@@ -188,17 +175,16 @@
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

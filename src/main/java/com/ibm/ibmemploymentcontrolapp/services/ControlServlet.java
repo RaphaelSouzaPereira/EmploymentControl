@@ -16,6 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
@@ -42,6 +43,8 @@ public class ControlServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        double rateConverted;
+
         String categoria = request.getParameter("categoria");
         String status = request.getParameter("status");
         String dataAberturaForm = request.getParameter("data_abertura");
@@ -58,7 +61,6 @@ public class ControlServlet extends HttpServlet {
         String dataEntrouOperacaoForm = request.getParameter("entrou_operacao");
         String profSelecionado = request.getParameter("profissional_selecionado");
         String rate = request.getParameter("rate");
-        String impactoFinanceiro = request.getParameter("impacto_financeiro");
         String comentarios = request.getParameter("comentarios");
 
         // campos de calculo de data nao mostrados no form
@@ -76,6 +78,10 @@ public class ControlServlet extends HttpServlet {
         dateAprovacaoBr = conversaoData(dataaprovacaoBoardBrForm, dateAprovacaoBr);
         dateAprovacaoGlobal = conversaoData(dataaprovacaoBoardGlobalForm, dateAprovacaoGlobal);
         dateEntrouOperacao = conversaoData(dataEntrouOperacaoForm, dateEntrouOperacao);
+
+        System.out.println("teste: ---> " + rate);
+        rate = conversaoRate(rate);
+        System.out.println("teste: ---> " + rate);
 
         expectativaDeAbertura = diferencaDatas(dateAbertura, dateExpectativaEntrada);
 
@@ -96,15 +102,16 @@ public class ControlServlet extends HttpServlet {
         vaga.setTipo(tipo);
         vaga.setBanda(banda);
         vaga.setDetalhe(detalhe);
-// nao obrigatorios:
 
+        rateConverted = Double.parseDouble(rate);
+
+        // nao obrigatorios:
         vaga.setPmp(NumberUtils.toInt(pmp, 0));
         vaga.setAprovacaoBoardBrasil(dateAprovacaoBr);
         vaga.setAprovacaoBoardGlobal(dateAprovacaoGlobal);
         vaga.setEntrouNaOperacao(dateEntrouOperacao);
         vaga.setProfissionalSelecionado(profSelecionado);
-        vaga.setRate(NumberUtils.toDouble(rate, 0));
-        vaga.setImpactoFinanceiro(NumberUtils.toDouble(impactoFinanceiro, 0));
+        vaga.setRate(rateConverted);
         vaga.setComentario(comentarios);
 
         // campos de calculo de data
@@ -115,7 +122,7 @@ public class ControlServlet extends HttpServlet {
         emf.close();
 
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {            
+        try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -123,7 +130,7 @@ public class ControlServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
 //            out.println("<h3>Cadastro realizado com sucesso.</h3>");
-            out.println("<script type=\"text/javascript\">");            
+            out.println("<script type=\"text/javascript\">");
             out.println("setTimeout(function(){window.location.href='cadastro-response.jsp';},500)");
             out.println("</script>");
             out.println("</body>");
@@ -150,6 +157,11 @@ public class ControlServlet extends HttpServlet {
         }
 
         return date;
+    }
+
+    public String conversaoRate(String rate) {
+        String rateSemVirgula = rate.replace(',', '.');
+        return rateSemVirgula;
     }
 
     /**

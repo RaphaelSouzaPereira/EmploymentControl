@@ -41,3 +41,11 @@ function redirectToHome() {
 function redireciona(url) {
     window.location.href = url;
 }
+
+/* Máscara do campo de cadastro 
+ * 
+ * http://igorescobar.github.io/jQuery-Mask-Plugin/
+ */
+$(document).ready(function(){
+    $('.inputRate').mask("#.##0,00", {reverse: true});
+});

@@ -26,9 +26,6 @@
                     <a class="nav-link py-4 px-4 menu-link" href="./">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link py-4 px-4 menu-link" href="./ConsultaServlet">Consultar Vagas</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link py-4 px-4 menu-link" href="./cadastro-vagas.jsp">Cadastrar Vagas</a>
                 </li>
                 <li class="nav-item">
@@ -40,8 +37,49 @@
             <div class="row">
                 <div class="offset-1 col-10">
                     <h2 class="title mb-3">Vagas Cadastradas</h2>
-                    <hr>                
-                    <table class="table table-bordered">
+                    <hr>
+
+                    <form class="consulta-vagas" action="" method="post">
+                        <div class="form-row">
+                            <div class="form-group col-3">
+                                <label for="inputStatus">Área:</label>
+                                <select id="inputAreaConsulta" class="form-control" name="area-consulta">
+                                    <option>Arquitetura</option>
+                                    <option selected>Canais</option>
+                                    <option>Digital</option>
+                                    <option>Especial</option>
+                                    <option>Suporte</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-3">
+                                <label for="inputStatus">Status:</label>
+                                <select id="inputStatusConsulta" class="form-control" name="status-consulta">
+                                    <option selected>Open</option>
+                                    <option>Closed</option>
+                                    <option>On hold</option>
+                                    <option>Cancelada</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-3">
+                                <label for="inputStatus">Tecnologia:</label>
+                                <select id="inputTecnologiaConsulta" class="form-control" name="status-consulta">
+                                    <option>Java</option>
+                                    <option>Analista de Automação</option>
+                                    <option>Especialista Mobilidade</option>
+                                    <option>Designer UX</option>
+                                    <option>Dev. ODI</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-3">
+                                <button type="submit" class="btn btn-primary btn-block" id="btn-consulta-vaga" style="margin-top:32px">Consultar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-1 col-10">
+                    <table class="table table-bordered" style="margin-top:45px">
                         <thead>
                             <tr>
                                 <th>Status</th>
@@ -58,11 +96,10 @@
                                 for (VagaBean v : listaDeVagas) {
                                     i++;
                             %>
-
                             <tr>
                                 <td><%= v.getStatus()%></td>
                                 <td><%= v.getPmp()%></td>
-                                <td><%= v.getExpectativaDeEntrada()%></td>
+                                <td><%= v.getTecnologia()%></td>
                                 <td><%= v.getArea()%></td>
                                 <td>
                                     <button
@@ -83,7 +120,7 @@
                                             <span class="vaga-item"><strong>Categoria: </strong></span><span class="vaga-value"><%= v.getCategoria()%></span> 
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Tecnologia: </strong></span><span class="vaga-value"><%= v.getTecnologia()%></span>
+                                            <span class="vaga-item"><strong>Expectativa de Entrada: </strong></span><span class="vaga-value"><%= v.getExpectativaDeEntrada()%></span>
                                         </li>
                                         <li class="list-group-item">
                                             <span class="vaga-item"><strong>Data de Abertura: </strong></span><span class="vaga-value"><%= v.getDataDeAbertura()%></span>
@@ -121,7 +158,7 @@
                                     </ul>
                                 </td>
                             </tr>
-                            <% }%>
+                            <% }%>       
                         </tbody>
                     </table>
                 </div>

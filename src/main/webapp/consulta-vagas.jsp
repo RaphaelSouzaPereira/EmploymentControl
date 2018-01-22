@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
@@ -22,9 +22,6 @@
             <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
                 <li class="nav-item">
                     <a class="nav-link py-4 px-4 menu-link" href="./">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link py-4 px-4 menu-link" href="./ConsultaServlet">Consultar Vagas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link py-4 px-4 menu-link" href="./cadastro-vagas.jsp">Cadastrar Vagas</a>
@@ -42,7 +39,7 @@
 
                     <form class="consulta-vagas" action="" method="post">
                         <div class="form-row">
-                            <div class="form-group col-5">
+                            <div class="form-group col-3">
                                 <label for="inputStatus">Área:</label>
                                 <select id="inputAreaConsulta" class="form-control" name="area-consulta">
                                     <option>Arquitetura</option>
@@ -52,7 +49,7 @@
                                     <option>Suporte</option>
                                 </select>
                             </div>
-                            <div class="form-group col-5">
+                            <div class="form-group col-3">
                                 <label for="inputStatus">Status:</label>
                                 <select id="inputStatusConsulta" class="form-control" name="status-consulta">
                                     <option selected>Open</option>
@@ -61,7 +58,17 @@
                                     <option>Cancelada</option>
                                 </select>
                             </div>
-                            <div class="form-group col-2">
+                            <div class="form-group col-3">
+                                <label for="inputStatus">Tecnologia:</label>
+                                <select id="inputTecnologiaConsulta" class="form-control" name="status-consulta">
+                                    <option>Java</option>
+                                    <option>Analista de Automação</option>
+                                    <option>Especialista Mobilidade</option>
+                                    <option>Designer UX</option>
+                                    <option>Dev. ODI</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-3">
                                 <button type="submit" class="btn btn-primary btn-block" id="btn-consulta-vaga" style="margin-top:32px">Consultar</button>
                             </div>
                         </div>
@@ -90,7 +97,7 @@
                             <tr>
                                 <td><%= v.getStatus()%></td>
                                 <td><%= v.getPmp()%></td>
-                                <td><%= v.getExpectativaDeEntrada()%></td>
+                                <td><%= v.getTecnologia()%></td>
                                 <td><%= v.getArea()%></td>
                                 <td>
                                     <button
@@ -104,7 +111,6 @@
                                     </button>
                                 </td>
                             </tr>
-
                             <tr class="collapse multi-collapse" id="vaga-<%= i%>">
                                 <td colspan="5">
                                     <ul class="list-group">
@@ -112,7 +118,7 @@
                                             <span class="vaga-item"><strong>Categoria: </strong></span><span class="vaga-value"><%= v.getCategoria()%></span> 
                                         </li>
                                         <li class="list-group-item">
-                                            <span class="vaga-item"><strong>Tecnologia: </strong></span><span class="vaga-value"><%= v.getTecnologia()%></span>
+                                            <span class="vaga-item"><strong>Expectativa de Entrada: </strong></span><span class="vaga-value"><%= v.getExpectativaDeEntrada()%></span>
                                         </li>
                                         <li class="list-group-item">
                                             <span class="vaga-item"><strong>Data de Abertura: </strong></span><span class="vaga-value"><%= v.getDataDeAbertura()%></span>
