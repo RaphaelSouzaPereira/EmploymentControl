@@ -5,27 +5,25 @@
  */
 package com.ibm.ibmemploymentcontrolapp.beans;
 
+import com.ibm.ibmemploymentcontrolapp.model.Vaga;
 import java.io.Serializable;
 import java.util.Collection;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author DiegoCansiMatte
+ * @author FabioHenriqueGoulart
  */
-public class CandidatoBean implements Serializable {
+public class CandidatoBean implements Serializable{
 
-    private static final long serialVersionUID = -5107118678599810075L;
-    
+    private static final long serialVersionUID = -175123748682980746L;
+        
     private Integer id;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     private String email;
     private String nome;
     private String observacao;
-    private Collection<VagaBean> vagaCollection;
+    private Collection<Vaga> vagaCollection;
 
-    public CandidatoBean(Integer id, String email, String nome, String observacao, Collection<VagaBean> vagaCollection) {
-        this.id = id;
+    public CandidatoBean(String email, String nome, String observacao, Collection<Vaga> vagaCollection) {
         this.email = email;
         this.nome = nome;
         this.observacao = observacao;
@@ -71,12 +69,11 @@ public class CandidatoBean implements Serializable {
         this.observacao = observacao;
     }
 
-    @XmlTransient
-    public Collection<VagaBean> getVagaCollection() {
+    public Collection<Vaga> getVagaCollection() {
         return vagaCollection;
     }
 
-    public void setVagaCollection(Collection<VagaBean> vagaCollection) {
+    public void setVagaCollection(Collection<Vaga> vagaCollection) {
         this.vagaCollection = vagaCollection;
     }
 

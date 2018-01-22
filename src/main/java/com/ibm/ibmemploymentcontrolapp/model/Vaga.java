@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.ibm.ibmemploymentcontrolapp.model;
 
 import java.io.Serializable;
@@ -15,9 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -29,9 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
- * @param
- * @return   
+ * @author FabioHenriqueGoulart
  */
 @Entity
 @Table(name = "vaga")
@@ -44,8 +39,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Vaga.findByDataDeAbertura", query = "SELECT v FROM Vaga v WHERE v.dataDeAbertura = :dataDeAbertura")
     , @NamedQuery(name = "Vaga.findByExpectativaDeEntrada", query = "SELECT v FROM Vaga v WHERE v.expectativaDeEntrada = :expectativaDeEntrada")
     , @NamedQuery(name = "Vaga.findByExpectativaDeAbertura", query = "SELECT v FROM Vaga v WHERE v.expectativaDeAbertura = :expectativaDeAbertura")
+    , @NamedQuery(name = "Vaga.findByArea", query = "SELECT v FROM Vaga v WHERE v.area = :area")
     , @NamedQuery(name = "Vaga.findByBanda", query = "SELECT v FROM Vaga v WHERE v.banda = :banda")
     , @NamedQuery(name = "Vaga.findByTipo", query = "SELECT v FROM Vaga v WHERE v.tipo = :tipo")
+    , @NamedQuery(name = "Vaga.findByTecnologia", query = "SELECT v FROM Vaga v WHERE v.tecnologia = :tecnologia")
     , @NamedQuery(name = "Vaga.findByDetalhe", query = "SELECT v FROM Vaga v WHERE v.detalhe = :detalhe")
     , @NamedQuery(name = "Vaga.findByAprovacaoBoardBrasil", query = "SELECT v FROM Vaga v WHERE v.aprovacaoBoardBrasil = :aprovacaoBoardBrasil")
     , @NamedQuery(name = "Vaga.findByDesdeAberturaBrasil", query = "SELECT v FROM Vaga v WHERE v.desdeAberturaBrasil = :desdeAberturaBrasil")
@@ -58,7 +55,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Vaga.findByDesdeExpectativa", query = "SELECT v FROM Vaga v WHERE v.desdeExpectativa = :desdeExpectativa")
     , @NamedQuery(name = "Vaga.findByImpactoFinanceiro", query = "SELECT v FROM Vaga v WHERE v.impactoFinanceiro = :impactoFinanceiro")
     , @NamedQuery(name = "Vaga.findByComentario", query = "SELECT v FROM Vaga v WHERE v.comentario = :comentario")
-    , @NamedQuery(name = "Vaga.findByCategoria", query = "SELECT v FROM Vaga v WHERE v.categoria = :categoria")})
+    , @NamedQuery(name = "Vaga.findByCategoria", query = "SELECT v FROM Vaga v WHERE v.categoria = :categoria")
+    , @NamedQuery(name = "Vaga.findOpenOnHoldByAreaExpectativa", query = "SELECT v FROM Vaga v WHERE v.status = 'Open' OR v.status = 'On Hold' ORDER BY v.area, v.expectativaDeEntrada")
+    , @NamedQuery(name = "Vaga.findOpenOnHoldByOrdemCronologica", query = "SELECT v FROM Vaga v WHERE v.status = 'Open' OR v.status = 'On Hold' ORDER BY v.expectativaDeEntrada")
+})
 public class Vaga implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,7 +66,7 @@ public class Vaga implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    public Integer id;
     @Size(max = 20)
     @Column(name = "status")
     private String status;
@@ -80,12 +80,18 @@ public class Vaga implements Serializable {
     private Date expectativaDeEntrada;
     @Column(name = "expectativa_de_abertura")
     private Integer expectativaDeAbertura;
+    @Size(max = 30)
+    @Column(name = "area")
+    private String area;
     @Size(max = 5)
     @Column(name = "banda")
     private String banda;
     @Size(max = 50)
     @Column(name = "tipo")
     private String tipo;
+    @Size(max = 50)
+    @Column(name = "tecnologia")
+    private String tecnologia;
     @Size(max = 150)
     @Column(name = "detalhe")
     private String detalhe;
@@ -122,12 +128,6 @@ public class Vaga implements Serializable {
     private String categoria;
     @ManyToMany(mappedBy = "vagaCollection")
     private Collection<Candidato> candidatoCollection;
-    @JoinColumn(name = "area", referencedColumnName = "id")
-    @ManyToOne
-    private Area area;
-    @JoinColumn(name = "tecnologia", referencedColumnName = "id")
-    @ManyToOne
-    private Tecnologia tecnologia;
 
     public Vaga() {
     }
@@ -184,6 +184,14 @@ public class Vaga implements Serializable {
         this.expectativaDeAbertura = expectativaDeAbertura;
     }
 
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
     public String getBanda() {
         return banda;
     }
@@ -198,6 +206,14 @@ public class Vaga implements Serializable {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getTecnologia() {
+        return tecnologia;
+    }
+
+    public void setTecnologia(String tecnologia) {
+        this.tecnologia = tecnologia;
     }
 
     public String getDetalhe() {
@@ -313,22 +329,6 @@ public class Vaga implements Serializable {
         this.candidatoCollection = candidatoCollection;
     }
 
-    public Area getArea() {
-        return area;
-    }
-
-    public void setArea(Area area) {
-        this.area = area;
-    }
-
-    public Tecnologia getTecnologia() {
-        return tecnologia;
-    }
-
-    public void setTecnologia(Tecnologia tecnologia) {
-        this.tecnologia = tecnologia;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -351,7 +351,7 @@ public class Vaga implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ibm.treinamento.exercicio.ibmemploymentcontrolapp.model.Vaga[ id=" + id + " ]";
+        return "com.ibm.ibmemploymentcontrolapp.model.Vaga[ id=" + id + " ]";
     }
-
+    
 }

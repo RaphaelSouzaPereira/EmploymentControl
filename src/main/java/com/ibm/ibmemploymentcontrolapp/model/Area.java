@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.ibm.ibmemploymentcontrolapp.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,17 +14,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
- * @param
- * @return   
+ * @author FabioHenriqueGoulart
  */
 @Entity
 @Table(name = "area")
@@ -46,8 +40,6 @@ public class Area implements Serializable {
     @Size(max = 30)
     @Column(name = "nome")
     private String nome;
-    @OneToMany(mappedBy = "area")
-    private Collection<Vaga> vagaCollection;
 
     public Area() {
     }
@@ -72,15 +64,6 @@ public class Area implements Serializable {
         this.nome = nome;
     }
 
-    @XmlTransient
-    public Collection<Vaga> getVagaCollection() {
-        return vagaCollection;
-    }
-
-    public void setVagaCollection(Collection<Vaga> vagaCollection) {
-        this.vagaCollection = vagaCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -103,7 +86,7 @@ public class Area implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ibm.treinamento.exercicio.ibmemploymentcontrolapp.model.Area[ id=" + id + " ]";
+        return "com.ibm.ibmemploymentcontrolapp.model.Area[ id=" + id + " ]";
     }
-
+    
 }

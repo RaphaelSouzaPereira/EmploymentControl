@@ -5,26 +5,29 @@
  */
 package com.ibm.ibmemploymentcontrolapp.beans;
 
+import com.ibm.ibmemploymentcontrolapp.model.Candidato;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author DiegoCansiMatte
+ * @author FabioHenriqueGoulart
  */
 public class VagaBean implements Serializable {
 
-    private static final long serialVersionUID = 8114869675080308333L; 
+    private static final long serialVersionUID = -4160396633631037368L;
+
     private Integer id;
     private String status;
     private Integer pmp;
     private Date dataDeAbertura;
     private Date expectativaDeEntrada;
     private Integer expectativaDeAbertura;
+    private String area;
     private String banda;
     private String tipo;
+    private String tecnologia;
     private String detalhe;
     private Date aprovacaoBoardBrasil;
     private Integer desdeAberturaBrasil;
@@ -38,18 +41,23 @@ public class VagaBean implements Serializable {
     private Double impactoFinanceiro;
     private String comentario;
     private String categoria;
-    private Collection<CandidatoBean> candidatoCollection;
-    private AreaBean area;
-    private TecnologiaBean tecnologia;
+    private Collection<Candidato> candidatoCollection;
 
-    public VagaBean(String status, Integer pmp, Date dataDeAbertura, Date expectativaDeEntrada, Integer expectativaDeAbertura, String banda, String tipo, String detalhe, Date aprovacaoBoardBrasil, Integer desdeAberturaBrasil, Date aprovacaoBoardGlobal, Integer desdeAberturaGlobal, String profissionalSelecionado, Date entrouNaOperacao, Integer desdeAberturaAprovacao, Double rate, Integer desdeExpectativa, Double impactoFinanceiro, String comentario, String categoria, Collection<CandidatoBean> candidatoCollection, AreaBean area, TecnologiaBean tecnologia) {
+    public VagaBean(String status, Integer pmp, Date dataDeAbertura, Date expectativaDeEntrada,
+            Integer expectativaDeAbertura, String area, String banda, String tipo, String tecnologia,
+            String detalhe, Date aprovacaoBoardBrasil, Integer desdeAberturaBrasil, Date aprovacaoBoardGlobal,
+            Integer desdeAberturaGlobal, String profissionalSelecionado, Date entrouNaOperacao,
+            Integer desdeAberturaAprovacao, Double rate, Integer desdeExpectativa,
+            Double impactoFinanceiro, String comentario, String categoria, Collection<Candidato> candidatoCollection) {
         this.status = status;
         this.pmp = pmp;
         this.dataDeAbertura = dataDeAbertura;
         this.expectativaDeEntrada = expectativaDeEntrada;
         this.expectativaDeAbertura = expectativaDeAbertura;
+        this.area = area;
         this.banda = banda;
         this.tipo = tipo;
+        this.tecnologia = tecnologia;
         this.detalhe = detalhe;
         this.aprovacaoBoardBrasil = aprovacaoBoardBrasil;
         this.desdeAberturaBrasil = desdeAberturaBrasil;
@@ -64,8 +72,6 @@ public class VagaBean implements Serializable {
         this.comentario = comentario;
         this.categoria = categoria;
         this.candidatoCollection = candidatoCollection;
-        this.area = area;
-        this.tecnologia = tecnologia;
     }
 
     public VagaBean() {
@@ -123,6 +129,14 @@ public class VagaBean implements Serializable {
         this.expectativaDeAbertura = expectativaDeAbertura;
     }
 
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
     public String getBanda() {
         return banda;
     }
@@ -137,6 +151,14 @@ public class VagaBean implements Serializable {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getTecnologia() {
+        return tecnologia;
+    }
+
+    public void setTecnologia(String tecnologia) {
+        this.tecnologia = tecnologia;
     }
 
     public String getDetalhe() {
@@ -243,29 +265,11 @@ public class VagaBean implements Serializable {
         this.categoria = categoria;
     }
 
-    @XmlTransient
-    public Collection<CandidatoBean> getCandidatoCollection() {
+    public Collection<Candidato> getCandidatoCollection() {
         return candidatoCollection;
     }
 
-    public void setCandidatoCollection(Collection<CandidatoBean> candidatoCollection) {
+    public void setCandidatoCollection(Collection<Candidato> candidatoCollection) {
         this.candidatoCollection = candidatoCollection;
     }
-
-    public AreaBean getArea() {
-        return area;
-    }
-
-    public void setArea(AreaBean area) {
-        this.area = area;
-    }
-
-    public TecnologiaBean getTecnologia() {
-        return tecnologia;
-    }
-
-    public void setTecnologia(TecnologiaBean tecnologia) {
-        this.tecnologia = tecnologia;
-    }
-
 }

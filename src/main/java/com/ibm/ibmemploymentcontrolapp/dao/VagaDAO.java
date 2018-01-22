@@ -15,42 +15,70 @@ import org.modelmapper.ModelMapper;
 
 /**
  *
-
+ *
  * @author FabioHenriqueGoulart
  */
 public class VagaDAO {
-    
+
     private EntityManager em;
     private final ModelMapper modelMapper;
-    
-
-
 
     public VagaDAO(EntityManager em) {
         this.em = em;
         this.modelMapper = new ModelMapper();
     }
 
-
     public void salvarVaga(VagaBean v) {
         Vaga objDestino = modelMapper.map(v, Vaga.class);
+        em.getTransaction().begin();
         em.persist(objDestino);
-
+        em.getTransaction().commit();
+        em.close();
+        em = null;
     }
-    
+
     public List<VagaBean> listarVagas() {
 
         Query query = em.createNamedQuery("Vaga.findAll");
-        List<VagaBean> listarVagasBean = new ArrayList<>();
+        List<VagaBean> listarVagasBean = new ArrayList<VagaBean>();
 
         for (Vaga vagas : (List<Vaga>) query.getResultList()) {
 
             listarVagasBean.add(modelMapper.map(vagas, VagaBean.class));
 
         }
+        em.close();
+        em = null;
         return listarVagasBean;
 
+    }
 
+    public List<VagaBean> listarPorAreaData() {
+
+        Query query = em.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa");
+        List<VagaBean> listarVagaAreaData = new ArrayList<VagaBean>();
+
+        for (Vaga vagas : (List<Vaga>) query.getResultList()) {
+
+            listarVagaAreaData.add(modelMapper.map(vagas, VagaBean.class));
+        }
+        em.close();
+        em = null;
+        return listarVagaAreaData;
+    }
+
+    public List<VagaBean> listarPorOrdemCronologica() {
+
+        Query query = em.createNamedQuery("Vaga.findOpenOnHoldByOrdemCronologica");
+        List<VagaBean> listarOrdemCronologica = new ArrayList<>();
+
+        for (Vaga vagas : (List<Vaga>) query.getResultList()) {
+
+            listarOrdemCronologica.add(modelMapper.map(vagas, VagaBean.class));
+        }
+        em.close();
+        em = null;
+        return listarOrdemCronologica;
     }
 
 }
