@@ -19,7 +19,7 @@ import org.modelmapper.ModelMapper;
  */
 public class CandidatoDAO {
 
-    private final EntityManager em;
+    private EntityManager em;
     private final ModelMapper modelMapper;
 
     public CandidatoDAO(EntityManager em) {
@@ -32,6 +32,8 @@ public class CandidatoDAO {
         em.getTransaction().begin();
         em.persist(destObject);
         em.getTransaction().commit();
+        em.close();
+        em = null;
     }
 
     public List<CandidatoBean> listarCandidatos() {
@@ -42,9 +44,11 @@ public class CandidatoDAO {
         for (Candidato candidato : (List<Candidato>) query.getResultList()) {
             listCandidatos.add(modelMapper.map(candidato, CandidatoBean.class));
         }
+        em.close();
+        em = null;
         return listCandidatos;
     }
-
+    
     public void salvarCandidatoComVerificacao(CandidatoBean c) {
         List<Candidato> listCandidatos = new ArrayList<Candidato>();
         listCandidatos = em.createNamedQuery("Candidato.findByEmail").setParameter("email", c.getEmail()).getResultList();
