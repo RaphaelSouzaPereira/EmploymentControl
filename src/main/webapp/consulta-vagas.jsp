@@ -89,7 +89,7 @@
                             <tr>
                                 <th>Status</th>
                                 <th>PMP</th>
-                                <th>Expectativa de Entrada</th>
+                                <th>Tecnologia</th>
                                 <th>Área</th>
                                 <th>Opções</th>
                             </tr>

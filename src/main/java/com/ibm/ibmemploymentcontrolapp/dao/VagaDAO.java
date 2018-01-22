@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import org.eclipse.persistence.sessions.factories.SessionFactory;
 import org.modelmapper.ModelMapper;
 
 /**
@@ -30,11 +31,46 @@ public class VagaDAO {
 
     public void salvarVaga(VagaBean v) {
         Vaga objDestino = modelMapper.map(v, Vaga.class);
-        em.getTransaction().begin();
-        em.persist(objDestino);
-        em.getTransaction().commit();
-        em.close();
-        em = null;
+        try {
+            em.getTransaction().begin();
+            em.persist(objDestino);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+            throw ex;
+        }
+       //em.close();
+       // em = null;
+    }
+    
+    /* metodo UPDATE com merge() conforme aqui:
+    https://www.devmedia.com.br/crud-completo-com-hibernate-e-jpa/32711 */
+    
+    public void atualizarVaga (VagaBean v) {
+        Vaga objDestino = modelMapper.map(v, Vaga.class);
+        try{
+            em.getTransaction().begin();
+            em.merge(objDestino);            
+            em.getTransaction().commit();
+        } catch(Exception ex){
+            em.getTransaction().rollback();
+            throw ex;
+        }
+        //em.close();
+    }
+    
+    // DELETE 
+    public void removerVaga (VagaBean v) {
+        Vaga objDestino = modelMapper.map(v, Vaga.class);
+        try {
+            objDestino = em.find(Vaga.class, objDestino.getId());
+            em.remove(objDestino);
+            em.getTransaction().commit();
+        } catch(Exception ex){
+            em.getTransaction().rollback();
+            throw ex;
+        }
+    //    em.close();
     }
 
     public List<VagaBean> listarVagas() {
@@ -47,12 +83,11 @@ public class VagaDAO {
             listarVagasBean.add(modelMapper.map(vagas, VagaBean.class));
 
         }
-        em.close();
-        em = null;
+    //    em.close();
+    //    em = null;
         return listarVagasBean;
-
     }
-
+    
     public List<VagaBean> listarPorAreaData() {
 
         Query query = em.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa");
@@ -62,8 +97,8 @@ public class VagaDAO {
 
             listarVagaAreaData.add(modelMapper.map(vagas, VagaBean.class));
         }
-        em.close();
-        em = null;
+    //    em.close();
+    //    em = null;
         return listarVagaAreaData;
     }
 
@@ -76,8 +111,8 @@ public class VagaDAO {
 
             listarOrdemCronologica.add(modelMapper.map(vagas, VagaBean.class));
         }
-        em.close();
-        em = null;
+    //    em.close();
+    //    em = null;
         return listarOrdemCronologica;
     }
 
