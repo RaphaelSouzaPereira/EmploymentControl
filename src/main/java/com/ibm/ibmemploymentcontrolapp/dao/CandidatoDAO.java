@@ -48,7 +48,7 @@ public class CandidatoDAO {
         em = null;
         return listCandidatos;
     }
-
+    
     public void salvarCandidatoComVerificacao(CandidatoBean c) {
         List<Candidato> listCandidatos = new ArrayList<Candidato>();
         listCandidatos = em.createNamedQuery("Candidato.findByEmail").setParameter("email", c.getEmail()).getResultList();
@@ -63,5 +63,4 @@ public class CandidatoDAO {
             throw erro;
         }
     }
-
 }

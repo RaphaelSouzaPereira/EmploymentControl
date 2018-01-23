@@ -53,21 +53,6 @@ public class VagaDAO {
             em.getTransaction().rollback();
             throw ex;
         }
-
-    }
-
-    // DELETE 
-    public void removerVaga(VagaBean v) {
-        Vaga objDestino = modelMapper.map(v, Vaga.class);
-        try {
-            objDestino = em.find(Vaga.class, objDestino.getId());
-            em.remove(objDestino);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            em.getTransaction().rollback();
-            throw ex;
-        }
-
     }
 
     public List<VagaBean> listarVagas() {
@@ -92,8 +77,6 @@ public class VagaDAO {
 
             listarVagaAreaData.add(modelMapper.map(vagas, VagaBean.class));
         }
-        //    em.close();
-        //    em = null;
         return listarVagaAreaData;
     }
 
