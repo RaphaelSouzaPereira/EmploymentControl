@@ -55,6 +55,20 @@ public class VagaDAO {
         }
     }
 
+    // Exclusao logica (seta status como "Excluida")
+    public void removerVaga(VagaBean v) {
+        v.setStatus("Excluida");
+        Vaga objDestino = modelMapper.map(v, Vaga.class);
+        try {
+            em.getTransaction().begin();
+            em.merge(objDestino);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+            throw ex;
+        }
+    }
+
     public List<VagaBean> listarVagas() {
 
         Query query = em.createNamedQuery("Vaga.findAll");
