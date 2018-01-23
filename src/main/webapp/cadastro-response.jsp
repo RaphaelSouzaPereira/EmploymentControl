@@ -13,7 +13,7 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
-        <title>Sucesso!!!</title>
+        <title>Cadastro Vaga</title>
         
     </head>
     <body>
@@ -39,7 +39,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
 
-                        <h4 class="modal-title">Feito!</h4>
+                        <h4 class="modal-title">Cadastro realizado com sucesso!</h4>
                     </div>
                     <div class="modal-body">
                         <p>Deseja cadastrar mais vagas?</p>

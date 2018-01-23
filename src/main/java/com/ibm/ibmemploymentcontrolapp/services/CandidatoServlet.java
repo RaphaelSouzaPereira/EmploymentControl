@@ -46,9 +46,25 @@ public class CandidatoServlet extends HttpServlet {
 
         candidato.setNome(nome);
         candidato.setEmail(email);
-        
+
         //salva no banco o novo candidato
-        candidadatoDAO.salvarCandidato(candidato);
+        try {
+            candidadatoDAO.salvarCandidato(candidato);
+        } catch (Exception ex) {
+            PrintWriter out = response.getWriter();
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert(\"Candidato jรก existe.\");");
+            out.println("setTimeout(function(){window.location.href='cadastro-candidato.jsp';},100)");
+            out.println("</script>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+
         emf.close();
         candidadatoDAO = null;
         candidato = null;
