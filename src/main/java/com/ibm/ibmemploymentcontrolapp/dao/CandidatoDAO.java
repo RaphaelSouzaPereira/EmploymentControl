@@ -18,7 +18,7 @@ import org.modelmapper.ModelMapper;
  * @author FabioHenriqueGoulart
  */
 public class CandidatoDAO {
-    
+
     private final EntityManager em;
     private final ModelMapper modelMapper;
 
@@ -26,22 +26,37 @@ public class CandidatoDAO {
         this.em = em;
         this.modelMapper = new ModelMapper();
     }
-    
-    public void salvarCandidato(CandidatoBean c){
+
+    public void salvarCandidato(CandidatoBean c) {
         Candidato destObject = modelMapper.map(c, Candidato.class);
         em.getTransaction().begin();
         em.persist(destObject);
         em.getTransaction().commit();
     }
-    
+
     public List<CandidatoBean> listarCandidatos() {
 
         Query query = em.createNamedQuery("Candidato.findAll");
         List<CandidatoBean> listCandidatos = new ArrayList<>();
-                
+
         for (Candidato candidato : (List<Candidato>) query.getResultList()) {
             listCandidatos.add(modelMapper.map(candidato, CandidatoBean.class));
         }
         return listCandidatos;
+    }
+
+    public void salvarCandidatoComVerificacao(CandidatoBean c) {
+        List<Candidato> listCandidatos = new ArrayList<Candidato>();
+        listCandidatos = em.createNamedQuery("Candidato.findByEmail").setParameter("email", c.getEmail()).getResultList();
+        
+        if (listCandidatos.isEmpty()) {
+            Candidato destObject = modelMapper.map(c, Candidato.class);
+            em.getTransaction().begin();
+            em.persist(destObject);
+            em.getTransaction().commit();
+        } else {
+            IllegalArgumentException erro = new IllegalArgumentException();
+            throw erro; 
+        }
     }
 }
