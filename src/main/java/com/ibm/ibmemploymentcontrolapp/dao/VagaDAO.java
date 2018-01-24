@@ -53,6 +53,8 @@ public class VagaDAO {
             em.getTransaction().rollback();
             throw ex;
         }
+        em.close();
+        em = null;
     }
 
     // Exclusao logica (seta status como "Excluida")
