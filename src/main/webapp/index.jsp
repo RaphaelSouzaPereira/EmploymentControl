@@ -165,10 +165,10 @@
                                     </ul>
                                 </td>
                             </tr>
-
                             <tr class="collapse multi-collapse" id="atualizar_vaga-<%= v.getId()%>">
                                 <td colspan="5">                                    
-                                        <form class="atualizar-vaga" action="" method="post">
+                                        <form class="atualizar-vaga" action="./AtualizacaoServlet" method="post">
+                                          <!-- Mudei o nome do servlet para chamar o novo que criei (Renan Boldrin) -->
                                             <div class="form-row">
                                                 <div class="form-group d-none">
                                                     <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputIdVaga" name="id_vaga">
