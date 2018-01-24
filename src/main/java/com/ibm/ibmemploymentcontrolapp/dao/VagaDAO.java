@@ -30,11 +30,42 @@ public class VagaDAO {
 
     public void salvarVaga(VagaBean v) {
         Vaga objDestino = modelMapper.map(v, Vaga.class);
-        em.getTransaction().begin();
-        em.persist(objDestino);
-        em.getTransaction().commit();
-        em.close();
-        em = null;
+        try {
+            em.getTransaction().begin();
+            em.persist(objDestino);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+            throw ex;
+        }
+    }
+
+    /* metodo UPDATE com merge() conforme aqui:
+    https://www.devmedia.com.br/crud-completo-com-hibernate-e-jpa/32711 */
+    public void atualizarVaga(VagaBean v) {
+        Vaga objDestino = modelMapper.map(v, Vaga.class);
+        try {
+            em.getTransaction().begin();
+            em.merge(objDestino);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+            throw ex;
+        }
+    }
+
+    // Exclusao logica (seta status como "Excluida")
+    public void removerVaga(VagaBean v) {
+        v.setStatus("Excluida");
+        Vaga objDestino = modelMapper.map(v, Vaga.class);
+        try {
+            em.getTransaction().begin();
+            em.merge(objDestino);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+            throw ex;
+        }
     }
 
     public List<VagaBean> listarVagas() {
@@ -47,10 +78,7 @@ public class VagaDAO {
             listarVagasBean.add(modelMapper.map(vagas, VagaBean.class));
 
         }
-        em.close();
-        em = null;
         return listarVagasBean;
-
     }
 
     public List<VagaBean> listarPorAreaData() {
@@ -62,8 +90,6 @@ public class VagaDAO {
 
             listarVagaAreaData.add(modelMapper.map(vagas, VagaBean.class));
         }
-        em.close();
-        em = null;
         return listarVagaAreaData;
     }
 
@@ -76,8 +102,6 @@ public class VagaDAO {
 
             listarOrdemCronologica.add(modelMapper.map(vagas, VagaBean.class));
         }
-        em.close();
-        em = null;
         return listarOrdemCronologica;
     }
 

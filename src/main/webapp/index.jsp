@@ -117,8 +117,7 @@
                                         data-toggle="collapse"
                                         data-target="#atualizar_vaga-<%= i%>"
                                         aria-expanded="false"
-                                        aria-controls="atualizar_vaga-<%= i%>"
-                                        onclick="redirecionaEditarVaga()">
+                                        aria-controls="atualizar_vaga-<%= i%>">
                                     </button>
                                 </td>
                             </tr>
@@ -171,7 +170,7 @@
                             <tr class="collapse multi-collapse" id="atualizar_vaga-<%= i%>">
                                 <td colspan="5">
                                     
-                                        <form class="atualizar-vaga" action="./ControlServlet" method="post" onchange="validaCamposDeCadastroDeVagas()">
+                                        <form class="atualizar-vaga" action="./editarVagaServlet" method="post" onchange="validaCamposDeEditarVagas()">
                                             <div class="form-row">
                                                 <div class="form-group col-3">
                                                     <label for="inputCategoria">Categoria:</label>
@@ -289,10 +288,10 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-primary" id="btn-salvar-cadastro" disabled>Salvar</button>                            
+                                                <button type="submit" class="btn btn-primary" id="btn-editar-vaga">Salvar</button>                            
                                                 <button type="button" class="btn btn-default" id="reset" data-toggle="modal" data-target="#myModal">Cancelar</button>
                                             </div>
-                                        </form> 
+                                        </form>
                                     </td>
                                 </tr>
                             <% }%>       
