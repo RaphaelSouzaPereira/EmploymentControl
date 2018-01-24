@@ -13,8 +13,7 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
-        <title>Cadastro Candidato</title>
-        
+        <title>Candidato não existe</title>      
     </head>
     <body>
         <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar mb-5">
@@ -34,15 +33,13 @@
         <!-- Modal -->
         <div class="modal fade in" id="myModal" role="dialog">
             <div class="modal-dialog">
-
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-
-                        <h4 class="modal-title">Cadastro realizado com sucesso!</h4>
+                        <h4 class="modal-title">Candidato já foi cadastrado!</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Deseja cadastrar mais candidatos?</p>
+                        <p>Deseja cadastrar novamente?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal" 
@@ -51,7 +48,6 @@
                                 onClick="redireciona('./')">Não</button>
                     </div>
                 </div>
-
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
