@@ -171,7 +171,8 @@
                             <tr class="collapse multi-collapse" id="atualizar_vaga-<%= i%>">
                                 <td colspan="5">
                                     
-                                        <form class="atualizar-vaga" action="./ControlServlet" method="post" onchange="validaCamposDeCadastroDeVagas()">
+                                        <form class="atualizar-vaga" action="./AtualizacaoServlet" method="post" onchange="validaCamposDeCadastroDeVagas()"> 
+                                            <!-- Mudei o nome do servlet para chamar o novo que criei (Renan Boldrin) -->
                                             <div class="form-row">
                                                 <div class="form-group col-3">
                                                     <label for="inputCategoria">Categoria:</label>
