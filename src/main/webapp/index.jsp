@@ -93,9 +93,7 @@
                         <tbody>
                             <%
                                 List<VagaBean> listaDeVagas = (List<VagaBean>) request.getAttribute("listaVagas");
-                                int i = 0;
                                 for (VagaBean v : listaDeVagas) {
-                                    i++;
                             %>
                             <tr>
                                 <td><%= v.getStatus()%></td>
@@ -107,22 +105,22 @@
                                         class="btn btn-primary glyphicon glyphicon-plus"
                                         type="button"
                                         data-toggle="collapse"
-                                        data-target="#vaga-<%= i%>"
+                                        data-target="#vaga-<%= v.getId()%>"
                                         aria-expanded="false"
-                                        aria-controls="vaga-<%= i%>">
+                                        aria-controls="vaga-<%= v.getId()%>">
                                     </button>
                                     <button
                                         class="btn btn-primary glyphicon glyphicon-pencil"
                                         type="button"
                                         data-toggle="collapse"
-                                        data-target="#atualizar_vaga-<%= i%>"
+                                        data-target="#atualizar_vaga-<%= v.getId()%>"
                                         aria-expanded="false"
-                                        aria-controls="atualizar_vaga-<%= i%>"
+                                        aria-controls="atualizar_vaga-<%= v.getId()%>"
                                         onclick="redirecionaEditarVaga()">
                                     </button>
                                 </td>
                             </tr>
-                            <tr class="collapse multi-collapse" id="vaga-<%= i%>">
+                            <tr class="collapse multi-collapse" id="vaga-<%= v.getId()%>">
                                 <td colspan="5">
                                     <ul class="list-group">
                                         <li class="list-group-item">
@@ -168,15 +166,16 @@
                                 </td>
                             </tr>
 
-                            <tr class="collapse multi-collapse" id="atualizar_vaga-<%= i%>">
-                                <td colspan="5">
-                                    
-                                        <form class="atualizar-vaga" action="./ControlServlet" method="post" onchange="validaCamposDeCadastroDeVagas()">
+                            <tr class="collapse multi-collapse" id="atualizar_vaga-<%= v.getId()%>">
+                                <td colspan="5">                                    
+                                        <form class="atualizar-vaga" action="" method="post">
                                             <div class="form-row">
+                                                <div class="form-group d-none">
+                                                    <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputIdVaga" name="id_vaga">
+                                                </div>
                                                 <div class="form-group col-3">
                                                     <label for="inputCategoria">Categoria:</label>
                                                     <select id="inputCategoria" class="form-control" name="categoria" required>
-                                                        <!-- TODO: pegar valores de um Enum? Ou deixamos chumbado aqui? -->
                                                         <option value="<%=v.getCategoria() %>"><%=v.getCategoria() %></option>
                                                         <option>Regular</option>
                                                         <option>BTP</option>
@@ -185,7 +184,6 @@
                                                 <div class="form-group col-3">
                                                     <label for="inputStatus">Status:</label>
                                                     <select id="inputStatus" class="form-control" name="status">
-                                                        <!-- TODO: pegar valores do Enum? Ou deixamos chumbado aqui? -->
                                                         <option value="<%=v.getStatus() %>"><%=v.getStatus() %></option>
                                                         <option>Open</option>
                                                         <option>Closed</option>
@@ -201,7 +199,6 @@
                                                     <label for="inputArea">Área:</label>
                                                     <select id="inputArea" class="form-control" name="area" required>
                                                         <option value="<%=v.getArea() %>"><%=v.getArea() %></option>
-                                                        <!-- TODO: pegar valores do Enum? Ou deixamos chumbado aqui? -->
                                                         <option>Arquitetura</option>
                                                         <option>Canais</option>
                                                         <option>Digital</option>
@@ -217,7 +214,6 @@
                                                     <label for="inputTec">Tecnologia:</label>
                                                     <select id="inputTec" class="form-control" name="tecnologia" required>
                                                         <option value="<%=v.getTecnologia()%>"><%=v.getTecnologia()%></option>
-                                                        <!-- TODO: pegar valores da tabela Tecnologia -->
                                                         <option>Java</option>
                                                         <option>Analista de Automação</option>
                                                         <option>Especialista Mobilidade</option>
