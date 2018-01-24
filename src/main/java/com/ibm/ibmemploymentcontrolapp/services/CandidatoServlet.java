@@ -37,7 +37,6 @@ public class CandidatoServlet extends HttpServlet {
         //campos obrigatorios no cadastro
         String nome = request.getParameter("nomeCandidato");
         String email = request.getParameter("emailCandidato");
-
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
 
         //instacia do DAO e BEAN do candidato para fazer o cadastro
@@ -46,27 +45,39 @@ public class CandidatoServlet extends HttpServlet {
 
         candidato.setNome(nome);
         candidato.setEmail(email);
-        
-        //salva no banco o novo candidato
-        candidadatoDAO.salvarCandidato(candidato);
-        emf.close();
-        candidadatoDAO = null;
-        candidato = null;
 
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+        //salva no banco o novo candidato
+        try {
+            candidadatoDAO.salvarCandidatoComVerificacao(candidato);
+            PrintWriter out = response.getWriter();
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("</head>");
             out.println("<body>");
             out.println("<script type=\"text/javascript\">");
-            out.println("setTimeout(function(){window.location.href='cadastrocandidato-response.jsp';},100)");
+            out.println("setTimeout(function(){window.location.href='cadastro-candidato-response.jsp';},100)");
+            out.println("</script>");
+            out.println("</body>");
+            out.println("</html>");
+        } catch (Exception ex) {
+            PrintWriter out = response.getWriter();
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<script type=\"text/javascript\">");
+            out.println("setTimeout(function(){window.location.href='cadastro-candidato-falha-response.jsp';},100)");
             out.println("</script>");
             out.println("</body>");
             out.println("</html>");
         }
+
+        emf.close();
+        candidadatoDAO = null;
+        candidato = null;
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -28,23 +28,16 @@ import org.hibernate.SessionFactory;
 
 /**
  *
- * @author FabioHenriqueGoulart
+ * @author RenanFontouraBoldrin
  */
-public class ControlServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+public class AtualizacaoServlet extends HttpServlet  {
+    
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         double rateConverted;
+        
+        String id = request.getParameter("id_vaga"); // ainda falta colocar o parametro no jsp(parte de atualizacao)
 
         String categoria = request.getParameter("categoria");
         String status = request.getParameter("status");
@@ -91,6 +84,9 @@ public class ControlServlet extends HttpServlet {
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
 
         VagaBean vaga = new VagaBean();
+        
+        vaga.setId(Integer.parseInt(id)); // setando o id
+        
         vaga.setCategoria(categoria);
         vaga.setStatus(status);
         vaga.setDataDeAbertura(dateAbertura);
@@ -115,8 +111,8 @@ public class ControlServlet extends HttpServlet {
         // campos de calculo de data
         vaga.setExpectativaDeAbertura(expectativaDeAbertura);
 
-        // salva no banco
-        vagaDAO.salvarVaga(vaga);
+        // Atualiza no banco
+        vagaDAO.atualizarVaga(vaga);
         emf.close();
 
         vagaDAO = null;
@@ -137,7 +133,7 @@ public class ControlServlet extends HttpServlet {
             out.println("</html>");
         }
     }
-
+        
     // fazendo a conversão da data   
     /**
      * @param form String pega do form feito no jsp
@@ -186,10 +182,7 @@ public class ControlServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /* processRequest deve ser comentado devido a resposta da pergunta no link abaixo?
-        https://stackoverflow.com/questions/2349633/doget-and-dopost-in-servlets */
         processRequest(request, response);
-
     }
 
     /**

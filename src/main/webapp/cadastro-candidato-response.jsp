@@ -13,7 +13,7 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
-        <title>Cadastro Vaga</title>        
+        <title>Cadastro Candidato</title>
     </head>
     <body>
         <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar mb-5">
@@ -39,11 +39,11 @@
                         <h4 class="modal-title">Cadastro realizado com sucesso!</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Deseja cadastrar mais vagas?</p>
+                        <p>Deseja cadastrar mais candidatos?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal" 
-                                onClick="redireciona('cadastro-vagas.jsp')">Sim</button>
+                                onClick="redireciona('cadastro-candidato.jsp')">Sim</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal"
                                 onClick="redireciona('./')">Não</button>
                     </div>
@@ -54,5 +54,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <script src="js/script.js"></script>
+        <script type="text/javascript">
+            $(window).on('load', function () {
+                $('#myModal').modal('show');
+            });
+        </script>
     </body>
 </html>
