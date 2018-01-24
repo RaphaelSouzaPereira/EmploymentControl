@@ -111,6 +111,15 @@
                                         aria-controls="vaga-<%= i%>">
                                         +
                                     </button>
+                                        <button
+                                        class="btn btn-primary"
+                                        type="button"
+                                        data-toggle="collapse"
+                                        data-target="#vaga-<%= i%>"
+                                        aria-expanded="false"
+                                        aria-controls="vaga-<%= i%>">
+                                        C
+                                    </button>
                                 </td>
                             </tr>
                             <tr class="collapse multi-collapse" id="vaga-<%= i%>">

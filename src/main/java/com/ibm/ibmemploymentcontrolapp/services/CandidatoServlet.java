@@ -50,6 +50,17 @@ public class CandidatoServlet extends HttpServlet {
         //salva no banco o novo candidato
         try {
             candidadatoDAO.salvarCandidato(candidato);
+            PrintWriter out = response.getWriter();
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<script type=\"text/javascript\">");
+            out.println("setTimeout(function(){window.location.href='cadastro-candidato-response.jsp';},100)");
+            out.println("</script>");
+            out.println("</body>");
+            out.println("</html>");
         } catch (Exception ex) {
             PrintWriter out = response.getWriter();
             out.println("<!DOCTYPE html>");
@@ -59,7 +70,7 @@ public class CandidatoServlet extends HttpServlet {
             out.println("<body>");
             out.println("<script type=\"text/javascript\">");
             out.println("alert(\"Candidato jรก existe.\");");
-            out.println("setTimeout(function(){window.location.href='cadastro-candidato.jsp';},100)");
+            out.println("setTimeout(function(){window.location.href='cadastro-candidato-falha-response.jsp';},100)");
             out.println("</script>");
             out.println("</body>");
             out.println("</html>");
@@ -69,20 +80,6 @@ public class CandidatoServlet extends HttpServlet {
         candidadatoDAO = null;
         candidato = null;
 
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<script type=\"text/javascript\">");
-            out.println("setTimeout(function(){window.location.href='cadastrocandidato-response.jsp';},100)");
-            out.println("</script>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
