@@ -45,13 +45,14 @@ public class ListaServlet extends HttpServlet {
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
         
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();
-        listaVagas = vagaDAO.listarVagas();
+        listaVagas = vagaDAO.listarPorAreaData();
         
 	request.setAttribute("listaVagas", listaVagas);
 	RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
 	view.forward(request, response);
         
         emf.close();
+        emf = null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

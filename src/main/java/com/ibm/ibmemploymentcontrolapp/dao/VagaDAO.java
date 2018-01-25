@@ -93,6 +93,8 @@ public class VagaDAO {
 
             listarVagaAreaData.add(modelMapper.map(vagas, VagaBean.class));
         }
+        em.close();
+        em = null;
         return listarVagaAreaData;
     }
 

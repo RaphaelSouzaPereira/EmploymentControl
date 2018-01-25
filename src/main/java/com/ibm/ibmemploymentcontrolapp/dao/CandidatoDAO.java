@@ -59,8 +59,13 @@ public class CandidatoDAO {
             em.persist(destObject);
             em.getTransaction().commit();
         } else {
+            em.close();
+            em = null;
             IllegalArgumentException erro = new IllegalArgumentException();
             throw erro;
         }
+        
+        em.close();
+        em = null;
     }
 }

@@ -75,6 +75,7 @@ public class CandidatoServlet extends HttpServlet {
         }
 
         emf.close();
+        emf = null;
         candidadatoDAO = null;
         candidato = null;
 
