@@ -27,3 +27,56 @@
     color: rgb(0,120,215);
     font-size: 18px;
 }
+
+.btn-ibmec {
+    color: #fff;
+    background-color: rgb(0,120,215);
+    border-color: rgb(0,120,215);
+}
+
+.btn-ibmec:hover {
+    color: rgb(0,120,215);
+    background-color: #fff;
+    border-color: rgb(0,120,215);
+}
+
+.list-table-ibmec {
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.list-thead-ibmec {
+    background-color: #f1f1f1;
+    color: #666666;
+}
+
+.list-row-ibmec td{
+    vertical-align: middle;
+}
+
+.list-row-content-ibmec {
+    background-color: #fafafa;
+}
+
+.edit-light-grey {
+    background-color: #f1f1f1;
+}
+
+.cadastra-candidatos {
+    height: 335px;
+}
+
+.footer-ibmec {
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+    left: 0;
+    bottom: 0;
+    margin-top: 25px;
+    min-height: 4rem;
+}
+
+.footer-content-ibmec {
+    padding: 2%;
+    box-sizing: border-box;
+    margin-bottom: 0;
+}
