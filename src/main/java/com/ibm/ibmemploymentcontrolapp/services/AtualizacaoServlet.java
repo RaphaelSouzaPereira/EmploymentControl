@@ -57,7 +57,6 @@ public class AtualizacaoServlet extends HttpServlet  {
         String dataaprovacaoBoardBrForm = request.getParameter("aprovacao_board_brasil");
         String dataaprovacaoBoardGlobalForm = request.getParameter("aprovacao_board_global");
         String dataEntrouOperacaoForm = request.getParameter("entrou_operacao");
-        String profSelecionado = request.getParameter("profissional_selecionado");
         String rate = request.getParameter("rate");
         String comentarios = request.getParameter("comentarios");
 
@@ -107,7 +106,6 @@ public class AtualizacaoServlet extends HttpServlet  {
         vaga.setAprovacaoBoardBrasil(dateAprovacaoBr);
         vaga.setAprovacaoBoardGlobal(dateAprovacaoGlobal);
         vaga.setEntrouNaOperacao(dateEntrouOperacao);
-        vaga.setProfissionalSelecionado(profSelecionado);
         vaga.setRate(rateConverted);
         vaga.setComentario(comentarios);
 
