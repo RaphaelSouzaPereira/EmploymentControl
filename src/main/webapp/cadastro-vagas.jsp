@@ -69,7 +69,7 @@
                                     <option value="">Selecione...</option>
                                     <!-- TODO: pegar valores da tabela Tecnologia -->
                                     <option>Java</option>
-                                    <option>Analista de Automação</option>
+                                    <option>Analista de Automacao</option>
                                     <option>Especialista Mobilidade</option>
                                     <option>Designer UX</option>
                                     <option>Dev. ODI</option>
