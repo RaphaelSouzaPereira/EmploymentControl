@@ -5,9 +5,10 @@ package com.ibm.ibmemploymentcontrolapp.services;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
 import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
+import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,20 +38,27 @@ public class ListaServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
 
         //Instancia uma VagaDAO
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
-        
+
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();
         listaVagas = vagaDAO.listarPorAreaData();
-        
-	request.setAttribute("listaVagas", listaVagas);
-	RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
-	view.forward(request, response);
-        
+
+        request.setAttribute("listaVagas", listaVagas);
+        //Instancia uma CandidatoDAO
+        CandidatoDAO candidatoDAO = new CandidatoDAO(emf.createEntityManager());
+
+        List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
+        listaCandidatos = candidatoDAO.listarCandidatos();
+
+        request.setAttribute("listaCandidatos", listaCandidatos);
+        RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
+        view.forward(request, response);
+
         emf.close();
         emf = null;
     }
