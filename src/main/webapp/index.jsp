@@ -309,24 +309,25 @@
                                 <td colspan="5" class="edit-light-grey">                        
                                     <form class="atualizar-vaga" action="./VinculaCandidatoServlet" method="post">                                        
                                         <div class="form-row">
-                                            <label for="inputFiltro">Filtro:</label>
-                                            <input value="" type="text" class="form-control" id="inputFiltro" placeholder="Filtro pesquisa" name="filtro">
+                                            <div class="form-group col-4">
+                                                <label for="inputFiltro">Filtro:</label>
+                                                <input value="" type="text" class="form-control" id="inputFiltro" placeholder="Filtro pesquisa" name="filtro">
+                                            </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-6">
-                                                <select id="candidatosAll" multiple="multiple">
+                                            <div class="form-group col-4">
+                                                <select id="candidatosAll" class="form-control" multiple="multiple" size="5">
                                                     <%  for (CandidatoBean c : listaDeCandidatos) {%>
-                                                    <option <%= c.getNome()%> </option>
-
+                                                    <option> <%= c.getNome()%> </option>
                                                     <% }%>
                                                 </select>
                                             </div>
                                             <div class="form-group col-3">
-                                                <input type="button" id="vincula" value="Vincular" />
+                                                <input type="button" class="btn btn-ibmec btn-block" id="vincula" value="Vincular" />
                                             </div>
-                                            <div class="form-group col-6">
-                                                <select id="candidatosVaga" multiple="multiple">
-
+                                            <div class="form-group col-4">
+                                                <select id="candidatosVaga" class="form-control" multiple="multiple" size="5">
+                                                    
                                                 </select>
                                             </div>
                                         </div>
@@ -345,6 +346,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="js/script.js"></script>
     </body>
 </html>

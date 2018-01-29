@@ -82,6 +82,20 @@ function redireciona(url) {
     window.location.href = url;
 }
 
+/* Funcao para copiar os candidatos selecionados do primeiro select para
+ * o segundo select no vincular candidato a vaga * 
+ */
+$(function () {
+    function copyItems(origin, dest) {
+        $(origin).find(':selected').appendTo(dest);
+    }
+
+    $('#vincula').click(function () {
+        copyItems('#candidatosAll', '#candidatosVaga');
+    });
+
+});
+
 /* Máscara do campo de cadastro 
  * 
  * http://igorescobar.github.io/jQuery-Mask-Plugin/
