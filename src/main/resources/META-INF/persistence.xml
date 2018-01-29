@@ -8,7 +8,7 @@
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://us-cdbr-sl-dfw-01.cleardb.net:3306/ibmx_1b343faa47fee4d?zeroDateTimeBehavior=convertToNull"/>
             <property name="javax.persistence.jdbc.user" value="b80cb503fd10a0"/>
-            <property name="javax.persistence.jdbc.password" value="9e370d37"/>
+            <property name="javax.persistence.jdbc.password" value="aa56c35a4b25f9f"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
