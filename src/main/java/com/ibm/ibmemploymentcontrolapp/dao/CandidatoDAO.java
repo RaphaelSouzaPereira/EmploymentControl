@@ -51,18 +51,18 @@ public class CandidatoDAO {
 
     public List<CandidatoBean> listarCandidatosComFiltro(String nomeDoFiltro) {
         List<Candidato> listCandidatos = new ArrayList<Candidato>();
-        listCandidatos = em.createNamedQuery("Candidato.findByFilter").setParameter("nome", "%"+ nomeDoFiltro + "%").getResultList();
-        List<CandidatoBean> listCandidatosBean = new ArrayList<CandidatoBean>();  
-        
-        for(Candidato candidato : listCandidatos ) {
-            listCandidatosBean.add(modelMapper.map(candidato, CandidatoBean.class));   
-        }              
-        
+        listCandidatos = em.createNamedQuery("Candidato.findByFilter").setParameter("nome", "%" + nomeDoFiltro + "%").getResultList();
+        List<CandidatoBean> listCandidatosBean = new ArrayList<CandidatoBean>();
+
+        for (Candidato candidato : listCandidatos) {
+            listCandidatosBean.add(modelMapper.map(candidato, CandidatoBean.class));
+        }
+
         em.close();
         em = null;
-        
+
         return listCandidatosBean;
-    }   
+    }
 
     public void salvarCandidatoComVerificacao(CandidatoBean c) {
         List<Candidato> listCandidatos = new ArrayList<Candidato>();
@@ -74,14 +74,14 @@ public class CandidatoDAO {
             em.persist(destObject);
             em.getTransaction().commit();
         } else {
-            //em.close();
-           // em = null;
+            em.close();
+            em = null;
             IllegalArgumentException erro = new IllegalArgumentException();
             throw erro;
         }
 
-        //em.close();
-       // em = null;
+        em.close();
+        em = null;
     }
 
 }
