@@ -6,7 +6,9 @@ package com.ibm.ibmemploymentcontrolapp.services;
  * and open the template in the editor.
  */
 
+import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
 import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
+import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,19 +40,32 @@ public class ListaServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        // parametro para filtro
+        //String filtro = request.getParameter("filtro"); ainda n foi implementado
+        String filtro = "";
+        
         //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
 
-        //Instancia uma VagaDAO
+        //Instancia os DAOs
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
+        CandidatoDAO candidatoDAO = new CandidatoDAO(emf.createEntityManager());
         
+        //Instancia os Beans
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();
-        listaVagas = vagaDAO.listarPorAreaData();
+        List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
         
+        //Retorna as listas de vagas e candidatos
+        listaVagas = vagaDAO.listarPorAreaData();        
+        listaCandidatos = candidatoDAO.listarCandidatosComFiltro(filtro);
+        
+        //Seta os atributos que serão utilizados nos jsp
 	request.setAttribute("listaVagas", listaVagas);
+        request.setAttribute("listaCandidatos", listaCandidatos);
+        
 	RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
 	view.forward(request, response);
-        
+
         emf.close();
         emf = null;
     }
