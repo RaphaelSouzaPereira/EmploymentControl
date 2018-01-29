@@ -45,6 +45,7 @@ public class CandidatoServlet extends HttpServlet {
 
         candidato.setNome(nome);
         candidato.setEmail(email);
+        
 
         //salva no banco o novo candidato
         try {
