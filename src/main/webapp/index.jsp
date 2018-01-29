@@ -82,8 +82,7 @@
                         </thead>
                         <tbody>
                             <%  List<VagaBean> listaDeVagas = (List<VagaBean>) request.getAttribute("listaVagas");
-                                for (VagaBean v : listaDeVagas) {%> 
-
+                                for (VagaBean v : listaDeVagas) {%>
 
                             <tr class="list-row-ibmec">
                                 <td><%= v.getStatus()%></td>
@@ -111,6 +110,7 @@
                                         >
                                         <i class="material-icons">mode_edit</i>
                                     </a>
+
                                     <a
                                         class="btn btn-ibmec"
                                         data-toggle="collapse"
@@ -121,6 +121,7 @@
                                         >
                                         <i class="material-icons">mode_edit</i>
                                     </a>
+
                                 </td>
                             </tr>
                             <tr class="collapse multi-collapse list-row-content-ibmec" id="vaga-<%= v.getId()%>">
@@ -299,6 +300,7 @@
                                         </div>
                                         </div>
                                     </form>
+
                                 </td>                            
                             </tr>
                             <tr class="collapse multi-collapse list-row-content-ibmec" id="incluir_candidato-<%= v.getId()%>">
@@ -329,6 +331,7 @@
                                             </div>
                                         </div>
                                     </form>                                   
+
                                 </td>
                             </tr>
                             <% }%>       
