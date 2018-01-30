@@ -337,6 +337,7 @@
                                             </div>
                                             <div class="form-group col-3">
                                                 <input type="button" class="btn btn-ibmec btn-block" id="vincula" value="Vincular" />
+                                                <input type="button" class="btn btn-ibmec btn-block" id="desvincula" value="Desvincular" />
                                             </div>
                                             <div class="form-group col-4">
                                                 <select id="candidatosVaga" class="form-control" multiple="multiple" size="5">

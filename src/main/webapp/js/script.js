@@ -96,6 +96,17 @@ $(function () {
 
 });
 
+$(function () {
+    function copyItems(origin, dest) {
+        $(origin).find(':selected').appendTo(dest);
+    }
+
+    $('#desvincula').click(function () {
+        copyItems('#candidatosVaga', '#candidatosAll');
+    });
+
+});
+
 /* Máscara do campo de cadastro 
  * 
  * http://igorescobar.github.io/jQuery-Mask-Plugin/
