@@ -7,7 +7,6 @@ package com.ibm.ibmemploymentcontrolapp.services;
  */
 import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
 import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
-import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
 import java.io.IOException;
@@ -26,6 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author PriscilaRicardoArrud
  */
 public class ListaServlet extends HttpServlet {
+
+    private static final long serialVersionUID = -5904318238581502627L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

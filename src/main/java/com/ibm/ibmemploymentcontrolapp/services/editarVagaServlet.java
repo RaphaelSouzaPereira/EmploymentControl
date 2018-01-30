@@ -8,7 +8,6 @@ package com.ibm.ibmemploymentcontrolapp.services;
 import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +26,8 @@ import org.apache.commons.lang.math.NumberUtils;
  * @author FabioHenriqueGoulart
  */
 public class editarVagaServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1135937768828020108L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
