@@ -322,24 +322,24 @@
                                 <td colspan="5" class="edit-light-grey">                        
                                     <form class="atualizar-vaga" action="./VinculaCandidatoServlet" method="post">                                        
                                         <div class="form-row">
-                                            <div class="form-group col-4">
+                                            <div class="form-group col-5">
                                                 <label for="inputFiltro">Filtro:</label>
                                                 <input value="" type="text" class="form-control" id="inputFiltro" placeholder="Filtro pesquisa" name="filtro">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-4">
+                                            <div class="form-group col-5">
                                                 <select id="candidatosAll" class="form-control" multiple="multiple" size="5">
                                                     <%  for (CandidatoBean c : listaDeCandidatos) {%>
                                                     <option> <%= c.getNome()%> </option>
                                                     <% }%>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-3">
+                                            <div class="form-group col-2">
                                                 <input type="button" class="btn btn-ibmec btn-block" id="vincula" value="Vincular" />
                                                 <input type="button" class="btn btn-ibmec btn-block" id="desvincula" value="Desvincular" />
                                             </div>
-                                            <div class="form-group col-4">
+                                            <div class="form-group col-5">
                                                 <select id="candidatosVaga" class="form-control" multiple="multiple" size="5">
 
                                                 </select>

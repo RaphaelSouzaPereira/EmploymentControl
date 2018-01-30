@@ -84,12 +84,14 @@ function redireciona(url) {
 
 // AQUI COMECA jQuery //
 
-/* Funcao para copiar os candidatos selecionados do primeiro select para
+/* Funcao para mover os candidatos selecionados do primeiro select para
  * o segundo select no vincular candidato a vaga
  */
 $(function () {
     function vincula(origin, dest) {
+        console.log("Chamou a funcao vincula")
         $(origin).find(':selected').appendTo(dest);
+        $('#inputFiltro').val(""); //limpa o campo de pesquisa
     }
 
     $('#vincula').click(function () {
@@ -98,21 +100,23 @@ $(function () {
 
 });
 
-//$(function () {
-//    function desvincula(origin, dest) {
-//        $(origin).find(':selected').appendTo(dest);
-//    }
-//
-//    $('#desvincula').click(function () {
-//        desvincula('#candidatosVaga', '#candidatosAll');
-//    });
-//
-//});
+$(function () {
+    function desvincula(origin, dest) {
+        $(origin).find(':selected').appendTo(dest);
+        $('#inputFiltro').val(""); //limpa o campo de pesquisa
+    }
+
+    $('#desvincula').click(function () {
+        desvincula('#candidatosVaga', '#candidatosAll');
+    });
+
+});
 
 /* Filtro de pesquisa de candidatos
  * 
  */
 $(function () {
+    console.log("iniciou o filtro...");
     var candidatoSelect = $('#candidatosAll'),
             procura = $('#inputFiltro'),
             options = candidatoSelect.find('option').clone(); // clone into memory
