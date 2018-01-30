@@ -90,38 +90,51 @@
                                 <td><%= v.getTecnologia()%></td>
                                 <td><%= v.getArea()%></td>
                                 <td>
-                                    <a
-                                        class="btn btn-ibmec"
-                                        data-toggle="collapse"
-                                        href="#vaga-<%= v.getId()%>"
-                                        role="button"
-                                        aria-expanded="false"
-                                        aria-controls="#vaga-<%= v.getId()%>"
-                                        >
-                                        <i class="material-icons">expand_more</i>
-                                    </a>
-                                    <a
-                                        class="btn btn-ibmec"
-                                        data-toggle="collapse"
-                                        href="#atualizar_vaga-<%= v.getId()%>"
-                                        role="button"
-                                        aria-expanded="false"
-                                        aria-controls="#atualizar_vaga-<%= v.getId()%>"
-                                        >
-                                        <i class="material-icons">mode_edit</i>
-                                    </a>
-
-                                    <a
-                                        class="btn btn-ibmec"
-                                        data-toggle="collapse"
-                                        href="#incluir_candidato-<%= v.getId()%>"
-                                        role="button"
-                                        aria-expanded="false"
-                                        aria-controls="#incluir_candidato-<%= v.getId()%>"
-                                        >
-                                        <i class="material-icons">mode_edit</i>
-                                    </a>
-
+                                    <span
+                                        data-toggle="tooltip"
+                                        data-placement="top"
+                                        title="Mais detalhes">
+                                        <a
+                                            class="btn btn-ibmec"
+                                            data-toggle="collapse"                                        
+                                            href="#vaga-<%= v.getId()%>"
+                                            role="button"
+                                            aria-expanded="false"
+                                            aria-controls="#vaga-<%= v.getId()%>"
+                                            >
+                                            <i class="material-icons">expand_more</i>
+                                        </a>
+                                    </span>
+                                    <span
+                                        data-toggle="tooltip"
+                                        data-placement="bottom"
+                                        title="Editar vaga">
+                                        <a
+                                            class="btn btn-ibmec"
+                                            data-toggle="collapse"
+                                            href="#atualizar_vaga-<%= v.getId()%>"
+                                            role="button"
+                                            aria-expanded="false"
+                                            aria-controls="#atualizar_vaga-<%= v.getId()%>"
+                                            >
+                                            <i class="material-icons">mode_edit</i>
+                                        </a>
+                                    </span>
+                                    <span
+                                        data-toggle="tooltip"
+                                        data-placement="rigt"
+                                        title="Vincular candidato">
+                                        <a
+                                            class="btn btn-ibmec"
+                                            data-toggle="collapse"
+                                            href="#incluir_candidato-<%= v.getId()%>"
+                                            role="button"
+                                            aria-expanded="false"
+                                            aria-controls="#incluir_candidato-<%= v.getId()%>"
+                                            >
+                                            <i class="material-icons">person_add</i>
+                                        </a>
+                                    </span>
                                 </td>
                             </tr>
                             <tr class="collapse multi-collapse list-row-content-ibmec" id="vaga-<%= v.getId()%>">
@@ -327,7 +340,7 @@
                                             </div>
                                             <div class="form-group col-4">
                                                 <select id="candidatosVaga" class="form-control" multiple="multiple" size="5">
-                                                    
+
                                                 </select>
                                             </div>
                                         </div>
