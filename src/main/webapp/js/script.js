@@ -80,51 +80,41 @@ function redirectToHome() {
 
 function redireciona(url) {
     window.location.href = url;
+
 }
 
 // AQUI COMECA jQuery //
 
-/* Funcao para mover os candidatos selecionados do primeiro select para
- * o segundo select no vincular candidato a vaga
- */
-$(function () {
-    function vincula(origin, dest) {
-        console.log("Chamou a funcao vincula")
-        $(origin).find(':selected').appendTo(dest);
-        $('#inputFiltro').val(""); //limpa o campo de pesquisa
-    }
+function vincula(origin, dest) {
+    $(origin).find(':selected').appendTo(dest);
+    $('#inputFiltro').val(""); //limpa o campo de pesquisa
+}
 
-    $('#vincula').click(function () {
-        vincula('#candidatosAll', '#candidatosVaga');
-    });
+function desvincula(origin, dest) {
+    $(origin).find(':selected').appendTo(dest);
+    $('#inputFiltro').val(''); //limpa o campo de pesquisa
+}
 
-});
+// Funcao pra limpar o texto para comparar
+function sanitize(string) {
+    return $.trim(string).replace(/\s+/g, ' ').toLowerCase();
+}
 
-$(function () {
-    function desvincula(origin, dest) {
-        $(origin).find(':selected').appendTo(dest);
-        $('#inputFiltro').val(""); //limpa o campo de pesquisa
-    }
+$(document).ready(function () {
+    /* Máscara do campo de cadastro 
+     * 
+     * http://igorescobar.github.io/jQuery-Mask-Plugin/
+     */
+    $('.inputRate').mask("#.##0,00", {reverse: true});
 
-    $('#desvincula').click(function () {
-        desvincula('#candidatosVaga', '#candidatosAll');
-    });
-
-});
-
-/* Filtro de pesquisa de candidatos
- * 
- */
-$(function () {
-    console.log("iniciou o filtro...");
+    /* Filtro de pesquisa de candidatos
+     * 
+     */
     var candidatoSelect = $('#candidatosAll'),
             procura = $('#inputFiltro'),
             options = candidatoSelect.find('option').clone(); // clone into memory
 
-    // Funcao pra limpar o texto para comparar
-    function sanitize(string) {
-        return $.trim(string).replace(/\s+/g, ' ').toLowerCase();
-    }
+
 
     // ajusta as opcoes para ser
     // um nome "procuravel" no elemento
@@ -150,12 +140,18 @@ $(function () {
         }).clone();
         candidatoSelect.empty().append(matches);
     });
+    ////// fim do filtro candidatos
+
+    /* Funcao para mover os candidatos selecionados do primeiro select para
+     * o segundo select no vincular candidato a vaga
+     */
+
+    $('#vincula').click(function () {
+        vincula('#candidatosAll', '#candidatosVaga');
+    });
+
+    $('#desvincula').click(function () {
+        desvincula('#candidatosVaga', '#candidatosAll');
+    });
 });
 
-/* Máscara do campo de cadastro 
- * 
- * http://igorescobar.github.io/jQuery-Mask-Plugin/
- */
-$(document).ready(function () {
-    $('.inputRate').mask("#.##0,00", {reverse: true});
-});
