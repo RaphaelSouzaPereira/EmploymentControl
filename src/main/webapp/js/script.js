@@ -87,7 +87,7 @@ function redireciona(url) {
 
 function vincula(origin, dest) {
     $(origin).find(':selected').appendTo(dest);
-    $('#inputFiltro').val(""); //limpa o campo de pesquisa
+    $('#inputFiltro').val(''); //limpa o campo de pesquisa
 }
 
 function desvincula(origin, dest) {
@@ -114,8 +114,6 @@ $(document).ready(function () {
             procura = $('#inputFiltro'),
             options = candidatoSelect.find('option').clone(); // clone into memory
 
-
-
     // ajusta as opcoes para ser
     // um nome "procuravel" no elemento
     options.each(function () {
@@ -140,8 +138,7 @@ $(document).ready(function () {
         }).clone();
         candidatoSelect.empty().append(matches);
     });
-    ////// fim do filtro candidatos
-
+   
     /* Funcao para mover os candidatos selecionados do primeiro select para
      * o segundo select no vincular candidato a vaga
      */
