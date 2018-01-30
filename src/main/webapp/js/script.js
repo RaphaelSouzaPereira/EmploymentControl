@@ -86,23 +86,23 @@ function redireciona(url) {
  * o segundo select no vincular candidato a vaga * 
  */
 $(function () {
-    function copyItems(origin, dest) {
+    function vincula(origin, dest) {
         $(origin).find(':selected').appendTo(dest);
     }
 
     $('#vincula').click(function () {
-        copyItems('#candidatosAll', '#candidatosVaga');
+        vincula('#candidatosAll', '#candidatosVaga');
     });
 
 });
 
 $(function () {
-    function copyItems(origin, dest) {
+    function desvincula(origin, dest) {
         $(origin).find(':selected').appendTo(dest);
     }
 
     $('#desvincula').click(function () {
-        copyItems('#candidatosVaga', '#candidatosAll');
+        desvincula('#candidatosVaga', '#candidatosAll');
     });
 
 });
