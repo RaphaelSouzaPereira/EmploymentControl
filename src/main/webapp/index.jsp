@@ -313,11 +313,9 @@
                                                 <button type="submit" class="btn btn-ibmec" id="btn-editar-vaga">Salvar</button>                            
                                             </div>
                                         </form>
-
-                                        <<<<<<< HEAD
                                     </td>                            
                                 </tr>
-                                <tr class="collapse multi-collapse list-row-content-ibmec" id="incluir_candidato-<%= v.getId()%>">
+                                <tr class="collapse multi-collapse list-row-content-ibmec" id="incluir_candidato-<%= v.getId()%>" data-toggle="collapse" data-parent="#accordion">
                                     <%  List<CandidatoBean> listaDeCandidatos = (List<CandidatoBean>) request.getAttribute("listaCandidatos");
                                     %>
                                     <td colspan="5" class="edit-light-grey">                        
