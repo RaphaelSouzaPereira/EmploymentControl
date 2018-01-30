@@ -82,8 +82,10 @@ function redireciona(url) {
     window.location.href = url;
 }
 
+// AQUI COMECA jQuery //
+
 /* Funcao para copiar os candidatos selecionados do primeiro select para
- * o segundo select no vincular candidato a vaga * 
+ * o segundo select no vincular candidato a vaga
  */
 $(function () {
     function vincula(origin, dest) {
@@ -96,15 +98,54 @@ $(function () {
 
 });
 
+//$(function () {
+//    function desvincula(origin, dest) {
+//        $(origin).find(':selected').appendTo(dest);
+//    }
+//
+//    $('#desvincula').click(function () {
+//        desvincula('#candidatosVaga', '#candidatosAll');
+//    });
+//
+//});
+
+/* Filtro de pesquisa de candidatos
+ * 
+ */
 $(function () {
-    function desvincula(origin, dest) {
-        $(origin).find(':selected').appendTo(dest);
+    var candidatoSelect = $('#candidatosAll'),
+            procura = $('#inputFiltro'),
+            options = candidatoSelect.find('option').clone(); // clone into memory
+
+    // Funcao pra limpar o texto para comparar
+    function sanitize(string) {
+        return $.trim(string).replace(/\s+/g, ' ').toLowerCase();
     }
 
-    $('#desvincula').click(function () {
-        desvincula('#candidatosVaga', '#candidatosAll');
+    // ajusta as opcoes para ser
+    // um nome "procuravel" no elemento
+    options.each(function () {
+        var option = $(this);
+        option.data('sanitized', sanitize(option.text()));
     });
 
+    // trata o evento keyup
+    procura.on('keyup', function (event) {
+        var term = sanitize($(this).val()),
+                matches;
+
+        // se nao achar, mostra todos os options do select
+        if (!term) {
+            candidatoSelect.empty().append(options.clone());
+            return;
+        }
+
+        // ou entao soh mostra o que achou
+        matches = options.filter(function () {
+            return $(this).data("sanitized").indexOf(term) !== -1;
+        }).clone();
+        candidatoSelect.empty().append(matches);
+    });
 });
 
 /* Máscara do campo de cadastro 
