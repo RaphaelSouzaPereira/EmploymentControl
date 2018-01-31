@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.ibm.ibmemploymentcontrolapp.model;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,13 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
+<<<<<<< HEAD
  * @author PriscilaRicardoArrud
+=======
+ * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
+ * @param
+ * @return   
+>>>>>>> 86ff296268d20d1cd69bc85fee5083c0814db690
  */
 @Entity
 @Table(name = "candidato")
@@ -55,7 +63,7 @@ public class Candidato implements Serializable {
     @JoinTable(name = "vaga_candidato", joinColumns = {
         @JoinColumn(name = "id_candidato", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_vaga", referencedColumnName = "id")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Vaga> vagaCollection;
 
     public Candidato() {

@@ -71,7 +71,7 @@ public class ListaServlet extends HttpServlet {
         //Retorna as listas de vagas e candidatos
         listaVagas = vagaDAO.listarPorAreaData();
         listaCandidatos = candidatoDAO.listarCandidatosComFiltro(filtro);
-
+        
         //Seta os atributos que serão utilizados nos jsp
         request.setAttribute("listaVagas", listaVagas);
         request.setAttribute("listaCandidatos", listaCandidatos);

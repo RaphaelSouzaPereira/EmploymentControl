@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.ibm.ibmemploymentcontrolapp.model;
 
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -55,6 +57,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Vaga.findByRate", query = "SELECT v FROM Vaga v WHERE v.rate = :rate")
     , @NamedQuery(name = "Vaga.findByStatus", query = "SELECT v FROM Vaga v WHERE v.status = :status")
     , @NamedQuery(name = "Vaga.findByTecnologia", query = "SELECT v FROM Vaga v WHERE v.tecnologia = :tecnologia")
+    , @NamedQuery(name = "Vaga.findOpenOnHoldByAreaExpectativa", query = "SELECT v FROM Vaga v WHERE v.status = 'Open' OR v.status = 'On Hold' ORDER BY v.area, v.expectativaDeEntrada")
     , @NamedQuery(name = "Vaga.findByTipo", query = "SELECT v FROM Vaga v WHERE v.tipo = :tipo")})
 public class Vaga implements Serializable {
 
@@ -350,5 +353,5 @@ public class Vaga implements Serializable {
     public String toString() {
         return "com.ibm.ibmemploymentcontrolapp.model.Vaga[ id=" + id + " ]";
     }
-    
+
 }
