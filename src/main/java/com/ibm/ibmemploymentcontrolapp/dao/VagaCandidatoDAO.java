@@ -26,19 +26,16 @@ public class VagaCandidatoDAO {
         this.em = em;
         this.modelMapper = new ModelMapper();
     }
-    
-    public void salvarCandidatoNaVaga(List<CandidatoBean> novosCandidatos, VagaBean vagaBean) {
+
+    public void salvarCandidatoNaVaga(CandidatoBean candidatoBean, VagaBean vagaBean) {
         Vaga vaga = modelMapper.map(vagaBean, Vaga.class);
         Candidato candidato = new Candidato();
-        for (CandidatoBean candidatoBean : novosCandidatos) {
-            candidato = modelMapper.map(candidatoBean, Candidato.class);
-            candidato.getVagaCollection().add(vaga);
-            //vaga.getCandidatoCollection().add(candidato);
-        }
-        
-        System.out.println("TransactionTeste");
+
+        candidato = modelMapper.map(candidatoBean, Candidato.class);
+        candidato.getVagaCollection().add(vaga);
+
         em.getTransaction().begin();
         em.merge(candidato);
-        em.getTransaction().commit(); 
+        em.getTransaction().commit();
     }
 }
