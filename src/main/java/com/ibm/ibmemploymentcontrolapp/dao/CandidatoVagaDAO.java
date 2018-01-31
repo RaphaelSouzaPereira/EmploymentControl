@@ -8,7 +8,9 @@ package com.ibm.ibmemploymentcontrolapp.dao;
 import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
 import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.model.Candidato;
+import com.ibm.ibmemploymentcontrolapp.model.Vaga;
 import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.modelmapper.ModelMapper;
@@ -41,21 +43,19 @@ public class CandidatoVagaDAO {
         ArrayList<CandidatoBean> listaVerificada = validaCandidato(lista, vaga);
         Collection<Candidato> candidatos = vaga.getCandidatoCollection();
         for (CandidatoBean candidatoBean : listaVerificada) {
-//            vaga.getCandidatoCollection().add(modelMapper.map(candidatoBean, Candidato.class));
-//            vaga.setCandidatoCollection(vaga.getCandidatoCollection());
-              candidatos.add(modelMapper.map(candidatoBean, Candidato.class));
+            candidatos.add(modelMapper.map(candidatoBean, Candidato.class));
         }
-        vaga.setCandidatoCollection(candaditos);
-        for (Candidato candidato : vaga.getCandidatoCollection()) {
-            System.out.println(candidato.getId() + "  " + candidato.getNome() + " BBBBBBBBBBBBBBBBBBBBBBBBBB");
+        vaga.setCandidatoCollection(candidatos);
+        try {
+            Vaga entity = modelMapper.map(vaga, Vaga.class);
+            em.getTransaction().begin();
+            em.merge(entity);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+            throw ex;
         }
-        
-        em.getTransaction().begin();
-        em.merge(vaga);
-        em.getTransaction().commit();
-
         em.close();
-        em = null;
     }
 
     /**
@@ -68,19 +68,17 @@ public class CandidatoVagaDAO {
      * com mesmo id e true para quando nao tem
      */
     public ArrayList<CandidatoBean> validaCandidato(ArrayList<CandidatoBean> candidatoBeanVinculado, VagaBean vaga) {
-        ArrayList<CandidatoBean> listCandidatosBean = listarCandidatosNaVaga(vaga);
-
-        for (CandidatoBean candidatoFront : candidatoBeanVinculado) {
-            for (CandidatoBean cand : listCandidatosBean) {
-                if (candidatoFront.getId() == cand.getId()) {
-                    //AINDA NAO FUNCIONA
-                    System.out.println(candidatoFront.getId() + "RETIRAAAAAAAAAAAAADOOOOOOOOOOOOOOOOOO");
-                    candidatoBeanVinculado.remove(candidatoFront);
+        Collection<Candidato> listCandidatosEntity = vaga.getCandidatoCollection();
+        ArrayList<CandidatoBean> listaCandidadoBeanNoBanco = new ArrayList<CandidatoBean>();
+        for (Candidato candidatoEntity : listCandidatosEntity) {
+            listaCandidadoBeanNoBanco.add(modelMapper.map(candidatoEntity, CandidatoBean.class));
+        }
+        for (CandidatoBean cand : listaCandidadoBeanNoBanco) {
+            for (int i = 0; i < candidatoBeanVinculado.size(); i++) {
+                if (cand.getId().intValue() == candidatoBeanVinculado.get(i).getId().intValue()) {
+                    candidatoBeanVinculado.remove(i);
                 }
             }
-        }
-        for (CandidatoBean candidatoFront : candidatoBeanVinculado) {
-            System.out.println(candidatoFront.getNome() + "AINDAAAAA NA LISTA");
         }
         return candidatoBeanVinculado;
     }
@@ -93,18 +91,13 @@ public class CandidatoVagaDAO {
      * @return uma lista de candidatos que estão na vaga
      */
     public ArrayList<CandidatoBean> listarCandidatosNaVaga(VagaBean vaga) {
-
         Query query = em.createNamedQuery("Vaga.findById").setParameter("id", vaga.getId());
-
         ArrayList<CandidatoBean> listCandidatosNaVaga = new ArrayList<CandidatoBean>();
-
         vaga = modelMapper.map(query.getSingleResult(), VagaBean.class);
-
         for (Candidato candidato : vaga.getCandidatoCollection()) {
             listCandidatosNaVaga.add(modelMapper.map(candidato, CandidatoBean.class));
         }
         em.close();
-        em = null;
         return listCandidatosNaVaga;
     }
 

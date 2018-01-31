@@ -55,10 +55,11 @@ public class Candidato implements Serializable {
     @Size(max = 255)
     @Column(name = "nome")
     private String nome;
-    @JoinTable(name = "vaga_candidato", joinColumns = {
-        @JoinColumn(name = "id_candidato", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_vaga", referencedColumnName = "id")})
-    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "vaga_candidato", joinColumns = {
+//        @JoinColumn(name = "id_candidato", referencedColumnName = "id")}, inverseJoinColumns = {
+//        @JoinColumn(name = "id_vaga", referencedColumnName = "id")})
+//    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "candidatoCollection", fetch = FetchType.EAGER)
     private Collection<Vaga> vagaCollection;
 
     public Candidato() {

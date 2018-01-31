@@ -60,52 +60,6 @@ public class ListaServlet extends HttpServlet {
         //Retorna as listas de vagas e candidatos
         listaVagas = vagaDAO.listarPorAreaData();
         listaCandidatos = candidatoDAO.listarCandidatosComFiltro(filtro);
-        
-        CandidatoVagaDAO candidatoVagaDao = new CandidatoVagaDAO(emf.createEntityManager());
-        VagaBean vaga = new VagaBean();
-        //vaga.setId(11);
-        for(VagaBean v : listaVagas){
-            if(v.getId() == 11){
-                vaga = v;
-                System.out.println(vaga.getId()+" TESTTTTTTTTTTEEEEEEEEEEEEEEEEE" );
-                
-            }
-        }
-        
-        System.out.println("teste -----> "+vaga.getId()+" ------> "+vaga.getArea());
-
-//        List<CandidatoBean> listacandidatos = candidatoVagaDao.listarCandidatosNaVaga(vaga);
-        
-        CandidatoBean cand1 = new CandidatoBean();
-        cand1.setId(301);
-        cand1.setEmail("teste.teste@teste");
-        cand1.setNome("nora");
-        
-//        CandidatoBean cand2 = new CandidatoBean();
-//        cand2.setId(311);
-//        cand2.setEmail("raphael@raphael.com");
-//        cand2.setNome("raphael");
-        
-        CandidatoBean cand3 = new CandidatoBean();
-        cand3.setId(321);
-        cand3.setEmail("cc@cc.com");
-        cand3.setNome("cc");
-        
-        
-        ArrayList<CandidatoBean> lista = new ArrayList<CandidatoBean>();
-        lista.add(cand1);
-//        lista.add(cand2);
-        lista.add(cand3);
-        
-        System.out.println("teste -----> "+cand1.getId()+" ------> teste "+cand3.getId()+" <___--___" );
-        
-        candidatoVagaDao.salvarCandidatoNaVagaComVerificacao(vaga, lista);
-        
-        System.out.println("Sucesso!!");
- 
-////        candidatoVagaDao.salvarCandidatoNaVagaComVerificacao(vaga, lista);
-
-//-------------------------------testefim
 
         //Seta os atributos que serão utilizados nos jsp
         request.setAttribute("listaVagas", listaVagas);
