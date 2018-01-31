@@ -30,9 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
- * @param
- * @return   
+ * @author PriscilaRicardoArrud
  */
 @Entity
 @Table(name = "vaga")

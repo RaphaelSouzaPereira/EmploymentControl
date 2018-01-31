@@ -27,9 +27,13 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
+<<<<<<< HEAD
+ * @author PriscilaRicardoArrud
+=======
  * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
  * @param
  * @return   
+>>>>>>> 86ff296268d20d1cd69bc85fee5083c0814db690
  */
 @Entity
 @Table(name = "candidato")
@@ -39,7 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Candidato.findById", query = "SELECT c FROM Candidato c WHERE c.id = :id")
     , @NamedQuery(name = "Candidato.findByEmail", query = "SELECT c FROM Candidato c WHERE c.email = :email")
     , @NamedQuery(name = "Candidato.findByNome", query = "SELECT c FROM Candidato c WHERE c.nome = :nome")
-    , @NamedQuery(name = "Candidato.findByFilter", query = "SELECT c FROM Candidato c WHERE c.nome = :nome")})
+    , @NamedQuery(name = "Candidato.findByFilter", query = "SELECT c FROM Candidato c WHERE c.nome LIKE :nome")})
 public class Candidato implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,7 +52,7 @@ public class Candidato implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="E-mail inválido")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 255)
     @Column(name = "email")
     private String email;
