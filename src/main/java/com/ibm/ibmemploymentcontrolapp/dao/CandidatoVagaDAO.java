@@ -100,5 +100,35 @@ public class CandidatoVagaDAO {
         em.close();
         return listCandidatosNaVaga;
     }
-
+    
+    public void removerCandidatoDaVaga(VagaBean vaga, CandidatoBean candidato){
+        Collection<Candidato> listCandidatosEntity = vaga.getCandidatoCollection();
+        ArrayList<CandidatoBean> listaCandidadoBeanNoBanco = new ArrayList<CandidatoBean>();
+        for (Candidato candidatoEntity : listCandidatosEntity) {
+            listaCandidadoBeanNoBanco.add(modelMapper.map(candidatoEntity, CandidatoBean.class));
+        }
+            for (int i = 0; i < listaCandidadoBeanNoBanco.size(); i++) {
+                if (candidato.getId().intValue() == listaCandidadoBeanNoBanco.get(i).getId().intValue()) {
+                    listaCandidadoBeanNoBanco.remove(i);
+                }
+            }
+            listCandidatosEntity.clear();
+            for (CandidatoBean candidatoBean : listaCandidadoBeanNoBanco) {
+            listCandidatosEntity.add(modelMapper.map(candidatoBean, Candidato.class));
+        }
+        vaga.setCandidatoCollection(listCandidatosEntity);
+        try {
+            Vaga entity = modelMapper.map(vaga, Vaga.class);
+            em.getTransaction().begin();
+            em.merge(entity);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+            throw ex;
+        }
+        em.close();
+       
+    }
+        
+        
 }
