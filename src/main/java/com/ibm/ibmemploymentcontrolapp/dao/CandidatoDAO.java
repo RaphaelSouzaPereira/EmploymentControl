@@ -83,5 +83,10 @@ public class CandidatoDAO {
         em.close();
         em = null;
     }
+    
+    public CandidatoBean buscarCandidatoPorIdExistente(Integer idCandidato) {
+        Candidato candidato = (Candidato) em.createNamedQuery("Candidato.findById").setParameter("id", idCandidato).getSingleResult();
+        return modelMapper.map(candidato, CandidatoBean.class);
+    }
 
 }

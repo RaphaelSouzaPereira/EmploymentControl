@@ -6,9 +6,14 @@
 package com.ibm.ibmemploymentcontrolapp.services;
 
 import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
+import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
+import com.ibm.ibmemploymentcontrolapp.dao.VagaCandidatoDAO;
+import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
@@ -47,7 +52,6 @@ public class CandidatoServlet extends HttpServlet {
 
         candidato.setNome(nome);
         candidato.setEmail(email);
-        
 
         //salva no banco o novo candidato
         try {

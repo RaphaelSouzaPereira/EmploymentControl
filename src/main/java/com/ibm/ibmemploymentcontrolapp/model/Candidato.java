@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FabioHenriqueGoulart
+ * @author PriscilaRicardoArrud
  */
 @Entity
 @Table(name = "candidato")
@@ -35,28 +35,23 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Candidato.findById", query = "SELECT c FROM Candidato c WHERE c.id = :id")
     , @NamedQuery(name = "Candidato.findByEmail", query = "SELECT c FROM Candidato c WHERE c.email = :email")
     , @NamedQuery(name = "Candidato.findByNome", query = "SELECT c FROM Candidato c WHERE c.nome = :nome")
-    , @NamedQuery(name = "Candidato.findByObservacao", query = "SELECT c FROM Candidato c WHERE c.observacao = :observacao")
+    , @NamedQuery(name = "Vaga.findOpenOnHoldByAreaExpectativa", query = "SELECT v FROM Vaga v WHERE v.status = 'Open' OR v.status = 'On Hold' ORDER BY v.area, v.expectativaDeEntrada")
     , @NamedQuery(name = "Candidato.findByFilter", query = "SELECT c FROM Candidato c WHERE c.nome LIKE :nome")})
-
 public class Candidato implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 70)
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="E-mail inválido")//if the field contains email address consider using this annotation to enforce field validation
+    @Size(max = 255)
     @Column(name = "email")
     private String email;
-    @Size(max = 100)
+    @Size(max = 255)
     @Column(name = "nome")
     private String nome;
-    @Size(max = 150)
-    @Column(name = "observacao")
-    private String observacao;
     @JoinTable(name = "vaga_candidato", joinColumns = {
         @JoinColumn(name = "id_candidato", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_vaga", referencedColumnName = "id")})
@@ -94,14 +89,6 @@ public class Candidato implements Serializable {
         this.nome = nome;
     }
 
-    public String getObservacao() {
-        return observacao;
-    }
-
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
-
     @XmlTransient
     public Collection<Vaga> getVagaCollection() {
         return vagaCollection;
@@ -135,5 +122,5 @@ public class Candidato implements Serializable {
     public String toString() {
         return "com.ibm.ibmemploymentcontrolapp.model.Candidato[ id=" + id + " ]";
     }
-    
+
 }

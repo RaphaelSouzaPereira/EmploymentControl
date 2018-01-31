@@ -9,6 +9,7 @@ import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
 import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
+import com.ibm.ibmemploymentcontrolapp.dao.VagaCandidatoDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +51,18 @@ public class ListaServlet extends HttpServlet {
 
         //Instancia os DAOs
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
-
         CandidatoDAO candidatoDAO = new CandidatoDAO(emf.createEntityManager());
+        VagaCandidatoDAO vagacandidatoDAO = new VagaCandidatoDAO(emf.createEntityManager());
+
+        /*Implentacao Inicial Salvar candidato na vaga
+        VagaBean vaga1 = new VagaBean();
+        vaga1 = vagaDAO.buscarVagaPorIdExistente(1);
+
+        List<CandidatoBean> listDeCandidatos = new ArrayList<CandidatoBean>();
+        listDeCandidatos.add(candidatoDAO.buscarCandidatoPorIdExistente(331));
+
+        vagacandidatoDAO.salvarCandidatoNaVaga(listDeCandidatos, vaga1);
+        -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 
         //Instancia os Beans
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();

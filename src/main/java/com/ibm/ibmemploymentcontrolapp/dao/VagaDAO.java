@@ -109,5 +109,10 @@ public class VagaDAO {
         }
         return listarOrdemCronologica;
     }
+    
+    public VagaBean buscarVagaPorIdExistente(Integer idVaga) {
+        Vaga vaga = (Vaga) em.createNamedQuery("Vaga.findById").setParameter("id", idVaga).getSingleResult();
+        return modelMapper.map(vaga, VagaBean.class);
+    }
 
 }
