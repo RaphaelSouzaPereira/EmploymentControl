@@ -45,7 +45,7 @@ public class ListaServlet extends HttpServlet {
         // parametro para filtro
         //String filtro = request.getParameter("filtro"); ainda n foi implementado
         String filtro = "";
-        String idVagaCandidato = request.getParameter("id_vaga_candidato");
+        String idVagaCandidato = "11";//request.getParameter("id_vaga_candidato");
         System.out.println(idVagaCandidato);
 
         //Inicializa configuracoes de persistencia
@@ -61,14 +61,10 @@ public class ListaServlet extends HttpServlet {
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
         ArrayList<CandidatoBean> listaCandidatosVagas = new ArrayList<CandidatoBean>();
         VagaBean vaga = new VagaBean();
-//
-//        if (idVagaCandidato.equals("")) {
-//            System.out.println("FUUUUUUUUUUCK");
-//        } else {
-//            vaga = vagaDAO.buscarVagaPorIdExistente(Integer.parseInt(idVagaCandidato));
-//        }
-        //Retorna as listas de vagas e candidatos
-        listaVagas = vagaDAO.listarVagas();
+
+        vaga = vagaDAO.buscarVagaPorIdExistente(Integer.parseInt(idVagaCandidato));
+
+        listaVagas = vagaDAO.listarPorAreaData();
         listaCandidatos = candidatoDAO.listarCandidatosComFiltro(filtro);
         listaCandidatosVagas = candidatoVagaDAO.listarCandidatosNaVaga(vaga);
 
@@ -76,6 +72,25 @@ public class ListaServlet extends HttpServlet {
         request.setAttribute("listaVagas", listaVagas);
         request.setAttribute("listaCandidatos", listaCandidatos);
         request.setAttribute("listaCandidatosVagas", listaCandidatosVagas);
+        
+        
+        ArrayList<CandidatoBean> listaCandidatosV = new ArrayList<CandidatoBean>();
+        
+        System.out.println("comeca aquiiiiiiiiiiiiiiiiii  ->  "+listaVagas.size());
+
+        VagaBean vag = new VagaBean();
+        
+        for (int i = 0; i < listaVagas.size(); i++) {
+            System.out.println("teste   -> "+listaVagas.get(i).getId());
+            vag = vagaDAO.buscarVagaPorIdExistente(listaVagas.get(i).getId());
+            System.out.println("renan id --------> " + listaVagas.get(i).getId());
+            listaCandidatosV = candidatoVagaDAO.listarCandidatosNaVaga(vag);
+            for(CandidatoBean candidat : listaCandidatosV ){
+                System.out.println("Nome da PRAGA ---> "+ candidat.getNome());
+            }
+            System.out.println("nome final da lista para o JSP ---> "+"listaCandidatosVagas" + listaVagas.get(i).getId());
+            request.setAttribute("listaCandidatosVagas" + listaVagas.get(i).getId(), listaCandidatosV);
+        }
 
         RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
         view.forward(request, response);

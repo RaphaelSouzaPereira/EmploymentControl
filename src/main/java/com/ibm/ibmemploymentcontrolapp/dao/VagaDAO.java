@@ -93,8 +93,8 @@ public class VagaDAO {
 
             listarVagaAreaData.add(modelMapper.map(vagas, VagaBean.class));
         }
-        em.close();
-        em = null;
+        //em.close();
+        //em = null;
         return listarVagaAreaData;
     }
 
@@ -112,6 +112,8 @@ public class VagaDAO {
     
     public VagaBean buscarVagaPorIdExistente(Integer idVaga) {
         Vaga vaga = (Vaga) em.createNamedQuery("Vaga.findById").setParameter("id", idVaga).getSingleResult();
+        //em.close();
+        //em = null;
         return modelMapper.map(vaga, VagaBean.class);
     }
 

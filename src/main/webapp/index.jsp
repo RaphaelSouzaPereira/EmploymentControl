@@ -316,11 +316,6 @@
                                     </td>                            
                                 </tr>
                                 <tr class="collapse multi-collapse list-row-content-ibmec" id="incluir_candidato-<%= v.getId()%>" data-toggle="collapse" data-parent="#accordion">
-                                    <%  List<CandidatoBean> listaDeCandidatos = (List<CandidatoBean>) request.getAttribute("listaCandidatos");
-                                        ArrayList<CandidatoBean> listaDeCandidatosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas");
-                                        System.out.println("TA VAZIA ESSA PORRA??? ");
-                                        System.out.println(listaDeCandidatosNaVaga.isEmpty());
-                                    %>
                                     <td colspan="5" class="edit-light-grey">                        
                                         <form class="atualizar-vaga" action="./VinculaCandidatoServlet" method="post">                                        
                                             <div class="form-row">
@@ -331,7 +326,10 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-5">
-                                                    <input value="<%= v.getId()%>" type="hidden" class="form-control" id="vaga_candidato" name="id_vaga_candidato">
+                                                    <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputVagaCandidato" name="id_vaga_candidato">
+                                                    <%  List<CandidatoBean> listaDeCandidatos = (List<CandidatoBean>) request.getAttribute("listaCandidatos");
+                                                        ArrayList<CandidatoBean> listaDeCandidatosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas");
+                                                    %>
                                                     <select name="candidatosAll" id="candidatosAll" class="form-control" multiple="multiple" size="5">
                                                         <%  for (CandidatoBean c : listaDeCandidatos) {%>
                                                         <option value=<%= c.getId()%>> <%= c.getNome()%> </option>                                                        
@@ -343,14 +341,11 @@
                                                     <input type="button" class="btn btn-ibmec btn-block" id="desvincula" value="Desvincular" />
                                                 </div>
                                                 <div class="form-group col-5">
+                                                    <%ArrayList<CandidatoBean> listaDeCandidatosVinculadosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas"+v.getId());%>
                                                     <select id="candidatosVaga" class="form-control" multiple="multiple" size="5">                                                        
-                                                        <% for (CandidatoBean cv : listaDeCandidatosNaVaga) {%>
-                                                        <% System.out.println("ANTES DO IF"); %>
-                                                        <%if (listaDeCandidatosNaVaga.isEmpty()) {
-                                                                System.out.println("DENTRO DO IF");
-                                                                break;
-                                                            }%>
-                                                        <% System.out.println("DEPOIS DO IF");%>
+                                                        <% for (CandidatoBean cv : listaDeCandidatosVinculadosNaVaga) {
+                                                            System.out.println(listaDeCandidatosVinculadosNaVaga.isEmpty()+"  teste  "+v.getId());
+                                                        %>
                                                         <option value=<%= cv.getId()%>> <%= cv.getNome()%> </option>
                                                         <% }%>
                                                     </select>

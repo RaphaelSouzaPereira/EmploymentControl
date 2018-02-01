@@ -97,7 +97,7 @@ public class CandidatoVagaDAO {
         for (Candidato candidato : vaga.getCandidatoCollection()) {
             listCandidatosNaVaga.add(modelMapper.map(candidato, CandidatoBean.class));
         }
-        em.close();
+        //em.close();
         return listCandidatosNaVaga;
     }
 
