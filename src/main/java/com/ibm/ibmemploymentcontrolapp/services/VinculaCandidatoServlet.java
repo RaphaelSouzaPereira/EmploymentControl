@@ -30,24 +30,24 @@ public class VinculaCandidatoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String[] valores = request.getParameterValues("candidatosAll");
-//        String[] ids = request.
-        for(int i = 0; i < valores.length; i++){
-            System.out.println("Valor: " + valores[i]);
-        }
-        
-        
+        //String[] valores = request.getParameterValues("candidatosAll");
+        String id = request.getParameter("id_candidato");
+        System.out.println("id: " + id);
+//        for(int i = 0; i < valores.length; i++){
+//            System.out.println("Valor: " + valores[i]);
+//        }
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet VinculaCandidatoServlet</title>");            
+            out.println("<title>Servlet VinculaCandidatoServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet VinculaCandidatoServlet at " + request.getContextPath() + "</h1>");
-            out.println("<p>" + Arrays.toString(valores) + "</p>");
+            out.println("<p>" + id + "</p>");
             out.println("</body>");
             out.println("</html>");
         }

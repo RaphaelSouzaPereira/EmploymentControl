@@ -330,8 +330,7 @@
                                                 <div class="form-group col-5">
                                                     <select name="candidatosAll" id="candidatosAll" class="form-control" multiple="multiple" size="5">
                                                         <%  for (CandidatoBean c : listaDeCandidatos) {%>
-                                                        <option style="display:none"> <%=c.getId()%> </option>
-                                                        <option> <%= c.getNome()%> </option>
+                                                        <option value="<jsp:declaration></jsp:declaration>"> <%= c.getNome()%> </option>                                                        
                                                         <% }%>
                                                     </select>
                                                 </div>
