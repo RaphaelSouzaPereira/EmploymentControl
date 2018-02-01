@@ -132,7 +132,6 @@ public class Vaga implements Serializable {
         @JoinColumn(name = "id_vaga", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_candidato", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.EAGER)
-//    @ManyToMany(mappedBy = "vagaCollection", fetch = FetchType.EAGER)
     private Collection<Candidato> candidatoCollection;
 
     public Vaga() {
