@@ -143,9 +143,9 @@ $(document).ready(function () {
      * o segundo select no vincular candidato a vaga
      */
 
-    $('#vincula').click(function () {
-        vincula('#candidatosAll', '#candidatosVaga');
-    });
+//    $('#vincula').click(function () {
+//        vincula('#candidatosAll', '#candidatosVaga');
+//    });
 
     $('#desvincula').click(function () {
         desvincula('#candidatosVaga', '#candidatosAll');

@@ -328,14 +328,15 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-5">
-                                                    <select id="candidatosAll" class="form-control" multiple="multiple" size="5">
+                                                    <input value="<%= v.getId()%>" type="hidden" class="form-control" id="vaga_candidato" name="id_vaga_candidato">
+                                                    <select name="candidatosAll" id="candidatosAll" class="form-control" multiple="multiple" size="5">
                                                         <%  for (CandidatoBean c : listaDeCandidatos) {%>
-                                                        <option> <%= c.getNome()%> </option>
+                                                        <option value=<%= c.getId()%>> <%= c.getNome()%> </option>                                                        
                                                         <% }%>
-                                                    </select>
+                                                    </select>                                                   
                                                 </div>
                                                 <div class="form-group col-2">
-                                                    <input type="button" class="btn btn-ibmec btn-block" id="vincula" value="Vincular" />
+                                                    <input type="submit" class="btn btn-ibmec btn-block" id="vincula" value="Vincular" />
                                                     <input type="button" class="btn btn-ibmec btn-block" id="desvincula" value="Desvincular" />
                                                 </div>
                                                 <div class="form-group col-5">
