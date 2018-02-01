@@ -317,6 +317,9 @@
                                 </tr>
                                 <tr class="collapse multi-collapse list-row-content-ibmec" id="incluir_candidato-<%= v.getId()%>" data-toggle="collapse" data-parent="#accordion">
                                     <%  List<CandidatoBean> listaDeCandidatos = (List<CandidatoBean>) request.getAttribute("listaCandidatos");
+                                        ArrayList<CandidatoBean> listaDeCandidatosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas");
+                                        System.out.println("TA VAZIA ESSA PORRA??? ");
+                                        System.out.println(listaDeCandidatosNaVaga.isEmpty());
                                     %>
                                     <td colspan="5" class="edit-light-grey">                        
                                         <form class="atualizar-vaga" action="./VinculaCandidatoServlet" method="post">                                        
@@ -340,9 +343,16 @@
                                                     <input type="button" class="btn btn-ibmec btn-block" id="desvincula" value="Desvincular" />
                                                 </div>
                                                 <div class="form-group col-5">
-                                                    <select id="candidatosVaga" class="form-control" multiple="multiple" size="5">
-
-
+                                                    <select id="candidatosVaga" class="form-control" multiple="multiple" size="5">                                                        
+                                                        <% for (CandidatoBean cv : listaDeCandidatosNaVaga) {%>
+                                                        <% System.out.println("ANTES DO IF"); %>
+                                                        <%if (listaDeCandidatosNaVaga.isEmpty()) {
+                                                                System.out.println("DENTRO DO IF");
+                                                                break;
+                                                            }%>
+                                                        <% System.out.println("DEPOIS DO IF");%>
+                                                        <option value=<%= cv.getId()%>> <%= cv.getNome()%> </option>
+                                                        <% }%>
                                                     </select>
                                                 </div>
                                             </div>

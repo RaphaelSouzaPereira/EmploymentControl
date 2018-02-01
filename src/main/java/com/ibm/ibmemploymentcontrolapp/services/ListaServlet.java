@@ -9,6 +9,7 @@ import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
 import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
+import com.ibm.ibmemploymentcontrolapp.dao.CandidatoVagaDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,8 @@ public class ListaServlet extends HttpServlet {
         // parametro para filtro
         //String filtro = request.getParameter("filtro"); ainda n foi implementado
         String filtro = "";
+        String idVagaCandidato = request.getParameter("id_vaga_candidato");
+        System.out.println(idVagaCandidato);
 
         //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
@@ -51,18 +54,28 @@ public class ListaServlet extends HttpServlet {
         //Instancia os DAOs
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
         CandidatoDAO candidatoDAO = new CandidatoDAO(emf.createEntityManager());
+        CandidatoVagaDAO candidatoVagaDAO = new CandidatoVagaDAO(emf.createEntityManager());
 
         //Instancia os Beans
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
-
+        ArrayList<CandidatoBean> listaCandidatosVagas = new ArrayList<CandidatoBean>();
+        VagaBean vaga = new VagaBean();
+//
+//        if (idVagaCandidato.equals("")) {
+//            System.out.println("FUUUUUUUUUUCK");
+//        } else {
+//            vaga = vagaDAO.buscarVagaPorIdExistente(Integer.parseInt(idVagaCandidato));
+//        }
         //Retorna as listas de vagas e candidatos
         listaVagas = vagaDAO.listarVagas();
         listaCandidatos = candidatoDAO.listarCandidatosComFiltro(filtro);
+        listaCandidatosVagas = candidatoVagaDAO.listarCandidatosNaVaga(vaga);
 
         //Seta os atributos que serão utilizados nos jsp
         request.setAttribute("listaVagas", listaVagas);
         request.setAttribute("listaCandidatos", listaCandidatos);
+        request.setAttribute("listaCandidatosVagas", listaCandidatosVagas);
 
         RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
         view.forward(request, response);
