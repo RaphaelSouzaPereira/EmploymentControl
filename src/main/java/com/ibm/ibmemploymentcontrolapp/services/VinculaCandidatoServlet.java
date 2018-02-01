@@ -5,9 +5,18 @@
  */
 package com.ibm.ibmemploymentcontrolapp.services;
 
+import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
+import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
+import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
+import com.ibm.ibmemploymentcontrolapp.dao.CandidatoVagaDAO;
+import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +27,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author leandropaz
  */
 public class VinculaCandidatoServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 3384510070196758224L;
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,12 +42,34 @@ public class VinculaCandidatoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //String[] valores = request.getParameterValues("candidatosAll");
-        String id = request.getParameter("id_candidato");
-        System.out.println("id: " + id);
-//        for(int i = 0; i < valores.length; i++){
-//            System.out.println("Valor: " + valores[i]);
-//        }
+        //Inicializa configuracoes de persistencia
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
+        // Variaveis do jsp
+        String idVaga = request.getParameter("id_vaga_candidato");
+        String[] idCandidatos = request.getParameterValues("candidatosAll");
+        // Candidato 
+        ArrayList<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
+
+        //Instancia DAOs
+        VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
+        CandidatoDAO candidatoDAO = new CandidatoDAO(emf.createEntityManager());
+        CandidatoVagaDAO candidatoVagaDAO = new CandidatoVagaDAO(emf.createEntityManager());
+
+        //Instancia Beans
+        VagaBean vaga = new VagaBean();
+
+        vaga = vagaDAO.buscarVagaPorIdExistente(Integer.parseInt(idVaga));
+
+        for (String id : idCandidatos) {
+            System.out.println("Valor: " + id);
+            listaCandidatos.add(candidatoDAO.buscarCandidatoPorIdExistente(Integer.parseInt(id)));
+        }
+
+        for (CandidatoBean cb : listaCandidatos) {
+            System.out.println(cb.getNome());
+        }
+
+        candidatoVagaDAO.salvarCandidatoNaVagaComVerificacao(vaga, listaCandidatos);
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -47,10 +81,13 @@ public class VinculaCandidatoServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet VinculaCandidatoServlet at " + request.getContextPath() + "</h1>");
-            out.println("<p>" + id + "</p>");
+//            out.println("<p>" + Arrays.toString(id) + "</p>");
+//            out.println("<p>ID DA VAGA: "+ id_vaga + "</p>");
             out.println("</body>");
             out.println("</html>");
         }
+        emf.close();
+        emf = null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
