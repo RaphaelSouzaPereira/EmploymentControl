@@ -61,7 +61,7 @@ public class ListaServlet extends HttpServlet {
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
 
-        listaVagas = vagaDAO.listarPorAreaData();
+        listaVagas = vagaDAO.listarPorAreaData(emf.createEntityManager());
         listaCandidatos = candidatoDAO.listarCandidatosComFiltro(filtro);
 
         //Seta os atributos que serão utilizados nos jsp
@@ -73,8 +73,8 @@ public class ListaServlet extends HttpServlet {
         
         // parte incluida para fazer a listagem dos candidatos vinculados a vaga...
         for (int i = 0; i < listaVagas.size(); i++) {
-            vag = vagaDAO.buscarVagaPorIdExistente(listaVagas.get(i).getId());
-            listaCandidatosV = candidatoVagaDAO.listarCandidatosNaVaga(vag);
+            vag = vagaDAO.buscarVagaPorIdExistente(listaVagas.get(i).getId(), emf.createEntityManager());
+            listaCandidatosV = candidatoVagaDAO.listarCandidatosNaVaga(vag, emf.createEntityManager());
             request.setAttribute("listaCandidatosVagas" + listaVagas.get(i).getId(), listaCandidatosV);
         }
 

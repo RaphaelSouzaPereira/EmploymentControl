@@ -90,14 +90,15 @@ public class CandidatoVagaDAO {
      * @param vaga
      * @return uma lista de candidatos que estão na vaga
      */
-    public ArrayList<CandidatoBean> listarCandidatosNaVaga(VagaBean vaga) {
-        Query query = em.createNamedQuery("Vaga.findById").setParameter("id", vaga.getId());
+    public ArrayList<CandidatoBean> listarCandidatosNaVaga(VagaBean vaga, EntityManager emExterno) {
+        Query query = emExterno.createNamedQuery("Vaga.findById").setParameter("id", vaga.getId());
         ArrayList<CandidatoBean> listCandidatosNaVaga = new ArrayList<CandidatoBean>();
         vaga = modelMapper.map(query.getSingleResult(), VagaBean.class);
         for (Candidato candidato : vaga.getCandidatoCollection()) {
             listCandidatosNaVaga.add(modelMapper.map(candidato, CandidatoBean.class));
         }
-        //em.close();
+        emExterno.close();
+        emExterno = null;
         return listCandidatosNaVaga;
     }
 

@@ -29,7 +29,6 @@ import javax.servlet.http.HttpServletResponse;
 public class VinculaCandidatoServlet extends HttpServlet {
 
     private static final long serialVersionUID = 3384510070196758224L;
-    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,7 +57,7 @@ public class VinculaCandidatoServlet extends HttpServlet {
         //Instancia Beans
         VagaBean vaga = new VagaBean();
 
-        vaga = vagaDAO.buscarVagaPorIdExistente(Integer.parseInt(idVaga));
+        vaga = vagaDAO.buscarVagaPorIdExistente(Integer.parseInt(idVaga), emf.createEntityManager());
 
         for (String id : idCandidatos) {
             System.out.println("Valor: " + id);
