@@ -341,7 +341,7 @@
                                                 </div>
                                                 <div class="form-group col-5">
                                                     <%ArrayList<CandidatoBean> listaDeCandidatosVinculadosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas"+v.getId());%>
-                                                    <select id="candidatosVaga" class="form-control" multiple="multiple" size="5">                                                        
+                                                    <select name="candidatosNaVagaAll" id="candidatosVaga" class="form-control" multiple="multiple" size="5">                                                        
                                                         <% for (CandidatoBean cv : listaDeCandidatosVinculadosNaVaga) {
                                                             System.out.println(listaDeCandidatosVinculadosNaVaga.isEmpty()+"  teste  "+v.getId());
                                                         %>
