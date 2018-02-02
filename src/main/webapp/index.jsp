@@ -328,7 +328,6 @@
                                                 <div class="form-group col-5">
                                                     <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputVagaCandidato" name="id_vaga_candidato">
                                                     <%  List<CandidatoBean> listaDeCandidatos = (List<CandidatoBean>) request.getAttribute("listaCandidatos");
-                                                        ArrayList<CandidatoBean> listaDeCandidatosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas");
                                                     %>
                                                     <select name="candidatosAll" id="candidatosAll" class="form-control" multiple="multiple" size="5">
                                                         <%  for (CandidatoBean c : listaDeCandidatos) {%>

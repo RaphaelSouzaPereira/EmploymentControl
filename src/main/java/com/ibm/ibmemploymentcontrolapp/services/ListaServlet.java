@@ -38,6 +38,9 @@ public class ListaServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    // F U N C I O N A N D O
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -45,8 +48,6 @@ public class ListaServlet extends HttpServlet {
         // parametro para filtro
         //String filtro = request.getParameter("filtro"); ainda n foi implementado
         String filtro = "";
-        String idVagaCandidato = "11";//request.getParameter("id_vaga_candidato");
-        System.out.println(idVagaCandidato);
 
         //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
@@ -59,36 +60,21 @@ public class ListaServlet extends HttpServlet {
         //Instancia os Beans
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
-        ArrayList<CandidatoBean> listaCandidatosVagas = new ArrayList<CandidatoBean>();
-        VagaBean vaga = new VagaBean();
-
-        vaga = vagaDAO.buscarVagaPorIdExistente(Integer.parseInt(idVagaCandidato));
 
         listaVagas = vagaDAO.listarPorAreaData();
         listaCandidatos = candidatoDAO.listarCandidatosComFiltro(filtro);
-        listaCandidatosVagas = candidatoVagaDAO.listarCandidatosNaVaga(vaga);
 
         //Seta os atributos que serão utilizados nos jsp
         request.setAttribute("listaVagas", listaVagas);
         request.setAttribute("listaCandidatos", listaCandidatos);
-        request.setAttribute("listaCandidatosVagas", listaCandidatosVagas);
-        
-        
+                
         ArrayList<CandidatoBean> listaCandidatosV = new ArrayList<CandidatoBean>();
-        
-        System.out.println("comeca aquiiiiiiiiiiiiiiiiii  ->  "+listaVagas.size());
-
         VagaBean vag = new VagaBean();
         
+        // parte incluida para fazer a listagem dos candidatos vinculados a vaga...
         for (int i = 0; i < listaVagas.size(); i++) {
-            System.out.println("teste   -> "+listaVagas.get(i).getId());
             vag = vagaDAO.buscarVagaPorIdExistente(listaVagas.get(i).getId());
-            System.out.println("renan id --------> " + listaVagas.get(i).getId());
             listaCandidatosV = candidatoVagaDAO.listarCandidatosNaVaga(vag);
-            for(CandidatoBean candidat : listaCandidatosV ){
-                System.out.println("Nome da PRAGA ---> "+ candidat.getNome());
-            }
-            System.out.println("nome final da lista para o JSP ---> "+"listaCandidatosVagas" + listaVagas.get(i).getId());
             request.setAttribute("listaCandidatosVagas" + listaVagas.get(i).getId(), listaCandidatosV);
         }
 
