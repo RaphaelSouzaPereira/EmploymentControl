@@ -317,7 +317,7 @@
                                 </tr>
                                 <tr class="collapse multi-collapse list-row-content-ibmec" id="incluir_candidato-<%= v.getId()%>" data-toggle="collapse" data-parent="#accordion">
                                     <td colspan="5" class="edit-light-grey">                        
-                                        <form class="atualizar-vaga" action="./VinculaCandidatoServlet" method="post">                                        
+                                        <form class="atualizar-vaga" action="./CandidatosNaVaga" method="post">                                        
                                             <div class="form-row">
                                                 <div class="form-group col-5">
                                                     <label for="inputFiltro">Filtro:</label>
@@ -336,8 +336,8 @@
                                                     </select>                                                   
                                                 </div>
                                                 <div class="form-group col-2">
-                                                    <input type="submit" class="btn btn-ibmec btn-block" id="vincula" value="Vincular" />
-                                                    <input type="button" class="btn btn-ibmec btn-block" id="desvincula" value="Desvincular" />
+                                                    <input type="submit" class="btn btn-ibmec btn-block" id="vincula" name="opcaoDeVinculo" value="Vincular" />
+                                                    <input type="submit" class="btn btn-ibmec btn-block" id="desvincula" name="opcaoDeVinculo" value="Desvincular" />
                                                 </div>
                                                 <div class="form-group col-5">
                                                     <%ArrayList<CandidatoBean> listaDeCandidatosVinculadosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas"+v.getId());%>
