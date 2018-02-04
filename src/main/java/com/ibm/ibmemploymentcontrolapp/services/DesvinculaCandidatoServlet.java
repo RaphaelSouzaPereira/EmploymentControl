@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.ibm.ibmemploymentcontrolapp.services;
 
 import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
@@ -22,13 +23,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  *
- * @author leandropaz
+ * @author RenanFontouraBoldrin
  */
-public class VinculaCandidatoServlet extends HttpServlet {
+public class DesvinculaCandidatoServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 3384510070196758224L;
+    private static final long serialVersionUID = -474914625620317771L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,7 +47,7 @@ public class VinculaCandidatoServlet extends HttpServlet {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
         // Variaveis do jsp
         String idVaga = request.getParameter("id_vaga_candidato");
-        String[] idCandidatos = request.getParameterValues("candidatosAll");
+        String[] idCandidatos = request.getParameterValues("candidatosNaVagaAll");
         // Candidato 
         ArrayList<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
 
@@ -68,7 +70,7 @@ public class VinculaCandidatoServlet extends HttpServlet {
             System.out.println(cb.getNome());
         }
 
-        candidatoVagaDAO.salvarCandidatoNaVagaComVerificacao(vaga, listaCandidatos);
+        candidatoVagaDAO.removerCandidatoDaVaga(vaga, listaCandidatos);
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -126,6 +128,6 @@ public class VinculaCandidatoServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }// </editor-fold>    
+    
 }
