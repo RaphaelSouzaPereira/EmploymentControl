@@ -328,7 +328,7 @@
                                                 <div class="form-group col-5">
                                                     <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputVagaCandidato" name="id_vaga_candidato">
                                                     <%  List<CandidatoBean> listaDeCandidatos = (List<CandidatoBean>) request.getAttribute("listaCandidatos");
-                                                    %>
+                                                        %>
                                                     <select name="candidatosAll" id="candidatosAll" class="form-control" multiple="multiple" size="5">
                                                         <%  for (CandidatoBean c : listaDeCandidatos) {%>
                                                         <option value=<%= c.getId()%>> <%= c.getNome()%> </option>                                                        
@@ -342,9 +342,7 @@
                                                 <div class="form-group col-5">
                                                     <%ArrayList<CandidatoBean> listaDeCandidatosVinculadosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas"+v.getId());%>
                                                     <select name="candidatosNaVagaAll" id="candidatosVaga" class="form-control" multiple="multiple" size="5">                                                        
-                                                        <% for (CandidatoBean cv : listaDeCandidatosVinculadosNaVaga) {
-                                                            System.out.println(listaDeCandidatosVinculadosNaVaga.isEmpty()+"  teste  "+v.getId());
-                                                        %>
+                                                        <% for (CandidatoBean cv : listaDeCandidatosVinculadosNaVaga) {   %>       
                                                         <option value=<%= cv.getId()%>> <%= cv.getNome()%> </option>
                                                         <% }%>
                                                     </select>

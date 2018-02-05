@@ -138,17 +138,5 @@ $(document).ready(function () {
         }).clone();
         candidatoSelect.empty().append(matches);
     });
-   
-    /* Funcao para mover os candidatos entre os selects para
-     * o segundo select no vincular candidato a vaga (somente para demo)
-     */
-
-//    $('#vincula').click(function () {
-//        vincula('#candidatosAll', '#candidatosVaga');
-//    });
-
-//    $('#desvincula').click(function () {
-//        desvincula('#candidatosVaga', '#candidatosAll');
-//    });
 });
 
