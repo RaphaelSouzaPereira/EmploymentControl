@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class CandidatosNaVagaServlet extends HttpServlet {
 
+    private static final long serialVersionUID = 2380334037078690670L;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -80,7 +82,10 @@ public class CandidatosNaVagaServlet extends HttpServlet {
             out.println("<title>Servlet CandidatosNaVagaServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<a href='./'>Voltar para a Home</a>");
+            //out.println("<a href='./'>Voltar para a Home</a>");
+            out.println("<script type=\"text/javascript\">");
+            out.println("setTimeout(function(){window.location.href='./';},200)");
+            out.println("</script>");
             out.println("</body>");
             out.println("</html>");
         }
