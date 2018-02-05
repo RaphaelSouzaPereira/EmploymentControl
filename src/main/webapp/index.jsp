@@ -143,10 +143,10 @@
                                             <a
                                                 class="btn btn-ibmec"
                                                 data-toggle="collapse"
-                                                href="#listar_historico-<%= v.getId()%>"
+                                                href="#listar-historico-<%= v.getId()%>"
                                                 role="button"
                                                 aria-expanded="false"
-                                                aria-controls="#listar_historico-<%= v.getId()%>"
+                                                aria-controls="#listar-historico-<%= v.getId()%>"
                                                 >
                                                 <i class="material-icons">description</i>
                                             </a>
@@ -339,7 +339,7 @@
                                                     <input value="" type="text" class="form-control" id="inputFiltro" placeholder="Filtro pesquisa" name="filtro">
                                                 </div>
                                             </div>
-                                            <div class="form-row">
+                                            <div>
                                                 <div class="form-group col-5">
                                                     <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputVagaCandidato" name="id_vaga_candidato">
                                                     <%  List<CandidatoBean> listaDeCandidatos = (List<CandidatoBean>) request.getAttribute("listaCandidatos");
@@ -366,7 +366,51 @@
                                         </form>
                                     </td>
                                 </tr>
-                                <% }%>       
+
+                                <tr class="collapse multi-collapse list-row-content-ibmec" id="listar-historico-<%= v.getId()%>" data-toggle="collapse" data-parent="#accordion">
+                                    <td colspan="5" class="edit-light-grey">                        
+                                        <form class="listar-historico" action="./HistoricoServlet" method="post">                                        
+                                            <div class="historico-ibmec">
+                                                <div class="form-group col-12">
+                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
+                                                </div>
+                                                <div class="form-group col-12">                                                   
+                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>                                                    
+                                                </div>
+                                                <hr>
+                                                <div class="form-group col-12">
+                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
+                                                </div>
+                                                <div class="form-group col-12">                                                   
+                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>                                                   
+                                                </div>
+                                                <hr>
+                                                <div class="form-group col-12">
+                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
+                                                </div>
+                                                <div class="form-group col-12">                                                   
+                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>                                                   
+                                                </div>
+                                                <hr>
+                                                <div class="form-group col-12">
+                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
+                                                </div>
+                                                <div class="form-group col-12">                                                   
+                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>
+                                                </div>
+                                                <hr>
+                                                <div class="form-group col-12">
+                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
+                                                </div>
+                                                <div class="form-group col-12">                                                   
+                                                    <span id="motivo" name="motivo">Modifiquei a vaga <a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% }%>
                             </tbody>
                         </table>
                     </div>
