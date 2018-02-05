@@ -69,8 +69,8 @@ public class CandidatoVagaDAOTest {
         cand2.setId(11);
         Candidato cand3 = new Candidato();
         cand3.setId(21);
-        List<Candidato> lista = new ArrayList<Candidato>();
-        List<CandidatoBean> listabean = new ArrayList<CandidatoBean>();
+        ArrayList<Candidato> lista = new ArrayList<Candidato>();
+        ArrayList<CandidatoBean> listabean = new ArrayList<CandidatoBean>();
         lista.add(cand1);
         lista.add(cand2);
         lista.add(cand3);

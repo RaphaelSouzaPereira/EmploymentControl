@@ -1,4 +1,4 @@
-package com.ibm.ibmemploymentcontrolapp.bean;
+package com.ibm.ibmemploymentcontrolapp.beans;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -82,7 +82,7 @@ public class VagaBeanTest {
                 desdeExpectativa, impactoFinanceiro, comentario,
                 categoria, null);
         assertNotNull("VAGABEAN2 não foi criado.", vagabean2);
-        assertEquals("STATUS não foi criado.", status, vagabean2.getStatus());
+        assertEquals("STATUS não foi pego pelo construtor.", status, vagabean2.getStatus());
         assertEquals("PMP não foi pego pelo construtor", new Long(pmp), new Long(vagabean2.getPmp()));
         assertTrue("DATADEABERTURA não foi pego pelo construtor.", dataDeAbertura.equals(vagabean2.getDataDeAbertura()));
         assertTrue("EXPECTATIVADEENTRADA não foi pego pelo construtor.", expectativaDeEntrada.equals(vagabean2.getExpectativaDeEntrada()));
