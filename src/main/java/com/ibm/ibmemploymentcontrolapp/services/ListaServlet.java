@@ -38,16 +38,10 @@ public class ListaServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     // F U N C I O N A N D O
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        // parametro para filtro
-        //String filtro = request.getParameter("filtro"); ainda n foi implementado
-        String filtro = "";
 
         //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
@@ -62,15 +56,15 @@ public class ListaServlet extends HttpServlet {
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
 
         listaVagas = vagaDAO.listarPorAreaData(emf.createEntityManager());
-        listaCandidatos = candidatoDAO.listarCandidatosComFiltro(filtro);
+        listaCandidatos = candidatoDAO.listarCandidatos();
 
         //Seta os atributos que serão utilizados nos jsp
         request.setAttribute("listaVagas", listaVagas);
         request.setAttribute("listaCandidatos", listaCandidatos);
-                
+
         ArrayList<CandidatoBean> listaCandidatosV = new ArrayList<CandidatoBean>();
         VagaBean vag = new VagaBean();
-        
+
         // parte incluida para fazer a listagem dos candidatos vinculados a vaga...
         for (int i = 0; i < listaVagas.size(); i++) {
             vag = vagaDAO.buscarVagaPorIdExistente(listaVagas.get(i).getId(), emf.createEntityManager());
