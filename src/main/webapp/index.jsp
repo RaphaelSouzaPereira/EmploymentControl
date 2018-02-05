@@ -90,7 +90,7 @@
                                     <td><%= v.getPmp()%></td>
                                     <td><%= v.getTecnologia()%></td>
                                     <td><%= v.getArea()%></td>
-                                    <td>
+                                    <td class="text-center">
                                         <span
                                             data-toggle="tooltip"
                                             data-placement="top"
@@ -136,6 +136,21 @@
                                                 <i class="material-icons">person_add</i>
                                             </a>
                                         </span>
+                                        <span
+                                            data-toggle="tooltip"
+                                            data-placement="rigt"
+                                            title="Listar Histórico">
+                                            <a
+                                                class="btn btn-ibmec"
+                                                data-toggle="collapse"
+                                                href="#listar_historico-<%= v.getId()%>"
+                                                role="button"
+                                                aria-expanded="false"
+                                                aria-controls="#listar_historico-<%= v.getId()%>"
+                                                >
+                                                <i class="material-icons">description</i>
+                                            </a>
+                                        </span>                                        
                                     </td>
                                 </tr>
                                 <tr class="collapse multi-collapse list-row-content-ibmec" id="vaga-<%= v.getId()%>" data-toggle="collapse" data-parent="#accordion">
@@ -328,7 +343,7 @@
                                                 <div class="form-group col-5">
                                                     <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputVagaCandidato" name="id_vaga_candidato">
                                                     <%  List<CandidatoBean> listaDeCandidatos = (List<CandidatoBean>) request.getAttribute("listaCandidatos");
-                                                        %>
+                                                    %>
                                                     <select name="candidatosAll" id="candidatosAll" class="form-control" multiple="multiple" size="5">
                                                         <%  for (CandidatoBean c : listaDeCandidatos) {%>
                                                         <option value=<%= c.getId()%>> <%= c.getNome()%> </option>                                                        
@@ -340,9 +355,9 @@
                                                     <input type="submit" class="btn btn-ibmec btn-block" id="desvincula" name="opcaoDeVinculo" value="Desvincular" />
                                                 </div>
                                                 <div class="form-group col-5">
-                                                    <%ArrayList<CandidatoBean> listaDeCandidatosVinculadosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas"+v.getId());%>
+                                                    <%ArrayList<CandidatoBean> listaDeCandidatosVinculadosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas" + v.getId());%>
                                                     <select name="candidatosNaVagaAll" id="candidatosVaga" class="form-control" multiple="multiple" size="5">                                                        
-                                                        <% for (CandidatoBean cv : listaDeCandidatosVinculadosNaVaga) {   %>       
+                                                        <% for (CandidatoBean cv : listaDeCandidatosVinculadosNaVaga) {%>       
                                                         <option value=<%= cv.getId()%>> <%= cv.getNome()%> </option>
                                                         <% }%>
                                                     </select>
