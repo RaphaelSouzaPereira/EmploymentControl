@@ -22,15 +22,18 @@
     </head>
     <body>
         <jsp:include page = "html/header.html" />
-        <div class="container">
+        <div class="container"> <!---------- Container - Início ---------->
             <div class="panel-group" id="accordion">
+                <!---------- Consulta de Vagas - Início ---------->
                 <jsp:include page="jsp/consulta-de-vagas.jsp"/>
-                <div class="row">
+                <!---------- Consulta de Vagas - Fim ---------->
+                
+                <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
                     <div class="offset-1 col-10">
                         <h2 class="title mb-3">Vagas Cadastradas</h2>
                         <hr>
                         <table class="table table-bordered list-table-ibmec">
-                            <thead class="list-thead-ibmec">
+                            <thead class="list-thead-ibmec"> <!---------- Vagas Cadastradas - Head da tabela - Início ---------->
                                 <tr class="list-ibmec">
                                     <th>Status</th>
                                     <th>PMP</th>
@@ -38,17 +41,16 @@
                                     <th>Área</th>
                                     <th>Opções</th>
                                 </tr>
-                            </thead>
-                            <tbody>
+                            </thead> <!---------- Vagas Cadastradas - Cabeçalho da tabela - Fim ---------->
+                            <tbody> <!---------- Vagas Cadastradas - Corpo da tabela - Início ---------->
                                 <%  List<VagaBean> listaDeVagas = (List<VagaBean>) request.getAttribute("listaVagas");
-                                    for (VagaBean v : listaDeVagas) {%>
-
-                                <tr class="list-row-ibmec">
+                                    for (VagaBean v : listaDeVagas) {%> <!---------- Vagas Cadastradas - For da Lista de Vagas - Início ---------->
+                                <tr class="list-row-ibmec"> 
                                     <td><%= v.getStatus()%></td>
                                     <td><%= v.getPmp()%></td>
                                     <td><%= v.getTecnologia()%></td>
                                     <td><%= v.getArea()%></td>
-                                    <td class="text-center">
+                                    <td class="text-center"> <!---------- Vagas Cadastradas - Botões das Opções - Início ---------->
                                         <span
                                             data-toggle="tooltip"
                                             data-placement="top"
@@ -108,11 +110,16 @@
                                                 >
                                                 <i class="material-icons">description</i>
                                             </a>
-                                        </span>                                        
-                                    </td>
+                                        </span>                                       
+                                    </td> <!---------- Vagas Cadastradas - Botões das Opções - Fim ----------> 
                                 </tr>
-                                <tr class="collapse multi-collapse list-row-content-ibmec" id="vaga-<%= v.getId()%>" data-toggle="collapse" data-parent="#accordion">
-                                    <td colspan="5">
+                                <tr 
+                                    class="collapse multi-collapse list-row-content-ibmec"
+                                    id="vaga-<%= v.getId()%>"
+                                    data-toggle="collapse"
+                                    data-parent="#accordion"
+                                > <!---------- Vagas Cadastradas - Mais Detalhes da Vaga - Início ---------->                 
+                                    <td colspan="5">  
                                         <div class="row">
                                             <div class="col-6">
                                                 <ul class="list-group">
@@ -163,8 +170,13 @@
                                             </div>
                                         </div>
                                     </td>
-                                </tr>
-                                <tr class="collapse multi-collapse list-row-content-ibmec" id="atualizar_vaga-<%= v.getId()%>" data-toggle="collapse" data-parent="#accordion">
+                                </tr> <!---------- Vagas Cadastradas - Mais Detalhes da Vaga - Fim ---------->
+                                <tr
+                                    class="collapse multi-collapse list-row-content-ibmec"
+                                    id="atualizar_vaga-<%= v.getId()%>"
+                                    data-toggle="collapse"
+                                    data-parent="#accordion"
+                                > <!---------- Vagas Cadastradas - Editar Vaga - Início ----------> 
                                     <td colspan="5" class="edit-light-grey">                                  
                                         <form class="atualizar-vaga" action="./AtualizacaoServlet" method="post">
                                             <div class="form-row">
@@ -287,8 +299,13 @@
                                             </div>
                                         </form>
                                     </td>                            
-                                </tr>
-                                <tr class="collapse multi-collapse list-row-content-ibmec" id="incluir_candidato-<%= v.getId()%>" data-toggle="collapse" data-parent="#accordion">
+                                </tr> <!---------- Vagas Cadastradas - Editar Vaga - Fim ---------->
+                                <tr
+                                    class="collapse multi-collapse list-row-content-ibmec"
+                                    id="incluir_candidato-<%= v.getId()%>"
+                                    data-toggle="collapse"
+                                    data-parent="#accordion"
+                                > <!---------- Vagas Cadastradas - Adicionar Candidatos na Vaga - Início ---------->
                                     <td colspan="5" class="edit-light-grey">                        
                                         <form class="atualizar-vaga" action="./CandidatosNaVaga" method="post">                                        
                                             <div class="form-row">
@@ -323,14 +340,14 @@
                                             </div>
                                         </form>
                                     </td>
-                                </tr>
-                                <% }%>       
-                            </tbody>
+                                </tr> <!---------- Vagas Cadastradas - Adicionar Candidatos na Vaga - Fim ---------->
+                                <% }%> <!---------- Vagas Cadastradas - For da Lista de Vagas - Fim ---------->
+                            </tbody> <!---------- Vagas Cadastradas - Corpo da tabela - Fim ---------->
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
+                </div> <!---------- Vagas Cadastradas - Fim ---------->
+            </div> 
+        </div> <!---------- Container - Fim ---------->
         <jsp:include page = "html/footer.html" />
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
