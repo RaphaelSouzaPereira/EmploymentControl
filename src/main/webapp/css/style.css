@@ -1,7 +1,11 @@
-.bd-navbar {
+.ibmec-navbar {
     background-color: #000;
     min-height: 4rem;
     padding: 0 5rem;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo {

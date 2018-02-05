@@ -316,10 +316,8 @@
                                     </td>                            
                                 </tr>
                                 <tr class="collapse multi-collapse list-row-content-ibmec" id="incluir_candidato-<%= v.getId()%>" data-toggle="collapse" data-parent="#accordion">
-                                    <%  List<CandidatoBean> listaDeCandidatos = (List<CandidatoBean>) request.getAttribute("listaCandidatos");
-                                    %>
                                     <td colspan="5" class="edit-light-grey">                        
-                                        <form class="atualizar-vaga" action="./VinculaCandidatoServlet" method="post">                                        
+                                        <form class="atualizar-vaga" action="./CandidatosNaVaga" method="post">                                        
                                             <div class="form-row">
                                                 <div class="form-group col-5">
                                                     <label for="inputFiltro">Filtro:</label>
@@ -328,20 +326,25 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-5">
+                                                    <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputVagaCandidato" name="id_vaga_candidato">
+                                                    <%  List<CandidatoBean> listaDeCandidatos = (List<CandidatoBean>) request.getAttribute("listaCandidatos");
+                                                        %>
                                                     <select name="candidatosAll" id="candidatosAll" class="form-control" multiple="multiple" size="5">
                                                         <%  for (CandidatoBean c : listaDeCandidatos) {%>
-                                                        <option value="<jsp:declaration></jsp:declaration>"> <%= c.getNome()%> </option>                                                        
+                                                        <option value=<%= c.getId()%>> <%= c.getNome()%> </option>                                                        
                                                         <% }%>
-                                                    </select>
+                                                    </select>                                                   
                                                 </div>
                                                 <div class="form-group col-2">
-                                                    <input type="submit" class="btn btn-ibmec btn-block" id="vincula" value="Vincular" />
-                                                    <input type="button" class="btn btn-ibmec btn-block" id="desvincula" value="Desvincular" />
+                                                    <input type="submit" class="btn btn-ibmec btn-block" id="vincula" name="opcaoDeVinculo" value="Vincular" />
+                                                    <input type="submit" class="btn btn-ibmec btn-block" id="desvincula" name="opcaoDeVinculo" value="Desvincular" />
                                                 </div>
                                                 <div class="form-group col-5">
-                                                    <select id="candidatosVaga" class="form-control" multiple="multiple" size="5">
-
-
+                                                    <%ArrayList<CandidatoBean> listaDeCandidatosVinculadosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas"+v.getId());%>
+                                                    <select name="candidatosNaVagaAll" id="candidatosVaga" class="form-control" multiple="multiple" size="5">                                                        
+                                                        <% for (CandidatoBean cv : listaDeCandidatosVinculadosNaVaga) {   %>       
+                                                        <option value=<%= cv.getId()%>> <%= cv.getNome()%> </option>
+                                                        <% }%>
                                                     </select>
                                                 </div>
                                             </div>

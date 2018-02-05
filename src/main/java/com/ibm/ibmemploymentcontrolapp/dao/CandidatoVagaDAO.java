@@ -90,30 +90,40 @@ public class CandidatoVagaDAO {
      * @param vaga
      * @return uma lista de candidatos que estão na vaga
      */
-    public ArrayList<CandidatoBean> listarCandidatosNaVaga(VagaBean vaga) {
-        Query query = em.createNamedQuery("Vaga.findById").setParameter("id", vaga.getId());
+    public ArrayList<CandidatoBean> listarCandidatosNaVaga(VagaBean vaga, EntityManager emExterno) {
+        Query query = emExterno.createNamedQuery("Vaga.findById").setParameter("id", vaga.getId());
         ArrayList<CandidatoBean> listCandidatosNaVaga = new ArrayList<CandidatoBean>();
         vaga = modelMapper.map(query.getSingleResult(), VagaBean.class);
         for (Candidato candidato : vaga.getCandidatoCollection()) {
             listCandidatosNaVaga.add(modelMapper.map(candidato, CandidatoBean.class));
         }
-        em.close();
+        emExterno.close();
+        emExterno = null;
         return listCandidatosNaVaga;
     }
-    
-    public void removerCandidatoDaVaga(VagaBean vaga, CandidatoBean candidato){
+
+    /**
+     * Metodo remove candidato da vaga
+     *
+     * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
+     * @param vaga que é uma bean de vaga para buscar a collection
+     * @param candidato que é uma lista de Bean da Vaga
+     */
+    public void removerCandidatoDaVaga(VagaBean vaga, ArrayList<CandidatoBean> lista) {
         Collection<Candidato> listCandidatosEntity = vaga.getCandidatoCollection();
         ArrayList<CandidatoBean> listaCandidadoBeanNoBanco = new ArrayList<CandidatoBean>();
         for (Candidato candidatoEntity : listCandidatosEntity) {
             listaCandidadoBeanNoBanco.add(modelMapper.map(candidatoEntity, CandidatoBean.class));
         }
+        for (CandidatoBean candidatoDoFront : lista) {
             for (int i = 0; i < listaCandidadoBeanNoBanco.size(); i++) {
-                if (candidato.getId().intValue() == listaCandidadoBeanNoBanco.get(i).getId().intValue()) {
+                if (candidatoDoFront.getId().intValue() == listaCandidadoBeanNoBanco.get(i).getId().intValue()) {
                     listaCandidadoBeanNoBanco.remove(i);
                 }
             }
-            listCandidatosEntity.clear();
-            for (CandidatoBean candidatoBean : listaCandidadoBeanNoBanco) {
+        }
+        listCandidatosEntity.clear();
+        for (CandidatoBean candidatoBean : listaCandidadoBeanNoBanco) {
             listCandidatosEntity.add(modelMapper.map(candidatoBean, Candidato.class));
         }
         vaga.setCandidatoCollection(listCandidatosEntity);
@@ -127,8 +137,7 @@ public class CandidatoVagaDAO {
             throw ex;
         }
         em.close();
-       
+
     }
-        
-        
+
 }

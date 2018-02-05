@@ -15,8 +15,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -59,10 +57,6 @@ public class Candidato implements Serializable {
     @Size(max = 255)
     @Column(name = "nome")
     private String nome;
-//    @JoinTable(name = "vaga_candidato", joinColumns = {
-//        @JoinColumn(name = "id_candidato", referencedColumnName = "id")}, inverseJoinColumns = {
-//        @JoinColumn(name = "id_vaga", referencedColumnName = "id")})
-//    @ManyToMany(fetch = FetchType.EAGER)
     @ManyToMany(mappedBy = "candidatoCollection", fetch = FetchType.EAGER)
     private Collection<Vaga> vagaCollection;
 

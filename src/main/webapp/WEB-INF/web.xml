@@ -30,8 +30,8 @@
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.AtualizacaoServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>VinculaCandidatoServlet</servlet-name>
-        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.VinculaCandidatoServlet</servlet-class>
+        <servlet-name>CandidatosNaVagaServlet</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.CandidatosNaVagaServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -58,8 +58,8 @@
         <url-pattern>/AtualizacaoServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>VinculaCandidatoServlet</servlet-name>
-        <url-pattern>/VinculaCandidatoServlet</url-pattern>
+        <servlet-name>CandidatosNaVagaServlet</servlet-name>
+        <url-pattern>/CandidatosNaVaga</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

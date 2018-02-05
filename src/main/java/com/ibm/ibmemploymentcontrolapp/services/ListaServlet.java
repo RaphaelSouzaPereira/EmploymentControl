@@ -9,8 +9,7 @@ import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
 import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
-import com.ibm.ibmemploymentcontrolapp.dao.VagaCandidatoDAO;
-import com.ibm.ibmemploymentcontrolapp.model.Vaga;
+import com.ibm.ibmemploymentcontrolapp.dao.CandidatoVagaDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +38,10 @@ public class ListaServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    // F U N C I O N A N D O
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        // parametro para filtro
-        //String filtro = request.getParameter("filtro"); ainda n foi implementado
-        String filtro = "";
 
         //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
@@ -53,56 +49,34 @@ public class ListaServlet extends HttpServlet {
         //Instancia os DAOs
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
         CandidatoDAO candidatoDAO = new CandidatoDAO(emf.createEntityManager());
-        VagaCandidatoDAO vagacandidatoDAO = new VagaCandidatoDAO(emf.createEntityManager());
+        CandidatoVagaDAO candidatoVagaDAO = new CandidatoVagaDAO(emf.createEntityManager());
 
-        
-        
-        
-        
-        /*Implentacao Inicial Salvar candidato na vaga
-        VagaBean vaga1 = new VagaBean();
-        vaga1 = vagaDAO.buscarVagaPorIdExistente(1);
-
-        List<CandidatoBean> listDeCandidatos = new ArrayList<CandidatoBean>();
-        listDeCandidatos.add(candidatoDAO.buscarCandidatoPorIdExistente(331));
-
-        vagacandidatoDAO.salvarCandidatoNaVaga(listDeCandidatos, vaga1);
-        -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
         //Instancia os Beans
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
-        
-        validaSalvaCandidado(vagaDAO, vagacandidatoDAO, listaCandidatos, 11);
 
-        //Retorna as listas de vagas e candidatos
-        listaVagas = vagaDAO.listarPorAreaData();
-        listaCandidatos = candidatoDAO.listarCandidatosComFiltro(filtro);
+        listaVagas = vagaDAO.listarPorAreaData(emf.createEntityManager());
+        listaCandidatos = candidatoDAO.listarCandidatos();
 
         //Seta os atributos que serão utilizados nos jsp
         request.setAttribute("listaVagas", listaVagas);
         request.setAttribute("listaCandidatos", listaCandidatos);
+
+        ArrayList<CandidatoBean> listaCandidatosV = new ArrayList<CandidatoBean>();
+        VagaBean vag = new VagaBean();
+
+        // parte incluida para fazer a listagem dos candidatos vinculados a vaga...
+        for (int i = 0; i < listaVagas.size(); i++) {
+            vag = vagaDAO.buscarVagaPorIdExistente(listaVagas.get(i).getId(), emf.createEntityManager());
+            listaCandidatosV = candidatoVagaDAO.listarCandidatosNaVaga(vag, emf.createEntityManager());
+            request.setAttribute("listaCandidatosVagas" + listaVagas.get(i).getId(), listaCandidatosV);
+        }
 
         RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
         view.forward(request, response);
 
         emf.close();
         emf = null;
-    }
-
-    public void validaSalvaCandidado(VagaDAO vagaDAO, VagaCandidatoDAO vagaCandidatoDAO,
-            List<CandidatoBean> listaCandidatoBean, Integer id_vaga) {
-        boolean teste;
-        for (CandidatoBean cand : listaCandidatoBean) {
-            teste = false;
-            for (Vaga vaga : cand.getVagaCollection()) {
-                if (vaga.getId().equals(id_vaga)) {
-                    teste = true;
-                }
-            }
-            if (teste == false) {
-                vagaCandidatoDAO.salvarCandidatoNaVaga(cand, vagaDAO.buscarVagaPorIdExistente(1));
-            }
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
