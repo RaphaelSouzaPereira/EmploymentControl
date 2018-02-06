@@ -5,8 +5,14 @@
  */
 package com.ibm.ibmemploymentcontrolapp.services;
 
+import com.ibm.ibmemploymentcontrolapp.beans.VagaAudBean;
+import com.ibm.ibmemploymentcontrolapp.dao.VagaAudDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,12 +38,32 @@ public class HistoricoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        String id = request.getParameter("id_vaga");
+        String dataFront = request.getParameter("dataModificacao");
+        String motivo = request.getParameter("motivo");
+        
+        //Inicializa configuracoes de persistencia
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
+
+        //Instancia os DAOs
+        VagaAudDAO vagaAudDAO = new VagaAudDAO(emf.createEntityManager());
+
+        //instancia os Beans
+        VagaAudBean vaga = new VagaAudBean();
+        List<VagaAudBean> listaHistoricoVaga = new ArrayList<VagaAudBean>();
+
+        listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(vaga.getVagaAudBeanPK().getId(), emf.createEntityManager());
+        System.out.println(listaHistoricoVaga.get(0).getRevinfo() + "DA VAGA AUTH CARAI!");
+
+
+
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HistoricoServlet</title>");            
+            out.println("<title>Servlet HistoricoServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet HistoricoServlet at " + request.getContextPath() + "</h1>");
