@@ -22,57 +22,18 @@
     </head>
     <body>
         <jsp:include page = "html/header.html" />
-        <div class="container">
+        <div class="container"> <!---------- Container - Início ---------->
             <div class="panel-group" id="accordion">
-                <div class="row">
-                    <div class="offset-1 col-10">
-                        <h2 class="title mb-3">Consultar Cadastradas</h2>
-                        <hr>
-                        <form class="consulta-vagas" action="" method="post">
-                            <div class="form-row mb-4">
-                                <div class="form-group col-3">
-                                    <label for="inputStatus">Área:</label>
-                                    <select id="inputAreaConsulta" class="form-control" name="area-consulta">
-                                        <option>Arquitetura</option>
-                                        <option selected>Canais</option>
-                                        <option>Digital</option>
-                                        <option>Especial</option>
-                                        <option>Suporte</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-3">
-                                    <label for="inputStatus">Status:</label>
-                                    <select id="inputStatusConsulta" class="form-control" name="status-consulta">
-                                        <option selected>Open</option>
-                                        <option>Closed</option>
-                                        <option>On hold</option>
-                                        <option>Cancelada</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-3">
-                                    <label for="inputStatus">Tecnologia:</label>
-                                    <select id="inputTecnologiaConsulta" class="form-control" name="status-consulta">
-                                        <option>Java</option>
-                                        <!--TODO - Tratar acentuacao-->
-                                        <option>Analista de Automacao</option>
-                                        <option>Especialista Mobilidade</option>
-                                        <option>Designer UX</option>
-                                        <option>Dev. ODI</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-3">
-                                    <button type="submit" class="btn btn-ibmec btn-block" id="btn-consulta-vaga" style="margin-top:32px">Consultar</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row">
+                <!---------- Consulta de Vagas - Início ---------->
+                <jsp:include page="jsp/consulta-de-vagas.jsp"/>
+                <!---------- Consulta de Vagas - Fim ---------->
+
+                <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
                     <div class="offset-1 col-10">
                         <h2 class="title mb-3">Vagas Cadastradas</h2>
                         <hr>
                         <table class="table table-bordered list-table-ibmec">
-                            <thead class="list-thead-ibmec">
+                            <thead class="list-thead-ibmec"> <!---------- Vagas Cadastradas - Head da tabela - Início ---------->
                                 <tr class="list-ibmec">
                                     <th>Status</th>
                                     <th>PMP</th>
@@ -80,17 +41,16 @@
                                     <th>Área</th>
                                     <th>Opções</th>
                                 </tr>
-                            </thead>
-                            <tbody>
+                            </thead> <!---------- Vagas Cadastradas - Cabeçalho da tabela - Fim ---------->
+                            <tbody> <!---------- Vagas Cadastradas - Corpo da tabela - Início ---------->
                                 <%  List<VagaBean> listaDeVagas = (List<VagaBean>) request.getAttribute("listaVagas");
-                                    for (VagaBean v : listaDeVagas) {%>
-
-                                <tr class="list-row-ibmec">
+                                    for (VagaBean v : listaDeVagas) {%> <!---------- Vagas Cadastradas - For da Lista de Vagas - Início ---------->
+                                <tr class="list-row-ibmec"> 
                                     <td><%= v.getStatus()%></td>
                                     <td><%= v.getPmp()%></td>
                                     <td><%= v.getTecnologia()%></td>
                                     <td><%= v.getArea()%></td>
-                                    <td>
+                                    <td class="text-center"> <!---------- Vagas Cadastradas - Botões das Opções - Início ---------->
                                         <span
                                             data-toggle="tooltip"
                                             data-placement="top"
@@ -136,10 +96,30 @@
                                                 <i class="material-icons">person_add</i>
                                             </a>
                                         </span>
-                                    </td>
+                                        <span
+                                            data-toggle="tooltip"
+                                            data-placement="rigt"
+                                            title="Listar Histórico">
+                                            <a
+                                                class="btn btn-ibmec"
+                                                data-toggle="collapse"
+                                                href="#listar-historico-<%= v.getId()%>"
+                                                role="button"
+                                                aria-expanded="false"
+                                                aria-controls="#listar-historico-<%= v.getId()%>"
+                                                >
+                                                <i class="material-icons">description</i>
+                                            </a>
+                                        </span>                                       
+                                    </td> <!---------- Vagas Cadastradas - Botões das Opções - Fim ----------> 
                                 </tr>
-                                <tr class="collapse multi-collapse list-row-content-ibmec" id="vaga-<%= v.getId()%>" data-toggle="collapse" data-parent="#accordion">
-                                    <td colspan="5">
+                                <tr 
+                                    class="collapse multi-collapse list-row-content-ibmec"
+                                    id="vaga-<%= v.getId()%>"
+                                    data-toggle="collapse"
+                                    data-parent="#accordion"
+                                    > <!---------- Vagas Cadastradas - Mais Detalhes da Vaga - Início ---------->                 
+                                    <td colspan="5">  
                                         <div class="row">
                                             <div class="col-6">
                                                 <ul class="list-group">
@@ -190,8 +170,13 @@
                                             </div>
                                         </div>
                                     </td>
-                                </tr>
-                                <tr class="collapse multi-collapse list-row-content-ibmec" id="atualizar_vaga-<%= v.getId()%>" data-toggle="collapse" data-parent="#accordion">
+                                </tr> <!---------- Vagas Cadastradas - Mais Detalhes da Vaga - Fim ---------->
+                                <tr
+                                    class="collapse multi-collapse list-row-content-ibmec"
+                                    id="atualizar_vaga-<%= v.getId()%>"
+                                    data-toggle="collapse"
+                                    data-parent="#accordion"
+                                    > <!---------- Vagas Cadastradas - Editar Vaga - Início ----------> 
                                     <td colspan="5" class="edit-light-grey">                                  
                                         <form class="atualizar-vaga" action="./AtualizacaoServlet" method="post">
                                             <div class="form-row">
@@ -314,8 +299,13 @@
                                             </div>
                                         </form>
                                     </td>                            
-                                </tr>
-                                <tr class="collapse multi-collapse list-row-content-ibmec" id="incluir_candidato-<%= v.getId()%>" data-toggle="collapse" data-parent="#accordion">
+                                </tr> <!---------- Vagas Cadastradas - Editar Vaga - Fim ---------->
+                                <tr
+                                    class="collapse multi-collapse list-row-content-ibmec"
+                                    id="incluir_candidato-<%= v.getId()%>"
+                                    data-toggle="collapse"
+                                    data-parent="#accordion"
+                                    > <!---------- Vagas Cadastradas - Adicionar Candidatos na Vaga - Início ---------->
                                     <td colspan="5" class="edit-light-grey">                        
                                         <form class="atualizar-vaga" action="./CandidatosNaVaga" method="post">                                        
                                             <div class="form-row">
@@ -328,7 +318,7 @@
                                                 <div class="form-group col-5">
                                                     <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputVagaCandidato" name="id_vaga_candidato">
                                                     <%  List<CandidatoBean> listaDeCandidatos = (List<CandidatoBean>) request.getAttribute("listaCandidatos");
-                                                        %>
+                                                    %>
                                                     <select name="candidatosAll" id="candidatosAll" class="form-control" multiple="multiple" size="5">
                                                         <%  for (CandidatoBean c : listaDeCandidatos) {%>
                                                         <option value=<%= c.getId()%>> <%= c.getNome()%> </option>                                                        
@@ -340,9 +330,9 @@
                                                     <input type="submit" class="btn btn-ibmec btn-block" id="desvincula" name="opcaoDeVinculo" value="Desvincular" />
                                                 </div>
                                                 <div class="form-group col-5">
-                                                    <%ArrayList<CandidatoBean> listaDeCandidatosVinculadosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas"+v.getId());%>
+                                                    <%ArrayList<CandidatoBean> listaDeCandidatosVinculadosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas" + v.getId());%>
                                                     <select name="candidatosNaVagaAll" id="candidatosVaga" class="form-control" multiple="multiple" size="5">                                                        
-                                                        <% for (CandidatoBean cv : listaDeCandidatosVinculadosNaVaga) {   %>       
+                                                        <% for (CandidatoBean cv : listaDeCandidatosVinculadosNaVaga) {%>       
                                                         <option value=<%= cv.getId()%>> <%= cv.getNome()%> </option>
                                                         <% }%>
                                                     </select>
@@ -350,14 +340,57 @@
                                             </div>
                                         </form>
                                     </td>
+                                </tr> <!---------- Vagas Cadastradas - Adicionar Candidatos na Vaga - Fim ---------->
+                                <tr class="collapse multi-collapse list-row-content-ibmec" id="listar-historico-<%= v.getId()%>" data-toggle="collapse" data-parent="#accordion">
+                                    <td colspan="5" class="edit-light-grey">                        
+                                        <form class="listar-historico" action="./HistoricoServlet" method="post">                                        
+                                            <div class="historico-ibmec">
+                                                <div class="form-group col-12">
+                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
+                                                </div>
+                                                <div class="form-group col-12">                                                   
+                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>                                                    
+                                                </div>
+                                                <hr>
+                                                <div class="form-group col-12">
+                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
+                                                </div>
+                                                <div class="form-group col-12">                                                   
+                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>                                                   
+                                                </div>
+                                                <hr>
+                                                <div class="form-group col-12">
+                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
+                                                </div>
+                                                <div class="form-group col-12">                                                   
+                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>                                                   
+                                                </div>
+                                                <hr>
+                                                <div class="form-group col-12">
+                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
+                                                </div>
+                                                <div class="form-group col-12">                                                   
+                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>
+                                                </div>
+                                                <hr>
+                                                <div class="form-group col-12">
+                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
+                                                </div>
+                                                <div class="form-group col-12">                                                   
+                                                    <span id="motivo" name="motivo">Modifiquei a vaga <a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </form>
+                                    </td>
                                 </tr>
-                                <% }%>       
-                            </tbody>
+                                <% }%> <!---------- Vagas Cadastradas - For da Lista de Vagas - Fim ---------->
+                            </tbody> <!---------- Vagas Cadastradas - Corpo da tabela - Fim ---------->
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
+                </div> <!---------- Vagas Cadastradas - Fim ---------->
+            </div> 
+        </div> <!---------- Container - Fim ---------->
         <jsp:include page = "html/footer.html" />
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
