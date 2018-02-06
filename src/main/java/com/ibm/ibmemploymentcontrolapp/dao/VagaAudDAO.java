@@ -5,6 +5,8 @@
  */
 package com.ibm.ibmemploymentcontrolapp.dao;
 
+import com.ibm.ibmemploymentcontrolapp.model.VagaAud;
+import com.ibm.ibmemploymentcontrolapp.beans.VagaAudBean;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
