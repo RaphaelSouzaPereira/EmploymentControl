@@ -4,6 +4,9 @@
     Author     : PriscilaRicardoArrud
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="com.ibm.ibmemploymentcontrolapp.beans.VagaAudBean"%>
 <%@page import="com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.ibm.ibmemploymentcontrolapp.beans.VagaBean"%>
@@ -345,41 +348,19 @@
                                     <td colspan="5" class="edit-light-grey">                        
                                         <form class="listar-historico" action="./HistoricoServlet" method="post">                                        
                                             <div class="historico-ibmec">
+                                                <% List<VagaAudBean> listaVagaAud = (List<VagaAudBean>) request.getAttribute("listaHistoricoVagas" + v.getId()); 
+                                                   DateFormat dataCerta = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); %>
+                                                <% for (VagaAudBean vagaAud : listaVagaAud) {%>
                                                 <div class="form-group col-12">
-                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
+                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">                                                        
+                                                        <%= dataCerta.format(vagaAud.getDataAudit()) %></span>
                                                 </div>
                                                 <div class="form-group col-12">                                                   
-                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>                                                    
+                                                    <div id="motivo" name="motivo" class="motivo-ibmec"><%=vagaAud.getMotivoAtualizacao()%></div>
+                                                    <a class="historico-ibmec-ver-mais" href="#">Ver mais</a>                                                 
                                                 </div>
                                                 <hr>
-                                                <div class="form-group col-12">
-                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
-                                                </div>
-                                                <div class="form-group col-12">                                                   
-                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>                                                   
-                                                </div>
-                                                <hr>
-                                                <div class="form-group col-12">
-                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
-                                                </div>
-                                                <div class="form-group col-12">                                                   
-                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>                                                   
-                                                </div>
-                                                <hr>
-                                                <div class="form-group col-12">
-                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
-                                                </div>
-                                                <div class="form-group col-12">                                                   
-                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>
-                                                </div>
-                                                <hr>
-                                                <div class="form-group col-12">
-                                                    <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
-                                                </div>
-                                                <div class="form-group col-12">                                                   
-                                                    <span id="motivo" name="motivo">Modifiquei a vaga <a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>
-                                                </div>
-                                                <hr>
+                                                <%}%>
                                             </div>
                                         </form>
                                     </td>

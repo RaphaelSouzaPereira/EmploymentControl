@@ -5,8 +5,8 @@
  */
 package com.ibm.ibmemploymentcontrolapp.dao;
 
-import com.ibm.ibmemploymentcontrolapp.beans.VagaAudBean;
 import com.ibm.ibmemploymentcontrolapp.model.VagaAud;
+import com.ibm.ibmemploymentcontrolapp.beans.VagaAudBean;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -27,15 +27,20 @@ public class VagaAudDAO {
         this.modelMapper = new ModelMapper();
     }
 
-    public List<VagaAudBean> listarHistVagas() {
+    public List<VagaAudBean> listarHistoricoDaVaga(int idVaga, EntityManager emExterno) {
 
-        Query query = em.createNamedQuery("VagaAud.findAll");
-        List<VagaAudBean> listarHistoricoBean = new ArrayList<VagaAudBean>();
+        List<VagaAud> listaHistorico = new ArrayList<VagaAud>();
+        Query query = emExterno.createNamedQuery("VagaAud.findById").setParameter("id", idVaga);
+        listaHistorico = query.getResultList();
+        List<VagaAudBean> listaHistoricoBean = new ArrayList<VagaAudBean>();
 
         for (VagaAud histVagas : (List<VagaAud>) query.getResultList()) {
 
-            listarHistoricoBean.add(modelMapper.map(histVagas, VagaAudBean.class));
+            listaHistoricoBean.add(modelMapper.map(histVagas, VagaAudBean.class));
         }
-        return listarHistoricoBean;
+        emExterno.close();
+        emExterno = null;
+        return listaHistoricoBean;
     }
+
 }

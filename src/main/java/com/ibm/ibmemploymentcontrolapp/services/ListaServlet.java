@@ -6,10 +6,12 @@ package com.ibm.ibmemploymentcontrolapp.services;
  * and open the template in the editor.
  */
 import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
+import com.ibm.ibmemploymentcontrolapp.beans.VagaAudBean;
 import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.CandidatoVagaDAO;
+import com.ibm.ibmemploymentcontrolapp.dao.VagaAudDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +50,15 @@ public class ListaServlet extends HttpServlet {
 
         //Instancia os DAOs
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
+        VagaAudDAO vagaAudDAO = new VagaAudDAO(emf.createEntityManager());
         CandidatoDAO candidatoDAO = new CandidatoDAO(emf.createEntityManager());
         CandidatoVagaDAO candidatoVagaDAO = new CandidatoVagaDAO(emf.createEntityManager());
 
         //Instancia os Beans
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();
+        List<VagaAudBean> listaHistoricoVaga = new ArrayList<VagaAudBean>();
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
+        VagaAudBean vagaAud = new VagaAudBean();
 
         listaVagas = vagaDAO.listarPorAreaData(emf.createEntityManager());
         listaCandidatos = candidatoDAO.listarCandidatos();
@@ -65,11 +70,18 @@ public class ListaServlet extends HttpServlet {
         ArrayList<CandidatoBean> listaCandidatosV = new ArrayList<CandidatoBean>();
         VagaBean vag = new VagaBean();
 
+//        System.out.println(listaHistoricoVaga.isEmpty()+" TESTE MALUCO!!!");
         // parte incluida para fazer a listagem dos candidatos vinculados a vaga...
         for (int i = 0; i < listaVagas.size(); i++) {
             vag = vagaDAO.buscarVagaPorIdExistente(listaVagas.get(i).getId(), emf.createEntityManager());
             listaCandidatosV = candidatoVagaDAO.listarCandidatosNaVaga(vag, emf.createEntityManager());
             request.setAttribute("listaCandidatosVagas" + listaVagas.get(i).getId(), listaCandidatosV);
+        }
+
+        // para a listagem do historico de cada vaga...
+        for (int j = 0; j < listaVagas.size(); j++) {
+            listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(listaVagas.get(j).getId(), emf.createEntityManager());
+            request.setAttribute("listaHistoricoVagas" + listaVagas.get(j).getId(), listaHistoricoVaga);
         }
 
         RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
