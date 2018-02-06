@@ -42,7 +42,7 @@ public class HistoricoServlet extends HttpServlet {
         String id = request.getParameter("id_vaga");
         String dataFront = request.getParameter("dataModificacao");
         String motivo = request.getParameter("motivo");
-        
+
         //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
 
@@ -54,9 +54,7 @@ public class HistoricoServlet extends HttpServlet {
         List<VagaAudBean> listaHistoricoVaga = new ArrayList<VagaAudBean>();
 
         listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(vaga.getVagaAudBeanPK().getId(), emf.createEntityManager());
-        System.out.println(listaHistoricoVaga.get(0).getRevinfo() + "DA VAGA AUTH CARAI!");
-
-
+       
 
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -70,6 +68,9 @@ public class HistoricoServlet extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         }
+
+        emf.close();
+        emf = null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

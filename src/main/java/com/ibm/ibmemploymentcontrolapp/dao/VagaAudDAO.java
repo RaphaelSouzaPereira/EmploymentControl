@@ -29,7 +29,6 @@ public class VagaAudDAO {
 
     public List<VagaAudBean> listarHistoricoDaVaga(int idVaga, EntityManager emExterno) {
 
-        
         List<VagaAud> listaHistorico = new ArrayList<VagaAud>();
         Query query = em.createNamedQuery("VagaAud.findById").setParameter("id", idVaga);
         listaHistorico = query.getResultList();
@@ -39,6 +38,8 @@ public class VagaAudDAO {
 
             listaHistoricoBean.add(modelMapper.map(histVagas, VagaAudBean.class));
         }
+        em.close();
+        em = null;
         return listaHistoricoBean;
     }
 

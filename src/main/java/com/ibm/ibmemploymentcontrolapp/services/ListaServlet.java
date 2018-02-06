@@ -82,10 +82,6 @@ public class ListaServlet extends HttpServlet {
         for (int j = 0; j < listaVagas.size(); j++) {
             listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(listaVagas.get(j).getId(), emf.createEntityManager());
             request.setAttribute("listaHistoricoVagas" + listaVagas.get(j).getId(), listaHistoricoVaga);
-            for (VagaAudBean vaga : listaHistoricoVaga) {
-                System.out.println("TESTE DO HISTORICO " + vaga.getCategoria());
-            }
-           
         }
 
         RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
