@@ -348,18 +348,19 @@
                                     <td colspan="5" class="edit-light-grey">                        
                                         <form class="listar-historico" action="./HistoricoServlet" method="post">                                        
                                             <div class="historico-ibmec">
-                                                <% List<VagaAudBean> listaVagaAud = (List<VagaAudBean>) request.getAttribute("listaHistoricoVagas" + v.getId()); 
-                                                   DateFormat dataCerta = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); %>
+                                                <% List<VagaAudBean> listaVagaAud = (List<VagaAudBean>) request.getAttribute("listaHistoricoVagas" + v.getId()); %>
+                                                <%int i = 0;%>
                                                 <% for (VagaAudBean vagaAud : listaVagaAud) {%>
                                                 <div class="form-group col-12">
                                                     <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">                                                        
-                                                        <%= dataCerta.format(vagaAud.getDataAudit()) %></span>
+                                                        <%=vagaAud.getDataAudit()%></span>
                                                 </div>
-                                                <div class="form-group col-12">                                                   
+                                                <div class="form-group col-12">
                                                     <div id="motivo" name="motivo" class="motivo-ibmec"><%=vagaAud.getMotivoAtualizacao()%></div>
-                                                    <a class="historico-ibmec-ver-mais" href="#">Ver mais</a>                                                 
+                                                    <a class="historico-ibmec-ver-mais" href="./HistoricoServlet?indiceLista=<%=i%>&idVaga=<%=vagaAud.getVagaAudBeanPK().getId() %>">Ver mais</a>                                                 
                                                 </div>
                                                 <hr>
+                                                <%i++;%>
                                                 <%}%>
                                             </div>
                                         </form>
