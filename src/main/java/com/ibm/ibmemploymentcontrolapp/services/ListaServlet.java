@@ -56,28 +56,32 @@ public class ListaServlet extends HttpServlet {
 
         //Instancia os Beans
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();
-        List<VagaAudBean> listHistoricoVaga = new ArrayList<VagaAudBean>();
+        List<VagaAudBean> listaHistoricoVaga = new ArrayList<VagaAudBean>();
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
+        VagaAudBean vagaAud = new VagaAudBean();
 
         listaVagas = vagaDAO.listarPorAreaData(emf.createEntityManager());
-        listHistoricoVaga = vagaAudDAO.listarHistVagas();
         listaCandidatos = candidatoDAO.listarCandidatos();
 
         //Seta os atributos que serão utilizados nos jsp
         request.setAttribute("listaVagas", listaVagas);
-        request.setAttribute("listaHistoricoVagas", listHistoricoVaga);
         request.setAttribute("listaCandidatos", listaCandidatos);
 
         ArrayList<CandidatoBean> listaCandidatosV = new ArrayList<CandidatoBean>();
         VagaBean vag = new VagaBean();
-        
-        System.out.println(listHistoricoVaga.isEmpty()+" TESTE MALUCO!!!");
 
+//        System.out.println(listaHistoricoVaga.isEmpty()+" TESTE MALUCO!!!");
         // parte incluida para fazer a listagem dos candidatos vinculados a vaga...
         for (int i = 0; i < listaVagas.size(); i++) {
             vag = vagaDAO.buscarVagaPorIdExistente(listaVagas.get(i).getId(), emf.createEntityManager());
             listaCandidatosV = candidatoVagaDAO.listarCandidatosNaVaga(vag, emf.createEntityManager());
             request.setAttribute("listaCandidatosVagas" + listaVagas.get(i).getId(), listaCandidatosV);
+        }
+
+        // para a listagem do historico de cada vaga...
+        for (int j = 0; j < listaVagas.size(); j++) {
+            listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(listaVagas.get(j).getId(), emf.createEntityManager());
+            request.setAttribute("listaHistoricoVagas" + listaVagas.get(j).getId(), listaHistoricoVaga);
         }
 
         RequestDispatcher view = request.getRequestDispatcher("./index.jsp");

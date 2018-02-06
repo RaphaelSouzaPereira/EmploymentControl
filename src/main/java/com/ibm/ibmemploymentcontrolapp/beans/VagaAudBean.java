@@ -6,11 +6,9 @@
 
 package com.ibm.ibmemploymentcontrolapp.beans;
 
-import com.ibm.ibmemploymentcontrolapp.model.Candidato;
 import com.ibm.ibmemploymentcontrolapp.model.Revinfo;
 import com.ibm.ibmemploymentcontrolapp.model.VagaAudPK;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 
 /**

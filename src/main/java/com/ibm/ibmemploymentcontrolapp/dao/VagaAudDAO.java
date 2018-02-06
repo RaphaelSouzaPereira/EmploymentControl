@@ -18,7 +18,7 @@ import org.modelmapper.ModelMapper;
  * @author FabioHenriqueGoulart
  */
 public class VagaAudDAO {
-    
+
     private EntityManager em;
     private final ModelMapper modelMapper;
 
@@ -26,16 +26,21 @@ public class VagaAudDAO {
         this.em = em;
         this.modelMapper = new ModelMapper();
     }
-    
-    public List<VagaAudBean> listarHistVagas() {
 
-        Query query = em.createNamedQuery("VagaAud.findAll");
-        List<VagaAudBean> listarHistoricoBean = new ArrayList<VagaAudBean>();
+    public List<VagaAudBean> listarHistoricoDaVaga(int idVaga, EntityManager emExterno) {
+
+        List<VagaAud> listaHistorico = new ArrayList<VagaAud>();
+        Query query = em.createNamedQuery("VagaAud.findById").setParameter("id", idVaga);
+        listaHistorico = query.getResultList();
+        List<VagaAudBean> listaHistoricoBean = new ArrayList<VagaAudBean>();
 
         for (VagaAud histVagas : (List<VagaAud>) query.getResultList()) {
 
-            listarHistoricoBean.add(modelMapper.map(histVagas, VagaAudBean.class));
+            listaHistoricoBean.add(modelMapper.map(histVagas, VagaAudBean.class));
         }
-        return listarHistoricoBean;
+        em.close();
+        em = null;
+        return listaHistoricoBean;
     }
+
 }
