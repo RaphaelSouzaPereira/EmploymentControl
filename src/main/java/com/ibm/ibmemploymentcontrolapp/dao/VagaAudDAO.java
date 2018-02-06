@@ -5,6 +5,8 @@
  */
 package com.ibm.ibmemploymentcontrolapp.dao;
 
+import com.ibm.ibmemploymentcontrolapp.beans.VagaAudBean;
+import com.ibm.ibmemploymentcontrolapp.model.VagaAud;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -16,7 +18,7 @@ import org.modelmapper.ModelMapper;
  * @author FabioHenriqueGoulart
  */
 public class VagaAudDAO {
-    
+
     private EntityManager em;
     private final ModelMapper modelMapper;
 
@@ -24,7 +26,7 @@ public class VagaAudDAO {
         this.em = em;
         this.modelMapper = new ModelMapper();
     }
-    
+
     public List<VagaAudBean> listarHistVagas() {
 
         Query query = em.createNamedQuery("VagaAud.findAll");
