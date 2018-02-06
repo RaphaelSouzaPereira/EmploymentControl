@@ -6,10 +6,12 @@ package com.ibm.ibmemploymentcontrolapp.services;
  * and open the template in the editor.
  */
 import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
+import com.ibm.ibmemploymentcontrolapp.beans.VagaAudBean;
 import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.CandidatoVagaDAO;
+import com.ibm.ibmemploymentcontrolapp.dao.VagaAudDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,22 +50,28 @@ public class ListaServlet extends HttpServlet {
 
         //Instancia os DAOs
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
+        VagaAudDAO vagaAudDAO = new VagaAudDAO(emf.createEntityManager());
         CandidatoDAO candidatoDAO = new CandidatoDAO(emf.createEntityManager());
         CandidatoVagaDAO candidatoVagaDAO = new CandidatoVagaDAO(emf.createEntityManager());
 
         //Instancia os Beans
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();
+        List<VagaAudBean> listHistoricoVaga = new ArrayList<VagaAudBean>();
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
 
         listaVagas = vagaDAO.listarPorAreaData(emf.createEntityManager());
+        listHistoricoVaga = vagaAudDAO.listarHistVagas();
         listaCandidatos = candidatoDAO.listarCandidatos();
 
         //Seta os atributos que serão utilizados nos jsp
         request.setAttribute("listaVagas", listaVagas);
+        request.setAttribute("listaHistoricoVagas", listHistoricoVaga);
         request.setAttribute("listaCandidatos", listaCandidatos);
 
         ArrayList<CandidatoBean> listaCandidatosV = new ArrayList<CandidatoBean>();
         VagaBean vag = new VagaBean();
+        
+        System.out.println(listHistoricoVaga.isEmpty()+" TESTE MALUCO!!!");
 
         // parte incluida para fazer a listagem dos candidatos vinculados a vaga...
         for (int i = 0; i < listaVagas.size(); i++) {
