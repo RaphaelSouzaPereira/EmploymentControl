@@ -349,35 +349,40 @@
                                                     <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
                                                 </div>
                                                 <div class="form-group col-12">                                                   
-                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>                                                    
+                                                    <div id="motivo" name="motivo" class="motivo-ibmec">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)</div>
+                                                    <a class="historico-ibmec-ver-mais" href="#">Ver mais</a>                                                 
                                                 </div>
                                                 <hr>
                                                 <div class="form-group col-12">
                                                     <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
                                                 </div>
                                                 <div class="form-group col-12">                                                   
-                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>                                                   
+                                                    <div id="motivo" name="motivo" class="motivo-ibmec">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste) lalalala lalalal lallala lalal lalalal llalala </div>
+                                                    <a class="historico-ibmec-ver-mais" href="#">Ver mais</a>
                                                 </div>
                                                 <hr>
                                                 <div class="form-group col-12">
                                                     <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
                                                 </div>
                                                 <div class="form-group col-12">                                                   
-                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>                                                   
+                                                    <div id="motivo" name="motivo" class="motivo-ibmec">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)lalalala lalalal lallala lalal lalalal llalala</div>
+                                                    <a class="historico-ibmec-ver-mais" href="#">Ver mais</a>                                                 
                                                 </div>
                                                 <hr>
                                                 <div class="form-group col-12">
                                                     <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
                                                 </div>
                                                 <div class="form-group col-12">                                                   
-                                                    <span id="motivo" name="motivo">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste)<a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>
+                                                    <div id="motivo" name="motivo" class="motivo-ibmec">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste) lalalala lalalal lallala lalal lalalal llalala</div>
+                                                    <a class="historico-ibmec-ver-mais" href="#">Ver mais</a>
                                                 </div>
                                                 <hr>
                                                 <div class="form-group col-12">
                                                     <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">14/12/2018</span>
                                                 </div>
                                                 <div class="form-group col-12">                                                   
-                                                    <span id="motivo" name="motivo">Modifiquei a vaga <a class="historico-ibmec-ver-mais" href="#">Ver mais</a></span>
+                                                    <div id="motivo" name="motivo" class="motivo-ibmec">Modifiquei a vaga por n motivos que nao te dizem respeito. (teste) lalalala lalalal lallala lalal lalalal llalala</div>
+                                                    <a class="historico-ibmec-ver-mais" href="#">Ver mais</a>
                                                 </div>
                                                 <hr>
                                             </div>
