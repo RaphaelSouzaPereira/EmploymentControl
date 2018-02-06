@@ -33,14 +33,14 @@
 }
 
 .btn-ibmec {
-    color: #fff;
-    background-color: rgb(0,120,215);
+    color: rgb(0,120,215);
+    background-color: #fff;
     border-color: rgb(0,120,215);
 }
 
 .btn-ibmec:hover {
-    color: rgb(0,120,215);
-    background-color: #fff;
+    color: #fff;
+    background-color: rgb(0,120,215);
     border-color: rgb(0,120,215);
 }
 
@@ -100,4 +100,13 @@
 
 .historico-ibmec hr:last-child {
     display: none;
+}
+
+.motivo-ibmec{
+    width: 600px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }

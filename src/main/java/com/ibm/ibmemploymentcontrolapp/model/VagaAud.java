@@ -7,18 +7,13 @@
 package com.ibm.ibmemploymentcontrolapp.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -26,8 +21,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.envers.Audited;
 
 /**
  *
@@ -36,45 +29,44 @@ import org.hibernate.envers.Audited;
  * @return   
  */
 @Entity
-@Table(name = "vaga")
-@Audited
+@Table(name = "vaga_aud")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Vaga.findAll", query = "SELECT v FROM Vaga v")
-    , @NamedQuery(name = "Vaga.findById", query = "SELECT v FROM Vaga v WHERE v.id = :id")
-    , @NamedQuery(name = "Vaga.findByAprovacaoBoardBrasil", query = "SELECT v FROM Vaga v WHERE v.aprovacaoBoardBrasil = :aprovacaoBoardBrasil")
-    , @NamedQuery(name = "Vaga.findByAprovacaoBoardGlobal", query = "SELECT v FROM Vaga v WHERE v.aprovacaoBoardGlobal = :aprovacaoBoardGlobal")
-    , @NamedQuery(name = "Vaga.findByArea", query = "SELECT v FROM Vaga v WHERE v.area = :area")
-    , @NamedQuery(name = "Vaga.findByBanda", query = "SELECT v FROM Vaga v WHERE v.banda = :banda")
-    , @NamedQuery(name = "Vaga.findByCategoria", query = "SELECT v FROM Vaga v WHERE v.categoria = :categoria")
-    , @NamedQuery(name = "Vaga.findByComentario", query = "SELECT v FROM Vaga v WHERE v.comentario = :comentario")
-    , @NamedQuery(name = "Vaga.findByDataDeAbertura", query = "SELECT v FROM Vaga v WHERE v.dataDeAbertura = :dataDeAbertura")
-    , @NamedQuery(name = "Vaga.findByDesdeAberturaAprovacao", query = "SELECT v FROM Vaga v WHERE v.desdeAberturaAprovacao = :desdeAberturaAprovacao")
-    , @NamedQuery(name = "Vaga.findByDesdeAberturaBrasil", query = "SELECT v FROM Vaga v WHERE v.desdeAberturaBrasil = :desdeAberturaBrasil")
-    , @NamedQuery(name = "Vaga.findByDesdeAberturaGlobal", query = "SELECT v FROM Vaga v WHERE v.desdeAberturaGlobal = :desdeAberturaGlobal")
-    , @NamedQuery(name = "Vaga.findByDesdeExpectativa", query = "SELECT v FROM Vaga v WHERE v.desdeExpectativa = :desdeExpectativa")
-    , @NamedQuery(name = "Vaga.findByDetalhe", query = "SELECT v FROM Vaga v WHERE v.detalhe = :detalhe")
-    , @NamedQuery(name = "Vaga.findByEntrouNaOperacao", query = "SELECT v FROM Vaga v WHERE v.entrouNaOperacao = :entrouNaOperacao")
-    , @NamedQuery(name = "Vaga.findByExpectativaDeAbertura", query = "SELECT v FROM Vaga v WHERE v.expectativaDeAbertura = :expectativaDeAbertura")
-    , @NamedQuery(name = "Vaga.findByExpectativaDeEntrada", query = "SELECT v FROM Vaga v WHERE v.expectativaDeEntrada = :expectativaDeEntrada")
-    , @NamedQuery(name = "Vaga.findByImpactoFinanceiro", query = "SELECT v FROM Vaga v WHERE v.impactoFinanceiro = :impactoFinanceiro")
-    , @NamedQuery(name = "Vaga.findByPmp", query = "SELECT v FROM Vaga v WHERE v.pmp = :pmp")
-    , @NamedQuery(name = "Vaga.findByProfissionalSelecionado", query = "SELECT v FROM Vaga v WHERE v.profissionalSelecionado = :profissionalSelecionado")
-    , @NamedQuery(name = "Vaga.findByRate", query = "SELECT v FROM Vaga v WHERE v.rate = :rate")
-    , @NamedQuery(name = "Vaga.findByStatus", query = "SELECT v FROM Vaga v WHERE v.status = :status")
-    , @NamedQuery(name = "Vaga.findByTecnologia", query = "SELECT v FROM Vaga v WHERE v.tecnologia = :tecnologia")
-    , @NamedQuery(name = "Vaga.findByTipo", query = "SELECT v FROM Vaga v WHERE v.tipo = :tipo")
-    , @NamedQuery(name = "Vaga.findByDataAudit", query = "SELECT v FROM Vaga v WHERE v.dataAudit = :dataAudit")
-    , @NamedQuery(name = "Vaga.findOpenOnHoldByAreaExpectativa", query = "SELECT v FROM Vaga v WHERE v.status = 'Open' OR v.status = 'On Hold' ORDER BY v.area, v.expectativaDeEntrada")    
-    , @NamedQuery(name = "Vaga.findByMotivoAtualizacao", query = "SELECT v FROM Vaga v WHERE v.motivoAtualizacao = :motivoAtualizacao")})
-public class Vaga implements Serializable {
+    @NamedQuery(name = "VagaAud.findAll", query = "SELECT v FROM VagaAud v")
+    , @NamedQuery(name = "VagaAud.findById", query = "SELECT v FROM VagaAud v WHERE v.vagaAudPK.id = :id")
+    , @NamedQuery(name = "VagaAud.findByRev", query = "SELECT v FROM VagaAud v WHERE v.vagaAudPK.rev = :rev")
+    , @NamedQuery(name = "VagaAud.findByRevtype", query = "SELECT v FROM VagaAud v WHERE v.revtype = :revtype")
+    , @NamedQuery(name = "VagaAud.findByAprovacaoBoardBrasil", query = "SELECT v FROM VagaAud v WHERE v.aprovacaoBoardBrasil = :aprovacaoBoardBrasil")
+    , @NamedQuery(name = "VagaAud.findByAprovacaoBoardGlobal", query = "SELECT v FROM VagaAud v WHERE v.aprovacaoBoardGlobal = :aprovacaoBoardGlobal")
+    , @NamedQuery(name = "VagaAud.findByArea", query = "SELECT v FROM VagaAud v WHERE v.area = :area")
+    , @NamedQuery(name = "VagaAud.findByBanda", query = "SELECT v FROM VagaAud v WHERE v.banda = :banda")
+    , @NamedQuery(name = "VagaAud.findByCategoria", query = "SELECT v FROM VagaAud v WHERE v.categoria = :categoria")
+    , @NamedQuery(name = "VagaAud.findByComentario", query = "SELECT v FROM VagaAud v WHERE v.comentario = :comentario")
+    , @NamedQuery(name = "VagaAud.findByDataDeAbertura", query = "SELECT v FROM VagaAud v WHERE v.dataDeAbertura = :dataDeAbertura")
+    , @NamedQuery(name = "VagaAud.findByDesdeAberturaAprovacao", query = "SELECT v FROM VagaAud v WHERE v.desdeAberturaAprovacao = :desdeAberturaAprovacao")
+    , @NamedQuery(name = "VagaAud.findByDesdeAberturaBrasil", query = "SELECT v FROM VagaAud v WHERE v.desdeAberturaBrasil = :desdeAberturaBrasil")
+    , @NamedQuery(name = "VagaAud.findByDesdeAberturaGlobal", query = "SELECT v FROM VagaAud v WHERE v.desdeAberturaGlobal = :desdeAberturaGlobal")
+    , @NamedQuery(name = "VagaAud.findByDesdeExpectativa", query = "SELECT v FROM VagaAud v WHERE v.desdeExpectativa = :desdeExpectativa")
+    , @NamedQuery(name = "VagaAud.findByDetalhe", query = "SELECT v FROM VagaAud v WHERE v.detalhe = :detalhe")
+    , @NamedQuery(name = "VagaAud.findByEntrouNaOperacao", query = "SELECT v FROM VagaAud v WHERE v.entrouNaOperacao = :entrouNaOperacao")
+    , @NamedQuery(name = "VagaAud.findByExpectativaDeAbertura", query = "SELECT v FROM VagaAud v WHERE v.expectativaDeAbertura = :expectativaDeAbertura")
+    , @NamedQuery(name = "VagaAud.findByExpectativaDeEntrada", query = "SELECT v FROM VagaAud v WHERE v.expectativaDeEntrada = :expectativaDeEntrada")
+    , @NamedQuery(name = "VagaAud.findByImpactoFinanceiro", query = "SELECT v FROM VagaAud v WHERE v.impactoFinanceiro = :impactoFinanceiro")
+    , @NamedQuery(name = "VagaAud.findByPmp", query = "SELECT v FROM VagaAud v WHERE v.pmp = :pmp")
+    , @NamedQuery(name = "VagaAud.findByProfissionalSelecionado", query = "SELECT v FROM VagaAud v WHERE v.profissionalSelecionado = :profissionalSelecionado")
+    , @NamedQuery(name = "VagaAud.findByRate", query = "SELECT v FROM VagaAud v WHERE v.rate = :rate")
+    , @NamedQuery(name = "VagaAud.findByStatus", query = "SELECT v FROM VagaAud v WHERE v.status = :status")
+    , @NamedQuery(name = "VagaAud.findByTecnologia", query = "SELECT v FROM VagaAud v WHERE v.tecnologia = :tecnologia")
+    , @NamedQuery(name = "VagaAud.findByTipo", query = "SELECT v FROM VagaAud v WHERE v.tipo = :tipo")
+    , @NamedQuery(name = "VagaAud.findByDataAudit", query = "SELECT v FROM VagaAud v WHERE v.dataAudit = :dataAudit")
+    , @NamedQuery(name = "VagaAud.findByMotivoAtualizacao", query = "SELECT v FROM VagaAud v WHERE v.motivoAtualizacao = :motivoAtualizacao")})
+public class VagaAud implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
+    @EmbeddedId
+    protected VagaAudPK vagaAudPK;
+    @Column(name = "REVTYPE")
+    private Short revtype;
     @Column(name = "aprovacao_board_brasil")
     @Temporal(TemporalType.DATE)
     private Date aprovacaoBoardBrasil;
@@ -138,27 +130,37 @@ public class Vaga implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataAudit;
     @Size(max = 255)
-    @Column(name = "motivo_atualizacao") 
+    @Column(name = "motivo_atualizacao")
     private String motivoAtualizacao;
-     @JoinTable(name = "vaga_candidato", joinColumns = {
-        @JoinColumn(name = "id_vaga", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_candidato", referencedColumnName = "id")})
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Candidato> candidatoCollection;
+    @JoinColumn(name = "REV", referencedColumnName = "REV", insertable = false, updatable = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Revinfo revinfo;
 
-    public Vaga() {
+    public VagaAud() {
     }
 
-    public Vaga(Integer id) {
-        this.id = id;
+    public VagaAud(VagaAudPK vagaAudPK) {
+        this.vagaAudPK = vagaAudPK;
     }
 
-    public Integer getId() {
-        return id;
+    public VagaAud(int id, int rev) {
+        this.vagaAudPK = new VagaAudPK(id, rev);
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public VagaAudPK getVagaAudPK() {
+        return vagaAudPK;
+    }
+
+    public void setVagaAudPK(VagaAudPK vagaAudPK) {
+        this.vagaAudPK = vagaAudPK;
+    }
+
+    public Short getRevtype() {
+        return revtype;
+    }
+
+    public void setRevtype(Short revtype) {
+        this.revtype = revtype;
     }
 
     public Date getAprovacaoBoardBrasil() {
@@ -352,31 +354,30 @@ public class Vaga implements Serializable {
     public void setMotivoAtualizacao(String motivoAtualizacao) {
         this.motivoAtualizacao = motivoAtualizacao;
     }
-    
-    @XmlTransient
-    public Collection<Candidato> getCandidatoCollection() {
-        return candidatoCollection;
+
+    public Revinfo getRevinfo() {
+        return revinfo;
     }
 
-    public void setCandidatoCollection(Collection<Candidato> candidatoCollection) {
-        this.candidatoCollection = candidatoCollection;
+    public void setRevinfo(Revinfo revinfo) {
+        this.revinfo = revinfo;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (vagaAudPK != null ? vagaAudPK.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Vaga)) {
+        if (!(object instanceof VagaAud)) {
             return false;
         }
-        Vaga other = (Vaga) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        VagaAud other = (VagaAud) object;
+        if ((this.vagaAudPK == null && other.vagaAudPK != null) || (this.vagaAudPK != null && !this.vagaAudPK.equals(other.vagaAudPK))) {
             return false;
         }
         return true;
@@ -384,7 +385,7 @@ public class Vaga implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ibm.ibmemploymentcontrolapp.model.Vaga[ id=" + id + " ]";
+        return "com.ibm.ibmemploymentcontrolapp.model.VagaAud[ vagaAudPK=" + vagaAudPK + " ]";
     }
 
 }

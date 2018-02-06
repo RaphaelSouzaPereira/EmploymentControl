@@ -33,6 +33,10 @@
         <servlet-name>CandidatosNaVagaServlet</servlet-name>
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.CandidatosNaVagaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HistoricoServlet</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.HistoricoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -60,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>CandidatosNaVagaServlet</servlet-name>
         <url-pattern>/CandidatosNaVaga</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoricoServlet</servlet-name>
+        <url-pattern>/HistoricoServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
