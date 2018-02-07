@@ -26,8 +26,7 @@
             <div class="panel-group" id="accordion">
                 <!---------- Consulta de Vagas - Início ---------->
                 <jsp:include page="jsp/consulta-de-vagas.jsp"/>
-                <!---------- Consulta de Vagas - Fim ---------->
-                
+                <!---------- Consulta de Vagas - Fim ---------->               
                 <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
                     <div class="offset-1 col-10">
                         <h2 class="title mb-3">Vagas Cadastradas</h2>
@@ -43,8 +42,9 @@
                                 </tr>
                             </thead> <!---------- Vagas Cadastradas - Cabeçalho da tabela - Fim ---------->
                             <tbody> <!---------- Vagas Cadastradas - Corpo da tabela - Início ---------->
-                                <%  List<VagaBean> listaDeVagas = (List<VagaBean>) request.getAttribute("listaVagas");
-                                    for (VagaBean v : listaDeVagas) {%> <!---------- Vagas Cadastradas - For da Lista de Vagas - Início ---------->
+                                <%
+                                    List<VagaBean> listaDeVagasPorPagina = (List<VagaBean>) session.getAttribute("listaDeVagasPorPagina");
+                                    for (VagaBean v : listaDeVagasPorPagina) {%> <!---------- Vagas Cadastradas - For da Lista de Vagas - Início ---------->
                                 <tr class="list-row-ibmec"> 
                                     <td><%= v.getStatus()%></td>
                                     <td><%= v.getPmp()%></td>
@@ -118,7 +118,7 @@
                                     id="vaga-<%= v.getId()%>"
                                     data-toggle="collapse"
                                     data-parent="#accordion"
-                                > <!---------- Vagas Cadastradas - Mais Detalhes da Vaga - Início ---------->                 
+                                    > <!---------- Vagas Cadastradas - Mais Detalhes da Vaga - Início ---------->                 
                                     <td colspan="5">  
                                         <div class="row">
                                             <div class="col-6">
@@ -176,7 +176,7 @@
                                     id="atualizar_vaga-<%= v.getId()%>"
                                     data-toggle="collapse"
                                     data-parent="#accordion"
-                                > <!---------- Vagas Cadastradas - Editar Vaga - Início ----------> 
+                                    > <!---------- Vagas Cadastradas - Editar Vaga - Início ----------> 
                                     <td colspan="5" class="edit-light-grey">                                  
                                         <form class="atualizar-vaga" action="./AtualizacaoServlet" method="post">
                                             <div class="form-row">
@@ -305,7 +305,7 @@
                                     id="incluir_candidato-<%= v.getId()%>"
                                     data-toggle="collapse"
                                     data-parent="#accordion"
-                                > <!---------- Vagas Cadastradas - Adicionar Candidatos na Vaga - Início ---------->
+                                    > <!---------- Vagas Cadastradas - Adicionar Candidatos na Vaga - Início ---------->
                                     <td colspan="5" class="edit-light-grey">                        
                                         <form class="atualizar-vaga" action="./CandidatosNaVaga" method="post">                                        
                                             <div class="form-row">
@@ -343,9 +343,31 @@
                                 </tr> <!---------- Vagas Cadastradas - Adicionar Candidatos na Vaga - Fim ---------->
                                 <% }%> <!---------- Vagas Cadastradas - For da Lista de Vagas - Fim ---------->
                             </tbody> <!---------- Vagas Cadastradas - Corpo da tabela - Fim ---------->
-                        </table>
+                        </table>                            
                     </div>
                 </div> <!---------- Vagas Cadastradas - Fim ---------->
+                <div class="row">
+                    <div class="offset-1 col-10">
+                        <div class="text-center ibmec-pagination">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination"> 
+                                    <%
+                                        List pageNumbers = (List) session.getAttribute("pages");
+                                        String cP = (String) session.getAttribute("currentPage");
+                                        int currentPage = Integer.parseInt(cP);
+                                        int previousPage = currentPage == 1 ? 1 : currentPage - 1;
+                                        int nextPage = pageNumbers.size() == currentPage ? currentPage : currentPage + 1;
+                                    %>
+                                    <li class="page-item"><a class="page-link" href="./?pageNumber=<%=previousPage%>">Previous</a></li>
+                                        <%for (int i = 0; i < pageNumbers.size(); i++) {%>                           
+                                    <li class="page-item"><a class="page-link" href="./?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a></li>
+                                        <%}%>
+                                    <li class="page-item"><a class="page-link" href="./?pageNumber=<%=nextPage%>">Next</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
             </div> 
         </div> <!---------- Container - Fim ---------->
         <jsp:include page = "html/footer.html" />

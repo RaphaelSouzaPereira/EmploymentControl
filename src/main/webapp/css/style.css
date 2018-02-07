@@ -9,22 +9,22 @@
 }
 
 .logo {
-  color: #fff;
-  margin: 0;
+    color: #fff;
+    margin: 0;
 }
 
 .logo-ibm {
-  color: rgb(0,120,215);
+    color: rgb(0,120,215);
 }
 
 .menu-link {
-  color: #fff!important;
-  border-bottom: 3px solid #000;
+    color: #fff!important;
+    border-bottom: 3px solid #000;
 }
 
 .menu-link:hover {
-  color: #aeaeae!important;
-  border-bottom: 3px solid rgb(0,120,215);
+    color: #aeaeae!important;
+    border-bottom: 3px solid rgb(0,120,215);
 }
 
 .title {
@@ -67,6 +67,10 @@
 
 .cadastra-candidatos {
     height: 335px;
+}
+
+.ibmec-pagination {
+    display: -webkit-inline-box;
 }
 
 .footer-ibmec {
