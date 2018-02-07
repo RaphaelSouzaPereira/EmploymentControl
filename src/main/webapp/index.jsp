@@ -181,7 +181,7 @@
                                     data-parent="#accordion"
                                     > <!---------- Vagas Cadastradas - Editar Vaga - Início ----------> 
                                     <td colspan="5" class="edit-light-grey">                                  
-                                        <form class="atualizar-vaga" action="./AtualizacaoServlet" method="post">
+                                        <form class="atualizar-vaga" id="atualizar-vaga-form" action="./AtualizacaoServlet" method="post">
                                             <div class="form-row">
                                                 <div class="form-group d-none">
                                                     <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputIdVaga" name="id_vaga">
@@ -294,11 +294,12 @@
                                             <div class="form-row">
                                                 <div class="form-group col-12">
                                                     <label for="inputComentario">Comentários:</label>
-                                                    <input value="<%=v.getComentario()%>" type="text" class="form-control" id="inputComentario" placeholder="Comentários" name="comentarios">
+                                                    <input value="<%=v.getComentario()%>" type="text" class="form-control" id="inputComentario" name="comentarios">
                                                 </div>
                                             </div>
+                                                <input type="hidden" id="motivoHidden" />
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-ibmec" id="btn-editar-vaga">Salvar</button>                            
+                                                <button class="btn btn-ibmec" id="btn-editar-vaga" data-toggle="modal" data-target="#modalUpdate">Salvar</button>                            
                                             </div>
                                         </form>
                                     </td>                            
@@ -314,12 +315,12 @@
                                             <div class="form-row">
                                                 <div class="form-group col-5">
                                                     <label for="inputFiltro">Filtro:</label>
-                                                    <input value="" type="text" class="form-control" id="inputFiltro" placeholder="Filtro pesquisa" name="filtro">
+                                                    <input value="" type="text" class="form-control" id="inputFiltro" placeholder="Filtro pesquisa" name="filtro" />
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-5">
-                                                    <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputVagaCandidato" name="id_vaga_candidato">
+                                                    <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputVagaCandidato" name="id_vaga_candidato" />
                                                     <%  List<CandidatoBean> listaDeCandidatos = (List<CandidatoBean>) request.getAttribute("listaCandidatos");
                                                     %>
                                                     <select name="candidatosAll" id="candidatosAll" class="form-control" multiple="multiple" size="5">
@@ -357,7 +358,7 @@
                                                 </div>
                                                 <div class="form-group col-12">
                                                     <div id="motivo" name="motivo" class="motivo-ibmec"><%=vagaAud.getMotivoAtualizacao()%></div>
-                                                    <a class="historico-ibmec-ver-mais" href="./HistoricoServlet?indiceLista=<%=i%>&idVaga=<%=vagaAud.getVagaAudBeanPK().getId() %>">Ver mais</a>                                                 
+                                                    <a class="historico-ibmec-ver-mais" href="./HistoricoServlet?indiceLista=<%=i%>&idVaga=<%=vagaAud.getVagaAudBeanPK().getId()%>">Ver mais</a>                                                 
                                                 </div>
                                                 <hr>
                                                 <%i++;%>
@@ -373,6 +374,36 @@
                 </div> <!---------- Vagas Cadastradas - Fim ---------->
             </div> 
         </div> <!---------- Container - Fim ---------->
+        <!-- Modal -->
+        <div class="modal fade" id="modalUpdate" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">                                                        
+                        <h4 class="modal-title" id="myModalLabel">
+                            Justificativa
+                        </h4>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label" for="inputMotivoModal"><h5>Motivo</h5></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="motivo-modal" id="inputMotivoModal" placeholder="Motivo da modificação" required/>
+                                </div>
+                            </div>                                                           
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <a href="#" id="modalSubmit" class="btn btn-ibmec">Confirmar</a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <jsp:include page = "html/footer.html" />
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

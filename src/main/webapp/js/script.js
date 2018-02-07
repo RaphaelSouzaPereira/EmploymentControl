@@ -84,6 +84,10 @@ function redireciona(url) {
 }
 
 // AQUI COMECA jQuery //
+$('#modalSubmit').click(function () {
+    $('#motivoHidden').val('#inputMotivoModal');
+    $('#atualizar-vaga-form').submit();
+});
 
 function vincula(origin, dest) {
     $(origin).find(':selected').appendTo(dest);

@@ -53,7 +53,9 @@ public class AtualizacaoServlet extends HttpServlet {
         String dataEntrouOperacaoForm = request.getParameter("entrou_operacao");
         String rate = request.getParameter("rate");
         String comentarios = request.getParameter("comentarios");
-        String motivoDaAtualizacao = request.getParameter("motivo");
+        String motivoDaAtualizacao = request.getParameter("motivoHidden");
+
+        System.out.println("MOTIVOOOOOOOOOOOOOOOOOOOOAOSEROWDF: " + motivoDaAtualizacao);
 
         // campos de calculo de data nao mostrados no form
         int expectativaDeAbertura;
