@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,8 +46,6 @@ public class HistoricoServlet extends HttpServlet {
         String indice = (String) request.getParameter("indiceLista");
         String id = (String) request.getParameter("idVaga");
 
-        System.out.println("Testeeeeeeeeee indice :  " + indice + "testeeeeeeee  id:  " + id);
-
         //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
 
@@ -60,9 +59,11 @@ public class HistoricoServlet extends HttpServlet {
         //verifica historico
         listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(Integer.parseInt(id), emf.createEntityManager());
         
-        System.out.println("testeeeeeeeeeeeeeeeeeeeeeee: "+listaHistoricoVaga.get(Integer.parseInt(indice)).getMotivoAtualizacao());
+        request.setAttribute("historico_selecionado", listaHistoricoVaga.get(Integer.parseInt(indice)));
+        
+        RequestDispatcher view = request.getRequestDispatcher("./apresentacao-historico.jsp");
+        view.forward(request, response);
 
-//        listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(vaga.getVagaAudBeanPK().getId(), emf.createEntityManager());
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
