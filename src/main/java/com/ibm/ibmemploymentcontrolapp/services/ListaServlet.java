@@ -6,10 +6,12 @@ package com.ibm.ibmemploymentcontrolapp.services;
  * and open the template in the editor.
  */
 import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
+import com.ibm.ibmemploymentcontrolapp.beans.VagaAudBean;
 import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.CandidatoVagaDAO;
+import com.ibm.ibmemploymentcontrolapp.dao.VagaAudDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +43,6 @@ public class ListaServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    // F U N C I O N A N D O
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -72,13 +73,16 @@ public class ListaServlet extends HttpServlet {
 
         //Instancia os DAOs
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
+        VagaAudDAO vagaAudDAO = new VagaAudDAO(emf.createEntityManager());
         CandidatoDAO candidatoDAO = new CandidatoDAO(emf.createEntityManager());
         CandidatoVagaDAO candidatoVagaDAO = new CandidatoVagaDAO(emf.createEntityManager());
 
         //Instancia os Beans
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();
         List<VagaBean> listaDeVagasPorPagina = new ArrayList<VagaBean>();
+        List<VagaAudBean> listaHistoricoVaga = new ArrayList<VagaAudBean>();
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
+        VagaAudBean vagaAud = new VagaAudBean();
 
         listaVagas = vagaDAO.listarPorAreaData(emf.createEntityManager());
         listaDeVagasPorPagina = vagaDAO.listarPorPagina(emf.createEntityManager(), this.length, this.offset);
@@ -94,9 +98,15 @@ public class ListaServlet extends HttpServlet {
             request.setAttribute("listaCandidatosVagas" + listaVagas.get(i).getId(), listaCandidatosV);
         }
 
+        // para a listagem do historico de cada vaga...
+        for (int j = 0; j < listaVagas.size(); j++) {
+            listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(listaVagas.get(j).getId(), emf.createEntityManager());
+            request.setAttribute("listaHistoricoVagas" + listaVagas.get(j).getId(), listaHistoricoVaga);
+        }
+
         //Seta os atributos que serão utilizados nos jsp
         request.setAttribute("listaCandidatos", listaCandidatos);
-        
+
         HttpSession httpSession = request.getSession();
         httpSession.setAttribute("currentPage", Integer.toString(page));
         httpSession.setAttribute("pages", getPages(listaVagas));
@@ -154,7 +164,7 @@ public class ListaServlet extends HttpServlet {
     public List getPages(List<VagaBean> listaVagas) {
         List pageNumbers = new ArrayList();
         int pages = listaVagas.size() / this.length;
-        
+
         if (listaVagas.size() % this.length != 0) {
             pages = pages + 1;
         }
@@ -162,7 +172,7 @@ public class ListaServlet extends HttpServlet {
         for (int i = 1; i <= pages; i++) {
             pageNumbers.add(new Integer(i));
         }
-        
+
         return pageNumbers;
     }
 

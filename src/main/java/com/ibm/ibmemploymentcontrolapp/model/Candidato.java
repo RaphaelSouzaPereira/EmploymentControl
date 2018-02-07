@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.envers.Audited;
 
 /**
  *
@@ -34,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 >>>>>>> 86ff296268d20d1cd69bc85fee5083c0814db690
  */
 @Entity
+@Audited
 @Table(name = "candidato")
 @XmlRootElement
 @NamedQueries({
