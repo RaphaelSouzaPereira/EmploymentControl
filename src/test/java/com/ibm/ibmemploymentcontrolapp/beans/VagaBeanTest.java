@@ -458,7 +458,7 @@ public class VagaBeanTest {
         String expResult = "MOTIVOATUALIZACAO";
         String motivo = "MOTIVOATUALIZACAO";
         VagaBean instance = new VagaBean();
-        instance.setStatus(motivo);
+        instance.setMotivoAtualizacao(motivo);
         String result = instance.getMotivoAtualizacao();
         assertEquals("GET STATUS NÃO FUNCIONOU", expResult, result);
     }
