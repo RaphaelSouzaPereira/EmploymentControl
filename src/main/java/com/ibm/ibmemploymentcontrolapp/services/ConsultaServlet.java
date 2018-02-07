@@ -46,7 +46,7 @@ public class ConsultaServlet extends HttpServlet {
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
         
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();
-        listaVagas = vagaDAO.listarPorAreaData();
+        listaVagas = vagaDAO.listarPorAreaData(emf.createEntityManager());
         
 	request.setAttribute("listaVagas", listaVagas);
 	RequestDispatcher view = request.getRequestDispatcher("./consulta-vagas.jsp");
