@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import org.eclipse.persistence.sessions.factories.SessionFactory;
 import org.modelmapper.ModelMapper;
 
 /**
@@ -84,17 +83,17 @@ public class VagaDAO {
         return listarVagasBean;
     }
 
-    public List<VagaBean> listarPorAreaData() {
+    public List<VagaBean> listarPorAreaData(EntityManager emExterno) {
 
-        Query query = em.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa");
+        Query query = emExterno.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa");
         List<VagaBean> listarVagaAreaData = new ArrayList<VagaBean>();
 
         for (Vaga vagas : (List<Vaga>) query.getResultList()) {
 
             listarVagaAreaData.add(modelMapper.map(vagas, VagaBean.class));
         }
-        em.close();
-        em = null;
+        emExterno.close();
+        emExterno = null;
         return listarVagaAreaData;
     }
 
@@ -108,6 +107,13 @@ public class VagaDAO {
             listarOrdemCronologica.add(modelMapper.map(vagas, VagaBean.class));
         }
         return listarOrdemCronologica;
+    }
+    
+    public VagaBean buscarVagaPorIdExistente(Integer idVaga, EntityManager emExterno) {
+        Vaga vaga = (Vaga) emExterno.createNamedQuery("Vaga.findById").setParameter("id", idVaga).getSingleResult();
+        emExterno.close();
+        emExterno = null;
+        return modelMapper.map(vaga, VagaBean.class);
     }
 
 }

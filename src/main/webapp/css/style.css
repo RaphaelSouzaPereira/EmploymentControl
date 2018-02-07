@@ -1,26 +1,30 @@
-.bd-navbar {
+.ibmec-navbar {
     background-color: #000;
     min-height: 4rem;
     padding: 0 5rem;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo {
-  color: #fff;
-  margin: 0;
+    color: #fff;
+    margin: 0;
 }
 
 .logo-ibm {
-  color: rgb(0,120,215);
+    color: rgb(0,120,215);
 }
 
 .menu-link {
-  color: #fff!important;
-  border-bottom: 3px solid #000;
+    color: #fff!important;
+    border-bottom: 3px solid #000;
 }
 
 .menu-link:hover {
-  color: #aeaeae!important;
-  border-bottom: 3px solid rgb(0,120,215);
+    color: #aeaeae!important;
+    border-bottom: 3px solid rgb(0,120,215);
 }
 
 .title {
@@ -29,14 +33,14 @@
 }
 
 .btn-ibmec {
-    color: #fff;
-    background-color: rgb(0,120,215);
+    color: rgb(0,120,215);
+    background-color: #fff;
     border-color: rgb(0,120,215);
 }
 
 .btn-ibmec:hover {
-    color: rgb(0,120,215);
-    background-color: #fff;
+    color: #fff;
+    background-color: rgb(0,120,215);
     border-color: rgb(0,120,215);
 }
 
@@ -79,4 +83,30 @@
     padding: 2%;
     box-sizing: border-box;
     margin-bottom: 0;
+}
+
+.historico-ibmec {
+    height: 339px;
+    overflow: scroll;   
+}
+
+.historico-ibmec-ver-mais {
+    padding-left: 10px;
+}
+
+.historico-ibmec-data {
+    color: rgb(0,120,215);
+}
+
+.historico-ibmec hr:last-child {
+    display: none;
+}
+
+.motivo-ibmec{
+    width: 600px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }

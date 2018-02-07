@@ -41,6 +41,8 @@ public class VagaBean implements Serializable {
     private Double impactoFinanceiro;
     private String comentario;
     private String categoria;
+    private Date dataAudit;
+    private String motivoAtualizacao;
     private Collection<Candidato> candidatoCollection;
 
     public VagaBean(String status, Integer pmp, Date dataDeAbertura, Date expectativaDeEntrada,
@@ -48,7 +50,8 @@ public class VagaBean implements Serializable {
             String detalhe, Date aprovacaoBoardBrasil, Integer desdeAberturaBrasil, Date aprovacaoBoardGlobal,
             Integer desdeAberturaGlobal, String profissionalSelecionado, Date entrouNaOperacao,
             Integer desdeAberturaAprovacao, Double rate, Integer desdeExpectativa,
-            Double impactoFinanceiro, String comentario, String categoria, Collection<Candidato> candidatoCollection) {
+            Double impactoFinanceiro, String comentario, String categoria, Collection<Candidato> candidatoCollection,
+            Date dataAudit, String motivoAtualizacao) {
         this.status = status;
         this.pmp = pmp;
         this.dataDeAbertura = dataDeAbertura;
@@ -71,6 +74,8 @@ public class VagaBean implements Serializable {
         this.impactoFinanceiro = impactoFinanceiro;
         this.comentario = comentario;
         this.categoria = categoria;
+        this.dataAudit = dataAudit;
+        this.motivoAtualizacao = motivoAtualizacao;
         this.candidatoCollection = candidatoCollection;
     }
 
@@ -271,5 +276,21 @@ public class VagaBean implements Serializable {
 
     public void setCandidatoCollection(Collection<Candidato> candidatoCollection) {
         this.candidatoCollection = candidatoCollection;
+    }
+    
+     public Date getDataAudit() {
+        return dataAudit;
+    }
+
+    public void setDataAudit(Date dataAudit) {
+        this.dataAudit = dataAudit;
+    }
+
+    public String getMotivoAtualizacao() {
+        return motivoAtualizacao;
+    }
+
+    public void setMotivoAtualizacao(String motivoAtualizacao) {
+        this.motivoAtualizacao = motivoAtualizacao;
     }
 }

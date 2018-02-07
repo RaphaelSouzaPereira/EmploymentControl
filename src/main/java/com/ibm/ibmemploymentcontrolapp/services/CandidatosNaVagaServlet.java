@@ -6,9 +6,13 @@
 package com.ibm.ibmemploymentcontrolapp.services;
 
 import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
+import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
+import com.ibm.ibmemploymentcontrolapp.dao.CandidatoVagaDAO;
+import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
@@ -18,11 +22,11 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
+ * @author PriscilaRicardoArrud
  */
-public class CandidatoServlet extends HttpServlet {
+public class CandidatosNaVagaServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 6149992041445660273L;
+    private static final long serialVersionUID = 2380334037078690670L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,51 +40,59 @@ public class CandidatoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //campos obrigatorios no cadastro
-        String nome = request.getParameter("nomeCandidato");
-        String email = request.getParameter("emailCandidato");
+        //Inicialização de configurações de persistência
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
 
-        //instacia do DAO e BEAN do candidato para fazer o cadastro
-        CandidatoDAO candidadatoDAO = new CandidatoDAO(emf.createEntityManager());
-        CandidatoBean candidato = new CandidatoBean();
+        //Valores dos parâmetros vindos da index.jsp
+        String idDaVaga = request.getParameter("id_vaga_candidato");
+        String[] idDosCandidatos = request.getParameterValues("candidatosAll");
+        String[] idDosCandidatosNaVaga = request.getParameterValues("candidatosNaVagaAll");
+        String opcaoDeVinculo = request.getParameter("opcaoDeVinculo");
 
-        candidato.setNome(nome);
-        candidato.setEmail(email);
+        //Instância DAOs
+        VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
+        CandidatoDAO candidatoDAO = new CandidatoDAO(emf.createEntityManager());
+        CandidatoVagaDAO candidatoVagaDAO = new CandidatoVagaDAO(emf.createEntityManager());
 
-        //salva no banco o novo candidato
-        try {
-            candidadatoDAO.salvarCandidatoComVerificacao(candidato);
-            PrintWriter out = response.getWriter();
+        //Instância de Beans
+        VagaBean vaga = new VagaBean();
+        ArrayList<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
+
+        //Busca uma vaga por Id existente
+        vaga = vagaDAO.buscarVagaPorIdExistente(Integer.parseInt(idDaVaga), emf.createEntityManager());
+
+        //Verifica qual a opção escolhida: Vincular ou Desvincular
+        if (opcaoDeVinculo.equals("Vincular")) {
+            //---------- VINCULAR CANDIDATO - INÍCIO ----------
+            listaCandidatos = adicionarNaListaCandidatos(listaCandidatos, idDosCandidatos, candidatoDAO);
+            candidatoVagaDAO.salvarCandidatoNaVagaComVerificacao(vaga, listaCandidatos);
+            //---------- VINCULAR CANDIDATO - FIM -------------            
+        } else if (opcaoDeVinculo.equals("Desvincular")) {
+            //---------- DESVINCULAR CANDIDATO - INÍCIO -------
+            listaCandidatos = adicionarNaListaCandidatos(listaCandidatos, idDosCandidatosNaVaga, candidatoDAO);
+            candidatoVagaDAO.removerCandidatoDaVaga(vaga, listaCandidatos);
+        }
+
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            out.println("<title>Servlet CandidatosNaVagaServlet</title>");
             out.println("</head>");
             out.println("<body>");
+            //out.println("<a href='./'>Voltar para a Home</a>");
             out.println("<script type=\"text/javascript\">");
-            out.println("setTimeout(function(){window.location.href='cadastro-candidato-response.jsp';},100)");
-            out.println("</script>");
-            out.println("</body>");
-            out.println("</html>");
-        } catch (Exception ex) {
-            PrintWriter out = response.getWriter();
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<script type=\"text/javascript\">");
-            out.println("setTimeout(function(){window.location.href='cadastro-candidato-falha-response.jsp';},100)");
+            out.println("setTimeout(function(){window.location.href='./';},200)");
             out.println("</script>");
             out.println("</body>");
             out.println("</html>");
         }
 
+        //Finalização de configurações de persistência
         emf.close();
         emf = null;
-        candidadatoDAO = null;
-        candidato = null;
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -121,5 +133,12 @@ public class CandidatoServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    public ArrayList<CandidatoBean> adicionarNaListaCandidatos(ArrayList<CandidatoBean> listaCandidatos, String[] idDosCandidatos, CandidatoDAO candidatoDAO) {
+        for (String id : idDosCandidatos) {
+            listaCandidatos.add(candidatoDAO.buscarCandidatoPorIdExistente(Integer.parseInt(id)));
+        }
+        return listaCandidatos;
+    }
 
 }

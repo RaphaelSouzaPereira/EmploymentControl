@@ -9,14 +9,10 @@ import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
@@ -24,22 +20,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.math.NumberUtils;
-import org.hibernate.SessionFactory;
 
 /**
  *
  * @author RenanFontouraBoldrin
  */
-public class AtualizacaoServlet extends HttpServlet  {
+public class AtualizacaoServlet extends HttpServlet {
 
     private static final long serialVersionUID = -4093743980063731357L;
 
-    
-        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         double rateConverted;
-        
+
         String id = request.getParameter("id_vaga"); // ainda falta colocar o parametro no jsp(parte de atualizacao)
 
         String categoria = request.getParameter("categoria");
@@ -59,6 +53,7 @@ public class AtualizacaoServlet extends HttpServlet  {
         String dataEntrouOperacaoForm = request.getParameter("entrou_operacao");
         String rate = request.getParameter("rate");
         String comentarios = request.getParameter("comentarios");
+        String motivoDaAtualizacao = request.getParameter("motivo");
 
         // campos de calculo de data nao mostrados no form
         int expectativaDeAbertura;
@@ -69,7 +64,8 @@ public class AtualizacaoServlet extends HttpServlet  {
         Date dateAprovacaoBr = null;
         Date dateAprovacaoGlobal = null;
         Date dateEntrouOperacao = null;
-        
+        Date dateAtual = new Date();
+
         // Variaveis datas sendo convertidas
         dateAbertura = conversaoData(dataAberturaForm, dateAbertura);
         dateExpectativaEntrada = conversaoData(dataExpectativaEntradaForm, dateExpectativaEntrada);
@@ -86,9 +82,9 @@ public class AtualizacaoServlet extends HttpServlet  {
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
 
         VagaBean vaga = new VagaBean();
-        
+
         vaga.setId(Integer.parseInt(id)); // setando o id
-        
+
         vaga.setCategoria(categoria);
         vaga.setStatus(status);
         vaga.setDataDeAbertura(dateAbertura);
@@ -98,6 +94,8 @@ public class AtualizacaoServlet extends HttpServlet  {
         vaga.setTipo(tipo);
         vaga.setBanda(banda);
         vaga.setDetalhe(detalhe);
+        vaga.setDataAudit(dateAtual);
+        vaga.setMotivoAtualizacao(motivoDaAtualizacao);
 
         rateConverted = Double.parseDouble(rate);
 
@@ -119,7 +117,7 @@ public class AtualizacaoServlet extends HttpServlet  {
         vagaDAO = null;
         vaga = null;
         emf = null;
-        
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
@@ -135,9 +133,10 @@ public class AtualizacaoServlet extends HttpServlet  {
             out.println("</html>");
         }
     }
-        
-    // fazendo a conversão da data   
+
     /**
+     * Converte as datas que vem da pagina web no form
+     *
      * @param form String pega do form feito no jsp
      * @param date variavel criada para receber a data convertida
      * @return uma data convertidada para o padrao yyyy/MM/dd
@@ -155,12 +154,20 @@ public class AtualizacaoServlet extends HttpServlet  {
         return date;
     }
 
+    /**
+     * Converte valor do rate com virgula que vem do form para rate com ponto no
+     * lugar
+     *
+     * @param rate
+     * @return valor da rate sem virgula
+     */
     public String conversaoRate(String rate) {
         String rateSemVirgula = rate.replace(',', '.');
         return rateSemVirgula;
     }
 
     /**
+     * Calcula a diferença entre datas
      *
      * @param dataAbertura
      * @param dataExpectativa
