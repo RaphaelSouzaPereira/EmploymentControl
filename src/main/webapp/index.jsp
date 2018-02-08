@@ -16,7 +16,7 @@
 <html lang="pt-br">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
@@ -29,15 +29,11 @@
             <div class="panel-group" id="accordion">
                 <!---------- Consulta de Vagas - Início ---------->
                 <jsp:include page="jsp/consulta-de-vagas.jsp"/>
-<<<<<<< HEAD
-                <!---------- Consulta de Vagas - Fim ---------->               
-=======
                 <!---------- Consulta de Vagas - Fim ---------->
-
->>>>>>> 58c3924223cb4cd2544640363886990eaa2edcc0
                 <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
                     <div class="offset-1 col-10">
                         <h2 class="title mb-3">Vagas Cadastradas</h2>
+                        <div class="table-responsive">
                         <hr>
                         <table class="table table-bordered list-table-ibmec">
                             <thead class="list-thead-ibmec"> <!---------- Vagas Cadastradas - Head da tabela - Início ---------->
@@ -375,6 +371,7 @@
                                 <% }%> <!---------- Vagas Cadastradas - For da Lista de Vagas - Fim ---------->
                             </tbody> <!---------- Vagas Cadastradas - Corpo da tabela - Fim ---------->
                         </table>                            
+                    </div>
                     </div>
                 </div> <!---------- Vagas Cadastradas - Fim ---------->
                 <div class="row">
