@@ -376,24 +376,22 @@
                 </div> <!---------- Vagas Cadastradas - Fim ---------->
                 <div class="row">
                     <div class="offset-1 col-10">
-                        <div class="text-center ibmec-pagination">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination"> 
-                                    <%
-                                        List pageNumbers = (List) session.getAttribute("pages");
-                                        String cP = (String) session.getAttribute("currentPage");
-                                        int currentPage = Integer.parseInt(cP);
-                                        int previousPage = currentPage == 1 ? 1 : currentPage - 1;
-                                        int nextPage = pageNumbers.size() == currentPage ? currentPage : currentPage + 1;
-                                    %>
-                                    <li class="page-item"><a class="page-link" href="./?pageNumber=<%=previousPage%>">Previous</a></li>
-                                        <%for (int i = 0; i < pageNumbers.size(); i++) {%>                           
-                                    <li class="page-item"><a class="page-link" href="./?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a></li>
-                                        <%}%>
-                                    <li class="page-item"><a class="page-link" href="./?pageNumber=<%=nextPage%>">Next</a></li>
-                                </ul>
-                            </nav>
-                        </div>
+                        <nav>
+                            <ul class="pagination justify-content-center"> 
+                                <%
+                                    List pageNumbers = (List) session.getAttribute("pages");
+                                    String cP = (String) session.getAttribute("currentPage");
+                                    int currentPage = Integer.parseInt(cP);
+                                    int previousPage = currentPage == 1 ? 1 : currentPage - 1;
+                                    int nextPage = pageNumbers.size() == currentPage ? currentPage : currentPage + 1;
+                                %>
+                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=previousPage%>">Previous</a></li>
+                                    <%for (int i = 0; i < pageNumbers.size(); i++) {%>                           
+                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a></li>
+                                    <%}%>
+                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=nextPage%>">Next</a></li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div> 
