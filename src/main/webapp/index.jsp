@@ -29,12 +29,7 @@
             <div class="panel-group" id="accordion">
                 <!---------- Consulta de Vagas - Início ---------->
                 <jsp:include page="jsp/consulta-de-vagas.jsp"/>
-<<<<<<< HEAD
                 <!---------- Consulta de Vagas - Fim ---------->               
-=======
-                <!---------- Consulta de Vagas - Fim ---------->
-
->>>>>>> 58c3924223cb4cd2544640363886990eaa2edcc0
                 <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
                     <div class="offset-1 col-10">
                         <h2 class="title mb-3">Vagas Cadastradas</h2>
@@ -302,7 +297,7 @@
                                                     <input value="<%=v.getComentario()%>" type="text" class="form-control" id="inputComentario" name="comentarios">
                                                 </div>
                                             </div>
-                                                <input type="hidden" id="motivoHidden" />
+                                                <input type="hidden" id="motivoHidden" name="motivoHidden"/>
                                             <div class="form-group">
                                                 <button class="btn btn-ibmec" id="btn-editar-vaga" data-toggle="modal" data-target="#modalUpdate">Salvar</button>                            
                                             </div>
