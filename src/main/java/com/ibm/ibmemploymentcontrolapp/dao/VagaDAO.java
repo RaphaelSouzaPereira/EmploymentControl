@@ -115,5 +115,19 @@ public class VagaDAO {
         emExterno = null;
         return modelMapper.map(vaga, VagaBean.class);
     }
+    
+    public List<VagaBean> listarPorPagina(EntityManager emExterno, int maxResults, int offset) {
+        Query query = emExterno.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa").setMaxResults(maxResults).setFirstResult(offset);
+        List<VagaBean> listarPorPagina = new ArrayList<VagaBean>();
+
+        for (Vaga vagas : (List<Vaga>) query.getResultList()) {
+            listarPorPagina.add(modelMapper.map(vagas, VagaBean.class));
+        }
+        
+        emExterno.close();
+        emExterno = null;
+        
+        return listarPorPagina;
+    } 
 
 }

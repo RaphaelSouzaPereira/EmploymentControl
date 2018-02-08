@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,9 +40,11 @@ public class HistoricoServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String id = request.getParameter("id_vaga");
-        String dataFront = request.getParameter("dataModificacao");
-        String motivo = request.getParameter("motivo");
+        //String id = request.getParameter("id_vaga");
+        // String dataFront = request.getParameter("dataModificacao");
+        // String motivo = request.getParameter("motivo");
+        String indice = (String) request.getParameter("indiceLista");
+        String id = (String) request.getParameter("idVaga");
 
         //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
@@ -52,9 +55,14 @@ public class HistoricoServlet extends HttpServlet {
         //instancia os Beans
         VagaAudBean vaga = new VagaAudBean();
         List<VagaAudBean> listaHistoricoVaga = new ArrayList<VagaAudBean>();
-
-        listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(vaga.getVagaAudBeanPK().getId(), emf.createEntityManager());
-       
+        
+        //verifica historico
+        listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(Integer.parseInt(id), emf.createEntityManager());
+        
+        request.setAttribute("historico_selecionado", listaHistoricoVaga.get(Integer.parseInt(indice)));
+        
+        RequestDispatcher view = request.getRequestDispatcher("./apresentacao-historico.jsp");
+        view.forward(request, response);
 
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */

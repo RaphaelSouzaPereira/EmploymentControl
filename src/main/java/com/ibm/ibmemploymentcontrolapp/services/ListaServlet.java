@@ -22,6 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,6 +31,8 @@ import javax.servlet.http.HttpServletResponse;
 public class ListaServlet extends HttpServlet {
 
     private static final long serialVersionUID = -5904318238581502627L;
+    int offset;
+    int length;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +43,30 @@ public class ListaServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    // F U N C I O N A N D O
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        //Declaração de variáveis
+        int maxEntriesPerPage = 5;
+        int page = 1;
+
+        //Pega Página da jsp
+        String pageNumberValue = request.getParameter("pageNumber");
+
+        //Seta a página como Integer
+        if (pageNumberValue != null) {
+            try {
+                page = Integer.parseInt(pageNumberValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //Define o offset e do limite de entradas por página
+        int offset = maxEntriesPerPage * (page - 1);
+        this.offset = offset;
+        this.length = maxEntriesPerPage;
 
         //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
@@ -56,21 +79,18 @@ public class ListaServlet extends HttpServlet {
 
         //Instancia os Beans
         List<VagaBean> listaVagas = new ArrayList<VagaBean>();
+        List<VagaBean> listaDeVagasPorPagina = new ArrayList<VagaBean>();
         List<VagaAudBean> listaHistoricoVaga = new ArrayList<VagaAudBean>();
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
         VagaAudBean vagaAud = new VagaAudBean();
 
         listaVagas = vagaDAO.listarPorAreaData(emf.createEntityManager());
+        listaDeVagasPorPagina = vagaDAO.listarPorPagina(emf.createEntityManager(), this.length, this.offset);
         listaCandidatos = candidatoDAO.listarCandidatos();
-
-        //Seta os atributos que serão utilizados nos jsp
-        request.setAttribute("listaVagas", listaVagas);
-        request.setAttribute("listaCandidatos", listaCandidatos);
 
         ArrayList<CandidatoBean> listaCandidatosV = new ArrayList<CandidatoBean>();
         VagaBean vag = new VagaBean();
 
-//        System.out.println(listaHistoricoVaga.isEmpty()+" TESTE MALUCO!!!");
         // parte incluida para fazer a listagem dos candidatos vinculados a vaga...
         for (int i = 0; i < listaVagas.size(); i++) {
             vag = vagaDAO.buscarVagaPorIdExistente(listaVagas.get(i).getId(), emf.createEntityManager());
@@ -83,6 +103,14 @@ public class ListaServlet extends HttpServlet {
             listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(listaVagas.get(j).getId(), emf.createEntityManager());
             request.setAttribute("listaHistoricoVagas" + listaVagas.get(j).getId(), listaHistoricoVaga);
         }
+
+        //Seta os atributos que serão utilizados nos jsp
+        request.setAttribute("listaCandidatos", listaCandidatos);
+
+        HttpSession httpSession = request.getSession();
+        httpSession.setAttribute("currentPage", Integer.toString(page));
+        httpSession.setAttribute("pages", getPages(listaVagas));
+        httpSession.setAttribute("listaDeVagasPorPagina", listaDeVagasPorPagina);
 
         RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
         view.forward(request, response);
@@ -129,5 +157,23 @@ public class ListaServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    /**
+     * @return List with page numbers
+     */
+    public List getPages(List<VagaBean> listaVagas) {
+        List pageNumbers = new ArrayList();
+        int pages = listaVagas.size() / this.length;
+
+        if (listaVagas.size() % this.length != 0) {
+            pages = pages + 1;
+        }
+
+        for (int i = 1; i <= pages; i++) {
+            pageNumbers.add(new Integer(i));
+        }
+
+        return pageNumbers;
+    }
 
 }

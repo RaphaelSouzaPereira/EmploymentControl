@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.ibm.ibmemploymentcontrolapp.beans;
 
 import com.ibm.ibmemploymentcontrolapp.model.Revinfo;
@@ -15,13 +14,12 @@ import java.util.Date;
  *
  * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
  * @param
- * @return   
+ * @return
  */
 public class VagaAudBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-    private Integer id;
+
     private String status;
     private Integer pmp;
     private Date dataDeAbertura;
@@ -49,8 +47,7 @@ public class VagaAudBean implements Serializable {
     private Revinfo revinfo;
     private VagaAudPK vagaAudPK;
     private short revtype;
-  
-    
+
     public VagaAudBean(String status, Integer pmp, Date dataDeAbertura, Date expectativaDeEntrada,
             Integer expectativaDeAbertura, String area, String banda, String tipo, String tecnologia,
             String detalhe, Date aprovacaoBoardBrasil, Integer desdeAberturaBrasil, Date aprovacaoBoardGlobal,
@@ -80,9 +77,9 @@ public class VagaAudBean implements Serializable {
         this.comentario = comentario;
         this.categoria = categoria;
         this.dataAudit = dataAudit;
-        this.motivoAtualizacao = motivoAtualizacao; 
+        this.motivoAtualizacao = motivoAtualizacao;
     }
-    
+
     public VagaAudBean() {
     }
 
