@@ -18,19 +18,19 @@
         <jsp:include page = "html/header.html" />
         <div class="container">
             <div class="row">
-                <div class="offset-1 col-10">
+                <div class="offset-1 col-md-10">
                     <h2 class="title mb-3">Cadastro de Candidatos</h2>
                     <hr>
                     <form class="cadastra-candidatos" action="./CandidatoServlet" method="post" onchange="validaCamposDeCadastroDeCandidatos()">
-                        <div class="form-group col-9">
+                        <div class="form-group col-xs-12 col-md-9">
                             <label for="inputNome">Nome:</label>
                             <input type="text" class="form-control" id="inputNome" placeholder="Nome do candidato" name="nomeCandidato" required>
                         </div>
-                        <div class="form-group col-9">
+                        <div class="form-group col-xs-12 col-md-9">
                             <label for="inputEmail">E-mail:</label>
                             <input type="email" class="form-control" id="inputEmail" placeholder="E-mail do candidato" name="emailCandidato" required>
                         </div>
-                        <div class="form-group col-9">
+                        <div class="form-group col-xs-12 col-md-9">
                             <button type="submit" class="btn btn-ibmec" id="btn-salvar-candidato" disabled>Salvar</button>
                             <button type="button" class="btn btn-default" id="reset" data-toggle="modal" data-target="#myModal">Cancelar</button>
                         </div>
