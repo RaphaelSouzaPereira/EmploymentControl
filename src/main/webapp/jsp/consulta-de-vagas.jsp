@@ -10,7 +10,7 @@
         <hr>
         <form class="consulta-vagas" action="" method="post">
             <div class="form-row mb-4">
-                <div class="form-group col-3">
+                <div class="form-group col-xs-12 col-md-3">
                     <label for="inputStatus">Área:</label>
                     <select id="inputAreaConsulta" class="form-control" name="area-consulta">
                         <option>Arquitetura</option>
@@ -20,7 +20,7 @@
                         <option>Suporte</option>
                     </select>
                 </div>
-                <div class="form-group col-3">
+                <div class="form-group col-xs-12 col-md-3">
                     <label for="inputStatus">Status:</label>
                     <select id="inputStatusConsulta" class="form-control" name="status-consulta">
                         <option selected>Open</option>
@@ -29,7 +29,7 @@
                         <option>Cancelada</option>
                     </select>
                 </div>
-                <div class="form-group col-3">
+                <div class="form-group col-xs-12 col-md-3">
                     <label for="inputStatus">Tecnologia:</label>
                     <select id="inputTecnologiaConsulta" class="form-control" name="status-consulta">
                         <option>Java</option>
@@ -40,7 +40,7 @@
                         <option>Dev. ODI</option>
                     </select>
                 </div>
-                <div class="form-group col-3">
+                <div class="form-group col-xs-12 col-md-3">
                     <button type="submit" class="btn btn-ibmec btn-block" id="btn-consulta-vaga" style="margin-top:32px">Consultar</button>
                 </div>
             </div>

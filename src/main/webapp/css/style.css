@@ -8,6 +8,11 @@
     z-index: 1000;
 }
 
+.ibmec-navbar .dropdown-menu{
+    background-color: #000;
+    margin-top: 0;
+}
+
 .logo {
     color: #fff;
     margin: 0;
@@ -67,10 +72,6 @@
 
 .cadastra-candidatos {
     height: 335px;
-}
-
-.ibmec-pagination {
-    display: -webkit-inline-box;
 }
 
 .footer-ibmec {
