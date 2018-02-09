@@ -17,7 +17,7 @@
             <a class="nav-link py-4 px-4 menu-link ibmec-menu-link" data-toggle="dropdown">Candidato</a>
             <ul class="dropdown-menu mt-0 ibmec-menu-dropdown">
                 <li><a class="nav-link py-2 px-3 menu-link ibmec-menu-link" href="./cadastro-candidato.jsp">Cadastrar</a></li>
-                <li><a class="nav-link py-2 px-3 menu-link ibmec-menu-link" href="./editar-candidato.jsp">Atualizar</a></li>
+                <li><a class="nav-link py-2 px-3 menu-link ibmec-menu-link" href="./ListaCandidatoServlet">Atualizar</a></li>
             </ul>
         </li>
     </ul>
