@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="offset-1 col-10">
-        <h2 class="title mb-3">Consultar Cadastradas</h2>
+        <h2 class="ibmec-title mb-3">Consultar Cadastradas</h2>
         <hr>
         <form class="consulta-vagas" action="" method="post">
             <div class="form-row mb-4">
@@ -41,7 +41,7 @@
                     </select>
                 </div>
                 <div class="form-group col-xs-12 col-md-3">
-                    <button type="submit" class="btn btn-ibmec btn-block" id="btn-consulta-vaga" style="margin-top:32px">Consultar</button>
+                    <button type="submit" class="btn btn-block ibmec-btn" id="btn-consulta-vaga" style="margin-top:32px">Consultar</button>
                 </div>
             </div>
         </form>

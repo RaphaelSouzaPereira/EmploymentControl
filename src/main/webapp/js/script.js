@@ -86,7 +86,7 @@ function redireciona(url) {
 
 // AQUI COMECA jQuery //
 $('#btn-editar-vaga').click(function (event) {
-    event.preventDefault(); 
+    event.preventDefault();
 });
 
 $('#modalSubmit').click(function (event) {

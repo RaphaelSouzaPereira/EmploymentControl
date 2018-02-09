@@ -16,7 +16,7 @@
         <title>Cadastro Candidato</title>
     </head>
     <body>
-        <jsp:include page = "html/header.html" />
+        <jsp:include page = "include/header.jsp" />
         <!-- Modal -->
         <div class="modal fade in" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -29,7 +29,7 @@
                         <p>Deseja cadastrar mais candidatos?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-ibmec" data-dismiss="modal" 
+                        <button type="button" class="btn ibmec-btn" data-dismiss="modal" 
                                 onClick="redireciona('cadastro-candidato.jsp')">Sim</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal"
                                 onClick="redireciona('./')">Não</button>

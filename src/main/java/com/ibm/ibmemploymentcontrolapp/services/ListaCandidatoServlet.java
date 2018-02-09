@@ -40,7 +40,7 @@ public class ListaCandidatoServlet extends HttpServlet {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
 
         //Instancia uma VagaDAO
-        CandidatoDAO candidatoDao = new CandidatoDAO(emf.createEntityManager());;
+        CandidatoDAO candidatoDao = new CandidatoDAO(emf.createEntityManager());
 
         ArrayList<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
         listaCandidatos = candidatoDao.listarCandidatos();

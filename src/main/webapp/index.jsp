@@ -24,15 +24,15 @@
         <title>Home</title>
     </head>
     <body>
-        <jsp:include page = "html/header.html" />
+        <jsp:include page = "include/header.jsp" />
         <div class="container"> <!---------- Container - Início ---------->
             <div class="panel-group" id="accordion">
                 <!---------- Consulta de Vagas - Início ---------->
-                <jsp:include page="jsp/consulta-de-vagas.jsp"/>
+                <jsp:include page="include/consulta-de-vagas.jsp"/>
                 <!---------- Consulta de Vagas - Fim ---------->               
                 <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
                     <div class="offset-1 col-10">
-                        <h2 class="title mb-3">Vagas Cadastradas</h2>
+                        <h2 class="ibmec-title mb-3">Vagas Cadastradas</h2>
                         <div class="table-responsive">
                             <hr>
                             <table class="table table-bordered list-table-ibmec">
@@ -60,7 +60,7 @@
                                                 data-placement="top"
                                                 title="Mais detalhes">
                                                 <a
-                                                    class="btn btn-ibmec"
+                                                    class="btn ibmec-btn"
                                                     data-toggle="collapse"                                        
                                                     href="#vaga-<%= v.getId()%>"
                                                     role="button"
@@ -75,7 +75,7 @@
                                                 data-placement="bottom"
                                                 title="Editar vaga">
                                                 <a
-                                                    class="btn btn-ibmec"
+                                                    class="btn ibmec-btn"
                                                     data-toggle="collapse"
                                                     href="#atualizar_vaga-<%= v.getId()%>"
                                                     role="button"
@@ -90,7 +90,7 @@
                                                 data-placement="rigt"
                                                 title="Vincular candidato">
                                                 <a
-                                                    class="btn btn-ibmec"
+                                                    class="btn ibmec-btn"
                                                     data-toggle="collapse"
                                                     href="#incluir_candidato-<%= v.getId()%>"
                                                     role="button"
@@ -105,7 +105,7 @@
                                                 data-placement="rigt"
                                                 title="Listar Histórico">
                                                 <a
-                                                    class="btn btn-ibmec"
+                                                    class="btn ibmec-btn"
                                                     data-toggle="collapse"
                                                     href="#listar-historico-<%= v.getId()%>"
                                                     role="button"
@@ -300,7 +300,7 @@
                                                 </div>
                                                 <input type="hidden" id="motivoHidden" name="motivoHidden"/>
                                                 <div class="form-group">
-                                                    <button class="btn btn-ibmec" id="btn-editar-vaga" data-toggle="modal" data-target="#modalUpdate">Salvar</button>                            
+                                                    <button class="btn ibmec-btn" id="btn-editar-vaga" data-toggle="modal" data-target="#modalUpdate">Salvar</button>                            
                                                 </div>
                                             </form>
                                         </td>                            
@@ -331,8 +331,8 @@
                                                         </select>                                                   
                                                     </div>
                                                     <div class="form-group col-2">
-                                                        <input type="submit" class="btn btn-ibmec btn-block" id="vincula" name="opcaoDeVinculo" value="Vincular" />
-                                                        <input type="submit" class="btn btn-ibmec btn-block" id="desvincula" name="opcaoDeVinculo" value="Desvincular" />
+                                                        <input type="submit" class="btn btn-block ibmec-btn" id="vincula" name="opcaoDeVinculo" value="Vincular" />
+                                                        <input type="submit" class="btn btn-block ibmec-btn" id="desvincula" name="opcaoDeVinculo" value="Desvincular" />
                                                     </div>
                                                     <div class="form-group col-5">
                                                         <%ArrayList<CandidatoBean> listaDeCandidatosVinculadosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas" + v.getId());%>
@@ -358,7 +358,7 @@
                                                             <%=vagaAud.getDataAudit()%></span>
                                                     </div>
                                                     <div class="form-group col-12">
-                                                        <div id="motivo" name="motivo" class="motivo-ibmec"><%=vagaAud.getMotivoAtualizacao()%></div>
+                                                        <div id="motivo" name="motivo" class="motivo-ibmec"><%=vagaAud.getMotivoAtualizacao()%></div>                                                       
                                                         <a class="historico-ibmec-ver-mais" href="./HistoricoServlet?indiceLista=<%=i%>&idVaga=<%=vagaAud.getVagaAudBeanPK().getId()%>">Ver mais</a>                                                 
                                                     </div>
                                                     <hr>
@@ -374,28 +374,26 @@
                         </div>
                     </div>
                 </div> <!---------- Vagas Cadastradas - Fim ---------->
-                <div class="row">
+                <div class="row"> <!---------- Paginação - Início ---------->
                     <div class="offset-1 col-10">
-                        <div class="text-center ibmec-pagination">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination"> 
-                                    <%
-                                        List pageNumbers = (List) session.getAttribute("pages");
-                                        String cP = (String) session.getAttribute("currentPage");
-                                        int currentPage = Integer.parseInt(cP);
-                                        int previousPage = currentPage == 1 ? 1 : currentPage - 1;
-                                        int nextPage = pageNumbers.size() == currentPage ? currentPage : currentPage + 1;
-                                    %>
-                                    <li class="page-item"><a class="page-link" href="./?pageNumber=<%=previousPage%>">Previous</a></li>
-                                        <%for (int i = 0; i < pageNumbers.size(); i++) {%>                           
-                                    <li class="page-item"><a class="page-link" href="./?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a></li>
-                                        <%}%>
-                                    <li class="page-item"><a class="page-link" href="./?pageNumber=<%=nextPage%>">Next</a></li>
-                                </ul>
-                            </nav>
-                        </div>
+                        <nav>
+                            <ul class="pagination justify-content-center"> 
+                                <%
+                                    List pageNumbers = (List) session.getAttribute("pages");
+                                    String cP = (String) session.getAttribute("currentPage");
+                                    int currentPage = Integer.parseInt(cP);
+                                    int previousPage = currentPage == 1 ? 1 : currentPage - 1;
+                                    int nextPage = pageNumbers.size() == currentPage ? currentPage : currentPage + 1;
+                                %>
+                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=previousPage%>">Previous</a></li>
+                                    <%for (int i = 0; i < pageNumbers.size(); i++) {%>                           
+                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a></li>
+                                    <%}%>
+                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=nextPage%>">Next</a></li>
+                            </ul>
+                        </nav>
                     </div>
-                </div>
+                </div><!---------- Paginação - Fim ---------->
             </div> 
         </div> <!---------- Container - Fim ---------->
         <!-- Modal -->
@@ -420,7 +418,7 @@
                             </div>                                                           
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <a href="#" id="modalSubmit" class="btn btn-ibmec">Confirmar</a>
+                                    <a href="#" id="modalSubmit" class="btn ibmec-btn">Confirmar</a>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                 </div>
                             </div>
@@ -428,7 +426,7 @@
                 </div>
             </div>
         </div>
-        <jsp:include page = "html/footer.html" />
+        <jsp:include page = "include/footer.jsp" />
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

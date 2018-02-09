@@ -45,8 +45,13 @@ public class CandidatosNaVagaServlet extends HttpServlet {
 
         //Valores dos parâmetros vindos da index.jsp
         String idDaVaga = request.getParameter("id_vaga_candidato");
-        String[] idDosCandidatos = request.getParameterValues("candidatosAll");
-        String[] idDosCandidatosNaVaga = request.getParameterValues("candidatosNaVagaAll");
+        
+        String[] idDosCandidatos;
+        idDosCandidatos = request.getParameterValues("candidatosAll");
+        
+        String[] idDosCandidatosNaVaga;
+        idDosCandidatosNaVaga = request.getParameterValues("candidatosNaVagaAll");
+        
         String opcaoDeVinculo = request.getParameter("opcaoDeVinculo");
 
         //Instância DAOs
@@ -65,12 +70,16 @@ public class CandidatosNaVagaServlet extends HttpServlet {
         if (opcaoDeVinculo.equals("Vincular")) {
             //---------- VINCULAR CANDIDATO - INÍCIO ----------
             listaCandidatos = adicionarNaListaCandidatos(listaCandidatos, idDosCandidatos, candidatoDAO);
-            candidatoVagaDAO.salvarCandidatoNaVagaComVerificacao(vaga, listaCandidatos);
+            if (listaCandidatos.isEmpty() != true) {
+                candidatoVagaDAO.salvarCandidatoNaVagaComVerificacao(vaga, listaCandidatos);
+            }
             //---------- VINCULAR CANDIDATO - FIM -------------            
         } else if (opcaoDeVinculo.equals("Desvincular")) {
             //---------- DESVINCULAR CANDIDATO - INÍCIO -------
             listaCandidatos = adicionarNaListaCandidatos(listaCandidatos, idDosCandidatosNaVaga, candidatoDAO);
-            candidatoVagaDAO.removerCandidatoDaVaga(vaga, listaCandidatos);
+            if (listaCandidatos.isEmpty() != true) {
+                candidatoVagaDAO.removerCandidatoDaVaga(vaga, listaCandidatos);
+            }
         }
 
         response.setContentType("text/html;charset=UTF-8");
@@ -133,10 +142,12 @@ public class CandidatosNaVagaServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
     public ArrayList<CandidatoBean> adicionarNaListaCandidatos(ArrayList<CandidatoBean> listaCandidatos, String[] idDosCandidatos, CandidatoDAO candidatoDAO) {
-        for (String id : idDosCandidatos) {
-            listaCandidatos.add(candidatoDAO.buscarCandidatoPorIdExistente(Integer.parseInt(id)));
+        if (idDosCandidatos != null) {
+            for (String id : idDosCandidatos) {
+                listaCandidatos.add(candidatoDAO.buscarCandidatoPorIdExistente(Integer.parseInt(id)));
+            }
         }
         return listaCandidatos;
     }
