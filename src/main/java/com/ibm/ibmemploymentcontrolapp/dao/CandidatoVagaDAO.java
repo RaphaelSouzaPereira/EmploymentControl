@@ -42,13 +42,20 @@ public class CandidatoVagaDAO {
     public void salvarCandidatoNaVagaComVerificacao(VagaBean vaga, ArrayList<CandidatoBean> lista) {
         ArrayList<CandidatoBean> listaVerificada = validaCandidato(lista, vaga);
         Collection<Candidato> candidatos = vaga.getCandidatoCollection();
+        String candidatosString = "";
         for (CandidatoBean candidatoBean : listaVerificada) {
+            candidatosString = candidatos + " - " + candidatoBean.getNome();
+            System.out.println("SALVANDO CANDIDATO NA VAGA UP: " + candidatoBean.getNome());
             candidatos.add(modelMapper.map(candidatoBean, Candidato.class));
         }
         vaga.setCandidatoCollection(candidatos);
+        System.out.println("ANTES DO TRY" + candidatosString);
         try {
+            vaga.setMotivoAtualizacao("Candidato(s) " + candidatosString + " vinculado(s).");
+
             Vaga entity = modelMapper.map(vaga, Vaga.class);
             em.getTransaction().begin();
+
             em.merge(entity);
             em.getTransaction().commit();
         } catch (Exception ex) {
