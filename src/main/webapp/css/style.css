@@ -28,6 +28,11 @@
 .ibmec-menu-dropdown {
     background-color: #000;
 }
+
+.ibmec-menu-dropdown .ibmec-menu-link,
+.ibmec-menu-dropdown .ibmec-menu-link:hover {
+    border: none;
+}
 /*---------- Menu - Fim ----------*/
 
 .title {
