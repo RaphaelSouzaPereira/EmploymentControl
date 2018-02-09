@@ -32,7 +32,7 @@
                 <!---------- Consulta de Vagas - Fim ---------->               
                 <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
                     <div class="offset-1 col-10">
-                        <h2 class="title mb-3">Vagas Cadastradas</h2>
+                        <h2 class="ibmec-title mb-3">Vagas Cadastradas</h2>
                         <div class="table-responsive">
                             <hr>
                             <table class="table table-bordered list-table-ibmec">
@@ -60,7 +60,7 @@
                                                 data-placement="top"
                                                 title="Mais detalhes">
                                                 <a
-                                                    class="btn btn-ibmec"
+                                                    class="btn ibmec-btn"
                                                     data-toggle="collapse"                                        
                                                     href="#vaga-<%= v.getId()%>"
                                                     role="button"
@@ -75,7 +75,7 @@
                                                 data-placement="bottom"
                                                 title="Editar vaga">
                                                 <a
-                                                    class="btn btn-ibmec"
+                                                    class="btn ibmec-btn"
                                                     data-toggle="collapse"
                                                     href="#atualizar_vaga-<%= v.getId()%>"
                                                     role="button"
@@ -90,7 +90,7 @@
                                                 data-placement="rigt"
                                                 title="Vincular candidato">
                                                 <a
-                                                    class="btn btn-ibmec"
+                                                    class="btn ibmec-btn"
                                                     data-toggle="collapse"
                                                     href="#incluir_candidato-<%= v.getId()%>"
                                                     role="button"
@@ -105,7 +105,7 @@
                                                 data-placement="rigt"
                                                 title="Listar Histórico">
                                                 <a
-                                                    class="btn btn-ibmec"
+                                                    class="btn ibmec-btn"
                                                     data-toggle="collapse"
                                                     href="#listar-historico-<%= v.getId()%>"
                                                     role="button"
@@ -300,7 +300,7 @@
                                                 </div>
                                                 <input type="hidden" id="motivoHidden" name="motivoHidden"/>
                                                 <div class="form-group">
-                                                    <button class="btn btn-ibmec" id="btn-editar-vaga" data-toggle="modal" data-target="#modalUpdate">Salvar</button>                            
+                                                    <button class="btn ibmec-btn" id="btn-editar-vaga" data-toggle="modal" data-target="#modalUpdate">Salvar</button>                            
                                                 </div>
                                             </form>
                                         </td>                            
@@ -331,8 +331,8 @@
                                                         </select>                                                   
                                                     </div>
                                                     <div class="form-group col-2">
-                                                        <input type="submit" class="btn btn-ibmec btn-block" id="vincula" name="opcaoDeVinculo" value="Vincular" />
-                                                        <input type="submit" class="btn btn-ibmec btn-block" id="desvincula" name="opcaoDeVinculo" value="Desvincular" />
+                                                        <input type="submit" class="btn btn-block ibmec-btn" id="vincula" name="opcaoDeVinculo" value="Vincular" />
+                                                        <input type="submit" class="btn btn-block ibmec-btn" id="desvincula" name="opcaoDeVinculo" value="Desvincular" />
                                                     </div>
                                                     <div class="form-group col-5">
                                                         <%ArrayList<CandidatoBean> listaDeCandidatosVinculadosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas" + v.getId());%>
@@ -418,7 +418,7 @@
                             </div>                                                           
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <a href="#" id="modalSubmit" class="btn btn-ibmec">Confirmar</a>
+                                    <a href="#" id="modalSubmit" class="btn ibmec-btn">Confirmar</a>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                 </div>
                             </div>

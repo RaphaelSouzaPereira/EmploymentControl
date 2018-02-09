@@ -19,7 +19,7 @@
         <div class="container">
             <div class="row">
                 <div class="offset-1 col-md-10">
-                    <h2 class="title mb-3">Cadastro de Candidatos</h2>
+                    <h2 class="ibmec-title mb-3">Cadastro de Candidatos</h2>
                     <hr>
                     <form class="cadastra-candidatos" action="./CandidatoServlet" method="post" onchange="validaCamposDeCadastroDeCandidatos()">
                         <div class="form-group col-xs-12 col-md-9">
@@ -31,7 +31,7 @@
                             <input type="email" class="form-control" id="inputEmail" placeholder="E-mail do candidato" name="emailCandidato" required>
                         </div>
                         <div class="form-group col-xs-12 col-md-9">
-                            <button type="submit" class="btn btn-ibmec" id="btn-salvar-candidato" disabled>Salvar</button>
+                            <button type="submit" class="btn ibmec-btn" id="btn-salvar-candidato" disabled>Salvar</button>
                             <button type="button" class="btn btn-default" id="reset" data-toggle="modal" data-target="#myModal">Cancelar</button>
                         </div>
                     </form>
@@ -48,7 +48,7 @@
                                     <p>Esta ação irá descartar os dados do formulário.</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-ibmec" data-dismiss="modal" 
+                                    <button type="button" class="btn ibmec-btn" data-dismiss="modal" 
                                             onClick="redireciona('./')">Sim</button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
                                 </div>

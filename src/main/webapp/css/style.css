@@ -35,22 +35,26 @@
 }
 /*---------- Menu - Fim ----------*/
 
-.title {
+/*---------- Títulos - Início -----*/
+.ibmec-title {
     color: rgb(0,120,215);
     font-size: 18px;
 }
+/*---------- Títulos - Fim -----*/
 
-.btn-ibmec {
-    color: rgb(0,120,215);
+/*---------- Botões - Início --*/
+.ibmec-btn {
     background-color: #fff;
     border-color: rgb(0,120,215);
+    color: rgb(0,120,215);
 }
 
-.btn-ibmec:hover {
-    color: #fff;
+.ibmec-btn:hover {
     background-color: rgb(0,120,215);
     border-color: rgb(0,120,215);
+    color: #fff;
 }
+/*---------- Botões - Fim --*/
 
 .list-table-ibmec {
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);

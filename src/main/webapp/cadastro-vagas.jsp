@@ -20,7 +20,7 @@
         <div class="container">
             <div class="row">
                 <div class="offset-md-1 col-md-10">
-                    <h2 class="title mb-3">Cadastro de Vagas</h2>
+                    <h2 class="ibmec-title mb-3">Cadastro de Vagas</h2>
                     <hr>                   
                     <form class="cadastra-vagas" action="./ControlServlet" method="post" onchange="validaCamposDeCadastroDeVagas()">
                         <div class="form-row">
@@ -139,7 +139,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-ibmec" id="btn-salvar-cadastro" disabled>Salvar</button>                            
+                            <button type="submit" class="btn ibmec-btn" id="btn-salvar-cadastro" disabled>Salvar</button>                            
                             <button type="button" class="btn btn-default" id="reset" data-toggle="modal" data-target="#myModal">Cancelar</button>
                         </div>
                     </form>
@@ -156,7 +156,7 @@
                                     <p>Esta ação irá descartar os dados do formulário.</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-ibmec" data-dismiss="modal" 
+                                    <button type="button" class="btn ibmec-btn" data-dismiss="modal" 
                                             onClick="redireciona('./')">Sim</button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
                                 </div>

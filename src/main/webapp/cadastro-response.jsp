@@ -29,7 +29,7 @@
                         <p>Deseja cadastrar mais vagas?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-ibmec" data-dismiss="modal" 
+                        <button type="button" class="btn ibmec-btn" data-dismiss="modal" 
                                 onClick="redireciona('cadastro-vagas.jsp')">Sim</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal"
                                 onClick="redireciona('./')">Não</button>

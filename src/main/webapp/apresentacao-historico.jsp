@@ -24,7 +24,7 @@
         <div class="container">
             <div class="row">
                 <div class="offset-1 col-10">
-                    <h2 class="title mb-3">Histórico da Vaga - <%= vagaAudBean.getDataAudit() %></h2>
+                    <h2 class="ibmec-title mb-3">Histórico da Vaga - <%= vagaAudBean.getDataAudit() %></h2>
                     <hr>
                 </div>
             </div>
