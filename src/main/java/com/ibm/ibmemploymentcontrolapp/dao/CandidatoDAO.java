@@ -18,20 +18,21 @@ import org.modelmapper.ModelMapper;
  * @author FabioHenriqueGoulart
  */
 public class CandidatoDAO {
-    
+
     //Declaracão de variaveis para fazer conexão no banco e fazer a mudança de Bean para Entity.
     private EntityManager em;
     private final ModelMapper modelMapper;
-    
+
     //Construtor
     public CandidatoDAO(EntityManager em) {
         this.em = em;
         this.modelMapper = new ModelMapper();
     }
-    
+
     /**
      * Salva candidatos no banco de dados pegos do front.
-     * @param candidato vindo do cadastro no front. 
+     *
+     * @param candidato vindo do cadastro no front.
      */
     public void salvarCandidato(CandidatoBean candidato) {
         Candidato destObject = modelMapper.map(candidato, Candidato.class);
@@ -41,14 +42,16 @@ public class CandidatoDAO {
         em.close();
         em = null;
     }
+
     /**
      * Lista todos os candidatos existentes.
+     *
      * @return listCandidatos com todos os candidatos do banco.
      */
-    public List<CandidatoBean> listarCandidatos() {
+    public ArrayList<CandidatoBean> listarCandidatos() {
 
         Query query = em.createNamedQuery("Candidato.findAll");
-        List<CandidatoBean> listCandidatos = new ArrayList<>();
+        ArrayList<CandidatoBean> listCandidatos = new ArrayList<>();
 
         for (Candidato candidato : (List<Candidato>) query.getResultList()) {
             listCandidatos.add(modelMapper.map(candidato, CandidatoBean.class));
@@ -60,6 +63,7 @@ public class CandidatoDAO {
 
     /**
      * Busca candidatos a partid do nome.
+     *
      * @param nomeDoFiltro nome do candidato digitado no filtro.
      * @return Lista de candidato para mostrar apenas os com o mesmo nome.
      */
@@ -79,8 +83,11 @@ public class CandidatoDAO {
     }
 
     /**
-     * Salva candidato novo e faz uma verificação para saber se ele já existe a partir do e-mail.
-     * @param candidato objeto bean puxado do front para transformar em entity para salvar no banco. 
+     * Salva candidato novo e faz uma verificação para saber se ele já existe a
+     * partir do e-mail.
+     *
+     * @param candidato objeto bean puxado do front para transformar em entity
+     * para salvar no banco.
      */
     public void salvarCandidatoComVerificacao(CandidatoBean candidato) {
         List<Candidato> listCandidatos = new ArrayList<Candidato>();
@@ -101,9 +108,10 @@ public class CandidatoDAO {
         em.close();
         em = null;
     }
-    
+
     /**
      * Busca candidatos apartir do ID.
+     *
      * @param idCandidato recebe o id do candidato do front.
      * @return um candidato entity já transformado em um Candidado bean.
      */
@@ -111,9 +119,10 @@ public class CandidatoDAO {
         Candidato candidato = (Candidato) em.createNamedQuery("Candidato.findById").setParameter("id", idCandidato).getSingleResult();
         return modelMapper.map(candidato, CandidatoBean.class);
     }
-    
+
     /**
      * Atualiza dados do candidato no banco.
+     *
      * @param candidato com dados atualizados do front.
      */
     public void atualizarCandidato(CandidatoBean candidato) {

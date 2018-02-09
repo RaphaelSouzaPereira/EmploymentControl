@@ -33,6 +33,14 @@
         <servlet-name>HistoricoServlet</servlet-name>
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.HistoricoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListaCandidatoServlet</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.ListaCandidatoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtualizarCandidatoServlet</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.AtualizarCandidatoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -60,6 +68,14 @@
     <servlet-mapping>
         <servlet-name>HistoricoServlet</servlet-name>
         <url-pattern>/HistoricoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListaCandidatoServlet</servlet-name>
+        <url-pattern>/ListaCandidatoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizarCandidatoServlet</servlet-name>
+        <url-pattern>/AtualizarCandidatoServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
