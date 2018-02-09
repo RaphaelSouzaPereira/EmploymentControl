@@ -16,7 +16,7 @@
         <title>Cadastro Vaga</title>        
     </head>
     <body>
-        <jsp:include page = "html/header.html" />
+        <jsp:include page = "include/header.jsp" />
         <!-- Modal -->
         <div class="modal fade in" id="myModal" role="dialog">
             <div class="modal-dialog">

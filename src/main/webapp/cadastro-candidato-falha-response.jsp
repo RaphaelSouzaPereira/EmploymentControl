@@ -16,7 +16,7 @@
         <title>Candidato não existe</title>      
     </head>
     <body>
-        <jsp:include page = "html/header.html" />f
+        <jsp:include page = "include/header.jsp" />f
         <!-- Modal -->
         <div class="modal fade in" id="myModal" role="dialog">
             <div class="modal-dialog">
