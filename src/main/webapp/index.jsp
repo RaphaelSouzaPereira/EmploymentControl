@@ -374,7 +374,7 @@
                         </div>
                     </div>
                 </div> <!---------- Vagas Cadastradas - Fim ---------->
-                <div class="row">
+                <div class="row"> <!---------- Paginação - Início ---------->
                     <div class="offset-1 col-10">
                         <nav>
                             <ul class="pagination justify-content-center"> 
@@ -393,7 +393,7 @@
                             </ul>
                         </nav>
                     </div>
-                </div>
+                </div><!---------- Paginação - Fim ---------->
             </div> 
         </div> <!---------- Container - Fim ---------->
         <!-- Modal -->
