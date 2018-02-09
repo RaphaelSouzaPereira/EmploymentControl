@@ -20,7 +20,7 @@
         <title>Alterar Candidato</title>
     </head>
 
-    <jsp:include page = "html/header.html" />
+    <jsp:include page = "include/header.jsp" />
     <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
         <div class="offset-1 col-10">
             <h2 class="title mb-3">Candidatos Cadastrados</h2>
@@ -99,5 +99,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
-    <jsp:include page = "html/footer.html" />
+    <jsp:include page = "include/footer.jsp" />
 </html>
