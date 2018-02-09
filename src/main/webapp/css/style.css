@@ -1,36 +1,34 @@
-.ibmec-navbar {
+/*---------- Menu - Início ----------*/
+.ibmec-menu {
     background-color: #000;
-    min-height: 4rem;
-    padding: 0 5rem;
     position: sticky;
     position: -webkit-sticky;
     top: 0;
     z-index: 1000;
 }
 
-.ibmec-navbar .dropdown-menu{
-    background-color: #000;
-    margin-top: 0;
-}
-
-.logo {
+.ibmec-menu-logo {
     color: #fff;
-    margin: 0;
 }
 
-.logo-ibm {
+.ibmec-menu-logo-ibm {
     color: rgb(0,120,215);
 }
 
-.menu-link {
-    color: #fff!important;
+.ibmec-menu-link {
     border-bottom: 3px solid #000;
+    color: #fff!important;
 }
 
-.menu-link:hover {
-    color: #aeaeae!important;
+.ibmec-menu-link:hover {
     border-bottom: 3px solid rgb(0,120,215);
+    color: #aeaeae!important;
 }
+
+.ibmec-menu-dropdown {
+    background-color: #000;
+}
+/*---------- Menu - Fim ----------*/
 
 .title {
     color: rgb(0,120,215);
