@@ -44,14 +44,12 @@ public class CandidatoVagaDAO {
         Collection<Candidato> candidatos = vaga.getCandidatoCollection();
         String candidatosString = "";
         for (CandidatoBean candidatoBean : listaVerificada) {
-            candidatosString = candidatos + " - " + candidatoBean.getNome();
-            System.out.println("SALVANDO CANDIDATO NA VAGA UP: " + candidatoBean.getNome());
+            candidatosString = candidatosString.concat(" " + candidatoBean.getNome());
             candidatos.add(modelMapper.map(candidatoBean, Candidato.class));
         }
-        vaga.setCandidatoCollection(candidatos);
-        System.out.println("ANTES DO TRY" + candidatosString);
+        vaga.setCandidatoCollection(candidatos);        
         try {
-            vaga.setMotivoAtualizacao("Candidato(s) " + candidatosString + " vinculado(s).");
+            vaga.setMotivoAtualizacao("Candidato(s)" + candidatosString + " vinculado(s).");
 
             Vaga entity = modelMapper.map(vaga, Vaga.class);
             em.getTransaction().begin();
@@ -118,6 +116,7 @@ public class CandidatoVagaDAO {
      */
     public void removerCandidatoDaVaga(VagaBean vaga, ArrayList<CandidatoBean> lista) {
         Collection<Candidato> listCandidatosEntity = vaga.getCandidatoCollection();
+        String candidatosString = "";
         ArrayList<CandidatoBean> listaCandidadoBeanNoBanco = new ArrayList<CandidatoBean>();
         for (Candidato candidatoEntity : listCandidatosEntity) {
             listaCandidadoBeanNoBanco.add(modelMapper.map(candidatoEntity, CandidatoBean.class));
@@ -125,6 +124,7 @@ public class CandidatoVagaDAO {
         for (CandidatoBean candidatoDoFront : lista) {
             for (int i = 0; i < listaCandidadoBeanNoBanco.size(); i++) {
                 if (candidatoDoFront.getId().intValue() == listaCandidadoBeanNoBanco.get(i).getId().intValue()) {
+                    candidatosString = candidatosString.concat(" " + listaCandidadoBeanNoBanco.get(i).getNome());
                     listaCandidadoBeanNoBanco.remove(i);
                 }
             }
@@ -136,6 +136,7 @@ public class CandidatoVagaDAO {
         vaga.setCandidatoCollection(listCandidatosEntity);
         try {
             Vaga entity = modelMapper.map(vaga, Vaga.class);
+            vaga.setMotivoAtualizacao("Candidato(s)" + candidatosString + " removido(s) da vaga.");
             em.getTransaction().begin();
             em.merge(entity);
             em.getTransaction().commit();
