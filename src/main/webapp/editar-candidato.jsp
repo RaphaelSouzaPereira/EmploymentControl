@@ -22,8 +22,8 @@
 
     <jsp:include page = "include/header.jsp" />
     <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
-        <div class="offset-1 col-10">
-            <h2 class="title mb-3">Candidatos Cadastrados</h2>
+        <div class="offset-1 col-md-10">
+            <h2 class="title mb-3 offset-xs-1">Candidatos Cadastrados</h2>
             <div class="table-responsive">
                 <hr>
                 <table class="table table-bordered list-table-ibmec">
@@ -72,15 +72,15 @@
                                                 <div class="form-group d-none">
                                                     <input value="<%= c.getId()%>" type="hidden" class="form-control" id="inputIdCandidato" name="id_candidato">
                                                 </div>
-                                                <div class="form-group col-4">
+                                                <div class="form-group col-xs-12 col-md-4">
                                                     <label for="inputNome">Nome:</label>
                                                     <input value="<%=c.getNome()%>" type="text" class="form-control" id="inputNome" placeholder="Nome" name="nome">
                                                 </div>   
-                                                <div class="form-group col-4">
+                                                <div class="form-group col-xs-12 col-md-4">
                                                     <label for="inputEmail">E-mail:</label>
                                                     <input value="<%=c.getEmail()%>" type="text" class="form-control" id="inputEmail" placeholder="E-mail" name="email">
                                                 </div>
-                                                <div class="form-group col-9">
+                                                <div class="form-group col-xs-12 col-md-9 text-xs-center">
                                                     <button type="submit" class="btn btn-ibmec" id="btn-salvar-candidato" disabled>Salvar</button>
                                                 </div>
                                             </div>

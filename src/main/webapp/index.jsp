@@ -187,7 +187,7 @@
                                                     <div class="form-group d-none">
                                                         <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputIdVaga" name="id_vaga">
                                                     </div>
-                                                    <div class="form-group col-3">
+                                                    <div class="form-group col-xs-12 col-md-3">
                                                         <label for="inputCategoria">Categoria:</label>
                                                         <select id="inputCategoria" class="form-control" name="categoria" required>
                                                             <option value="<%=v.getCategoria()%>"><%=v.getCategoria()%></option>
@@ -195,7 +195,7 @@
                                                             <option>BTP</option>
                                                         </select>
                                                     </div>
-                                                    <div class="form-group col-3">
+                                                    <div class="form-group col-xs-12 col-md-3">
                                                         <label for="inputStatus">Status:</label>
                                                         <select id="inputStatus" class="form-control" name="status">
                                                             <option value="<%=v.getStatus()%>"><%=v.getStatus()%></option>
@@ -205,11 +205,11 @@
                                                             <option>Cancelada</option>
                                                         </select>
                                                     </div>
-                                                    <div class="form-group col-3">
+                                                    <div class="form-group col-xs-12 col-md-3">
                                                         <label for="inputDtAbertura">Data Abertura:</label>
                                                         <input value="<%=v.getDataDeAbertura()%>" type="date" class="form-control" id="inputDtAbertura" name="data_abertura" required>
                                                     </div>
-                                                    <div class="form-group col-3">
+                                                    <div class="form-group col-xs-12 col-md-3">
                                                         <label for="inputArea">Área:</label>
                                                         <select id="inputArea" class="form-control" name="area" required>
                                                             <option value="<%=v.getArea()%>"><%=v.getArea()%></option>
@@ -224,7 +224,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
-                                                    <div class="form-group col-4">
+                                                    <div class="form-group col-xs-12 col-md-4">
                                                         <label for="inputTec">Tecnologia:</label>
                                                         <select id="inputTec" class="form-control" name="tecnologia" required>
                                                             <option value="<%=v.getTecnologia()%>"><%=v.getTecnologia()%></option>
@@ -236,11 +236,11 @@
                                                             <option>...</option>
                                                         </select>
                                                     </div>
-                                                    <div class="form-group col-4">
+                                                    <div class="form-group col-xs-12 col-md-4">
                                                         <label for="inputDtExpecEntrada">Expectativa Entrada:</label>
                                                         <input value="<%=v.getExpectativaDeEntrada()%>" type="date" class="form-control" id="inputDtExpecEntrada" name="data_exp_entrada" required>
                                                     </div>
-                                                    <div class="form-group col-4">
+                                                    <div class="form-group col-xs-12 col-md-4">
                                                         <label for="inputTipo">Tipo:</label>
                                                         <select id="inputTipo" class="form-control" name="tipo" required>
                                                             <option value="<%=v.getTipo()%>"><%=v.getTipo()%></option>
@@ -250,7 +250,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
-                                                    <div class="form-group col-4">
+                                                    <div class="form-group col-xs-12 col-md-4">
                                                         <label for="inputBanda">Banda:</label>
                                                         <select id="inputBanda" class="form-control" name="banda" required>
                                                             <option value="<%=v.getBanda()%>"><%=v.getBanda()%></option>
@@ -263,43 +263,43 @@
                                                             <option>9</option>
                                                         </select>
                                                     </div>
-                                                    <div class="form-group col-4">
+                                                    <div class="form-group col-xs-12 col-md-4">
                                                         <label for="inpuRate">Rate(R$):</label>
                                                         <input value="<%=v.getRate()%>" type="text" class="form-control inputRate" id="inputRate" placeholder="Rate(R$)" name="rate" maxlength="6">
                                                     </div>   
-                                                    <div class="form-group col-4">
+                                                    <div class="form-group col-xs-12 col-md-4">
                                                         <label for="inputPmp">PMP:</label>
                                                         <input value="<%=v.getPmp()%>" type="text" class="form-control" id="inputPmp" placeholder="Número PMP" name="pmp">
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
-                                                    <div class="form-group col-12">
+                                                    <div class="form-group  col-xs-12 col-md-12">
                                                         <label for="inputDetalhe">Detalhe:</label>
                                                         <textarea class="form-control" id="inputDetalhe" rows="3" name="detalhe"><%=v.getDetalhe()%></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
-                                                    <div class="form-group col-4">
+                                                    <div class="form-group col-xs-12 col-md-4">
                                                         <label for="inputDtAprovaBrasil">Aprovação Board Brasil:</label>
                                                         <input value="<%=v.getAprovacaoBoardBrasil()%>" type="date" class="form-control" id="inputDtAprovaBrasil" name="aprovacao_board_brasil">
                                                     </div>
-                                                    <div class="form-group col-4">
+                                                    <div class="form-group col-xs-12 col-md-4">
                                                         <label for="inputDtAprovaGlobal">Aprovação Board Global:</label>
                                                         <input value="<%=v.getAprovacaoBoardGlobal()%>" type="date" class="form-control" id="inputDtAprovaGlobal" name="aprovacao_board_global">
                                                     </div>
-                                                    <div class="form-group col-4">
+                                                    <div class="form-group col-xs-12 col-md-4">
                                                         <label for="inputDtEntrouOperac">Entrou na Operação:</label>
                                                         <input value="<%=v.getEntrouNaOperacao()%>" type="date" class="form-control" id="inputDtEntrouOperac" name="entrou_operacao">
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
-                                                    <div class="form-group col-12">
+                                                    <div class="form-group col-xs-12 col-md-12">
                                                         <label for="inputComentario">Comentários:</label>
                                                         <input value="<%=v.getComentario()%>" type="text" class="form-control" id="inputComentario" name="comentarios">
                                                     </div>
                                                 </div>
                                                 <input type="hidden" id="motivoHidden" name="motivoHidden"/>
-                                                <div class="form-group">
+                                                <div class="form-group text-xs-center">
                                                     <button class="btn ibmec-btn" id="btn-editar-vaga" data-toggle="modal" data-target="#modalUpdate">Salvar</button>                            
                                                 </div>
                                             </form>
