@@ -16,7 +16,7 @@
         <title>Atualizar Candidato</title>
     </head>
     <body>
-        <jsp:include page = "html/header.html" />
+        <jsp:include page = "include/header.jsp" />
         <!-- Modal -->
         <div class="modal fade in" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -43,9 +43,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <script src="js/script.js"></script>
         <script type="text/javascript">
-            $(window).on('load', function () {
-                $('#myModal').modal('show');
-            });
+                                    $(window).on('load', function () {
+                                        $('#myModal').modal('show');
+                                    });
         </script>
     </body>
 </html>
