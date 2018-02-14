@@ -9,8 +9,10 @@ import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
 import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
+ * @author Diego Cansi Matte <diego.cansi at ibm.com>
  */
-public class CandidatoServlet extends HttpServlet {
-
-    private static final long serialVersionUID = 6149992041445660273L;
+public class ListaCandidatoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,50 +36,38 @@ public class CandidatoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //campos obrigatorios no cadastro
-        String nome = request.getParameter("nomeCandidato");
-        String email = request.getParameter("emailCandidato");
+        //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
 
-        //instacia do DAO e BEAN do candidato para fazer o cadastro
-        CandidatoDAO candidadatoDAO = new CandidatoDAO(emf.createEntityManager());
-        CandidatoBean candidato = new CandidatoBean();
+        //Instancia uma VagaDAO
+        CandidatoDAO candidatoDao = new CandidatoDAO(emf.createEntityManager());
 
-        candidato.setNome(nome);
-        candidato.setEmail(email);
+        ArrayList<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
+        listaCandidatos = candidatoDao.listarCandidatos();
 
-        //salva no banco o novo candidato
-        try {
-            candidadatoDAO.salvarCandidatoComVerificacao(candidato);
-            PrintWriter out = response.getWriter();
+        request.setAttribute("listaCandidatosCompletos", listaCandidatos);
+        RequestDispatcher view = request.getRequestDispatcher("./editar-candidato.jsp");
+        view.forward(request, response);
+
+        emf.close();
+        candidatoDao = null;
+        emf = null;
+
+        response.setContentType("text/html;charset=UTF-8");
+
+        try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            out.println("<title>Alterar Candidato</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<script type=\"text/javascript\">");
-            out.println("setTimeout(function(){window.location.href='cadastro-candidato-response.jsp';},100)");
-            out.println("</script>");
-            out.println("</body>");
-            out.println("</html>");
-        } catch (Exception ex) {
-            PrintWriter out = response.getWriter();
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<script type=\"text/javascript\">");
-            out.println("setTimeout(function(){window.location.href='cadastro-candidato-falha-response.jsp';},100)");
+            out.println("setTimeout(function(){window.location.href='editar-candidato.jsp';},100)");
             out.println("</script>");
             out.println("</body>");
             out.println("</html>");
         }
-
-        emf.close();
-        emf = null;
-        candidadatoDAO = null;
-        candidato = null;
 
     }
 

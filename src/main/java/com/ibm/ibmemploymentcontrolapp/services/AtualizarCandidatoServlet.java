@@ -5,26 +5,22 @@
  */
 package com.ibm.ibmemploymentcontrolapp.services;
 
-import com.ibm.ibmemploymentcontrolapp.beans.VagaBean;
-import com.ibm.ibmemploymentcontrolapp.dao.VagaDAO;
+import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
+import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author RenanFontouraBoldrin
+ * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
  */
-@WebServlet(name = "ConsultaServlet", urlPatterns = {"/ConsultaServlet"})
-public class ConsultaServlet extends HttpServlet {
+public class AtualizarCandidatoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,22 +33,57 @@ public class ConsultaServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
+
+        String id = request.getParameter("id_candidato");
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+
         //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
 
         //Instancia uma VagaDAO
-        VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
+        CandidatoDAO candidatoDAO = new CandidatoDAO(emf.createEntityManager());
+        CandidatoBean candidato = new CandidatoBean();
+
+        candidato.setId(Integer.parseInt(id));
+        candidato.setNome(nome);
+        candidato.setEmail(email);
+
         
-        List<VagaBean> listaVagas = new ArrayList<VagaBean>();
-        listaVagas = vagaDAO.listarPorAreaData();
-        
-	request.setAttribute("listaVagas", listaVagas);
-	RequestDispatcher view = request.getRequestDispatcher("./consulta-vagas.jsp");
-	view.forward(request, response);
-        
+        try {
+            candidatoDAO.atualizarCandidato(candidato);
+            PrintWriter out = response.getWriter();
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<script type=\"text/javascript\">");
+            out.println("setTimeout(function(){window.location.href='atualizar-candidato-response.jsp';},100)");
+            out.println("</script>");
+            out.println("</body>");
+            out.println("</html>");
+        } catch (Exception ex) {
+            PrintWriter out = response.getWriter();
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<script type=\"text/javascript\">");
+            out.println("setTimeout(function(){window.location.href='atualizar-candidato-falha-response.jsp';},100)");
+            out.println("</script>");
+            out.println("</body>");
+            out.println("</html>");
+        }
         emf.close();
+
+        candidato = null;
+        candidatoDAO = null;
+        emf = null;
+
+        response.setContentType("text/html;charset=UTF-8");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -22,12 +22,24 @@
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.CandidatoServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>editarVagaServlet</servlet-name>
-        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.editarVagaServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AtualizacaoServlet</servlet-name>
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.AtualizacaoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CandidatosNaVagaServlet</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.CandidatosNaVagaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HistoricoServlet</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.HistoricoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListaCandidatoServlet</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.ListaCandidatoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtualizarCandidatoServlet</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.AtualizarCandidatoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -46,12 +58,24 @@
         <url-pattern>/CandidatoServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>editarVagaServlet</servlet-name>
-        <url-pattern>/editarVagaServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>AtualizacaoServlet</servlet-name>
         <url-pattern>/AtualizacaoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CandidatosNaVagaServlet</servlet-name>
+        <url-pattern>/CandidatosNaVaga</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoricoServlet</servlet-name>
+        <url-pattern>/HistoricoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListaCandidatoServlet</servlet-name>
+        <url-pattern>/ListaCandidatoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizarCandidatoServlet</servlet-name>
+        <url-pattern>/AtualizarCandidatoServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

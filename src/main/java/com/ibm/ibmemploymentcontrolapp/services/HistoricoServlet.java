@@ -5,12 +5,15 @@
  */
 package com.ibm.ibmemploymentcontrolapp.services;
 
-import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
-import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
+import com.ibm.ibmemploymentcontrolapp.beans.VagaAudBean;
+import com.ibm.ibmemploymentcontrolapp.dao.VagaAudDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +21,11 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
+ * @author Leandro Paz <leandro.paz at ibm.com>
  */
-public class CandidatoServlet extends HttpServlet {
+public class HistoricoServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 6149992041445660273L;
+    private static final long serialVersionUID = 5261638975561941841L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,52 +38,47 @@ public class CandidatoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 
-        //campos obrigatorios no cadastro
-        String nome = request.getParameter("nomeCandidato");
-        String email = request.getParameter("emailCandidato");
+        //String id = request.getParameter("id_vaga");
+        // String dataFront = request.getParameter("dataModificacao");
+        // String motivo = request.getParameter("motivo");
+        String indice = (String) request.getParameter("indiceLista");
+        String id = (String) request.getParameter("idVaga");
+
+        //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
 
-        //instacia do DAO e BEAN do candidato para fazer o cadastro
-        CandidatoDAO candidadatoDAO = new CandidatoDAO(emf.createEntityManager());
-        CandidatoBean candidato = new CandidatoBean();
+        //Instancia os DAOs
+        VagaAudDAO vagaAudDAO = new VagaAudDAO(emf.createEntityManager());
 
-        candidato.setNome(nome);
-        candidato.setEmail(email);
+        //instancia os Beans
+        VagaAudBean vaga = new VagaAudBean();
+        List<VagaAudBean> listaHistoricoVaga = new ArrayList<VagaAudBean>();
+        
+        //verifica historico
+        listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(Integer.parseInt(id), emf.createEntityManager());
+        
+        request.setAttribute("historico_selecionado", listaHistoricoVaga.get(Integer.parseInt(indice)));
+        
+        RequestDispatcher view = request.getRequestDispatcher("./apresentacao-historico.jsp");
+        view.forward(request, response);
 
-        //salva no banco o novo candidato
-        try {
-            candidadatoDAO.salvarCandidatoComVerificacao(candidato);
-            PrintWriter out = response.getWriter();
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            out.println("<title>Servlet HistoricoServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<script type=\"text/javascript\">");
-            out.println("setTimeout(function(){window.location.href='cadastro-candidato-response.jsp';},100)");
-            out.println("</script>");
-            out.println("</body>");
-            out.println("</html>");
-        } catch (Exception ex) {
-            PrintWriter out = response.getWriter();
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<script type=\"text/javascript\">");
-            out.println("setTimeout(function(){window.location.href='cadastro-candidato-falha-response.jsp';},100)");
-            out.println("</script>");
+            out.println("<h1>Servlet HistoricoServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
 
         emf.close();
         emf = null;
-        candidadatoDAO = null;
-        candidato = null;
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

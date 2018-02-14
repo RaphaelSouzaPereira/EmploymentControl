@@ -16,15 +16,15 @@
         <title>Cadastro de Vagas</title>
     </head>
     <body>
-        <jsp:include page = "html/header.html" />
+        <jsp:include page = "include/header.jsp" />
         <div class="container">
             <div class="row">
-                <div class="offset-1 col-10">
-                    <h2 class="title mb-3">Cadastro de Vagas</h2>
+                <div class="offset-md-1 col-md-10">
+                    <h2 class="ibmec-title mb-3">Cadastro de Vagas</h2>
                     <hr>                   
                     <form class="cadastra-vagas" action="./ControlServlet" method="post" onchange="validaCamposDeCadastroDeVagas()">
                         <div class="form-row">
-                            <div class="form-group col-3">
+                            <div class="form-group col-xs-12 col-md-3">
                                 <label for="inputCategoria">Categoria:</label>
                                 <select id="inputCategoria" class="form-control" name="categoria" required>
                                     <!-- TODO: pegar valores de um Enum? Ou deixamos chumbado aqui? -->
@@ -33,7 +33,7 @@
                                     <option>BTP</option>
                                 </select>
                             </div>
-                            <div class="form-group col-3">
+                            <div class="form-group col-xs-12 col-md-3">
                                 <label for="inputStatus">Status:</label>
                                 <select id="inputStatus" class="form-control" name="status">
                                     <!-- TODO: pegar valores do Enum? Ou deixamos chumbado aqui? -->
@@ -43,11 +43,11 @@
                                     <option>Cancelada</option>
                                 </select>
                             </div>
-                            <div class="form-group col-3">
+                            <div class="form-group col-xs-12 col-md-3">
                                 <label for="inputDtAbertura">Data Abertura:</label>
                                 <input type="date" class="form-control" id="inputDtAbertura" name="data_abertura" required>
                             </div>
-                            <div class="form-group col-3">
+                            <div class="form-group col-xs-12 col-md-3">
                                 <label for="inputArea">Área:</label>
                                 <select id="inputArea" class="form-control" name="area" required>
                                     <option value="">Selecione...</option>
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-4">
+                            <div class="form-group col-xs-12 col-md-4">
                                 <label for="inputTec">Tecnologia:</label>
                                 <select id="inputTec" class="form-control" name="tecnologia" required>
                                     <option value="">Selecione...</option>
@@ -76,11 +76,11 @@
                                     <option>...</option>
                                 </select>
                             </div>
-                            <div class="form-group col-4">
+                            <div class="form-group col-xs-12 col-md-4">
                                 <label for="inputDtExpecEntrada">Expectativa Entrada:</label>
                                 <input type="date" class="form-control" id="inputDtExpecEntrada" name="data_exp_entrada" required>
                             </div>
-                            <div class="form-group col-4">
+                            <div class="form-group col-xs-12 col-md-4">
                                 <label for="inputTipo">Tipo:</label>
                                 <select id="inputTipo" class="form-control" name="tipo" required>
                                     <option value="">Selecione...</option>
@@ -90,7 +90,7 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-4">
+                            <div class="form-group col-xs-12 col-md-4">
                                 <label for="inputBanda">Banda:</label>
                                 <select id="inputBanda" class="form-control" name="banda" required>
                                     <option value="">Selecione...</option>
@@ -103,43 +103,43 @@
                                     <option>9</option>
                                 </select>
                             </div>
-                            <div class="form-group col-4">
+                            <div class="form-group col-xs-12 col-md-4">
                                 <label for="inpuRate">Rate(R$):</label>
                                 <input type="text" class="form-control inputRate" id="inputRate" placeholder="Rate(R$)" name="rate" maxlength="6">
                             </div>   
-                            <div class="form-group col-4">
+                            <div class="form-group col-xs-12 col-md-4">
                                 <label for="inputPmp">PMP:</label>
                                 <input type="text" class="form-control" id="inputPmp" placeholder="Número PMP" name="pmp">
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-12">
+                            <div class="form-group col-xs-12 col-md-12">
                                 <label for="inputDetalhe">Detalhe:</label>
                                 <textarea class="form-control" id="inputDetalhe" rows="3" name="detalhe"></textarea>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-4">
+                            <div class="form-group col-xs-12 col-md-4">
                                 <label for="inputDtAprovaBrasil">Aprovação Board Brasil:</label>
                                 <input type="date" class="form-control" id="inputDtAprovaBrasil" name="aprovacao_board_brasil">
                             </div>
-                            <div class="form-group col-4">
+                            <div class="form-group col-xs-12 col-md-4">
                                 <label for="inputDtAprovaGlobal">Aprovação Board Global:</label>
                                 <input type="date" class="form-control" id="inputDtAprovaGlobal" name="aprovacao_board_global">
                             </div>
-                            <div class="form-group col-4">
+                            <div class="form-group col-xs-12 col-md-4">
                                 <label for="inputDtEntrouOperac">Entrou na Operação:</label>
                                 <input type="date" class="form-control" id="inputDtEntrouOperac" name="entrou_operacao">
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-12">
+                            <div class="form-group col-xs-12 col-md-12">
                                 <label for="inputComentario">Comentários:</label>
                                 <input type="text" class="form-control" id="inputComentario" placeholder="Comentários" name="comentarios">
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-ibmec" id="btn-salvar-cadastro" disabled>Salvar</button>                            
+                            <button type="submit" class="btn ibmec-btn" id="btn-salvar-cadastro" disabled>Salvar</button>                            
                             <button type="button" class="btn btn-default" id="reset" data-toggle="modal" data-target="#myModal">Cancelar</button>
                         </div>
                     </form>
@@ -156,7 +156,7 @@
                                     <p>Esta ação irá descartar os dados do formulário.</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-ibmec" data-dismiss="modal" 
+                                    <button type="button" class="btn ibmec-btn" data-dismiss="modal" 
                                             onClick="redireciona('./')">Sim</button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
                                 </div>
@@ -167,7 +167,7 @@
             </div>
         </div>
     </div>
-    <jsp:include page = "html/footer.html" />
+    <jsp:include page = "include/footer.jsp" />
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>

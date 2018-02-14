@@ -80,12 +80,74 @@ function redirectToHome() {
 
 function redireciona(url) {
     window.location.href = url;
+
 }
 
-/* Máscara do campo de cadastro 
- * 
- * http://igorescobar.github.io/jQuery-Mask-Plugin/
- */
-$(document).ready(function () {
-    $('.inputRate').mask("#.##0,00", {reverse: true});
+
+// AQUI COMECA jQuery //
+$('#btn-editar-vaga').click(function (event) {
+    event.preventDefault();
 });
+
+$('#modalSubmit').click(function (event) {
+    var motivoValue = document.getElementById("inputMotivoModal").value;
+    var motivoValueSubmit = document.getElementById("motivoHidden");
+    motivoValueSubmit.value = motivoValue;
+    $('#atualizar-vaga-form').submit();
+});
+
+function vincula(origin, dest) {
+    $(origin).find(':selected').appendTo(dest);
+    $('#inputFiltro').val(''); //limpa o campo de pesquisa
+}
+
+function desvincula(origin, dest) {
+    $(origin).find(':selected').appendTo(dest);
+    $('#inputFiltro').val(''); //limpa o campo de pesquisa
+}
+
+// Funcao pra limpar o texto para comparar
+function sanitize(string) {
+    return $.trim(string).replace(/\s+/g, ' ').toLowerCase();
+}
+
+$(document).ready(function () {
+    /* Máscara do campo de cadastro 
+     * 
+     * http://igorescobar.github.io/jQuery-Mask-Plugin/
+     */
+    $('.inputRate').mask("#.##0,00", {reverse: true});
+
+    /* Filtro de pesquisa de candidatos
+     * 
+     */
+    var candidatoSelect = $('#candidatosAll'),
+            procura = $('#inputFiltro'),
+            options = candidatoSelect.find('option').clone(); // clone into memory
+
+    // ajusta as opcoes para ser
+    // um nome "procuravel" no elemento
+    options.each(function () {
+        var option = $(this);
+        option.data('sanitized', sanitize(option.text()));
+    });
+
+    // trata o evento keyup
+    procura.on('keyup', function (event) {
+        var term = sanitize($(this).val()),
+                matches;
+
+        // se nao achar, mostra todos os options do select
+        if (!term) {
+            candidatoSelect.empty().append(options.clone());
+            return;
+        }
+
+        // ou entao soh mostra o que achou
+        matches = options.filter(function () {
+            return $(this).data("sanitized").indexOf(term) !== -1;
+        }).clone();
+        candidatoSelect.empty().append(matches);
+    });
+});
+

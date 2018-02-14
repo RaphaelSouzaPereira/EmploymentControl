@@ -1,14 +1,18 @@
-<header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar mb-5">
+<header class="navbar navbar-expand navbar-dark flex-column flex-md-row mb-5 ibmec-navbar">
     <h1 class="navbar-brand mr-0 mr-md-2 logo"><span class="logo-ibm">IBM </span>Employment Control</h1>
-    <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+    <ul class="navbar-nav flex-row ml-md-auto d-md-none d-md-flex">
         <li class="nav-item">
-            <a class="nav-link py-4 px-4 menu-link" href="./">Home</a>
+            <a class="col-xs-4 text-xs-center nav-link py-4 px-4 menu-link" href="./">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link py-4 px-4 menu-link" href="./cadastro-vagas.jsp">Cadastrar Vagas</a>
+            <a class="col-xs-4 text-xs-center nav-link py-4 px-4 menu-link" href="./cadastro-vagas.jsp">Cadastrar Vagas</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link py-4 px-4 menu-link" href="./cadastro-candidato.jsp">Cadastrar Candidato</a>
+        <li class="dropdown">
+            <a class="nav-link py-4 px-4 menu-link" data-toggle="dropdown">Candidato</a>
+            <ul class="dropdown-menu">
+                <li><a class="nav-link py-1 px-1 menu-link" href="./cadastro-candidato.jsp">Cadastrar</a></li>
+                <li><a class="nav-link py-1 px-1 menu-link" href="./ListaCandidatoServlet">Atualizar</a></li>
+            </ul>
         </li>
     </ul>
 </header>

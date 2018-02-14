@@ -13,7 +13,7 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
-        <title>Cadastro Candidato</title>
+        <title>Atualizar Candidato</title>
     </head>
     <body>
         <jsp:include page = "include/header.jsp" />
@@ -23,14 +23,14 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Cadastro realizado com sucesso!</h4>
+                        <h4 class="modal-title">Editar candidato com sucesso!</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Deseja cadastrar mais candidatos?</p>
+                        <p>Deseja atualizar mais candidatos?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn ibmec-btn" data-dismiss="modal" 
-                                onClick="redireciona('cadastro-candidato.jsp')">Sim</button>
+                        <button type="button" class="btn btn-ibmec" data-dismiss="modal" 
+                                onClick="redireciona('./ListaCandidatoServlet')">Sim</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal"
                                 onClick="redireciona('./')">Não</button>
                     </div>
@@ -43,9 +43,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <script src="js/script.js"></script>
         <script type="text/javascript">
-            $(window).on('load', function () {
-                $('#myModal').modal('show');
-            });
+                                    $(window).on('load', function () {
+                                        $('#myModal').modal('show');
+                                    });
         </script>
     </body>
 </html>
