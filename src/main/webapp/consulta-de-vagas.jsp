@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index.jsp
-    Created on : 16/01/2018, 14:53:23
+    Document   : consulta-de-vagas
+    Created on : 15/02/2018, 10:40:57
     Author     : PriscilaRicardoArrud
 --%>
 
@@ -26,10 +26,61 @@
     <body>
         <jsp:include page = "include/header.jsp" />
         <div class="container"> <!---------- Container - Início ---------->
-            <div class="panel-group" id="accordion">             
+            <div class="panel-group" id="accordion">
+                <!---------- Consulta de Vagas - Início ---------->
+                <%
+                    String currentArea = (String) session.getAttribute("currentArea");
+                    String currentStatus = (String) session.getAttribute("currentStatus");
+                    String currentTecnologia = (String) session.getAttribute("currentTecnologia");
+                %>
+                <div class="row">
+                    <div class="offset-1 col-10">
+                        <h2 class="ibmec-title mb-3">Consultar Vagas Cadastradas</h2>
+                        <hr>
+                        <form class="consulta-vagas" action="./ConsultarVagas" method="post">
+                            <div class="form-row mb-4">
+                                <div class="form-group col-xs-12 col-md-3">
+                                    <label for="inputStatus">Área:</label>
+                                    <select id="inputAreaConsulta" class="form-control" name="adc">
+                                        <option <%= currentArea.equals("Arquitetura") ? "selected" : "" %>>Arquitetura</option>
+                                        <option <%= currentArea.equals("Canais") ? "selected" : "" %>>Canais</option>
+                                        <option <%= currentArea.equals("Digital") ? "selected" : "" %>>Digital</option>
+                                        <option <%= currentArea.equals("Especial") ? "selected" : "" %>>Especial</option>
+                                        <option <%= currentArea.equals("Suporte") ? "selected" : "" %>>Suporte</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-xs-12 col-md-3">
+                                    <label for="inputStatus">Status:</label>
+                                    <select id="inputStatusConsulta" class="form-control" name="sdc">
+                                        <option <%= currentStatus.equals("Open") ? "selected" : "" %>>Open</option>
+                                        <option <%= currentStatus.equals("Closed") ? "selected" : "" %>>Closed</option>
+                                        <option <%= currentStatus.equals("On hold") ? "selected" : "" %>>On hold</option>
+                                        <option <%= currentStatus.equals("Cancelada") ? "selected" : "" %>>Cancelada</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-xs-12 col-md-3">
+                                    <label for="inputStatus">Tecnologia:</label>
+                                    <select id="inputTecnologiaConsulta" class="form-control" name="tdc">
+                                        <option <%= currentTecnologia.equals("Java") ? "selected" : "" %>>Java</option>
+                                        <!--TODO - Tratar acentuacao-->
+                                        <option <%= currentTecnologia.equals("Analista de Automacao") ? "selected" : "" %>>Analista de Automacao</option>
+                                        <option <%= currentTecnologia.equals("Especialista Mobilidade") ? "selected" : "" %>>Especialista Mobilidade</option>
+                                        <option <%= currentTecnologia.equals("Designer UX") ? "selected" : "" %>>Designer UX</option>
+                                        <option <%= currentTecnologia.equals("Dev. ODI") ? "selected" : "" %>>Dev. ODI</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-xs-12 col-md-3">
+                                    <button type="submit" class="btn btn-block ibmec-btn" style="margin-top:32px" name="botao-de-consulta" value="Consultar">Consultar</button>
+                                    <!--<input type="submit" class="btn btn-block ibmec-btn" id="vincula" name="opcaoDeVinculo" value="Vincular" />-->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!---------- Consulta de Vagas - Fim ---------->               
                 <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
                     <div class="offset-1 col-10">
-                        <h2 class="ibmec-title mb-3">Vagas Cadastradas (Open e On Hold)</h2>
+                        <h2 class="ibmec-title mb-3">Vagas Filtradas</h2>
                         <div class="table-responsive">
                             <hr>
                             <table class="table table-bordered list-table-ibmec">
@@ -44,8 +95,8 @@
                                 </thead> <!---------- Vagas Cadastradas - Cabeçalho da tabela - Fim ---------->
                                 <tbody> <!---------- Vagas Cadastradas - Corpo da tabela - Início ---------->
                                     <%
-                                        List<VagaBean> listaDeVagasPorPagina = (List<VagaBean>) session.getAttribute("listaDeVagasPorPagina");
-                                        for (VagaBean v : listaDeVagasPorPagina) {%> <!---------- Vagas Cadastradas - For da Lista de Vagas - Início ---------->
+                                        List<VagaBean> listaDeVagasPorPaginaDaConsulta = (List<VagaBean>) session.getAttribute("listaDeVagasPorPaginaDaConsulta");
+                                        for (VagaBean v : listaDeVagasPorPaginaDaConsulta) {%> <!---------- Vagas Cadastradas - For da Lista de Vagas - Início ---------->
                                     <tr class="list-row-ibmec"> 
                                         <td><%= v.getStatus()%></td>
                                         <td><%= v.getPmp()%></td>
@@ -382,11 +433,11 @@
                                     int previousPage = currentPage == 1 ? 1 : currentPage - 1;
                                     int nextPage = pageNumbers.size() == currentPage ? currentPage : currentPage + 1;
                                 %>
-                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=previousPage%>">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="./ConsultarVagas?pageNumber=<%=previousPage%>&adc=<%=currentArea%>&sdc=<%=currentStatus%>&tdc=<%=currentTecnologia%>">Previous</a></li>
                                     <%for (int i = 0; i < pageNumbers.size(); i++) {%>                           
-                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a></li>
+                                <li class="page-item"><a class="page-link" href="./ConsultarVagas?pageNumber=<%=pageNumbers.get(i)%>&adc=<%=currentArea%>&sdc=<%=currentStatus%>&tdc=<%=currentTecnologia%>"><%=pageNumbers.get(i)%></a></li>
                                     <%}%>
-                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=nextPage%>">Next</a></li>
+                                <li class="page-item"><a class="page-link" href="./ConsultarVagas?pageNumber=<%=nextPage%>&adc=<%=currentArea%>&sdc=<%=currentStatus%>&tdc=<%=currentTecnologia%>">Next</a></li>
                             </ul>
                         </nav>
                     </div>

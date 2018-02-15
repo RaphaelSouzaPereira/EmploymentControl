@@ -129,5 +129,33 @@ public class VagaDAO {
         
         return listarPorPagina;
     } 
+    
+    public List<VagaBean> listarComFiltro(EntityManager emExterno, String area, String status, String tecnologia) {
+        Query query = emExterno.createNamedQuery("Vaga.findByAreaStatusAndTecnologia").setParameter("area", area).setParameter("status", status).setParameter("tecnologia", tecnologia);
+        List<VagaBean> listarPorPagina = new ArrayList<VagaBean>();
+
+        for (Vaga vagas : (List<Vaga>) query.getResultList()) {
+            listarPorPagina.add(modelMapper.map(vagas, VagaBean.class));
+        }
+        
+        emExterno.close();
+        emExterno = null;
+        
+        return listarPorPagina;
+    }
+    
+    public List<VagaBean> listarPorPaginaComFiltro(EntityManager emExterno, int maxResults, int offset, String area, String status, String tecnologia) {
+        Query query = emExterno.createNamedQuery("Vaga.findByAreaStatusAndTecnologia").setMaxResults(maxResults).setFirstResult(offset).setParameter("area", area).setParameter("status", status).setParameter("tecnologia", tecnologia);
+        List<VagaBean> listarPorPagina = new ArrayList<VagaBean>();
+
+        for (Vaga vagas : (List<Vaga>) query.getResultList()) {
+            listarPorPagina.add(modelMapper.map(vagas, VagaBean.class));
+        }
+        
+        emExterno.close();
+        emExterno = null;
+        
+        return listarPorPagina;
+    } 
 
 }
