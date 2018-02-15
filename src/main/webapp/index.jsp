@@ -179,7 +179,7 @@
                                         data-parent="#accordion"
                                         > <!---------- Vagas Cadastradas - Editar Vaga - Início ----------> 
                                         <td colspan="5" class="edit-light-grey">                                  
-                                            <form class="atualizar-vaga" id="atualizar-vaga-form" action="./AtualizacaoServlet" method="post">
+                                            <form class="atualizar-vaga-form" action="./AtualizacaoServlet" method="post">
                                                 <div class="form-row">
                                                     <div class="form-group d-none">
                                                         <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputIdVaga" name="id_vaga">
@@ -295,9 +295,9 @@
                                                         <input value="<%=v.getComentario()%>" type="text" class="form-control" id="inputComentario" name="comentarios">
                                                     </div>
                                                 </div>
-                                                <input type="hidden" id="motivoHidden" name="motivoHidden"/>
+                                                <input type="hidden" class="motivoHidden-class" id="motivoHidden" name="motivoHidden"/>
                                                 <div class="form-group text-xs-center">
-                                                    <button class="btn ibmec-btn" id="btn-editar-vaga" data-toggle="modal" data-target="#modalUpdate">Salvar</button>                            
+                                                    <button class="btn ibmec-btn btn-editar-vaga" id="btn-editar-vaga" data-toggle="modal" data-target="#modalUpdate">Salvar</button>                            
                                                 </div>
                                             </form>
                                         </td>                            

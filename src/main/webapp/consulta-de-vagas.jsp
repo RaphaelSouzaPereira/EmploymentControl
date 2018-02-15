@@ -230,7 +230,7 @@
                                         data-parent="#accordion"
                                         > <!---------- Vagas Cadastradas - Editar Vaga - Início ----------> 
                                         <td colspan="5" class="edit-light-grey">                                  
-                                            <form class="atualizar-vaga" id="atualizar-vaga-form" action="./AtualizacaoServlet" method="post">
+                                            <form class="atualizar-vaga-form" action="./AtualizacaoServlet" method="post">
                                                 <div class="form-row">
                                                     <div class="form-group d-none">
                                                         <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputIdVaga" name="id_vaga">
