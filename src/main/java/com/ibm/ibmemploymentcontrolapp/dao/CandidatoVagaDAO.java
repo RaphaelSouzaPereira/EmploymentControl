@@ -134,9 +134,10 @@ public class CandidatoVagaDAO {
             listCandidatosEntity.add(modelMapper.map(candidatoBean, Candidato.class));
         }
         vaga.setCandidatoCollection(listCandidatosEntity);
+        
         try {
             Vaga entity = modelMapper.map(vaga, Vaga.class);
-            vaga.setMotivoAtualizacao("Candidato(s)" + candidatosString + " removido(s) da vaga.");
+            entity.setMotivoAtualizacao("Candidato(s)" + candidatosString + " removido(s) da vaga.");
             em.getTransaction().begin();
             em.merge(entity);
             em.getTransaction().commit();
