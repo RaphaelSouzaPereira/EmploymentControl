@@ -96,6 +96,7 @@ public class ListaServlet extends HttpServlet {
         VagaBean vag = new VagaBean();
 
         int resultadoDiasUteis;
+        double impactoFinanceiro;
         
         //Seta os atributos que serão utilizados nos jsp
         
@@ -120,7 +121,11 @@ public class ListaServlet extends HttpServlet {
             request.setAttribute("desdeAberturaEntrouNaOperacao" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis entrouNaOperacao
             
             resultadoDiasUteis = CalculoDatasExpectativa(listaVagas.get(j).getExpectativaDeEntrada(), listaVagas.get(j).getEntrouNaOperacao());
-            request.setAttribute("expectativaDeEntrada" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis expectativaentrada         
+            request.setAttribute("expectativaDeEntrada" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis expectativaentrada
+            
+            // calculo impacto financeiro
+            impactoFinanceiro = (resultadoDiasUteis * listaVagas.get(j).getRate() * 8.8); // Desde Expectativa * rate * 8.8
+            request.setAttribute("impactoFinanceiro" + listaVagas.get(j).getId(), "R$ "+impactoFinanceiro+" "); // passando o Impacto Financeiro
         }
         
         request.setAttribute("listaCandidatos", listaCandidatos);

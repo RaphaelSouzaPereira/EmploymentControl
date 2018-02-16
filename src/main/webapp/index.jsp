@@ -43,9 +43,17 @@
                                     </tr>
                                 </thead> <!---------- Vagas Cadastradas - Cabeçalho da tabela - Fim ---------->
                                 <tbody> <!---------- Vagas Cadastradas - Corpo da tabela - Início ---------->
-                                    <%
+                                    <%                          
                                         List<VagaBean> listaDeVagasPorPagina = (List<VagaBean>) session.getAttribute("listaDeVagasPorPagina");
                                         for (VagaBean v : listaDeVagasPorPagina) {%> <!---------- Vagas Cadastradas - For da Lista de Vagas - Início ---------->
+                                        
+                                        <% Object expectativaDeEntrada = request.getAttribute("expectativaDeEntrada"+v.getId()); %>
+                                        <% Object desdeAberturaEntrouNaOperacao = request.getAttribute("desdeAberturaEntrouNaOperacao"+v.getId()); %>
+                                        <% Object desdeAberturaGlobal = request.getAttribute("desdeAberturaGlobal"+v.getId()); %>
+                                        <% Object desdeAberturaBrasil = request.getAttribute("desdeAberturaBrasil"+v.getId()); %>
+                                        <% Object impactoFinanceiro = request.getAttribute("impactoFinanceiro"+v.getId()); %>
+                                        
+                                        
                                     <tr class="list-row-ibmec"> 
                                         <td><%= v.getStatus()%></td>
                                         <td><%= v.getPmp()%></td>
@@ -131,8 +139,17 @@
                                                             <span class="vaga-item"><strong>Expectativa de Entrada: </strong></span><span class="vaga-value"><%= v.getExpectativaDeEntrada()%></span>
                                                         </li>
                                                         <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Data de Abertura: </strong></span><span class="vaga-value"><%= v.getDataDeAbertura()%></span>
+                                                            <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardBrasil()%></span>
                                                         </li>
+                                                        <li class="list-group-item">
+                                                            <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardGlobal()%></span>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= v.getEntrouNaOperacao()%></span>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= v.getRate()%></span>
+                                                        </li>                                                        
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Tipo: </strong></span><span class="vaga-value"><%= v.getTipo()%></span>
                                                         </li>
@@ -141,29 +158,32 @@
                                                         </li>
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Detalhe: </strong></span><span class="vaga-value"><%= v.getDetalhe()%></span>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardBrasil()%></span>
-                                                        </li>
+                                                        </li>                                                        
                                                     </ul>
                                                 </div>
                                                 <div class="col-6">
-                                                    <ul class="list-group">
+                                                    <ul class="list-group">                                                        
                                                         <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardGlobal()%></span>
+                                                            <span class="vaga-item"><strong>Data de Abertura: </strong></span><span class="vaga-value"><%= v.getDataDeAbertura()%></span>
                                                         </li>
                                                         <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= v.getEntrouNaOperacao()%></span>
+                                                            <span class="vaga-item"><strong>Desde Expectativa: </strong></span><span class="vaga-value"><%= expectativaDeEntrada%></span>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <span class="vaga-item"><strong>Desde Abertura (Brasil): </strong></span><span class="vaga-value"><%= desdeAberturaBrasil%></span>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <span class="vaga-item"><strong>Desde Abertura (Global): </strong></span><span class="vaga-value"><%= desdeAberturaGlobal%></span>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <span class="vaga-item"><strong>Desde Abertura (Operação): </strong></span><span class="vaga-value"><%= desdeAberturaEntrouNaOperacao%></span>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value"><%= impactoFinanceiro%></span>
                                                         </li>
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Profissional Selecionado: </strong></span><span class="vaga-value"><%= v.getProfissionalSelecionado()%></span>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= v.getRate()%></span>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value"><%= v.getImpactoFinanceiro()%></span>
-                                                        </li>
+                                                        </li>                                                        
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Comentários: </strong></span><span class="vaga-value"><%= v.getComentario()%></span>
                                                         </li>
