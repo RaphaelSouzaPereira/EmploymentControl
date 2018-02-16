@@ -84,21 +84,6 @@ function redireciona(url) {
 }
 
 
-// AQUI COMECA jQuery //
-$('.btn-editar-vaga').click(function (event) {
-    event.preventDefault();
-});
-
-$('#modalSubmit').click(function (event) {
-    var motivoValue = document.getElementById("inputMotivoModal").value;
-    var motivoValueSubmit = document.getElementsByClassName("motivoHidden-class");
-    motivoValueSubmit.value = motivoValue;
-    console.log(motivoValueSubmit);
-    console.log(motivoValueSubmit.value);
-    $('.atualizar-vaga-form').submit();
-    alert(" Modal : " + motivoValue + " \n Input Hidden : " + motivoValueSubmit);
-});
-
 function vincula(origin, dest) {
     $(origin).find(':selected').appendTo(dest);
     $('#inputFiltro').val(''); //limpa o campo de pesquisa

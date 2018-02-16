@@ -295,9 +295,14 @@
                                                         <input value="<%=v.getComentario()%>" type="text" class="form-control" id="inputComentario" name="comentarios">
                                                     </div>
                                                 </div>
-                                                <input type="hidden" class="motivoHidden-class" id="motivoHidden" name="motivoHidden"/>
+                                                <div class="form-row">
+                                                    <div class="form-group col-xs-12 col-md-12">
+                                                        <label for="motivo-id">Motivo alteração:</label>
+                                                        <input type="text" class="form-control" id="motivo-id" name="motivo" required />
+                                                    </div>
+                                                </div>
                                                 <div class="form-group text-xs-center">
-                                                    <button class="btn ibmec-btn btn-editar-vaga" id="btn-editar-vaga" data-toggle="modal" data-target="#modalUpdate">Salvar</button>                            
+                                                    <button type="submit" class="btn ibmec-btn btn-editar-vaga" id="btn-editar-vaga" >Salvar</button>                            
                                                 </div>
                                             </form>
                                         </td>                            
@@ -392,37 +397,7 @@
                     </div>
                 </div><!---------- Paginação - Fim ---------->
             </div> 
-        </div> <!---------- Container - Fim ---------->
-        <!-- Modal -->
-        <div class="modal fade" id="modalUpdate" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header">                                                        
-                        <h4 class="modal-title" id="myModalLabel">
-                            Justificativa
-                        </h4>
-                    </div>
-                    <!-- Modal Body -->
-                    <div class="modal-body">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label  class="col-sm-2 control-label" for="inputMotivoModal"><h5>Motivo</h5></label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="motivo-modal" id="inputMotivoModal" placeholder="Motivo da modificação" required/>
-                                </div>
-                            </div>                                                           
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <a href="#" id="modalSubmit" class="btn ibmec-btn">Confirmar</a>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div> <!---------- Container - Fim ---------->      
         <jsp:include page = "include/footer.jsp" />
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
