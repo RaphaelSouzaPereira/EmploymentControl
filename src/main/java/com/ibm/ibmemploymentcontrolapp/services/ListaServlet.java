@@ -182,7 +182,8 @@ public class ListaServlet extends HttpServlet {
     }// </editor-fold>
 
     /**
-     * @return List with page numbers
+     * Método que realiza a paginação.
+     * @return lista com o número de páginas
      */
     public List getPages(List<VagaBean> listaVagas) {
         List pageNumbers = new ArrayList();
@@ -198,7 +199,13 @@ public class ListaServlet extends HttpServlet {
 
         return pageNumbers;
     }
-//Calcula os dias uteis de uma data a outra(retira apenas sabados e domingos, nao leva em conta feriados)...
+
+    /**
+     * Método que calcula os dias uteis de uma data a outra (retira apenas sabados e domingos, nao leva em conta feriados).
+     * @param data1
+     * @param data2
+     * @return número de dias úteis
+     */
     public int calculoDiasUteis(LocalDate data1, LocalDate data2) {
         int diasUteis = 1;
         while (data1.isBefore(data2)) {
@@ -209,7 +216,13 @@ public class ListaServlet extends HttpServlet {
         }
         return diasUteis;
     }
-//Efetua regra de negocio nas datas, para entao calcular os dias uteis...
+
+    /**
+     * Método que efetua regra de negócio nas datas, para então calcular os dias úteis.
+     * @param abertura
+     * @param aprovacao
+     * @return cálculo dos dias úteis
+     */
     public int CalculoDatas(Date abertura, Date aprovacao) {
         int resultadoDiasUteis = 0;
         String d = abertura.toString();
@@ -225,8 +238,13 @@ public class ListaServlet extends HttpServlet {
         }
         return resultadoDiasUteis;
     }
-// Efetua regra de negocio na situacao expecifica da expectativa de entrada,
-// para depois seguir com o calculo das datas... 
+
+    /**
+     * Método que efetua regra de negócio na situação expecífica da expectativa de entrada, para depois seguir com cálculo das datas.
+     * @param expectativa
+     * @param entrouNaOperacao
+     * @return cálculo da data conforme os parâmentros informados
+     */
     public int CalculoDatasExpectativa(Date expectativa, Date entrouNaOperacao){
         String d = expectativa.toString();
         LocalDate expectativaA = LocalDate.parse(d);

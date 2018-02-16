@@ -27,6 +27,12 @@ public class VagaAudDAO {
         this.modelMapper = new ModelMapper();
     }
 
+    /**
+     * Método que lista as alterações de cada vaga
+     * @param idVaga
+     * @param emExterno
+     * @return lista das vagas que tiverem alteração
+     */
     public List<VagaAudBean> listarHistoricoDaVaga(int idVaga, EntityManager emExterno) {
 
         List<VagaAud> listaHistorico = new ArrayList<VagaAud>();

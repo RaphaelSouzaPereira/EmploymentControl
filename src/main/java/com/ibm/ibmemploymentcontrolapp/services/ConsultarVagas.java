@@ -179,7 +179,8 @@ public class ConsultarVagas extends HttpServlet {
     }// </editor-fold>
 
     /**
-     * @return List with page numbers
+     * Método que realiza a paginação.
+     * @return lista com o número de páginas
      */
     public List getPages(List<VagaBean> listaVagas) {
         List pageNumbers = new ArrayList();
