@@ -31,7 +31,6 @@ public class CandidatoDAO {
 
     /**
      * Salva candidatos no banco de dados pegos do front.
-     *
      * @param candidato vindo do cadastro no front.
      */
     public void salvarCandidato(CandidatoBean candidato) {
@@ -45,7 +44,6 @@ public class CandidatoDAO {
 
     /**
      * Lista todos os candidatos existentes.
-     *
      * @return listCandidatos com todos os candidatos do banco.
      */
     public ArrayList<CandidatoBean> listarCandidatos() {
@@ -62,8 +60,7 @@ public class CandidatoDAO {
     }
 
     /**
-     * Busca candidatos a partid do nome.
-     *
+     * Busca candidatos a partir do nome.
      * @param nomeDoFiltro nome do candidato digitado no filtro.
      * @return Lista de candidato para mostrar apenas os com o mesmo nome.
      */
@@ -83,9 +80,7 @@ public class CandidatoDAO {
     }
 
     /**
-     * Salva candidato novo e faz uma verificação para saber se ele já existe a
-     * partir do e-mail.
-     *
+     * Salva candidato novo e faz uma verificação para saber se ele já existe a partir do e-mail.
      * @param candidato objeto bean puxado do front para transformar em entity
      * para salvar no banco.
      */
@@ -110,8 +105,7 @@ public class CandidatoDAO {
     }
 
     /**
-     * Busca candidatos apartir do ID.
-     *
+     * Busca candidatos a partir do ID.
      * @param idCandidato recebe o id do candidato do front.
      * @return um candidato entity já transformado em um Candidado bean.
      */
@@ -122,7 +116,6 @@ public class CandidatoDAO {
 
     /**
      * Atualiza dados do candidato no banco.
-     *
      * @param candidato com dados atualizados do front.
      */
     public void atualizarCandidato(CandidatoBean candidato) {

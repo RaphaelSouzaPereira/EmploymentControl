@@ -28,6 +28,10 @@ public class VagaDAO {
         this.modelMapper = new ModelMapper();
     }
 
+    /**
+     * Método que salva uma nova vaga.
+     * @param v 
+     */
     public void salvarVaga(VagaBean v) {
         Vaga objDestino = modelMapper.map(v, Vaga.class);
         try {
@@ -42,6 +46,11 @@ public class VagaDAO {
 
     /* metodo UPDATE com merge() conforme aqui:
     https://www.devmedia.com.br/crud-completo-com-hibernate-e-jpa/32711 */
+    
+    /**
+     * Método que atualiza vagas existentes.
+     * @param v 
+     */
     public void atualizarVaga(VagaBean v) {
         Vaga objDestino = modelMapper.map(v, Vaga.class);
         try {
@@ -57,6 +66,10 @@ public class VagaDAO {
     }
 
     // Exclusao logica (seta status como "Excluida")
+    /**
+     * Método que faz a exclusão lógica de uma vaga.
+     * @param v 
+     */
     public void removerVaga(VagaBean v) {
         v.setStatus("Excluida");
         Vaga objDestino = modelMapper.map(v, Vaga.class);
@@ -70,6 +83,10 @@ public class VagaDAO {
         }
     }
 
+    /**
+     * Método que lista todas as vagas existentes.
+     * @return lista das vagas existents
+     */
     public List<VagaBean> listarVagas() {
 
         Query query = em.createNamedQuery("Vaga.findAll");
@@ -83,6 +100,11 @@ public class VagaDAO {
         return listarVagasBean;
     }
 
+    /**
+     * Método que lista as vagas ordenada por área e data
+     * @param emExterno
+     * @return lista ordenada das vagas por área e data
+     */
     public List<VagaBean> listarPorAreaData(EntityManager emExterno) {
 
         Query query = emExterno.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa");
@@ -97,6 +119,10 @@ public class VagaDAO {
         return listarVagaAreaData;
     }
 
+    /**
+     * Método que lista as vagas por ordem cronológica.
+     * @return lista ordenada cronologicamente
+     */
     public List<VagaBean> listarPorOrdemCronologica() {
 
         Query query = em.createNamedQuery("Vaga.findOpenOnHoldByOrdemCronologica");
@@ -116,6 +142,13 @@ public class VagaDAO {
         return modelMapper.map(vaga, VagaBean.class);
     }
     
+    /**
+     * Método que lista as vagas por páginas.
+     * @param emExterno
+     * @param maxResults
+     * @param offset
+     * @return vagas por páginas
+     */
     public List<VagaBean> listarPorPagina(EntityManager emExterno, int maxResults, int offset) {
         Query query = emExterno.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa").setMaxResults(maxResults).setFirstResult(offset);
         List<VagaBean> listarPorPagina = new ArrayList<VagaBean>();
@@ -130,6 +163,14 @@ public class VagaDAO {
         return listarPorPagina;
     } 
     
+    /**
+     * Método que listas as vagas com os filtros "area", "status" e "tecnologia".
+     * @param emExterno
+     * @param area
+     * @param status
+     * @param tecnologia
+     * @return lista com os filtros aplicados
+     */
     public List<VagaBean> listarComFiltro(EntityManager emExterno, String area, String status, String tecnologia) {
         Query query = emExterno.createNamedQuery("Vaga.findByAreaStatusAndTecnologia").setParameter("area", area).setParameter("status", status).setParameter("tecnologia", tecnologia);
         List<VagaBean> listarPorPagina = new ArrayList<VagaBean>();
@@ -144,6 +185,16 @@ public class VagaDAO {
         return listarPorPagina;
     }
     
+    /**
+     * Método que lista as vagas por página e filtro.
+     * @param emExterno
+     * @param maxResults
+     * @param offset
+     * @param area
+     * @param status
+     * @param tecnologia
+     * @return lissta com os filtros aplicados e por página
+     */
     public List<VagaBean> listarPorPaginaComFiltro(EntityManager emExterno, int maxResults, int offset, String area, String status, String tecnologia) {
         Query query = emExterno.createNamedQuery("Vaga.findByAreaStatusAndTecnologia").setMaxResults(maxResults).setFirstResult(offset).setParameter("area", area).setParameter("status", status).setParameter("tecnologia", tecnologia);
         List<VagaBean> listarPorPagina = new ArrayList<VagaBean>();
