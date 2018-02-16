@@ -29,6 +29,15 @@ public class AtualizacaoServlet extends HttpServlet {
 
     private static final long serialVersionUID = -4093743980063731357L;
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -53,8 +62,7 @@ public class AtualizacaoServlet extends HttpServlet {
         String dataEntrouOperacaoForm = request.getParameter("entrou_operacao");
         String rate = request.getParameter("rate");
         String comentarios = request.getParameter("comentarios");
-        String motivoDaAtualizacao = request.getParameter("motivoHidden");        
-
+        String motivoDaAtualizacao = request.getParameter("motivo");        
         // campos de calculo de data nao mostrados no form
         int expectativaDeAbertura;
 
@@ -135,8 +143,7 @@ public class AtualizacaoServlet extends HttpServlet {
     }
 
     /**
-     * Converte as datas que vem da pagina web no form
-     *
+     * Converte as datas que vem da pagina web no form.
      * @param form String pega do form feito no jsp
      * @param date variavel criada para receber a data convertida
      * @return uma data convertidada para o padrao yyyy/MM/dd
@@ -155,9 +162,7 @@ public class AtualizacaoServlet extends HttpServlet {
     }
 
     /**
-     * Converte valor do rate com virgula que vem do form para rate com ponto no
-     * lugar
-     *
+     * Converte valor do rate com virgula que vem do form para rate com ponto no lugar.
      * @param rate
      * @return valor da rate sem virgula
      */
@@ -168,7 +173,6 @@ public class AtualizacaoServlet extends HttpServlet {
 
     /**
      * Calcula a diferença entre datas
-     *
      * @param dataAbertura
      * @param dataExpectativa
      * @return retorna a diferenca, em dias, da data Expectativa de entrada x

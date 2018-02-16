@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index.jsp
-    Created on : 16/01/2018, 14:53:23
+    Document   : consulta-de-vagas
+    Created on : 15/02/2018, 10:40:57
     Author     : PriscilaRicardoArrud
 --%>
 
@@ -26,10 +26,61 @@
     <body>
         <jsp:include page = "include/header.jsp" />
         <div class="container"> <!---------- Container - Início ---------->
-            <div class="panel-group" id="accordion">             
+            <div class="panel-group" id="accordion">
+                <!---------- Consulta de Vagas - Início ---------->
+                <%
+                    String currentArea = (String) session.getAttribute("currentArea");
+                    String currentStatus = (String) session.getAttribute("currentStatus");
+                    String currentTecnologia = (String) session.getAttribute("currentTecnologia");
+                %>
+                <div class="row">
+                    <div class="offset-1 col-10">
+                        <h2 class="ibmec-title mb-3">Consultar Vagas Cadastradas</h2>
+                        <hr>
+                        <form class="consulta-vagas" action="./ConsultarVagas" method="post">
+                            <div class="form-row mb-4">
+                                <div class="form-group col-xs-12 col-md-3">
+                                    <label for="inputStatus">Área:</label>
+                                    <select id="inputAreaConsulta" class="form-control" name="adc">
+                                        <option <%= currentArea.equals("Arquitetura") ? "selected" : "" %>>Arquitetura</option>
+                                        <option <%= currentArea.equals("Canais") ? "selected" : "" %>>Canais</option>
+                                        <option <%= currentArea.equals("Digital") ? "selected" : "" %>>Digital</option>
+                                        <option <%= currentArea.equals("Especial") ? "selected" : "" %>>Especial</option>
+                                        <option <%= currentArea.equals("Suporte") ? "selected" : "" %>>Suporte</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-xs-12 col-md-3">
+                                    <label for="inputStatus">Status:</label>
+                                    <select id="inputStatusConsulta" class="form-control" name="sdc">
+                                        <option <%= currentStatus.equals("Open") ? "selected" : "" %>>Open</option>
+                                        <option <%= currentStatus.equals("Closed") ? "selected" : "" %>>Closed</option>
+                                        <option <%= currentStatus.equals("On hold") ? "selected" : "" %>>On hold</option>
+                                        <option <%= currentStatus.equals("Cancelada") ? "selected" : "" %>>Cancelada</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-xs-12 col-md-3">
+                                    <label for="inputStatus">Tecnologia:</label>
+                                    <select id="inputTecnologiaConsulta" class="form-control" name="tdc">
+                                        <option <%= currentTecnologia.equals("Java") ? "selected" : "" %>>Java</option>
+                                        <!--TODO - Tratar acentuacao-->
+                                        <option <%= currentTecnologia.equals("Analista de Automacao") ? "selected" : "" %>>Analista de Automacao</option>
+                                        <option <%= currentTecnologia.equals("Especialista Mobilidade") ? "selected" : "" %>>Especialista Mobilidade</option>
+                                        <option <%= currentTecnologia.equals("Designer UX") ? "selected" : "" %>>Designer UX</option>
+                                        <option <%= currentTecnologia.equals("Dev. ODI") ? "selected" : "" %>>Dev. ODI</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-xs-12 col-md-3">
+                                    <button type="submit" class="btn btn-block ibmec-btn" style="margin-top:32px" name="botao-de-consulta" value="Consultar">Consultar</button>
+                                    <!--<input type="submit" class="btn btn-block ibmec-btn" id="vincula" name="opcaoDeVinculo" value="Vincular" />-->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!---------- Consulta de Vagas - Fim ---------->               
                 <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
                     <div class="offset-1 col-10">
-                        <h2 class="ibmec-title mb-3">Vagas Cadastradas (Open e On Hold)</h2>
+                        <h2 class="ibmec-title mb-3">Vagas Filtradas</h2>
                         <div class="table-responsive">
                             <hr>
                             <table class="table table-bordered list-table-ibmec">
@@ -43,17 +94,9 @@
                                     </tr>
                                 </thead> <!---------- Vagas Cadastradas - Cabeçalho da tabela - Fim ---------->
                                 <tbody> <!---------- Vagas Cadastradas - Corpo da tabela - Início ---------->
-                                    <%                          
-                                        List<VagaBean> listaDeVagasPorPagina = (List<VagaBean>) session.getAttribute("listaDeVagasPorPagina");
-                                        for (VagaBean v : listaDeVagasPorPagina) {%> <!---------- Vagas Cadastradas - For da Lista de Vagas - Início ---------->
-                                        
-                                        <% Object expectativaDeEntrada = request.getAttribute("expectativaDeEntrada"+v.getId()); %>
-                                        <% Object desdeAberturaEntrouNaOperacao = request.getAttribute("desdeAberturaEntrouNaOperacao"+v.getId()); %>
-                                        <% Object desdeAberturaGlobal = request.getAttribute("desdeAberturaGlobal"+v.getId()); %>
-                                        <% Object desdeAberturaBrasil = request.getAttribute("desdeAberturaBrasil"+v.getId()); %>
-                                        <% Object impactoFinanceiro = request.getAttribute("impactoFinanceiro"+v.getId()); %>
-                                        
-                                        
+                                    <%
+                                        List<VagaBean> listaDeVagasPorPaginaDaConsulta = (List<VagaBean>) session.getAttribute("listaDeVagasPorPaginaDaConsulta");
+                                        for (VagaBean v : listaDeVagasPorPaginaDaConsulta) {%> <!---------- Vagas Cadastradas - For da Lista de Vagas - Início ---------->
                                     <tr class="list-row-ibmec"> 
                                         <td><%= v.getStatus()%></td>
                                         <td><%= v.getPmp()%></td>
@@ -139,17 +182,8 @@
                                                             <span class="vaga-item"><strong>Expectativa de Entrada: </strong></span><span class="vaga-value"><%= v.getExpectativaDeEntrada()%></span>
                                                         </li>
                                                         <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardBrasil()%></span>
+                                                            <span class="vaga-item"><strong>Data de Abertura: </strong></span><span class="vaga-value"><%= v.getDataDeAbertura()%></span>
                                                         </li>
-                                                        <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardGlobal()%></span>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= v.getEntrouNaOperacao()%></span>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= v.getRate()%></span>
-                                                        </li>                                                        
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Tipo: </strong></span><span class="vaga-value"><%= v.getTipo()%></span>
                                                         </li>
@@ -158,32 +192,29 @@
                                                         </li>
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Detalhe: </strong></span><span class="vaga-value"><%= v.getDetalhe()%></span>
-                                                        </li>                                                        
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardBrasil()%></span>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                                 <div class="col-6">
-                                                    <ul class="list-group">                                                        
+                                                    <ul class="list-group">
                                                         <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Data de Abertura: </strong></span><span class="vaga-value"><%= v.getDataDeAbertura()%></span>
+                                                            <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardGlobal()%></span>
                                                         </li>
                                                         <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Desde Expectativa: </strong></span><span class="vaga-value"><%= expectativaDeEntrada%></span>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Desde Abertura (Brasil): </strong></span><span class="vaga-value"><%= desdeAberturaBrasil%></span>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Desde Abertura (Global): </strong></span><span class="vaga-value"><%= desdeAberturaGlobal%></span>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Desde Abertura (Operação): </strong></span><span class="vaga-value"><%= desdeAberturaEntrouNaOperacao%></span>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value"><%= impactoFinanceiro%></span>
+                                                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= v.getEntrouNaOperacao()%></span>
                                                         </li>
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Profissional Selecionado: </strong></span><span class="vaga-value"><%= v.getProfissionalSelecionado()%></span>
-                                                        </li>                                                        
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= v.getRate()%></span>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value"><%= v.getImpactoFinanceiro()%></span>
+                                                        </li>
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Comentários: </strong></span><span class="vaga-value"><%= v.getComentario()%></span>
                                                         </li>
@@ -204,7 +235,7 @@
                                                     <div class="form-group d-none">
                                                         <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputIdVaga" name="id_vaga">
                                                     </div>
-                                                    <div class="form-group col-xs-12 col-md-3">
+                                                    <div class="form-group col-3">
                                                         <label for="inputCategoria">Categoria:</label>
                                                         <select id="inputCategoria" class="form-control" name="categoria" required>
                                                             <option value="<%=v.getCategoria()%>"><%=v.getCategoria()%></option>
@@ -212,7 +243,7 @@
                                                             <option>BTP</option>
                                                         </select>
                                                     </div>
-                                                    <div class="form-group col-xs-12 col-md-3">
+                                                    <div class="form-group col-3">
                                                         <label for="inputStatus">Status:</label>
                                                         <select id="inputStatus" class="form-control" name="status">
                                                             <option value="<%=v.getStatus()%>"><%=v.getStatus()%></option>
@@ -222,11 +253,11 @@
                                                             <option>Cancelada</option>
                                                         </select>
                                                     </div>
-                                                    <div class="form-group col-xs-12 col-md-3">
+                                                    <div class="form-group col-3">
                                                         <label for="inputDtAbertura">Data Abertura:</label>
                                                         <input value="<%=v.getDataDeAbertura()%>" type="date" class="form-control" id="inputDtAbertura" name="data_abertura" required>
                                                     </div>
-                                                    <div class="form-group col-xs-12 col-md-3">
+                                                    <div class="form-group col-3">
                                                         <label for="inputArea">Área:</label>
                                                         <select id="inputArea" class="form-control" name="area" required>
                                                             <option value="<%=v.getArea()%>"><%=v.getArea()%></option>
@@ -241,7 +272,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
-                                                    <div class="form-group col-xs-12 col-md-4">
+                                                    <div class="form-group col-4">
                                                         <label for="inputTec">Tecnologia:</label>
                                                         <select id="inputTec" class="form-control" name="tecnologia" required>
                                                             <option value="<%=v.getTecnologia()%>"><%=v.getTecnologia()%></option>
@@ -253,11 +284,11 @@
                                                             <option>...</option>
                                                         </select>
                                                     </div>
-                                                    <div class="form-group col-xs-12 col-md-4">
+                                                    <div class="form-group col-4">
                                                         <label for="inputDtExpecEntrada">Expectativa Entrada:</label>
                                                         <input value="<%=v.getExpectativaDeEntrada()%>" type="date" class="form-control" id="inputDtExpecEntrada" name="data_exp_entrada" required>
                                                     </div>
-                                                    <div class="form-group col-xs-12 col-md-4">
+                                                    <div class="form-group col-4">
                                                         <label for="inputTipo">Tipo:</label>
                                                         <select id="inputTipo" class="form-control" name="tipo" required>
                                                             <option value="<%=v.getTipo()%>"><%=v.getTipo()%></option>
@@ -267,7 +298,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
-                                                    <div class="form-group col-xs-12 col-md-4">
+                                                    <div class="form-group col-4">
                                                         <label for="inputBanda">Banda:</label>
                                                         <select id="inputBanda" class="form-control" name="banda" required>
                                                             <option value="<%=v.getBanda()%>"><%=v.getBanda()%></option>
@@ -280,49 +311,44 @@
                                                             <option>9</option>
                                                         </select>
                                                     </div>
-                                                    <div class="form-group col-xs-12 col-md-4">
+                                                    <div class="form-group col-4">
                                                         <label for="inpuRate">Rate(R$):</label>
                                                         <input value="<%=v.getRate()%>" type="text" class="form-control inputRate" id="inputRate" placeholder="Rate(R$)" name="rate" maxlength="6">
                                                     </div>   
-                                                    <div class="form-group col-xs-12 col-md-4">
+                                                    <div class="form-group col-4">
                                                         <label for="inputPmp">PMP:</label>
                                                         <input value="<%=v.getPmp()%>" type="text" class="form-control" id="inputPmp" placeholder="Número PMP" name="pmp">
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
-                                                    <div class="form-group  col-xs-12 col-md-12">
+                                                    <div class="form-group col-12">
                                                         <label for="inputDetalhe">Detalhe:</label>
                                                         <textarea class="form-control" id="inputDetalhe" rows="3" name="detalhe"><%=v.getDetalhe()%></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
-                                                    <div class="form-group col-xs-12 col-md-4">
+                                                    <div class="form-group col-4">
                                                         <label for="inputDtAprovaBrasil">Aprovação Board Brasil:</label>
                                                         <input value="<%=v.getAprovacaoBoardBrasil()%>" type="date" class="form-control" id="inputDtAprovaBrasil" name="aprovacao_board_brasil">
                                                     </div>
-                                                    <div class="form-group col-xs-12 col-md-4">
+                                                    <div class="form-group col-4">
                                                         <label for="inputDtAprovaGlobal">Aprovação Board Global:</label>
                                                         <input value="<%=v.getAprovacaoBoardGlobal()%>" type="date" class="form-control" id="inputDtAprovaGlobal" name="aprovacao_board_global">
                                                     </div>
-                                                    <div class="form-group col-xs-12 col-md-4">
+                                                    <div class="form-group col-4">
                                                         <label for="inputDtEntrouOperac">Entrou na Operação:</label>
                                                         <input value="<%=v.getEntrouNaOperacao()%>" type="date" class="form-control" id="inputDtEntrouOperac" name="entrou_operacao">
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
-                                                    <div class="form-group col-xs-12 col-md-12">
+                                                    <div class="form-group col-12">
                                                         <label for="inputComentario">Comentários:</label>
                                                         <input value="<%=v.getComentario()%>" type="text" class="form-control" id="inputComentario" name="comentarios">
                                                     </div>
                                                 </div>
-                                                <div class="form-row">
-                                                    <div class="form-group col-xs-12 col-md-12">
-                                                        <label for="motivo-id">Motivo alteração:</label>
-                                                        <input type="text" class="form-control" id="motivo-id" name="motivo" required />
-                                                    </div>
-                                                </div>
-                                                <div class="form-group text-xs-center">
-                                                    <button type="submit" class="btn ibmec-btn btn-editar-vaga" id="btn-editar-vaga" >Salvar</button>                            
+                                                <input type="hidden" id="motivoHidden" name="motivoHidden"/>
+                                                <div class="form-group">
+                                                    <button class="btn ibmec-btn" id="btn-editar-vaga" data-toggle="modal" data-target="#modalUpdate">Salvar</button>                            
                                                 </div>
                                             </form>
                                         </td>                            
@@ -407,17 +433,47 @@
                                     int previousPage = currentPage == 1 ? 1 : currentPage - 1;
                                     int nextPage = pageNumbers.size() == currentPage ? currentPage : currentPage + 1;
                                 %>
-                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=previousPage%>">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="./ConsultarVagas?pageNumber=<%=previousPage%>&adc=<%=currentArea%>&sdc=<%=currentStatus%>&tdc=<%=currentTecnologia%>">Previous</a></li>
                                     <%for (int i = 0; i < pageNumbers.size(); i++) {%>                           
-                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a></li>
+                                <li class="page-item"><a class="page-link" href="./ConsultarVagas?pageNumber=<%=pageNumbers.get(i)%>&adc=<%=currentArea%>&sdc=<%=currentStatus%>&tdc=<%=currentTecnologia%>"><%=pageNumbers.get(i)%></a></li>
                                     <%}%>
-                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=nextPage%>">Next</a></li>
+                                <li class="page-item"><a class="page-link" href="./ConsultarVagas?pageNumber=<%=nextPage%>&adc=<%=currentArea%>&sdc=<%=currentStatus%>&tdc=<%=currentTecnologia%>">Next</a></li>
                             </ul>
                         </nav>
                     </div>
                 </div><!---------- Paginação - Fim ---------->
             </div> 
-        </div> <!---------- Container - Fim ---------->      
+        </div> <!---------- Container - Fim ---------->
+        <!-- Modal -->
+        <div class="modal fade" id="modalUpdate" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">                                                        
+                        <h4 class="modal-title" id="myModalLabel">
+                            Justificativa
+                        </h4>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label" for="inputMotivoModal"><h5>Motivo</h5></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="motivo-modal" id="inputMotivoModal" placeholder="Motivo da modificação" required/>
+                                </div>
+                            </div>                                                           
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <a href="#" id="modalSubmit" class="btn ibmec-btn">Confirmar</a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <jsp:include page = "include/footer.jsp" />
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

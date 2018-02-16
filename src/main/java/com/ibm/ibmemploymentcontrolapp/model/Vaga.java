@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.ibm.ibmemploymentcontrolapp.model;
 
 import java.io.Serializable;
@@ -33,7 +32,7 @@ import org.hibernate.envers.Audited;
  *
  * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
  * @param
- * @return   
+ * @return
  */
 @Entity
 @Table(name = "vaga")
@@ -65,7 +64,8 @@ import org.hibernate.envers.Audited;
     , @NamedQuery(name = "Vaga.findByTecnologia", query = "SELECT v FROM Vaga v WHERE v.tecnologia = :tecnologia")
     , @NamedQuery(name = "Vaga.findByTipo", query = "SELECT v FROM Vaga v WHERE v.tipo = :tipo")
     , @NamedQuery(name = "Vaga.findByDataAudit", query = "SELECT v FROM Vaga v WHERE v.dataAudit = :dataAudit")
-    , @NamedQuery(name = "Vaga.findOpenOnHoldByAreaExpectativa", query = "SELECT v FROM Vaga v WHERE v.status = 'Open' OR v.status = 'On Hold' ORDER BY v.area, v.expectativaDeEntrada")    
+    , @NamedQuery(name = "Vaga.findOpenOnHoldByAreaExpectativa", query = "SELECT v FROM Vaga v WHERE v.status = 'Open' OR v.status = 'On Hold' ORDER BY v.area, v.expectativaDeEntrada")
+    , @NamedQuery(name = "Vaga.findByAreaStatusAndTecnologia", query = "SELECT v FROM Vaga v WHERE v.area = :area AND v.status = :status AND v.tecnologia = :tecnologia")
     , @NamedQuery(name = "Vaga.findByMotivoAtualizacao", query = "SELECT v FROM Vaga v WHERE v.motivoAtualizacao = :motivoAtualizacao")})
 public class Vaga implements Serializable {
 
@@ -138,9 +138,9 @@ public class Vaga implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataAudit;
     @Size(max = 255)
-    @Column(name = "motivo_atualizacao") 
+    @Column(name = "motivo_atualizacao")
     private String motivoAtualizacao;
-     @JoinTable(name = "vaga_candidato", joinColumns = {
+    @JoinTable(name = "vaga_candidato", joinColumns = {
         @JoinColumn(name = "id_vaga", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_candidato", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.EAGER)
@@ -352,7 +352,7 @@ public class Vaga implements Serializable {
     public void setMotivoAtualizacao(String motivoAtualizacao) {
         this.motivoAtualizacao = motivoAtualizacao;
     }
-    
+
     @XmlTransient
     public Collection<Candidato> getCandidatoCollection() {
         return candidatoCollection;

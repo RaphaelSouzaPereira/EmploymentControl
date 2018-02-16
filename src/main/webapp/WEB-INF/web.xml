@@ -45,6 +45,10 @@
         <servlet-name>RelatorioServlet</servlet-name>
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.RelatorioServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ConsultarVagas</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.ConsultarVagas</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -84,6 +88,10 @@
     <servlet-mapping>
         <servlet-name>RelatorioServlet</servlet-name>
         <url-pattern>/RelatorioServlet</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>ConsultarVagas</servlet-name>
+        <url-pattern>/ConsultarVagas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

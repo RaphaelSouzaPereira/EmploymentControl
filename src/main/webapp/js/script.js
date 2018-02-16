@@ -84,18 +84,6 @@ function redireciona(url) {
 }
 
 
-// AQUI COMECA jQuery //
-$('#btn-editar-vaga').click(function (event) {
-    event.preventDefault();
-});
-
-$('#modalSubmit').click(function (event) {
-    var motivoValue = document.getElementById("inputMotivoModal").value;
-    var motivoValueSubmit = document.getElementById("motivoHidden");
-    motivoValueSubmit.value = motivoValue;
-    $('#atualizar-vaga-form').submit();
-});
-
 function vincula(origin, dest) {
     $(origin).find(':selected').appendTo(dest);
     $('#inputFiltro').val(''); //limpa o campo de pesquisa

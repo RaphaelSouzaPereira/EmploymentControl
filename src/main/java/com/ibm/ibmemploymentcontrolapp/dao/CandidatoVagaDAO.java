@@ -32,10 +32,7 @@ public class CandidatoVagaDAO {
     }
 
     /**
-     * Metodo para vincular candidato a uma vaga salvando na tabela do banco os
-     * ids.
-     *
-     * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
+     * Método para vincular candidato a uma vaga salvando na tabela do banco os id's.
      * @param vaga
      * @param lista
      */
@@ -64,13 +61,10 @@ public class CandidatoVagaDAO {
     }
 
     /**
-     * Metodo feito para validar se candidato ja esta ou nao vinculado a vaga
-     *
-     * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
+     * Método feito para validar se candidato ja esta ou nao vinculado a vaga
      * @param candidatoBeanVinculado
      * @param vaga
-     * @return valor boleano onde false significa que ja exista algum candidato
-     * com mesmo id e true para quando nao tem
+     * @return valor boleano onde false significa que ja exista algum candidato com mesmo id e true para quando nao tem
      */
     public ArrayList<CandidatoBean> validaCandidato(ArrayList<CandidatoBean> candidatoBeanVinculado, VagaBean vaga) {
         Collection<Candidato> listCandidatosEntity = vaga.getCandidatoCollection();
@@ -89,9 +83,7 @@ public class CandidatoVagaDAO {
     }
 
     /**
-     * Metodo para listar todos os candidatos ligados há vaga
-     *
-     * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
+     * Metodo para listar todos os candidatos ligados há vaga.
      * @param vaga
      * @return uma lista de candidatos que estão na vaga
      */
@@ -109,8 +101,6 @@ public class CandidatoVagaDAO {
 
     /**
      * Metodo remove candidato da vaga
-     *
-     * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
      * @param vaga que é uma bean de vaga para buscar a collection
      * @param candidato que é uma lista de Bean da Vaga
      */
