@@ -23,6 +23,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -44,8 +45,10 @@ public class RelatorioServlet extends HttpServlet {
 
         try {
             String src = "C://Relatorio//relatorio.jasper";
-            Map<String, Object> params = new HashMap<>(); 
+            HashMap<String, Object> params = new HashMap<>();
             Connection conexao = DriverManager.getConnection("jdbc:mysql://us-cdbr-sl-dfw-01.cleardb.net:3306/ibmx_1b343faa47fee4d", "b80cb503fd10a0", "aa56c35a4b25f9f");
+            params.put("STATUS", "Open");
+            params.put("STATUS2", "On hold");
             JasperPrint relatorio = JasperFillManager.fillReport(src, params, conexao);
             JasperPrintManager.printReport(relatorio, false);
             conexao.close();
