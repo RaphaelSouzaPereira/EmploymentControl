@@ -6,6 +6,8 @@
 ZmU3LTZmMjEzNDI0YWI0Zjs=]]>
 	</property>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="IBM EMPLOYMENT CONTROL"/>
+	<parameter name="STATUS" class="java.lang.String"/>
+	<parameter name="STATUS2" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT ibmx_1b343faa47fee4d.vaga.pmp,
 	ibmx_1b343faa47fee4d.vaga.status,
@@ -13,7 +15,8 @@ ZmU3LTZmMjEzNDI0YWI0Zjs=]]>
 	ibmx_1b343faa47fee4d.vaga.area,
 	ibmx_1b343faa47fee4d.vaga.detalhe,
 	ibmx_1b343faa47fee4d.vaga.impacto_financeiro
-FROM ibmx_1b343faa47fee4d.vaga]]>
+FROM ibmx_1b343faa47fee4d.vaga
+WHERE ibmx_1b343faa47fee4d.vaga.status =  $P{STATUS} OR ibmx_1b343faa47fee4d.vaga.status =  $P{STATUS2}]]>
 	</queryString>
 	<field name="pmp" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="pmp"/>
