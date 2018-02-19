@@ -13,11 +13,13 @@ import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.CandidatoVagaDAO;
 import com.ibm.ibmemploymentcontrolapp.dao.VagaAudDAO;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
@@ -53,6 +55,8 @@ public class ListaServlet extends HttpServlet {
         //Declaração de variáveis
         int maxEntriesPerPage = 5;
         int page = 1;
+        DecimalFormat formatoNumero = new DecimalFormat("#.00");
+         
 
         //Pega Página da jsp
         String pageNumberValue = request.getParameter("pageNumber");
@@ -86,7 +90,7 @@ public class ListaServlet extends HttpServlet {
         List<VagaAudBean> listaHistoricoVaga = new ArrayList<VagaAudBean>();
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
         VagaAudBean vagaAud = new VagaAudBean();
-        
+
         //instancia variaveis envolvidas nos request's
         listaVagas = vagaDAO.listarPorAreaData(emf.createEntityManager());
         listaDeVagasPorPagina = vagaDAO.listarPorPagina(emf.createEntityManager(), this.length, this.offset);
@@ -97,9 +101,8 @@ public class ListaServlet extends HttpServlet {
 
         int resultadoDiasUteis;
         double impactoFinanceiro;
-        
+
         //Seta os atributos que serão utilizados nos jsp
-        
         for (int j = 0; j < listaVagas.size(); j++) {
             // parte incluida para fazer a listagem dos candidatos vinculados a vaga...
             vag = vagaDAO.buscarVagaPorIdExistente(listaVagas.get(j).getId(), emf.createEntityManager());
@@ -111,23 +114,26 @@ public class ListaServlet extends HttpServlet {
             request.setAttribute("listaHistoricoVagas" + listaVagas.get(j).getId(), listaHistoricoVaga);
 
             // calculo elaborado com as datas
+            resultadoDiasUteis = diferencaDatas(listaVagas.get(j).getDataDeAbertura(), listaVagas.get(j).getExpectativaDeEntrada());
+            request.setAttribute("expectativaVsAbertura" + listaVagas.get(j).getId(), resultadoDiasUteis); // somente diferenca entre datas com DIAS CORRIDOS
+            
             resultadoDiasUteis = CalculoDatas(listaVagas.get(j).getDataDeAbertura(), listaVagas.get(j).getAprovacaoBoardBrasil());
             request.setAttribute("desdeAberturaBrasil" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis boardBrasil
-            
+
             resultadoDiasUteis = CalculoDatas(listaVagas.get(j).getDataDeAbertura(), listaVagas.get(j).getAprovacaoBoardGlobal());
             request.setAttribute("desdeAberturaGlobal" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis boardGlobal
-            
+
             resultadoDiasUteis = CalculoDatas(listaVagas.get(j).getDataDeAbertura(), listaVagas.get(j).getEntrouNaOperacao());
             request.setAttribute("desdeAberturaEntrouNaOperacao" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis entrouNaOperacao
-            
+
             resultadoDiasUteis = CalculoDatasExpectativa(listaVagas.get(j).getExpectativaDeEntrada(), listaVagas.get(j).getEntrouNaOperacao());
             request.setAttribute("expectativaDeEntrada" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis expectativaentrada
-            
+
             // calculo impacto financeiro
-            impactoFinanceiro = (resultadoDiasUteis * listaVagas.get(j).getRate() * 8.8); // Desde Expectativa * rate * 8.8
-            request.setAttribute("impactoFinanceiro" + listaVagas.get(j).getId(), "R$ "+impactoFinanceiro+" "); // passando o Impacto Financeiro
+            impactoFinanceiro = (resultadoDiasUteis * listaVagas.get(j).getRate() * 8.8); // Desde Expectativa * rate * 8.8            
+            request.setAttribute("impactoFinanceiro" + listaVagas.get(j).getId(), "R$ " + formatoNumero.format(impactoFinanceiro) + " "); // passando o Impacto Financeiro
         }
-        
+
         request.setAttribute("listaCandidatos", listaCandidatos);
 
         HttpSession httpSession = request.getSession();
@@ -198,7 +204,13 @@ public class ListaServlet extends HttpServlet {
 
         return pageNumbers;
     }
+
+    public int diferencaDatas(Date dataAbertura, Date dataExpectativa) {
+        long dif = dataExpectativa.getTime() - dataAbertura.getTime();
+        return (int) TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS);
+    }
 //Calcula os dias uteis de uma data a outra(retira apenas sabados e domingos, nao leva em conta feriados)...
+
     public int calculoDiasUteis(LocalDate data1, LocalDate data2) {
         int diasUteis = 1;
         while (data1.isBefore(data2)) {
@@ -210,6 +222,7 @@ public class ListaServlet extends HttpServlet {
         return diasUteis;
     }
 //Efetua regra de negocio nas datas, para entao calcular os dias uteis...
+
     public int CalculoDatas(Date abertura, Date aprovacao) {
         int resultadoDiasUteis = 0;
         String d = abertura.toString();
@@ -219,7 +232,7 @@ public class ListaServlet extends HttpServlet {
         if (aprovacao == null) {
             resultadoDiasUteis = calculoDiasUteis(dataAbertura, hoje);
         } else {
-            String b = aprovacao.toString(); 
+            String b = aprovacao.toString();
             LocalDate dataAprovacaoBrasil = LocalDate.parse(b);
             resultadoDiasUteis = calculoDiasUteis(dataAbertura, dataAprovacaoBrasil);
         }
@@ -227,12 +240,13 @@ public class ListaServlet extends HttpServlet {
     }
 // Efetua regra de negocio na situacao expecifica da expectativa de entrada,
 // para depois seguir com o calculo das datas... 
-    public int CalculoDatasExpectativa(Date expectativa, Date entrouNaOperacao){
+
+    public int CalculoDatasExpectativa(Date expectativa, Date entrouNaOperacao) {
         String d = expectativa.toString();
         LocalDate expectativaA = LocalDate.parse(d);
         LocalDate hoje = LocalDate.now();
-        
-        if(hoje.isBefore(expectativaA)){
+
+        if (hoje.isBefore(expectativaA)) {
             return 0;
         }
         return CalculoDatas(expectativa, entrouNaOperacao);

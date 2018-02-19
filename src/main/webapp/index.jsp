@@ -52,6 +52,7 @@
                                         <% Object desdeAberturaGlobal = request.getAttribute("desdeAberturaGlobal"+v.getId()); %>
                                         <% Object desdeAberturaBrasil = request.getAttribute("desdeAberturaBrasil"+v.getId()); %>
                                         <% Object impactoFinanceiro = request.getAttribute("impactoFinanceiro"+v.getId()); %>
+                                        <% Object expectativaVsAbertura = request.getAttribute("expectativaVsAbertura"+v.getId()); %>
                                         
                                         
                                     <tr class="list-row-ibmec"> 
@@ -149,7 +150,10 @@
                                                         </li>
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= v.getRate()%></span>
-                                                        </li>                                                        
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <span class="vaga-item"><strong>Expectativa / Abertura: </strong></span><span class="vaga-value"><%= expectativaVsAbertura%></span>
+                                                        </li>  
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Tipo: </strong></span><span class="vaga-value"><%= v.getTipo()%></span>
                                                         </li>
@@ -203,6 +207,7 @@
                                                 <div class="form-row">
                                                     <div class="form-group d-none">
                                                         <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputIdVaga" name="id_vaga">
+                                                        <input value="<%=impactoFinanceiro%>" type="hidden" class="form-control" id="inputImpactoFinanceiro" name="id_ImpactoFinanceiro">
                                                     </div>
                                                     <div class="form-group col-xs-12 col-md-3">
                                                         <label for="inputCategoria">Categoria:</label>
