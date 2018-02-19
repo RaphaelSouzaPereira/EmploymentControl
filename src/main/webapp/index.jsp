@@ -43,17 +43,18 @@
                                     </tr>
                                 </thead> <!---------- Vagas Cadastradas - Cabeçalho da tabela - Fim ---------->
                                 <tbody> <!---------- Vagas Cadastradas - Corpo da tabela - Início ---------->
-                                    <%                          
+                                    <%
                                         List<VagaBean> listaDeVagasPorPagina = (List<VagaBean>) session.getAttribute("listaDeVagasPorPagina");
                                         for (VagaBean v : listaDeVagasPorPagina) {%> <!---------- Vagas Cadastradas - For da Lista de Vagas - Início ---------->
-                                        
-                                        <% Object expectativaDeEntrada = request.getAttribute("expectativaDeEntrada"+v.getId()); %>
-                                        <% Object desdeAberturaEntrouNaOperacao = request.getAttribute("desdeAberturaEntrouNaOperacao"+v.getId()); %>
-                                        <% Object desdeAberturaGlobal = request.getAttribute("desdeAberturaGlobal"+v.getId()); %>
-                                        <% Object desdeAberturaBrasil = request.getAttribute("desdeAberturaBrasil"+v.getId()); %>
-                                        <% Object impactoFinanceiro = request.getAttribute("impactoFinanceiro"+v.getId()); %>
-                                        
-                                        
+
+                                    <% Object expectativaDeEntrada = request.getAttribute("expectativaDeEntrada" + v.getId()); %>
+                                    <% Object desdeAberturaEntrouNaOperacao = request.getAttribute("desdeAberturaEntrouNaOperacao" + v.getId()); %>
+                                    <% Object desdeAberturaGlobal = request.getAttribute("desdeAberturaGlobal" + v.getId()); %>
+                                    <% Object desdeAberturaBrasil = request.getAttribute("desdeAberturaBrasil" + v.getId()); %>
+                                    <% Object impactoFinanceiro = request.getAttribute("impactoFinanceiro" + v.getId()); %>
+                                    <% Object expectativaVsAbertura = request.getAttribute("expectativaVsAbertura" + v.getId());%>
+
+
                                     <tr class="list-row-ibmec"> 
                                         <td><%= v.getStatus()%></td>
                                         <td><%= v.getPmp()%></td>
@@ -149,7 +150,10 @@
                                                         </li>
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= v.getRate()%></span>
-                                                        </li>                                                        
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <span class="vaga-item"><strong>Expectativa / Abertura: </strong></span><span class="vaga-value"><%= expectativaVsAbertura%></span>
+                                                        </li>  
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Tipo: </strong></span><span class="vaga-value"><%= v.getTipo()%></span>
                                                         </li>
@@ -203,6 +207,7 @@
                                                 <div class="form-row">
                                                     <div class="form-group d-none">
                                                         <input value="<%= v.getId()%>" type="hidden" class="form-control" id="inputIdVaga" name="id_vaga">
+                                                        <input value="<%=impactoFinanceiro%>" type="hidden" class="form-control" id="inputImpactoFinanceiro" name="id_ImpactoFinanceiro">
                                                     </div>
                                                     <div class="form-group col-xs-12 col-md-3">
                                                         <label for="inputCategoria">Categoria:</label>
@@ -267,7 +272,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
-                                                    <div class="form-group col-xs-12 col-md-4">
+                                                    <div class="form-group col-xs-12 col-md-3">
                                                         <label for="inputBanda">Banda:</label>
                                                         <select id="inputBanda" class="form-control" name="banda" required>
                                                             <option value="<%=v.getBanda()%>"><%=v.getBanda()%></option>
@@ -280,13 +285,23 @@
                                                             <option>9</option>
                                                         </select>
                                                     </div>
-                                                    <div class="form-group col-xs-12 col-md-4">
+                                                    <div class="form-group col-xs-12 col-md-3">
                                                         <label for="inpuRate">Rate(R$):</label>
                                                         <input value="<%=v.getRate()%>" type="text" class="form-control inputRate" id="inputRate" placeholder="Rate(R$)" name="rate" maxlength="6">
                                                     </div>   
-                                                    <div class="form-group col-xs-12 col-md-4">
+                                                    <div class="form-group col-xs-12 col-md-3">
                                                         <label for="inputPmp">PMP:</label>
                                                         <input value="<%=v.getPmp()%>" type="text" class="form-control" id="inputPmp" placeholder="Número PMP" name="pmp">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-md-3">
+                                                        <%ArrayList<CandidatoBean> CandidatosVinculadosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas" + v.getId());%>
+                                                        <label for="inputProfissionalSelecionado">Profissional Selecionado:</label>
+                                                        <select id="inputProfissionalSelecionado" class="form-control" name="profissionalSelecionado" required>
+                                                            <option value="<%=v.getProfissionalSelecionado()%>"><%=v.getProfissionalSelecionado()%></option>
+                                                            <% for (CandidatoBean cand : CandidatosVinculadosNaVaga) {%>
+                                                                    <option> <%= cand.getNome()%> </option>
+                                                                <%}%>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">

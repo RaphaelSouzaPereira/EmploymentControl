@@ -4,6 +4,7 @@
     Author     : PriscilaRicardoArrud
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.ibm.ibmemploymentcontrolapp.beans.VagaAudBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,6 +20,7 @@
     <body>
         <%
             VagaAudBean vagaAudBean = (VagaAudBean) request.getAttribute("historico_selecionado");
+            DecimalFormat formatoNumero = new DecimalFormat("#.00");
         %>
         <jsp:include page = "include/header.jsp" />
         <div class="container">
@@ -63,7 +65,7 @@
                             <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= vagaAudBean.getRate() %></span>
                         </li>
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value"><%= vagaAudBean.getImpactoFinanceiro() %></span>
+                            <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value"><%= "R$ " + formatoNumero.format(vagaAudBean.getImpactoFinanceiro()) %></span>
                         </li>
                     </ul>
                 </div>

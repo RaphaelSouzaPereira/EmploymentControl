@@ -23,7 +23,7 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a class="col-xs-4 text-xs-center nav-link py-4 px-4 menu-link ibmec-menu-link" href="#">Relatórios</a>
+            <a class="col-xs-4 text-xs-center nav-link py-4 px-4 menu-link ibmec-menu-link" href="./RelatorioServlet">Relatorio</a>
         </li>
     </ul>
 </header>

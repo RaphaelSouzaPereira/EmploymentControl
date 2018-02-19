@@ -101,7 +101,7 @@ public class ControlServlet extends HttpServlet {
         rateConverted = Double.parseDouble(rate);
 
         // nao obrigatorios:
-        vaga.setPmp(NumberUtils.toInt(pmp, 0));
+        vaga.setPmp(NumberUtils.toInt(pmp, 0));        
         vaga.setAprovacaoBoardBrasil(dateAprovacaoBr);
         vaga.setAprovacaoBoardGlobal(dateAprovacaoGlobal);
         vaga.setEntrouNaOperacao(dateEntrouOperacao);

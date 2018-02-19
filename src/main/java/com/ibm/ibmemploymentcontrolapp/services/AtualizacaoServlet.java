@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import javax.persistence.EntityManagerFactory;
@@ -43,7 +45,9 @@ public class AtualizacaoServlet extends HttpServlet {
 
         double rateConverted;
 
-        String id = request.getParameter("id_vaga"); // ainda falta colocar o parametro no jsp(parte de atualizacao)
+        String id = request.getParameter("id_vaga");
+        Double impactoFinanceiro;
+        int diasExpectativaEntrada;
 
         String categoria = request.getParameter("categoria");
         String status = request.getParameter("status");
@@ -56,13 +60,14 @@ public class AtualizacaoServlet extends HttpServlet {
         String detalhe = request.getParameter("detalhe");
 
         //campos nao obrigatorios
+        String profissionalSelecionado = request.getParameter("profissionalSelecionado");
         String pmp = request.getParameter("pmp");
         String dataaprovacaoBoardBrForm = request.getParameter("aprovacao_board_brasil");
         String dataaprovacaoBoardGlobalForm = request.getParameter("aprovacao_board_global");
         String dataEntrouOperacaoForm = request.getParameter("entrou_operacao");
         String rate = request.getParameter("rate");
         String comentarios = request.getParameter("comentarios");
-        String motivoDaAtualizacao = request.getParameter("motivo");        
+        String motivoDaAtualizacao = request.getParameter("motivo");
         // campos de calculo de data nao mostrados no form
         int expectativaDeAbertura;
 
@@ -77,6 +82,8 @@ public class AtualizacaoServlet extends HttpServlet {
         // Variaveis datas sendo convertidas
         dateAbertura = conversaoData(dataAberturaForm, dateAbertura);
         dateExpectativaEntrada = conversaoData(dataExpectativaEntradaForm, dateExpectativaEntrada);
+        System.out.println("DATA NO ATUALIZA: " + dateExpectativaEntrada);
+        System.out.println("DATA NO ATUALIZA request: " + dataExpectativaEntradaForm);
         dateAprovacaoBr = conversaoData(dataaprovacaoBoardBrForm, dateAprovacaoBr);
         dateAprovacaoGlobal = conversaoData(dataaprovacaoBoardGlobalForm, dateAprovacaoGlobal);
         dateEntrouOperacao = conversaoData(dataEntrouOperacaoForm, dateEntrouOperacao);
@@ -89,9 +96,7 @@ public class AtualizacaoServlet extends HttpServlet {
         //Instancia uma VagaDAO
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
 
-        VagaBean vaga = new VagaBean();
-
-        vaga.setId(Integer.parseInt(id)); // setando o id
+        VagaBean vaga = vagaDAO.buscarVagaPorIdExistente(Integer.parseInt(id), emf.createEntityManager());
 
         vaga.setCategoria(categoria);
         vaga.setStatus(status);
@@ -101,6 +106,7 @@ public class AtualizacaoServlet extends HttpServlet {
         vaga.setExpectativaDeEntrada(dateExpectativaEntrada);
         vaga.setTipo(tipo);
         vaga.setBanda(banda);
+        vaga.setProfissionalSelecionado(profissionalSelecionado);
         vaga.setDetalhe(detalhe);
         vaga.setDataAudit(dateAtual);
         vaga.setMotivoAtualizacao(motivoDaAtualizacao);
@@ -116,7 +122,14 @@ public class AtualizacaoServlet extends HttpServlet {
         vaga.setComentario(comentarios);
 
         // campos de calculo de data
+        diasExpectativaEntrada = CalculoDatasExpectativa(dataExpectativaEntradaForm, dataEntrouOperacaoForm);
+        impactoFinanceiro = diasExpectativaEntrada * rateConverted * 8.8;
         vaga.setExpectativaDeAbertura(expectativaDeAbertura);
+        vaga.setImpactoFinanceiro(impactoFinanceiro);
+        
+       
+
+        System.out.println("IMPACTO AFU: " + impactoFinanceiro);
 
         // Atualiza no banco
         vagaDAO.atualizarVaga(vaga);
@@ -221,5 +234,48 @@ public class AtualizacaoServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+//Calcula os dias uteis de uma data a outra(retira apenas sabados e domingos, nao leva em conta feriados)...
+    public int calculoDiasUteis(LocalDate data1, LocalDate data2) {
+        int diasUteis = 1;
+        while (data1.isBefore(data2)) {
+            data1 = data1.plusDays(1);
+            if (!(data1.getDayOfWeek() == DayOfWeek.SATURDAY || data1.getDayOfWeek() == DayOfWeek.SUNDAY)) {
+                diasUteis++;
+            }
+        }
+        return diasUteis;
+    }
+//Efetua regra de negocio nas datas, para entao calcular os dias uteis...
+
+    public int CalculoDatas(String abertura, String aprovacao) {
+        int resultadoDiasUteis = 0;
+//        String d = abertura.toString();
+        System.out.println("DENTRO DO CALCULO: " + abertura);
+        LocalDate dataAbertura = LocalDate.parse(abertura);
+        LocalDate hoje = LocalDate.now();
+
+        if (aprovacao == null || aprovacao.isEmpty()) {
+            resultadoDiasUteis = calculoDiasUteis(dataAbertura, hoje);
+        } else {
+//            String b = aprovacaotoString();
+            LocalDate dataAprovacaoBrasil = LocalDate.parse(aprovacao);
+            resultadoDiasUteis = calculoDiasUteis(dataAbertura, dataAprovacaoBrasil);
+        }
+        return resultadoDiasUteis;
+    }
+// Efetua regra de negocio na situacao expecifica da expectativa de entrada,
+// para depois seguir com o calculo das datas... 
+
+    public int CalculoDatasExpectativa(String expectativa, String entrouNaOperacao) {
+//        String d = expectativa.toString();
+        LocalDate expectativaA = LocalDate.parse(expectativa);
+        LocalDate hoje = LocalDate.now();
+
+        if (hoje.isBefore(expectativaA)) {
+            return 0;
+        }
+        return CalculoDatas(expectativa, entrouNaOperacao);
+    }
 
 }
