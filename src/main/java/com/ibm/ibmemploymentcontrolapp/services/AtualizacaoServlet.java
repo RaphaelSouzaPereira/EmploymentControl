@@ -60,6 +60,7 @@ public class AtualizacaoServlet extends HttpServlet {
         String detalhe = request.getParameter("detalhe");
 
         //campos nao obrigatorios
+        String profissionalSelecionado = request.getParameter("profissionalSelecionado");
         String pmp = request.getParameter("pmp");
         String dataaprovacaoBoardBrForm = request.getParameter("aprovacao_board_brasil");
         String dataaprovacaoBoardGlobalForm = request.getParameter("aprovacao_board_global");
@@ -95,9 +96,7 @@ public class AtualizacaoServlet extends HttpServlet {
         //Instancia uma VagaDAO
         VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
 
-        VagaBean vaga = new VagaBean();
-
-        vaga.setId(Integer.parseInt(id)); // setando o id
+        VagaBean vaga = vagaDAO.buscarVagaPorIdExistente(Integer.parseInt(id), emf.createEntityManager());
 
         vaga.setCategoria(categoria);
         vaga.setStatus(status);
@@ -107,6 +106,7 @@ public class AtualizacaoServlet extends HttpServlet {
         vaga.setExpectativaDeEntrada(dateExpectativaEntrada);
         vaga.setTipo(tipo);
         vaga.setBanda(banda);
+        vaga.setProfissionalSelecionado(profissionalSelecionado);
         vaga.setDetalhe(detalhe);
         vaga.setDataAudit(dateAtual);
         vaga.setMotivoAtualizacao(motivoDaAtualizacao);
