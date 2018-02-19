@@ -3,7 +3,7 @@ IBM Employment Control APP
 
 Aplicativo para gestão de vagas na IBM Porto Alegre.
 
-Desenvolvido pelos TryCatcher's:
+Desenvolvido pela equipe TryCatcher's:
 * Diego
 * Fábio
 * Leandro
