@@ -40,12 +40,15 @@
 }
 /*---------- Menu - Fim ----------*/
 
-/*---------- Títulos - Início -----*/
+/*---------- Títulos e Subtítulos - Início -----*/
 .ibmec-title {
     color: rgb(0,120,215);
     font-size: 18px;
 }
-/*---------- Títulos - Fim -----*/
+.ibmec-subtitle {
+    font-size: 16px;
+}
+/*---------- Títulos e Subtítulos - Fim -----*/
 
 /*---------- Botões - Início --*/
 .ibmec-btn {

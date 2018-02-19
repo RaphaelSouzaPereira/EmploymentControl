@@ -30,7 +30,8 @@ public class VagaDAO {
 
     /**
      * Método que salva uma nova vaga.
-     * @param v 
+     *
+     * @param v
      */
     public void salvarVaga(VagaBean v) {
         Vaga objDestino = modelMapper.map(v, Vaga.class);
@@ -46,10 +47,10 @@ public class VagaDAO {
 
     /* metodo UPDATE com merge() conforme aqui:
     https://www.devmedia.com.br/crud-completo-com-hibernate-e-jpa/32711 */
-    
     /**
      * Método que atualiza vagas existentes.
-     * @param v 
+     *
+     * @param v
      */
     public void atualizarVaga(VagaBean v) {
         Vaga objDestino = modelMapper.map(v, Vaga.class);
@@ -68,7 +69,8 @@ public class VagaDAO {
     // Exclusao logica (seta status como "Excluida")
     /**
      * Método que faz a exclusão lógica de uma vaga.
-     * @param v 
+     *
+     * @param v
      */
     public void removerVaga(VagaBean v) {
         v.setStatus("Excluida");
@@ -85,6 +87,7 @@ public class VagaDAO {
 
     /**
      * Método que lista todas as vagas existentes.
+     *
      * @return lista das vagas existents
      */
     public List<VagaBean> listarVagas() {
@@ -102,6 +105,7 @@ public class VagaDAO {
 
     /**
      * Método que lista as vagas ordenada por área e data
+     *
      * @param emExterno
      * @return lista ordenada das vagas por área e data
      */
@@ -121,6 +125,7 @@ public class VagaDAO {
 
     /**
      * Método que lista as vagas por ordem cronológica.
+     *
      * @return lista ordenada cronologicamente
      */
     public List<VagaBean> listarPorOrdemCronologica() {
@@ -134,16 +139,17 @@ public class VagaDAO {
         }
         return listarOrdemCronologica;
     }
-    
+
     public VagaBean buscarVagaPorIdExistente(Integer idVaga, EntityManager emExterno) {
         Vaga vaga = (Vaga) emExterno.createNamedQuery("Vaga.findById").setParameter("id", idVaga).getSingleResult();
         emExterno.close();
         emExterno = null;
         return modelMapper.map(vaga, VagaBean.class);
     }
-    
+
     /**
      * Método que lista as vagas por páginas.
+     *
      * @param emExterno
      * @param maxResults
      * @param offset
@@ -156,37 +162,68 @@ public class VagaDAO {
         for (Vaga vagas : (List<Vaga>) query.getResultList()) {
             listarPorPagina.add(modelMapper.map(vagas, VagaBean.class));
         }
-        
+
         emExterno.close();
         emExterno = null;
-        
+
         return listarPorPagina;
-    } 
-    
+    }
+
     /**
-     * Método que listas as vagas com os filtros "area", "status" e "tecnologia".
+     * Método que listas as vagas com os filtros "area", "status" e
+     * "tecnologia".
+     *
      * @param emExterno
      * @param area
      * @param status
      * @param tecnologia
      * @return lista com os filtros aplicados
      */
-    public List<VagaBean> listarComFiltro(EntityManager emExterno, String area, String status, String tecnologia) {
-        Query query = emExterno.createNamedQuery("Vaga.findByAreaStatusAndTecnologia").setParameter("area", area).setParameter("status", status).setParameter("tecnologia", tecnologia);
+    public List<VagaBean> listarVagasComFiltro(EntityManager emExterno, String area, String status, String tecnologia, String filtro) {
+        Query query = null;
+
+        switch (filtro) {
+            case "Status Open e On Hold":
+                System.out.println("Status Open e On Hold");
+                query = emExterno.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa");
+                break;
+            case "Area":
+                System.out.println("foi area");
+                query = emExterno.createNamedQuery("Vaga.findByArea").setParameter("area", area);
+                break;
+            case "Status":
+                System.out.println("foi status");
+                query = emExterno.createNamedQuery("Vaga.findByStatus").setParameter("status", status);
+                break;
+            case "Tecnologia":
+                System.out.println("foi tecnologia");
+                query = emExterno.createNamedQuery("Vaga.findByTecnologia").setParameter("tecnologia", tecnologia);
+                break;
+            case "Area, Status e Tecnologia":
+                System.out.println("Area, Status e Tecnologia");
+                query = emExterno.createNamedQuery("Vaga.findByAreaStatusAndTecnologia").setParameter("area", area).setParameter("status", status).setParameter("tecnologia", tecnologia);
+                break;
+            default:
+                System.out.println("foi default");
+                query = emExterno.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa");
+                break;
+        }
+
         List<VagaBean> listarPorPagina = new ArrayList<VagaBean>();
 
         for (Vaga vagas : (List<Vaga>) query.getResultList()) {
             listarPorPagina.add(modelMapper.map(vagas, VagaBean.class));
         }
-        
+
         emExterno.close();
         emExterno = null;
-        
+
         return listarPorPagina;
     }
-    
+
     /**
      * Método que lista as vagas por página e filtro.
+     *
      * @param emExterno
      * @param maxResults
      * @param offset
@@ -195,18 +232,46 @@ public class VagaDAO {
      * @param tecnologia
      * @return lissta com os filtros aplicados e por página
      */
-    public List<VagaBean> listarPorPaginaComFiltro(EntityManager emExterno, int maxResults, int offset, String area, String status, String tecnologia) {
-        Query query = emExterno.createNamedQuery("Vaga.findByAreaStatusAndTecnologia").setMaxResults(maxResults).setFirstResult(offset).setParameter("area", area).setParameter("status", status).setParameter("tecnologia", tecnologia);
+    public List<VagaBean> listarVagasPorPaginaComFiltro(EntityManager emExterno, int maxResults, int offset, String area, String status, String tecnologia, String filtro) {
+        Query query = null;
+
+        switch (filtro) {
+            case "Status Open e On Hold":
+                System.out.println("Status Open e On Hold");
+                query = emExterno.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa").setMaxResults(maxResults).setFirstResult(offset);
+                break;
+            case "Area":
+                System.out.println("foi area");
+                query = emExterno.createNamedQuery("Vaga.findByArea").setMaxResults(maxResults).setFirstResult(offset).setParameter("area", area);
+                break;
+            case "Status":
+                System.out.println("foi status");
+                query = emExterno.createNamedQuery("Vaga.findByStatus").setMaxResults(maxResults).setFirstResult(offset).setParameter("status", status);
+                break;
+            case "Tecnologia":
+                System.out.println("foi tecnologia");
+                query = emExterno.createNamedQuery("Vaga.findByTecnologia").setMaxResults(maxResults).setFirstResult(offset).setParameter("tecnologia", tecnologia);
+                break;
+            case "Area, Status e Tecnologia":
+                System.out.println("Area, Status e Tecnologia");
+                query = emExterno.createNamedQuery("Vaga.findByAreaStatusAndTecnologia").setMaxResults(maxResults).setFirstResult(offset).setParameter("area", area).setParameter("status", status).setParameter("tecnologia", tecnologia);
+                break;
+            default:
+                System.out.println("foi default");
+                query = emExterno.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa").setMaxResults(maxResults).setFirstResult(offset);
+                break;
+        }
+        
         List<VagaBean> listarPorPagina = new ArrayList<VagaBean>();
 
         for (Vaga vagas : (List<Vaga>) query.getResultList()) {
             listarPorPagina.add(modelMapper.map(vagas, VagaBean.class));
         }
-        
+
         emExterno.close();
         emExterno = null;
-        
+
         return listarPorPagina;
-    } 
+    }
 
 }

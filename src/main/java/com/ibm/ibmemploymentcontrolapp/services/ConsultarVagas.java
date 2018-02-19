@@ -54,9 +54,16 @@ public class ConsultarVagas extends HttpServlet {
         String pageNumberValue = request.getParameter("pageNumber");
 
         //Pega parametros da jsp
+        String filtroDaConsulta = request.getParameter("fdc");
         String areaDaConsulta = request.getParameter("adc");
         String statusDaConsulta = request.getParameter("sdc");
         String tecnologiaDaConsulta = request.getParameter("tdc");
+
+        System.out.println("filtro: " + filtroDaConsulta);
+
+        if (filtroDaConsulta == null) {
+            filtroDaConsulta = "Status Open e On Hold";
+        }
 
         if (areaDaConsulta == null) {
             areaDaConsulta = "";
@@ -99,9 +106,9 @@ public class ConsultarVagas extends HttpServlet {
         List<VagaAudBean> listaHistoricoVaga = new ArrayList<VagaAudBean>();
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
         VagaAudBean vagaAud = new VagaAudBean();
-
-        listaVagas = vagaDAO.listarComFiltro(emf.createEntityManager(), areaDaConsulta, statusDaConsulta, tecnologiaDaConsulta);
-        listaDeVagasPorPaginaDaConsulta = vagaDAO.listarPorPaginaComFiltro(emf.createEntityManager(), this.length, this.offset, areaDaConsulta, statusDaConsulta, tecnologiaDaConsulta);
+        
+        listaVagas = vagaDAO.listarVagasComFiltro(emf.createEntityManager(), areaDaConsulta, statusDaConsulta, tecnologiaDaConsulta, filtroDaConsulta);
+        listaDeVagasPorPaginaDaConsulta = vagaDAO.listarVagasPorPaginaComFiltro(emf.createEntityManager(), this.length, this.offset, areaDaConsulta, statusDaConsulta, tecnologiaDaConsulta, filtroDaConsulta);
 
         listaCandidatos = candidatoDAO.listarCandidatos();
 
@@ -128,6 +135,7 @@ public class ConsultarVagas extends HttpServlet {
         httpSession.setAttribute("currentPage", Integer.toString(page));
         httpSession.setAttribute("pages", getPages(listaVagas));
         httpSession.setAttribute("listaDeVagasPorPaginaDaConsulta", listaDeVagasPorPaginaDaConsulta);
+        httpSession.setAttribute("currentFilter", filtroDaConsulta);
         httpSession.setAttribute("currentArea", areaDaConsulta);
         httpSession.setAttribute("currentStatus", statusDaConsulta);
         httpSession.setAttribute("currentTecnologia", tecnologiaDaConsulta);
@@ -180,6 +188,7 @@ public class ConsultarVagas extends HttpServlet {
 
     /**
      * Método que realiza a paginação.
+     *
      * @return lista com o número de páginas
      */
     public List getPages(List<VagaBean> listaVagas) {

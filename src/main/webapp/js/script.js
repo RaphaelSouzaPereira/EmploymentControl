@@ -137,5 +137,93 @@ $(document).ready(function () {
         }).clone();
         candidatoSelect.empty().append(matches);
     });
+
+    /*---------- Filtros - Quando Carrega - Início ----------*/
+    var inputOpenAndOnHoldOption = $('#OpenAndOnHoldOption');
+    if (inputOpenAndOnHoldOption.is(':checked'))
+    {
+        $('#inputAreaConsulta').prop('disabled', true);
+        $('#inputStatusConsulta').prop('disabled', true);
+        $('#inputTecnologiaConsulta').prop('disabled', true);
+    }
+
+    var AreaOption = $('#AreaOption');
+    if (AreaOption.is(':checked'))
+    {
+        $('#inputAreaConsulta').prop('disabled', false);
+        $('#inputStatusConsulta').prop('disabled', true);
+        $('#inputTecnologiaConsulta').prop('disabled', true);
+    }
+
+    var StatusOption = $('#StatusOption');
+    if (StatusOption.is(':checked'))
+    {
+        $('#inputAreaConsulta').prop('disabled', true);
+        $('#inputStatusConsulta').prop('disabled', false);
+        $('#inputTecnologiaConsulta').prop('disabled', true);
+    }
+
+    var TecnologiaOption = $('#TecnologiaOption');
+    if (TecnologiaOption.is(':checked'))
+    {
+        $('#inputAreaConsulta').prop('disabled', true);
+        $('#inputStatusConsulta').prop('disabled', true);
+        $('#inputTecnologiaConsulta').prop('disabled', false);
+    }
+
+    var AllOptions = $('#AllOptions');
+    if (AllOptions.is(':checked'))
+    {
+        $('#inputAreaConsulta').prop('disabled', false);
+        $('#inputStatusConsulta').prop('disabled', false);
+        $('#inputTecnologiaConsulta').prop('disabled', false);
+    }
+    /*---------- Filtros - Quando Carrega - Fim ----------*/
 });
 
+/*---------- Filtros - Evento de Click - Início ----------*/
+$('#OpenAndOnHoldOption').click(function () {
+    if ($(this).is(':checked'))
+    {
+        $('#inputAreaConsulta').prop('disabled', true);
+        $('#inputStatusConsulta').prop('disabled', true);
+        $('#inputTecnologiaConsulta').prop('disabled', true);
+    }
+});
+
+$('#AreaOption').click(function () {
+    if ($(this).is(':checked'))
+    {
+        $('#inputAreaConsulta').prop('disabled', false);
+        $('#inputStatusConsulta').prop('disabled', true);
+        $('#inputTecnologiaConsulta').prop('disabled', true);
+    }
+});
+
+$('#StatusOption').click(function () {
+    if ($(this).is(':checked'))
+    {
+        $('#inputAreaConsulta').prop('disabled', true);
+        $('#inputStatusConsulta').prop('disabled', false);
+        $('#inputTecnologiaConsulta').prop('disabled', true);
+    }
+});
+
+$('#TecnologiaOption').click(function () {
+    if ($(this).is(':checked'))
+    {
+        $('#inputAreaConsulta').prop('disabled', true);
+        $('#inputStatusConsulta').prop('disabled', true);
+        $('#inputTecnologiaConsulta').prop('disabled', false);
+    }
+});
+
+$('#AllOptions').click(function () {
+    if ($(this).is(':checked'))
+    {
+        $('#inputAreaConsulta').prop('disabled', false);
+        $('#inputStatusConsulta').prop('disabled', false);
+        $('#inputTecnologiaConsulta').prop('disabled', false);
+    }
+});
+/*---------- Filtros - Evento de Click - Fim ----------*/
