@@ -42,6 +42,10 @@
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.AtualizarCandidatoServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>RelatorioServlet</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.RelatorioServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ConsultarVagas</servlet-name>
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.ConsultarVagas</servlet-class>
     </servlet>
@@ -82,6 +86,10 @@
         <url-pattern>/AtualizarCandidatoServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>RelatorioServlet</servlet-name>
+        <url-pattern>/RelatorioServlet</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
         <servlet-name>ConsultarVagas</servlet-name>
         <url-pattern>/ConsultarVagas</url-pattern>
     </servlet-mapping>

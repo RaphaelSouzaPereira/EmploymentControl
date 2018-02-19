@@ -137,6 +137,7 @@ public class ControlServlet extends HttpServlet {
 
     // fazendo a conversão da data   
     /**
+     * Método que faz a conversão da data
      * @param form String pega do form feito no jsp
      * @param date variavel criada para receber a data convertida
      * @return uma data convertidada para o padrao yyyy/MM/dd
@@ -154,17 +155,21 @@ public class ControlServlet extends HttpServlet {
         return date;
     }
 
+    /**
+     * Método que faz a conversao do rate
+     * @param rate
+     * @return rate convertido
+     */
     public String conversaoRate(String rate) {
         String rateSemVirgula = rate.replace(',', '.');
         return rateSemVirgula;
     }
 
     /**
-     *
+     * Método que calcula a diferença da "dataAbertura" x "dataExpectativa"
      * @param dataAbertura
      * @param dataExpectativa
-     * @return retorna a diferenca, em dias, da data Expectativa de entrada x
-     * Abertura da vaga
+     * @return retorna a diferença, em dias, da data Expectativa de entrada x Abertura da vaga
      */
     public int diferencaDatas(Date dataAbertura, Date dataExpectativa) {
         long dif = dataExpectativa.getTime() - dataAbertura.getTime();

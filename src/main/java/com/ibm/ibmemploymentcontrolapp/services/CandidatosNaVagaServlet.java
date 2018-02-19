@@ -153,7 +153,14 @@ public class CandidatosNaVagaServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
+    /**
+     * Método que adiciona os candidatos na vaga
+     * @param listaCandidatos
+     * @param idDosCandidatos
+     * @param candidatoDAO
+     * @return lista de candidatos na vaga
+     */
     public ArrayList<CandidatoBean> adicionarNaListaCandidatos(ArrayList<CandidatoBean> listaCandidatos, String[] idDosCandidatos, CandidatoDAO candidatoDAO) {
         if (idDosCandidatos != null) {
             for (String id : idDosCandidatos) {
