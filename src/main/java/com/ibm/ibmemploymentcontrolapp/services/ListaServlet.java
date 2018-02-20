@@ -55,36 +55,36 @@ public class ListaServlet extends HttpServlet {
         //Declaração de variáveis
         int maxEntriesPerPage = 5;
         int page = 1;
-        DecimalFormat formatoNumero = new DecimalFormat("#.00");
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
 
         //Pega parametros da jsp
-        String pageNumberValue = request.getParameter("pageNumber");
-        String filtroDaConsulta = request.getParameter("fdc");
-        String areaDaConsulta = request.getParameter("adc");
-        String statusDaConsulta = request.getParameter("sdc");
-        String tecnologiaDaConsulta = request.getParameter("tdc");
+        String pageNumber = request.getParameter("pn");
+        String searchFilter = request.getParameter("sf");
+        String searchArea = request.getParameter("sa");
+        String searchStatus = request.getParameter("ss");
+        String searchTechnology = request.getParameter("st");
 
         //Verifica se o filtro está vindo como null e seta um valor padrão
-        if (filtroDaConsulta == null) {
-            filtroDaConsulta = "Status Open e On Hold";
+        if (searchFilter == null) {
+            searchFilter = "Status Open e On Hold";
         }
 
-        if (areaDaConsulta == null) {
-            areaDaConsulta = "";
+        if (searchArea == null) {
+            searchArea = "";
         }
 
-        if (statusDaConsulta == null) {
-            statusDaConsulta = "";
+        if (searchStatus == null) {
+            searchStatus = "";
         }
 
-        if (tecnologiaDaConsulta == null) {
-            tecnologiaDaConsulta = "";
+        if (searchTechnology == null) {
+            searchTechnology = "";
         }
 
         //Seta a página como Integer
-        if (pageNumberValue != null) {
+        if (pageNumber != null) {
             try {
-                page = Integer.parseInt(pageNumberValue);
+                page = Integer.parseInt(pageNumber);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
@@ -109,11 +109,10 @@ public class ListaServlet extends HttpServlet {
         List<VagaBean> listaDeVagasPorPagina = new ArrayList<VagaBean>();
         List<VagaAudBean> listaHistoricoVaga = new ArrayList<VagaAudBean>();
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
-        VagaAudBean vagaAud = new VagaAudBean();
 
         //instancia variaveis envolvidas nos request's
-        listaVagas = vagaDAO.listarVagasComFiltro(emf.createEntityManager(), areaDaConsulta, statusDaConsulta, tecnologiaDaConsulta, filtroDaConsulta);
-        listaDeVagasPorPagina = vagaDAO.listarVagasPorPaginaComFiltro(emf.createEntityManager(), this.length, this.offset, areaDaConsulta, statusDaConsulta, tecnologiaDaConsulta, filtroDaConsulta);
+        listaVagas = vagaDAO.listarVagasComFiltro(emf.createEntityManager(), searchArea, searchStatus, searchTechnology, searchFilter);
+        listaDeVagasPorPagina = vagaDAO.listarVagasPorPaginaComFiltro(emf.createEntityManager(), this.length, this.offset, searchArea, searchStatus, searchTechnology, searchFilter);
         listaCandidatos = candidatoDAO.listarCandidatos();
 
         ArrayList<CandidatoBean> listaCandidatosV = new ArrayList<CandidatoBean>();
@@ -151,19 +150,19 @@ public class ListaServlet extends HttpServlet {
 
             // calculo impacto financeiro
             impactoFinanceiro = (resultadoDiasUteis * listaVagas.get(j).getRate() * 8.8); // Desde Expectativa * rate * 8.8            
-            request.setAttribute("impactoFinanceiro" + listaVagas.get(j).getId(), "R$ " + formatoNumero.format(impactoFinanceiro) + " "); // passando o Impacto Financeiro
+            request.setAttribute("impactoFinanceiro" + listaVagas.get(j).getId(), "R$ " + numberFormat.format(impactoFinanceiro) + " "); // passando o Impacto Financeiro
         }
 
         request.setAttribute("listaCandidatos", listaCandidatos);
 
         HttpSession httpSession = request.getSession();
         httpSession.setAttribute("currentPage", Integer.toString(page));
-        httpSession.setAttribute("pages", getPages(listaVagas));
+        httpSession.setAttribute("pageNumbers", getPages(listaVagas));
         httpSession.setAttribute("listaDeVagasPorPagina", listaDeVagasPorPagina);
-        httpSession.setAttribute("currentFilter", filtroDaConsulta);
-        httpSession.setAttribute("currentArea", areaDaConsulta);
-        httpSession.setAttribute("currentStatus", statusDaConsulta);
-        httpSession.setAttribute("currentTecnologia", tecnologiaDaConsulta);
+        httpSession.setAttribute("currentFilter", searchFilter);
+        httpSession.setAttribute("currentArea", searchArea);
+        httpSession.setAttribute("currentStatus", searchStatus);
+        httpSession.setAttribute("currentTechnology", searchTechnology);
 
         RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
         view.forward(request, response);

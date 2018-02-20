@@ -32,7 +32,7 @@
                     String currentFilter = (String) session.getAttribute("currentFilter");
                     String currentArea = (String) session.getAttribute("currentArea");
                     String currentStatus = (String) session.getAttribute("currentStatus");
-                    String currentTecnologia = (String) session.getAttribute("currentTecnologia");
+                    String currentTechnology = (String) session.getAttribute("currentTechnology");
                 %>
                 <div class="row">
                     <div class="offset-1 col-10">
@@ -87,17 +87,16 @@
                                     <div class="form-group col-xs-12 col-md-3">
                                         <label for="inputStatus">Tecnologia:</label>
                                         <select id="inputTecnologiaConsulta" class="form-control" name="tdc">
-                                            <option <%= currentTecnologia.equals("Java") ? "selected" : ""%>>Java</option>
+                                            <option <%= currentTechnology.equals("Java") ? "selected" : ""%>>Java</option>
                                             <!--TODO - Tratar acentuacao-->
-                                            <option <%= currentTecnologia.equals("Analista de Automacao") ? "selected" : ""%>>Analista de Automacao</option>
-                                            <option <%= currentTecnologia.equals("Especialista Mobilidade") ? "selected" : ""%>>Especialista Mobilidade</option>
-                                            <option <%= currentTecnologia.equals("Designer UX") ? "selected" : ""%>>Designer UX</option>
-                                            <option <%= currentTecnologia.equals("Dev. ODI") ? "selected" : ""%>>Dev. ODI</option>
+                                            <option <%= currentTechnology.equals("Analista de Automacao") ? "selected" : ""%>>Analista de Automacao</option>
+                                            <option <%= currentTechnology.equals("Especialista Mobilidade") ? "selected" : ""%>>Especialista Mobilidade</option>
+                                            <option <%= currentTechnology.equals("Designer UX") ? "selected" : ""%>>Designer UX</option>
+                                            <option <%= currentTechnology.equals("Dev. ODI") ? "selected" : ""%>>Dev. ODI</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-xs-12 col-md-3">
                                         <button type="submit" class="btn btn-block ibmec-btn" style="margin-top:32px" name="botao-de-consulta" value="Consultar">Consultar</button>
-                                        <!--<input type="submit" class="btn btn-block ibmec-btn" id="vincula" name="opcaoDeVinculo" value="Vincular" />-->
                                     </div>
                                 </div>
                             </form>
@@ -493,17 +492,17 @@
                         <nav>
                             <ul class="pagination justify-content-center"> 
                                 <%
-                                    List pageNumbers = (List) session.getAttribute("pages");
+                                    List pageNumbers = (List) session.getAttribute("pageNumbers");
                                     String cP = (String) session.getAttribute("currentPage");
                                     int currentPage = Integer.parseInt(cP);
                                     int previousPage = currentPage == 1 ? 1 : currentPage - 1;
                                     int nextPage = pageNumbers.size() == currentPage ? currentPage : currentPage + 1;
                                 %>
-                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=previousPage%>&fdc=<%=currentFilter%>&adc=<%=currentArea%>&sdc=<%=currentStatus%>&tdc=<%=currentTecnologia%>">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="./?pn=<%=previousPage%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>">Previous</a></li>
                                     <%for (int i = 0; i < pageNumbers.size(); i++) {%>                           
-                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=pageNumbers.get(i)%>&fdc=<%=currentFilter%>&adc=<%=currentArea%>&sdc=<%=currentStatus%>&tdc=<%=currentTecnologia%>"><%=pageNumbers.get(i)%></a></li>
+                                <li class="page-item"><a class="page-link" href="./?pn=<%=pageNumbers.get(i)%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>"><%=pageNumbers.get(i)%></a></li>
                                     <%}%>
-                                <li class="page-item"><a class="page-link" href="./?pageNumber=<%=nextPage%>&fdc=<%=currentFilter%>&adc=<%=currentArea%>&sdc=<%=currentStatus%>&tdc=<%=currentTecnologia%>">Next</a></li>
+                                <li class="page-item"><a class="page-link" href="./?pn=<%=nextPage%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>">Next</a></li>
                             </ul>
                         </nav>
                     </div>
