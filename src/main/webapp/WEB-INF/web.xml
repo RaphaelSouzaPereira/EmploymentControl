@@ -89,10 +89,6 @@
         <servlet-name>RelatorioServlet</servlet-name>
         <url-pattern>/RelatorioServlet</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
-        <servlet-name>ConsultarVagas</servlet-name>
-        <url-pattern>/ConsultarVagas</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
