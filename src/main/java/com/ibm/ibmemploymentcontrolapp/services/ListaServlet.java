@@ -153,8 +153,6 @@ public class ListaServlet extends HttpServlet {
             impactoFinanceiro = (resultadoDiasUteis * listaVagas.get(j).getRate() * 8.8); // Desde Expectativa * rate * 8.8            
             request.setAttribute("impactoFinanceiro" + listaVagas.get(j).getId(), "R$ " + numberFormat.format(impactoFinanceiro) + " "); // passando o Impacto Financeiro
         }
-        
-        vagaAudDAO.getTimeStamp(15, emf.createEntityManager());
 
         request.setAttribute("listaCandidatos", listaCandidatos);
 
