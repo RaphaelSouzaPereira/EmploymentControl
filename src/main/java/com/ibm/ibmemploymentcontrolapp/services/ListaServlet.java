@@ -120,7 +120,7 @@ public class ListaServlet extends HttpServlet {
 
         int resultadoDiasUteis;
         double impactoFinanceiro;
-        String dataCriacaoVaga;
+       
 
         //Seta os atributos que serão utilizados nos jsp
         for (int j = 0; j < listaVagas.size(); j++) {

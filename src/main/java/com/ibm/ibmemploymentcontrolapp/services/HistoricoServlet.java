@@ -55,12 +55,12 @@ public class HistoricoServlet extends HttpServlet {
         //instancia os Beans
         VagaAudBean vaga = new VagaAudBean();
         List<VagaAudBean> listaHistoricoVaga = new ArrayList<VagaAudBean>();
-        
+
         //verifica historico
         listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(Integer.parseInt(id), emf.createEntityManager());
-        
+
         request.setAttribute("historico_selecionado", listaHistoricoVaga.get(Integer.parseInt(indice)));
-        
+
         RequestDispatcher view = request.getRequestDispatcher("./apresentacao-historico.jsp");
         view.forward(request, response);
 
