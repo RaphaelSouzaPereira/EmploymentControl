@@ -7,7 +7,9 @@ package com.ibm.ibmemploymentcontrolapp.dao;
 
 import com.ibm.ibmemploymentcontrolapp.model.VagaAud;
 import com.ibm.ibmemploymentcontrolapp.beans.VagaAudBean;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -29,6 +31,7 @@ public class VagaAudDAO {
 
     /**
      * Método que lista as alterações de cada vaga
+     *
      * @param idVaga
      * @param emExterno
      * @return lista das vagas que tiverem alteração
@@ -47,6 +50,18 @@ public class VagaAudDAO {
         emExterno.close();
         emExterno = null;
         return listaHistoricoBean;
+    }
+
+    public String getTimeStamp(int rev, EntityManager emExterno) {
+        Date data = new Date();        
+        String data1;
+        SimpleDateFormat formata = new SimpleDateFormat("dd/MM/yyyy");        
+        Query query = emExterno.createNamedQuery("Revinfo.findByRevTime").setParameter("timestamp", rev);
+        data = (Date) query.getSingleResult();       
+        data1 = formata.format(data);        
+        emExterno.close();
+        emExterno = null;
+        return data1;
     }
 
 }
