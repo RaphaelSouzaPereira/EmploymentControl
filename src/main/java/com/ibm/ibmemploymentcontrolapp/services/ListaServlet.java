@@ -56,10 +56,30 @@ public class ListaServlet extends HttpServlet {
         int maxEntriesPerPage = 5;
         int page = 1;
         DecimalFormat formatoNumero = new DecimalFormat("#.00");
-         
 
-        //Pega Página da jsp
+        //Pega parametros da jsp
         String pageNumberValue = request.getParameter("pageNumber");
+        String filtroDaConsulta = request.getParameter("fdc");
+        String areaDaConsulta = request.getParameter("adc");
+        String statusDaConsulta = request.getParameter("sdc");
+        String tecnologiaDaConsulta = request.getParameter("tdc");
+
+        //Verifica se o filtro está vindo como null e seta um valor padrão
+        if (filtroDaConsulta == null) {
+            filtroDaConsulta = "Status Open e On Hold";
+        }
+
+        if (areaDaConsulta == null) {
+            areaDaConsulta = "";
+        }
+
+        if (statusDaConsulta == null) {
+            statusDaConsulta = "";
+        }
+
+        if (tecnologiaDaConsulta == null) {
+            tecnologiaDaConsulta = "";
+        }
 
         //Seta a página como Integer
         if (pageNumberValue != null) {
@@ -92,8 +112,8 @@ public class ListaServlet extends HttpServlet {
         VagaAudBean vagaAud = new VagaAudBean();
 
         //instancia variaveis envolvidas nos request's
-        listaVagas = vagaDAO.listarPorAreaData(emf.createEntityManager());
-        listaDeVagasPorPagina = vagaDAO.listarPorPagina(emf.createEntityManager(), this.length, this.offset);
+        listaVagas = vagaDAO.listarVagasComFiltro(emf.createEntityManager(), areaDaConsulta, statusDaConsulta, tecnologiaDaConsulta, filtroDaConsulta);
+        listaDeVagasPorPagina = vagaDAO.listarVagasPorPaginaComFiltro(emf.createEntityManager(), this.length, this.offset, areaDaConsulta, statusDaConsulta, tecnologiaDaConsulta, filtroDaConsulta);
         listaCandidatos = candidatoDAO.listarCandidatos();
 
         ArrayList<CandidatoBean> listaCandidatosV = new ArrayList<CandidatoBean>();
@@ -117,7 +137,7 @@ public class ListaServlet extends HttpServlet {
             // calculo elaborado com as datas
             resultadoDiasUteis = diferencaDatas(listaVagas.get(j).getDataDeAbertura(), listaVagas.get(j).getExpectativaDeEntrada());
             request.setAttribute("expectativaVsAbertura" + listaVagas.get(j).getId(), resultadoDiasUteis); // somente diferenca entre datas com DIAS CORRIDOS
-            
+
             resultadoDiasUteis = CalculoDatas(listaVagas.get(j).getDataDeAbertura(), listaVagas.get(j).getAprovacaoBoardBrasil());
             request.setAttribute("desdeAberturaBrasil" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis boardBrasil
 
@@ -143,6 +163,10 @@ public class ListaServlet extends HttpServlet {
         httpSession.setAttribute("currentPage", Integer.toString(page));
         httpSession.setAttribute("pages", getPages(listaVagas));
         httpSession.setAttribute("listaDeVagasPorPagina", listaDeVagasPorPagina);
+        httpSession.setAttribute("currentFilter", filtroDaConsulta);
+        httpSession.setAttribute("currentArea", areaDaConsulta);
+        httpSession.setAttribute("currentStatus", statusDaConsulta);
+        httpSession.setAttribute("currentTecnologia", tecnologiaDaConsulta);
 
         RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
         view.forward(request, response);
@@ -192,6 +216,7 @@ public class ListaServlet extends HttpServlet {
 
     /**
      * Método que realiza a paginação.
+     *
      * @return lista com o número de páginas
      */
     public List getPages(List<VagaBean> listaVagas) {
@@ -209,20 +234,20 @@ public class ListaServlet extends HttpServlet {
         return pageNumbers;
     }
 
-
     public int diferencaDatas(Date dataAbertura, Date dataExpectativa) {
         long dif = dataExpectativa.getTime() - dataAbertura.getTime();
         return (int) TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS);
     }
-    
+
 //Calcula os dias uteis de uma data a outra(retira apenas sabados e domingos, nao leva em conta feriados)...
     /**
-     * Método que calcula os dias uteis de uma data a outra (retira apenas sabados e domingos, nao leva em conta feriados).
+     * Método que calcula os dias uteis de uma data a outra (retira apenas
+     * sabados e domingos, nao leva em conta feriados).
+     *
      * @param data1
      * @param data2
      * @return número de dias úteis
      */
-
     public int calculoDiasUteis(LocalDate data1, LocalDate data2) {
         int diasUteis = 1;
         while (data1.isBefore(data2)) {
@@ -235,9 +260,10 @@ public class ListaServlet extends HttpServlet {
     }
 
 //Efetua regra de negocio nas datas, para entao calcular os dias uteis...
-
     /**
-     * Método que efetua regra de negócio nas datas, para então calcular os dias úteis.
+     * Método que efetua regra de negócio nas datas, para então calcular os dias
+     * úteis.
+     *
      * @param abertura
      * @param aprovacao
      * @return cálculo dos dias úteis
@@ -260,15 +286,15 @@ public class ListaServlet extends HttpServlet {
 
 // Efetua regra de negocio na situacao expecifica da expectativa de entrada,
 // para depois seguir com o calculo das datas... 
-
-
     /**
-     * Método que efetua regra de negócio na situação expecífica da expectativa de entrada, para depois seguir com cálculo das datas.
+     * Método que efetua regra de negócio na situação expecífica da expectativa
+     * de entrada, para depois seguir com cálculo das datas.
+     *
      * @param expectativa
      * @param entrouNaOperacao
      * @return cálculo da data conforme os parâmentros informados
      */
-    public int CalculoDatasExpectativa(Date expectativa, Date entrouNaOperacao){
+    public int CalculoDatasExpectativa(Date expectativa, Date entrouNaOperacao) {
         String d = expectativa.toString();
         LocalDate expectativaA = LocalDate.parse(d);
         LocalDate hoje = LocalDate.now();
