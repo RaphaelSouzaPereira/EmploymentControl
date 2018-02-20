@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row">
                 <div class="offset-1 col-10">
-                    <h2 class="ibmec-title mb-3">Histórico da Vaga - <%= vagaAudBean.getDataAudit() %></h2>
+                    <h2 class="ibmec-title mb-3">Histórico da Vaga - <%= vagaAudBean.getDataAudit()%></h2>
                     <hr>
                 </div>
             </div>
@@ -34,38 +34,39 @@
                 <div class="offset-1 col-5 mb-3">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Categoria: </strong></span><span class="vaga-value"><%= vagaAudBean.getCategoria() %></span> 
+                            <span class="vaga-item"><strong>Categoria: </strong></span><span class="vaga-value"><%= vagaAudBean.getCategoria()%></span> 
                         </li>
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Expectativa de Entrada: </strong></span><span class="vaga-value"><%= vagaAudBean.getExpectativaDeEntrada() %></span>
+                            <span class="vaga-item"><strong>Expectativa de Entrada: </strong></span><span class="vaga-value"><%= vagaAudBean.getExpectativaDeEntrada()%></span>
                         </li>
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Data de Abertura: </strong></span><span class="vaga-value"><%= vagaAudBean.getDataDeAbertura() %></span>
+                            <span class="vaga-item"><strong>Data de Abertura: </strong></span><span class="vaga-value"><%= vagaAudBean.getDataDeAbertura()%></span>
                         </li>
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Tipo: </strong></span><span class="vaga-value"><%= vagaAudBean.getTipo() %></span>
+                            <span class="vaga-item"><strong>Tipo: </strong></span><span class="vaga-value"><%= vagaAudBean.getTipo()%></span>
                         </li>
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Banda: </strong></span><span class="vaga-value"><%= vagaAudBean.getBanda() %></span>
+                            <span class="vaga-item"><strong>Banda: </strong></span><span class="vaga-value"><%= vagaAudBean.getBanda()%></span>
                         </li>
                     </ul>
                 </div>
                 <div class="col-5">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value"><%= vagaAudBean.getAprovacaoBoardGlobal() == null ? "" : vagaAudBean.getAprovacaoBoardGlobal() %></span>
+                            <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value"><%= vagaAudBean.getAprovacaoBoardGlobal() == null ? "" : vagaAudBean.getAprovacaoBoardGlobal()%></span>
                         </li>
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= vagaAudBean.getEntrouNaOperacao() == null ? "" : vagaAudBean.getEntrouNaOperacao() %></span>
+                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= vagaAudBean.getEntrouNaOperacao() == null ? "" : vagaAudBean.getEntrouNaOperacao()%></span>
                         </li>
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value"><%= vagaAudBean.getAprovacaoBoardBrasil() == null ? "" : vagaAudBean.getAprovacaoBoardBrasil() %></span>
+                            <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value"><%= vagaAudBean.getAprovacaoBoardBrasil() == null ? "" : vagaAudBean.getAprovacaoBoardBrasil()%></span>
                         </li>
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= vagaAudBean.getRate() %></span>
+                            <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= vagaAudBean.getRate()%></span>
                         </li>
-                        <li class="list-group-item">
-                            <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value"><%= "R$ " + formatoNumero.format(vagaAudBean.getImpactoFinanceiro()) %></span>
+                        <li class="list-group-item">                                
+                                <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value"><%= "R$ "
+                                        + (vagaAudBean.getImpactoFinanceiro() == null ? "0" : formatoNumero.format(vagaAudBean.getImpactoFinanceiro()))%></span>
                         </li>
                     </ul>
                 </div>
@@ -75,13 +76,13 @@
                             <span class="vaga-item"><strong>Profissional Selecionado: </strong></span><span class="vaga-value"><%= vagaAudBean.getProfissionalSelecionado() == null ? "" : vagaAudBean.getProfissionalSelecionado()%></span>
                         </li>
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Detalhe: </strong></span><span class="vaga-value"><%= vagaAudBean.getDetalhe() %></span>
+                            <span class="vaga-item"><strong>Detalhe: </strong></span><span class="vaga-value"><%= vagaAudBean.getDetalhe()%></span>
                         </li>
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Comentários: </strong></span><span class="vaga-value"><%= vagaAudBean.getComentario() %></span>
+                            <span class="vaga-item"><strong>Comentários: </strong></span><span class="vaga-value"><%= vagaAudBean.getComentario()%></span>
                         </li>
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Motivo(s) da(s) Alteração(ões): </strong></span><span class="vaga-value"><%= vagaAudBean.getMotivoAtualizacao() %></span>
+                            <span class="vaga-item"><strong>Motivo(s) da(s) Alteração(ões): </strong></span><span class="vaga-value"><%= vagaAudBean.getMotivoAtualizacao()%></span>
                         </li>
                     </ul>
                 </div>
