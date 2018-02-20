@@ -51,17 +51,4 @@ public class VagaAudDAO {
         emExterno = null;
         return listaHistoricoBean;
     }
-
-    public String getTimeStamp(int rev, EntityManager emExterno) {
-        Date data = new Date();        
-        String data1;
-        SimpleDateFormat formata = new SimpleDateFormat("dd/MM/yyyy");        
-        Query query = emExterno.createNamedQuery("Revinfo.findByRevTime").setParameter("timestamp", rev);
-        data = (Date) query.getSingleResult();       
-        data1 = formata.format(data);        
-        emExterno.close();
-        emExterno = null;
-        return data1;
-    }
-
 }

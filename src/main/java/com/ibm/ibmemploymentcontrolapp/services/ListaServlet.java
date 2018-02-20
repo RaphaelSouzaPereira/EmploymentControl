@@ -121,7 +121,7 @@ public class ListaServlet extends HttpServlet {
 
         int resultadoDiasUteis;
         double impactoFinanceiro;
-        String dataCriacaoVaga;
+       
 
         //Seta os atributos que serão utilizados nos jsp
         for (int j = 0; j < listaVagas.size(); j++) {
@@ -155,7 +155,7 @@ public class ListaServlet extends HttpServlet {
             request.setAttribute("impactoFinanceiro" + listaVagas.get(j).getId(), "R$ " + formatoNumero.format(impactoFinanceiro) + " "); // passando o Impacto Financeiro
         }
         
-        vagaAudDAO.getTimeStamp(15, emf.createEntityManager());
+//        vagaAudDAO.getTimeStamp(15, emf.createEntityManager());
 
         request.setAttribute("listaCandidatos", listaCandidatos);
 
