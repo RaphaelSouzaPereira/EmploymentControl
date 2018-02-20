@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.ibm.ibmemploymentcontrolapp.model;
 
 import java.io.Serializable;
@@ -28,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
  * @param
- * @return   
+ * @return
  */
 @Entity
 @Table(name = "revinfo")
@@ -36,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Revinfo.findAll", query = "SELECT r FROM Revinfo r")
     , @NamedQuery(name = "Revinfo.findByRev", query = "SELECT r FROM Revinfo r WHERE r.rev = :rev")
-    , @NamedQuery(name = "Revinfo.findByRevtstmp", query = "SELECT r FROM Revinfo r WHERE r.revtstmp = :revtstmp")})
+    , @NamedQuery(name = "Revinfo.findByRevtstmp", query = "SELECT r FROM Revinfo r WHERE r.revtstmp = :revtstmp")
+    , @NamedQuery(name = "Revinfo.findByRevTime", query = "SELECT from_unixtime(REVTSTMP/1000) FROM Revinfo WHERE rev = :timestamp")})
 public class Revinfo implements Serializable {
 
     private static final long serialVersionUID = 1L;

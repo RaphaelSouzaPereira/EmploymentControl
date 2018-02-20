@@ -220,20 +220,20 @@
                                                             <span class="vaga-item"><strong>Detalhe: </strong></span><span class="vaga-value"><%= v.getDetalhe()%></span>
                                                         </li>
                                                         <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardBrasil()%></span>
+                                                            <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardBrasil() == null ? "" : v.getAprovacaoBoardBrasil() %></span>
                                                         </li>
                                                     </ul>
                                                 </div>
                                                 <div class="col-6">
                                                     <ul class="list-group">
                                                         <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardGlobal()%></span>
+                                                            <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardGlobal() == null ? "" : v.getAprovacaoBoardGlobal()%></span>
                                                         </li>
                                                         <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= v.getEntrouNaOperacao()%></span>
+                                                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= v.getEntrouNaOperacao() == null ? "" : v.getEntrouNaOperacao()%></span>
                                                         </li>
                                                         <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Profissional Selecionado: </strong></span><span class="vaga-value"><%= v.getProfissionalSelecionado()%></span>
+                                                            <span class="vaga-item"><strong>Profissional Selecionado: </strong></span><span class="vaga-value"><%= v.getProfissionalSelecionado() == null ? "" : v.getProfissionalSelecionado()%></span>
                                                         </li>
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= v.getRate()%></span>

@@ -58,7 +58,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "VagaAud.findByTecnologia", query = "SELECT v FROM VagaAud v WHERE v.tecnologia = :tecnologia")
     , @NamedQuery(name = "VagaAud.findByTipo", query = "SELECT v FROM VagaAud v WHERE v.tipo = :tipo")
     , @NamedQuery(name = "VagaAud.findByDataAudit", query = "SELECT v FROM VagaAud v WHERE v.dataAudit = :dataAudit")
-    , @NamedQuery(name = "VagaAud.findByMotivoAtualizacao", query = "SELECT v FROM VagaAud v WHERE v.motivoAtualizacao = :motivoAtualizacao")})
+    , @NamedQuery(name = "VagaAud.findByMotivoAtualizacao", query = "SELECT v FROM VagaAud v WHERE v.motivoAtualizacao = :motivoAtualizacao")
+    })
 public class VagaAud implements Serializable {
 
     private static final long serialVersionUID = 1L;

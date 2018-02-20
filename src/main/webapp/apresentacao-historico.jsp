@@ -53,13 +53,13 @@
                 <div class="col-5">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value"><%= vagaAudBean.getAprovacaoBoardGlobal() %></span>
+                            <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value"><%= vagaAudBean.getAprovacaoBoardGlobal() == null ? "" : vagaAudBean.getAprovacaoBoardGlobal() %></span>
                         </li>
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= vagaAudBean.getEntrouNaOperacao() %></span>
+                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= vagaAudBean.getEntrouNaOperacao() == null ? "" : vagaAudBean.getEntrouNaOperacao() %></span>
                         </li>
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value"><%= vagaAudBean.getAprovacaoBoardBrasil() %></span>
+                            <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value"><%= vagaAudBean.getAprovacaoBoardBrasil() == null ? "" : vagaAudBean.getAprovacaoBoardBrasil() %></span>
                         </li>
                         <li class="list-group-item">
                             <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= vagaAudBean.getRate() %></span>
@@ -72,7 +72,7 @@
                 <div class="offset-1 col-10">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Profissional Selecionado: </strong></span><span class="vaga-value"><%= vagaAudBean.getProfissionalSelecionado() %></span>
+                            <span class="vaga-item"><strong>Profissional Selecionado: </strong></span><span class="vaga-value"><%= vagaAudBean.getProfissionalSelecionado() == null ? "" : vagaAudBean.getProfissionalSelecionado()%></span>
                         </li>
                         <li class="list-group-item">
                             <span class="vaga-item"><strong>Detalhe: </strong></span><span class="vaga-value"><%= vagaAudBean.getDetalhe() %></span>
