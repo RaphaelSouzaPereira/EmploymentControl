@@ -4,7 +4,7 @@
     Author     : PriscilaRicardoArrud
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=ISO-8859-1" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage=""%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -67,7 +67,7 @@
                                 <select id="inputTec" class="form-control" name="tecnologia" required>
                                     <option value="">Selecione...</option>
                                     <!-- TODO: Cadastrar valores em tabela Tecnologia -->                                    
-                                    <option>Analista de Automacao</option>
+                                    <option>Analista de Automação</option>
                                     <option>Atendente</option>
                                     <option>Clipper</option>
                                     <option>Designer UX</option>                                    
