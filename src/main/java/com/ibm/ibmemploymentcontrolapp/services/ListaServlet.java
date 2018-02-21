@@ -59,10 +59,15 @@ public class ListaServlet extends HttpServlet {
 
         //Pega parametros da jsp
         String pageNumber = request.getParameter("pn");
+        System.out.println("pageNumber "+pageNumber);
         String searchFilter = request.getParameter("sf");
+        System.out.println("searchFilter "+searchFilter);
         String searchArea = request.getParameter("sa");
+        System.out.println("searchArea "+searchArea);
         String searchStatus = request.getParameter("ss");
+        System.out.println("searchStatus "+searchStatus);
         String searchTechnology = request.getParameter("st");
+        System.out.println("searchTechnology "+searchTechnology);
 
         //Verifica se o filtro está vindo como null e seta um valor padrão
         if (searchFilter == null) {
