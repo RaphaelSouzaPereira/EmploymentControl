@@ -45,6 +45,10 @@
         <servlet-name>HistoricoServlet</servlet-name>
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.HistoricoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VacancyReport</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.VacancyReport</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -80,6 +84,10 @@
     <servlet-mapping>
         <servlet-name>HistoricoServlet</servlet-name>
         <url-pattern>/HistoricoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VacancyReport</servlet-name>
+        <url-pattern>/VacancyReport</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

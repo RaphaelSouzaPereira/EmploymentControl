@@ -47,23 +47,23 @@
                                 <div class="form-row mb-4">
                                     <div class="form-group col-xs-12 col-md-12">
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="OpenAndOnHoldOption" name="fdc" class="custom-control-input" value="Status Open e On Hold" <%= currentFilter.equals("Status Open e On Hold") ? "checked" : ""%>>
+                                            <input type="radio" id="OpenAndOnHoldOption" name="sf" class="custom-control-input" value="Status Open e On Hold" <%= currentFilter.equals("Status Open e On Hold") ? "checked" : ""%>>
                                             <label class="custom-control-label" for="OpenAndOnHoldOption">Status Open e On Hold</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="AreaOption" name="fdc" class="custom-control-input" value="Area" <%= currentFilter.equals("Area") ? "checked" : ""%>>
+                                            <input type="radio" id="AreaOption" name="sf" class="custom-control-input" value="Area" <%= currentFilter.equals("Area") ? "checked" : ""%>>
                                             <label class="custom-control-label" for="AreaOption">Area</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="StatusOption" name="fdc" class="custom-control-input" value="Status" <%= currentFilter.equals("Status") ? "checked" : ""%>>
+                                            <input type="radio" id="StatusOption" name="sf" class="custom-control-input" value="Status" <%= currentFilter.equals("Status") ? "checked" : ""%>>
                                             <label class="custom-control-label" for="StatusOption">Status</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="TecnologiaOption" name="fdc" class="custom-control-input" value="Tecnologia" <%= currentFilter.equals("Tecnologia") ? "checked" : ""%>>
+                                            <input type="radio" id="TecnologiaOption" name="sf" class="custom-control-input" value="Tecnologia" <%= currentFilter.equals("Tecnologia") ? "checked" : ""%>>
                                             <label class="custom-control-label" for="TecnologiaOption">Tecnologia</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="AllOptions" name="fdc" class="custom-control-input" value="Area, Status e Tecnologia" <%= currentFilter.equals("Area, Status e Tecnologia") ? "checked" : ""%>>
+                                            <input type="radio" id="AllOptions" name="sf" class="custom-control-input" value="Area, Status e Tecnologia" <%= currentFilter.equals("Area, Status e Tecnologia") ? "checked" : ""%>>
                                             <label class="custom-control-label" for="AllOptions">Area, Status e Tecnologia</label>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
                                 <div class="form-row mb-4">
                                     <div class="form-group col-xs-12 col-md-3">
                                         <label for="inputStatus">Área:</label>
-                                        <select id="inputAreaConsulta" class="form-control" name="adc">
+                                        <select id="inputAreaConsulta" class="form-control" name="sa">
                                             <option <%= currentArea.equals("Arquitetura") ? "selected" : ""%>>Arquitetura</option>
                                             <option <%= currentArea.equals("Canais") ? "selected" : ""%>>Canais</option>
                                             <option <%= currentArea.equals("Digital") ? "selected" : ""%>>Digital</option>
@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="form-group col-xs-12 col-md-3">
                                         <label for="inputStatus">Status:</label>
-                                        <select id="inputStatusConsulta" class="form-control" name="sdc">
+                                        <select id="inputStatusConsulta" class="form-control" name="ss">
                                             <option <%= currentStatus.equals("Open") ? "selected" : ""%>>Open</option>
                                             <option <%= currentStatus.equals("Closed") ? "selected" : ""%>>Closed</option>
                                             <option <%= currentStatus.equals("On hold") ? "selected" : ""%>>On hold</option>
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="form-group col-xs-12 col-md-3">
                                         <label for="inputStatus">Tecnologia:</label>
-                                        <select id="inputTecnologiaConsulta" class="form-control" name="tdc">
+                                        <select id="inputTecnologiaConsulta" class="form-control" name="st">
                                             <option <%= currentTechnology.equals("Java") ? "selected" : ""%>>Java</option>
                                             <!--TODO - Tratar acentuacao-->
                                             <option <%= currentTechnology.equals("Analista de Automacao") ? "selected" : ""%>>Analista de Automacao</option>
@@ -106,10 +106,17 @@
                             </form>
                     </div>
                 </div>
-                <!---------- Consulta de Vagas - Fim ---------->  
+                <!---------- Consulta de Vagas - Fim ---------->
                 <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
+                    <div class="offset-1 col-7">
+                        <h2 class="ibmec-title my-2">Vagas Filtradas</h2>
+                    </div>
+                    <div class="col-3 text-right">
+                        <a href="./VacancyReport?rf=<%=currentFilter%>&ra=<%=currentArea%>&rs=<%=currentStatus%>&rt=<%=currentTechnology%>" class="btn ibmec-btn px-4">Gerar Relatório de Vagas</a>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="offset-1 col-10">
-                        <h2 class="ibmec-title mb-3">Vagas Filtradas</h2>
                         <div class="table-responsive">
                             <hr>
                             <table class="table table-bordered list-table-ibmec">
@@ -469,21 +476,21 @@
                                             <div class="historico-ibmec">                                                    
                                                 <% List<VagaAudBean> listaVagaAud = (List<VagaAudBean>) request.getAttribute("listaHistoricoVagas" + v.getId()); %>
                                                 <%int i = 0;
-                                                        BigInteger b1 = new BigInteger("1");
-                                                        Long l1;
-                                                        Timestamp timestamp;
-                                                        Date dataT;%>
+                                                    BigInteger b1 = new BigInteger("1");
+                                                    Long l1;
+                                                    Timestamp timestamp;
+                                                    Date dataT;%>
                                                 <% for (VagaAudBean vagaAud : listaVagaAud) {%>
                                                 <!----------------- EU FIZ MAS NAO ME ORGULHO... --------------------->
                                                 <% b1 = vagaAud.getRevinfo().getRevtstmp();
-                                                   l1 = b1.longValue();
-                                                   timestamp = new Timestamp(l1);
-                                                   dataT = new Date(timestamp.getTime()); %>
+                                                    l1 = b1.longValue();
+                                                    timestamp = new Timestamp(l1);
+                                                    dataT = new Date(timestamp.getTime());%>
                                                 <!----------------- EU FIZ MAS NAO ME ORGULHO... ---------------------->
                                                 <div class="form-group col-12">
                                                     <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">                                                        
                                                         <%=vagaAud.getDataAudit() == null
-                                                                    ? dataT : vagaAud.getDataAudit()%></span>
+                                                                ? dataT : vagaAud.getDataAudit()%></span>
                                                 </div>
                                                 <div class="form-group col-12">
                                                     <div id="motivo" name="motivo" class="motivo-ibmec"><%=vagaAud.getMotivoAtualizacao() == null ? "Vaga Cadastrada" : vagaAud.getMotivoAtualizacao()%></div>                                                       
