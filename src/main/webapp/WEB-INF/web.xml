@@ -30,10 +30,6 @@
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.CandidatosNaVagaServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>HistoricoServlet</servlet-name>
-        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.HistoricoServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ListaCandidatoServlet</servlet-name>
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.ListaCandidatoServlet</servlet-class>
     </servlet>
@@ -42,12 +38,12 @@
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.AtualizarCandidatoServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RelatorioServlet</servlet-name>
-        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.RelatorioServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ConsultarVagas</servlet-name>
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.ConsultarVagas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HistoricoServlet</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.HistoricoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -74,10 +70,6 @@
         <url-pattern>/CandidatosNaVaga</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HistoricoServlet</servlet-name>
-        <url-pattern>/HistoricoServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ListaCandidatoServlet</servlet-name>
         <url-pattern>/ListaCandidatoServlet</url-pattern>
     </servlet-mapping>
@@ -86,8 +78,8 @@
         <url-pattern>/AtualizarCandidatoServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RelatorioServlet</servlet-name>
-        <url-pattern>/RelatorioServlet</url-pattern>
+        <servlet-name>HistoricoServlet</servlet-name>
+        <url-pattern>/HistoricoServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
