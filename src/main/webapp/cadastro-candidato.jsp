@@ -18,7 +18,7 @@
         <jsp:include page = "include/header.jsp" />
         <div class="container">
             <div class="row">
-                <div class="offset-1 col-md-10">
+                <div class="col-md-12">
                     <h2 class="ibmec-title mb-3">Cadastro de Candidatos</h2>
                     <hr>
                     <form class="cadastra-candidatos" action="./CandidatoServlet" method="post" onchange="validaCamposDeCadastroDeCandidatos()">

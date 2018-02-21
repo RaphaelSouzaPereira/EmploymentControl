@@ -21,22 +21,22 @@
         <jsp:include page = "include/header.jsp" />
         <div class="container"> <!---------- Container - Beginning ---------->
             <div class="row"> <!---------- Vacancy Report - Beginning ---------->
-                <div class="offset-1 col-10">
+                <div class="col-12">
                     <h2 class="ibmec-title mb-3">Relatório de Vagas</h2>
                     <hr>
                     <div class="table-responsive">
                         <table class="table table-bordered list-table-ibmec">
                             <thead class="list-thead-ibmec"> <!---------- Vacancy Report - thead - Beginning ---------->
                                 <tr class="list-ibmec">
-                                    <th>Status</th>
+                                    <th class>Status</th>
                                     <th>PMP</th>
                                     <th>Área</th>
                                     <th>Banda</th>
                                     <th>Tipo</th>
                                     <th>Tecnologia</th>
                                     <th>Detalhe</th>
-                                    <th>Aprovação Board Brasil</th>
-                                    <th>Aprovação Board Global</th>
+                                    <th>Aprovação B. B.</th>
+                                    <th>Aprovação B. G.</th>
                                     <th>Comentários</th>
                                 </tr>
                             </thead> <!---------- Vacancy Report - thead - End ---------->

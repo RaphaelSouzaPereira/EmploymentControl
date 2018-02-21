@@ -21,77 +21,79 @@
     </head>
 
     <jsp:include page = "include/header.jsp" />
-    <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
-        <div class="offset-1 col-md-10">
-            <h2 class="title mb-3 offset-xs-1">Candidatos Cadastrados</h2>
-            <div class="table-responsive">
-                <hr>
-                <table class="table table-bordered list-table-ibmec">
-                    <thead class="list-thead-ibmec"> <!---------- Candidatos Cadastrados - Head da tabela - Início ---------->
-                        <tr class="list-ibmec">
-                            <th>Nome</th>
-                            <th>E-mail</th>
-                            <th>Editar</th>
-                        </tr>
-                    </thead> <!---------- Candidatos Cdastrados - Cabeçalho da tabela - Fim ---------->
-                    <tbody>  <!---------- Candidatos Cadastrados - Corpo da tabela - Início ---------->
-                        <%  ArrayList<CandidatoBean> listaDeCandidatos = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosCompletos");
-                        %>
-                        <%
+    <div class="container">
+        <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
+            <div class="col-md-12">
+                <h2 class="title mb-3 offset-xs-1">Candidatos Cadastrados</h2>
+                <div class="table-responsive">
+                    <hr>
+                    <table class="table table-bordered list-table-ibmec">
+                        <thead class="list-thead-ibmec"> <!---------- Candidatos Cadastrados - Head da tabela - Início ---------->
+                            <tr class="list-ibmec">
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Editar</th>
+                            </tr>
+                        </thead> <!---------- Candidatos Cdastrados - Cabeçalho da tabela - Fim ---------->
+                        <tbody>  <!---------- Candidatos Cadastrados - Corpo da tabela - Início ---------->
+                            <%  ArrayList<CandidatoBean> listaDeCandidatos = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosCompletos");
+                            %>
+                            <%
                             for (CandidatoBean c : listaDeCandidatos) {%>
-                        <!---------- Candidatos Cadastrados - For da Lista de Candidatos - Início ---------->
-                        <tr class="list-row-ibmec">
-                            <td><%= c.getNome()%></td>
-                            <td><%= c.getEmail()%></td>   
-                            <td class="text-center"> <!---------- Candidatos Cadastradas - Botões das Opções - Início ---------->
-                                <span
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="Editar candidato">
-                                    <a
-                                        class="btn btn-ibmec"
-                                        data-toggle="collapse"                                        
-                                        href="#editar_candidato-<%= c.getId()%>"
-                                        role="button"
-                                        aria-expanded="false"
-                                        aria-controls="#editar_candidato-<%= c.getId()%>"
-                                        >
-                                        <i class="material-icons">mode_edit</i>
-                                    </a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr class="collapse multi-collapse list-row-content-ibmec"
-                            id="editar_candidato-<%= c.getId()%>"
-                            data-toggle="collapse">
-                            <td colspan="5" class="edit-light-grey">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <form class="atualizar-candidato" id="atualizar-candidato-form" action="./AtualizarCandidatoServlet" method="post" onchange="validaCamposDeCadastroDeCandidatos()">
-                                            <div class="form-row">
-                                                <div class="form-group d-none">
-                                                    <input value="<%= c.getId()%>" type="hidden" class="form-control" id="inputIdCandidato" name="id_candidato">
+                            <!---------- Candidatos Cadastrados - For da Lista de Candidatos - Início ---------->
+                            <tr class="list-row-ibmec">
+                                <td><%= c.getNome()%></td>
+                                <td><%= c.getEmail()%></td>   
+                                <td class="text-center"> <!---------- Candidatos Cadastradas - Botões das Opções - Início ---------->
+                                    <span
+                                        data-toggle="tooltip"
+                                        data-placement="top"
+                                        title="Editar candidato">
+                                        <a
+                                            class="btn btn-ibmec"
+                                            data-toggle="collapse"                                        
+                                            href="#editar_candidato-<%= c.getId()%>"
+                                            role="button"
+                                            aria-expanded="false"
+                                            aria-controls="#editar_candidato-<%= c.getId()%>"
+                                            >
+                                            <i class="material-icons">mode_edit</i>
+                                        </a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="collapse multi-collapse list-row-content-ibmec"
+                                id="editar_candidato-<%= c.getId()%>"
+                                data-toggle="collapse">
+                                <td colspan="5" class="edit-light-grey">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <form class="atualizar-candidato" id="atualizar-candidato-form" action="./AtualizarCandidatoServlet" method="post" onchange="validaCamposDeCadastroDeCandidatos()">
+                                                <div class="form-row">
+                                                    <div class="form-group d-none">
+                                                        <input value="<%= c.getId()%>" type="hidden" class="form-control" id="inputIdCandidato" name="id_candidato">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-md-4">
+                                                        <label for="inputNome">Nome:</label>
+                                                        <input value="<%=c.getNome()%>" type="text" class="form-control" id="inputNome" placeholder="Nome" name="nome">
+                                                    </div>   
+                                                    <div class="form-group col-xs-12 col-md-4">
+                                                        <label for="inputEmail">E-mail:</label>
+                                                        <input value="<%=c.getEmail()%>" type="text" class="form-control" id="inputEmail" placeholder="E-mail" name="email">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-md-9 text-xs-center">
+                                                        <button type="submit" class="btn btn-ibmec" id="btn-salvar-candidato" disabled>Salvar</button>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group col-xs-12 col-md-4">
-                                                    <label for="inputNome">Nome:</label>
-                                                    <input value="<%=c.getNome()%>" type="text" class="form-control" id="inputNome" placeholder="Nome" name="nome">
-                                                </div>   
-                                                <div class="form-group col-xs-12 col-md-4">
-                                                    <label for="inputEmail">E-mail:</label>
-                                                    <input value="<%=c.getEmail()%>" type="text" class="form-control" id="inputEmail" placeholder="E-mail" name="email">
-                                                </div>
-                                                <div class="form-group col-xs-12 col-md-9 text-xs-center">
-                                                    <button type="submit" class="btn btn-ibmec" id="btn-salvar-candidato" disabled>Salvar</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <% }%>
-                    </tbody>
-                </table>
+                                </td>
+                            </tr>
+                            <% }%>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

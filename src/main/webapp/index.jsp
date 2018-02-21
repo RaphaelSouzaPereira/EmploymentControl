@@ -39,7 +39,7 @@
                     String currentTechnology = (String) session.getAttribute("currentTechnology");
                 %>
                 <div class="row">
-                    <div class="offset-1 col-10">
+                    <div class="col-12">
                         <h2 class="ibmec-title mb-3">Consultar Vagas Cadastradas</h2>
                         <hr>
                         <h3 class="mb-3 ibmec-subtitle">Filtrar por...</h2>
@@ -108,15 +108,15 @@
                 </div>
                 <!---------- Consulta de Vagas - Fim ---------->
                 <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
-                    <div class="offset-1 col-7">
+                    <div class="col-9">
                         <h2 class="ibmec-title my-2">Vagas Filtradas</h2>
                     </div>
-                    <div class="col-3 text-right">
-                        <a href="./VacancyReport?rf=<%=currentFilter%>&ra=<%=currentArea%>&rs=<%=currentStatus%>&rt=<%=currentTechnology%>" class="btn ibmec-btn px-4">Gerar Relatório de Vagas</a>
+                    <div class="col-3 pl-0">
+                        <a href="./VacancyReport?rf=<%=currentFilter%>&ra=<%=currentArea%>&rs=<%=currentStatus%>&rt=<%=currentTechnology%>" class="btn btn-block ibmec-btn">Gerar Relatório de Vagas</a>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="offset-1 col-10">
+                    <div class="col-12">
                         <div class="table-responsive">
                             <hr>
                             <table class="table table-bordered list-table-ibmec">
