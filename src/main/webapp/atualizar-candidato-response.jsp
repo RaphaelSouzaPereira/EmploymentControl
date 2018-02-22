@@ -23,7 +23,7 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Editar candidato com sucesso!</h4>
+                        <h4 class="modal-title">Candidato atualizado com sucesso!</h4>
                     </div>
                     <div class="modal-body">
                         <p>Deseja atualizar mais candidatos?</p>

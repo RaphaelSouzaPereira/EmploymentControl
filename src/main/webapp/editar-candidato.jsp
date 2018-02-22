@@ -44,7 +44,7 @@
                             <tr class="list-row-ibmec">
                                 <td><%= c.getNome()%></td>
                                 <td><%= c.getEmail()%></td>   
-                                <td class="text-center"> <!---------- Candidatos Cadastradas - Botões das Opções - Início ---------->
+                                <td class="text-center"> <!---------- Candidatos Cadastrados - Botões das Opções - Início ---------->
                                     <span
                                         data-toggle="tooltip"
                                         data-placement="top"
@@ -82,7 +82,7 @@
                                                         <input value="<%=c.getEmail()%>" type="text" class="form-control" id="inputEmail" placeholder="E-mail" name="email">
                                                     </div>
                                                     <div class="form-group col-xs-12 col-md-9 text-xs-center">
-                                                        <button type="submit" class="btn btn-ibmec" id="btn-salvar-candidato" disabled>Salvar</button>
+                                                        <button type="submit" class="btn btn-ibmec" id="btn-editar-candidato">Salvar</button>
                                                     </div>
                                                 </div>
                                             </form>
