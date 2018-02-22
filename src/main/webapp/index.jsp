@@ -111,10 +111,10 @@
                 </div>
                 <!---------- Consulta de Vagas - Fim ---------->
                 <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
-                    <div class="col-9">
+                    <div class="col-md-9">
                         <h2 class="ibmec-title my-2">Vagas Filtradas</h2>
                     </div>
-                    <div class="col-3 pl-0">
+                    <div class="col-xs-12 offset-xs-1 col-md-3 pl-md-0">
                         <a href="./VacancyReport?rf=<%=currentFilter%>&ra=<%=currentArea%>&rs=<%=currentStatus%>&rt=<%=currentTechnology%>" class="btn btn-block ibmec-btn">Gerar Relatório de Vagas</a>
                     </div>
                 </div>
