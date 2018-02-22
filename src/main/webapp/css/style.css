@@ -1,4 +1,13 @@
-/*---------- Menu - Início ----------*/
+html, body {
+    height:100%;
+}
+
+.container {
+    min-height:100%;
+    position:relative;
+}
+
+/*---------- Menu - Beginning ----------*/
 .ibmec-menu {
     background-color: #000;
     position: sticky;
@@ -38,9 +47,9 @@
 .ibmec-menu-dropdown .ibmec-menu-link:hover {
     border: none;
 }
-/*---------- Menu - Fim ----------*/
+/*---------- Menu - End ----------*/
 
-/*---------- Títulos e Subtítulos - Início -----*/
+/*---------- Titles e Subtitles - Beginning -----*/
 .ibmec-title {
     color: rgb(0,120,215);
     font-size: 18px;
@@ -48,9 +57,9 @@
 .ibmec-subtitle {
     font-size: 16px;
 }
-/*---------- Títulos e Subtítulos - Fim -----*/
+/*---------- Titles e Subtitles - End -----*/
 
-/*---------- Botões - Início --*/
+/*---------- Buttons - Beginning --*/
 .ibmec-btn {
     background-color: #fff;
     border-color: rgb(0,120,215);
@@ -62,48 +71,46 @@
     border-color: rgb(0,120,215);
     color: #fff;
 }
-/*---------- Botões - Fim --*/
+/*---------- Buttons - End --*/
 
-.list-table-ibmec {
+/*---------- Table - Beginning --*/
+.ibmec-table {
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
 }
 
-.list-thead-ibmec {
+.ibmec-thead {
     background-color: #f1f1f1;
     color: #666666;
 }
 
-.list-row-ibmec td{
+.ibmec-table .ibmec-thead-th {
+    border-bottom-width: 1px;
+}
+
+.ibmec-table .ibmec-tbody-td{
     vertical-align: middle;
 }
 
-.list-row-content-ibmec {
-    background-color: #fafafa;
-}
+.ibmec-tbody-tr-content-occult {
+    background-color: #f1f1f1}
+/*---------- Table - End --*/
 
-.edit-light-grey {
-    background-color: #f1f1f1;
-}
-
-.cadastra-candidatos {
-    height: 335px;
-}
-
+/*---------- Footer- Beginning --*/
 .footer-ibmec {
     text-align: center;
     background-color: #000;
     color: #fff;
-    left: 0;
-    bottom: 0;
     margin-top: 25px;
     min-height: 4rem;
+    position:absolute;
 }
 
 .footer-content-ibmec {
-    padding: 2%;
     box-sizing: border-box;
     margin-bottom: 0;
+    padding: 2%;
 }
+/*---------- Footer- End --*/
 
 .historico-ibmec {
     height: 339px;

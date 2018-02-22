@@ -27,12 +27,12 @@
                 <h2 class="title mb-3 offset-xs-1">Candidatos Cadastrados</h2>
                 <div class="table-responsive">
                     <hr>
-                    <table class="table table-bordered list-table-ibmec">
-                        <thead class="list-thead-ibmec"> <!---------- Candidatos Cadastrados - Head da tabela - Início ---------->
-                            <tr class="list-ibmec">
-                                <th>Nome</th>
-                                <th>E-mail</th>
-                                <th>Editar</th>
+                    <table class="table table-bordered ibmec-table">
+                        <thead class="ibmec-thead"> <!---------- Candidatos Cadastrados - Head da tabela - Início ---------->
+                            <tr>
+                                <th class="ibmec-thead-th">Nome</th>
+                                <th class="ibmec-thead-th">E-mail</th>
+                                <th class="ibmec-thead-th">Editar</th>
                             </tr>
                         </thead> <!---------- Candidatos Cdastrados - Cabeçalho da tabela - Fim ---------->
                         <tbody>  <!---------- Candidatos Cadastrados - Corpo da tabela - Início ---------->
@@ -41,10 +41,10 @@
                             <%
                             for (CandidatoBean c : listaDeCandidatos) {%>
                             <!---------- Candidatos Cadastrados - For da Lista de Candidatos - Início ---------->
-                            <tr class="list-row-ibmec">
-                                <td><%= c.getNome()%></td>
-                                <td><%= c.getEmail()%></td>   
-                                <td class="text-center"> <!---------- Candidatos Cadastradas - Botões das Opções - Início ---------->
+                            <tr>
+                                <td class="ibmec-tbody-td"><%= c.getNome()%></td>
+                                <td class="ibmec-tbody-td"><%= c.getEmail()%></td>   
+                                <td class="text-center ibmec-tbody-td"> <!---------- Candidatos Cadastradas - Botões das Opções - Início ---------->
                                     <span
                                         data-toggle="tooltip"
                                         data-placement="top"
@@ -62,10 +62,10 @@
                                     </span>
                                 </td>
                             </tr>
-                            <tr class="collapse multi-collapse list-row-content-ibmec"
+                            <tr class="collapse multi-collapse ibmec-tbody-tr-content-occult"
                                 id="editar_candidato-<%= c.getId()%>"
                                 data-toggle="collapse">
-                                <td colspan="5" class="edit-light-grey">
+                                <td colspan="5" class="ibmec-tbody-td">
                                     <div class="row">
                                         <div class="col-6">
                                             <form class="atualizar-candidato" id="atualizar-candidato-form" action="./AtualizarCandidatoServlet" method="post" onchange="validaCamposDeCadastroDeCandidatos()">
