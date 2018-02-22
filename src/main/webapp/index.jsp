@@ -4,6 +4,8 @@
     Author     : PriscilaRicardoArrud
 --%>
 
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Locale"%>
 <%@page import="com.ibm.ibmemploymentcontrolapp.dao.VagaAudDAO"%>
 <%@page import="java.math.BigInteger"%>
 <%@page import="java.util.Date"%>
@@ -476,22 +478,11 @@
                                         <form class="listar-historico" action="./HistoricoServlet" method="post">                                        
                                             <div class="historico-ibmec">                                                    
                                                 <% List<VagaAudBean> listaVagaAud = (List<VagaAudBean>) request.getAttribute("listaHistoricoVagas" + v.getId()); %>
-                                                <%int i = 0;
-                                                    BigInteger b1 = new BigInteger("1");
-                                                    Long l1;
-                                                    Timestamp timestamp;
-                                                    Date dataT;%>
+                                                <%int i = 0;%>
                                                 <% for (VagaAudBean vagaAud : listaVagaAud) {%>
-                                                <!----------------- EU FIZ MAS NAO ME ORGULHO... --------------------->
-                                                <% b1 = vagaAud.getRevinfo().getRevtstmp();
-                                                    l1 = b1.longValue();
-                                                    timestamp = new Timestamp(l1);
-                                                    dataT = new Date(timestamp.getTime());%>
-                                                <!----------------- EU FIZ MAS NAO ME ORGULHO... ---------------------->
                                                 <div class="form-group col-12">
                                                     <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">                                                        
-                                                        <%=vagaAud.getDataAudit() == null
-                                                                ? dataT : vagaAud.getDataAudit()%></span>
+                                                        <%=vagaAud.getDataAudit()%></span>
                                                 </div>
                                                 <div class="form-group col-12">
                                                     <div id="motivo" name="motivo" class="motivo-ibmec"><%=vagaAud.getMotivoAtualizacao() == null ? "Vaga Cadastrada" : vagaAud.getMotivoAtualizacao()%></div>                                                       

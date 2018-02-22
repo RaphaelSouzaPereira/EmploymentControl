@@ -72,6 +72,7 @@ public class ControlServlet extends HttpServlet {
         Date dateAprovacaoGlobal = null;
         Date dateEntrouOperacao = null;
         
+        
         // Variaveis datas sendo convertidas
         dateAbertura = conversaoData(dataAberturaForm, dateAbertura);
         dateExpectativaEntrada = conversaoData(dataExpectativaEntradaForm, dateExpectativaEntrada);
@@ -111,6 +112,7 @@ public class ControlServlet extends HttpServlet {
 
         // campos de calculo de data
         vaga.setExpectativaDeAbertura(expectativaDeAbertura);
+        vaga.setDataAudit(new Date()); // para o cadastro da vaga, a primeira "modificacao"
 
         // salva no banco
         vagaDAO.salvarVaga(vaga);
