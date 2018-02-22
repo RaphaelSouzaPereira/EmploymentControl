@@ -3,7 +3,7 @@
     Created on : Jan 22, 2018, 12:04:03 PM
     Author     : Raphael de Souza Pereira <raphael.pereira@ibm.com>
 --%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=ISO-8859-1" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage=""%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,7 +18,7 @@
         <jsp:include page = "include/header.jsp" />
         <div class="container">
             <div class="row">
-                <div class="offset-1 col-md-10">
+                <div class="col-md-12">
                     <h2 class="ibmec-title mb-3">Cadastro de Candidatos</h2>
                     <hr>
                     <form class="cadastra-candidatos" action="./CandidatoServlet" method="post" onchange="validaCamposDeCadastroDeCandidatos()">
