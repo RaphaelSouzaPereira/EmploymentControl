@@ -4,6 +4,8 @@
     Author     : PriscilaRicardoArrud
 --%>
 
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Locale"%>
 <%@page import="com.ibm.ibmemploymentcontrolapp.dao.VagaAudDAO"%>
 <%@page import="java.math.BigInteger"%>
 <%@page import="java.util.Date"%>
@@ -60,6 +62,7 @@
                                             <label class="custom-control-label" for="OpenAndOnHoldOption">Status Open e On Hold</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
+
                                             <input type="radio" id="AreaOption" name="sf" class="custom-control-input" value="Area" <%= currentFilter.equals("Area") ? "checked" : ""%>>
                                             <label class="custom-control-label" for="AreaOption">Area</label>
                                         </div>
@@ -102,7 +105,7 @@
                                         <select id="inputTecnologiaConsulta" class="form-control" name="st">
                                             <option <%= currentTechnology.equals("Java") ? "selected" : ""%>>Java</option>
                                             <!--TODO - Tratar acentuacao-->
-                                            <option <%= currentTechnology.equals("Analista de Automacao") ? "selected" : ""%>>Analista de Automacao</option>
+                                            <option <%= currentTechnology.equals("Analista de Automacao") ? "selected" : ""%>>Analista de Automação</option>
                                             <option <%= currentTechnology.equals("Especialista Mobilidade") ? "selected" : ""%>>Especialista Mobilidade</option>
                                             <option <%= currentTechnology.equals("Designer UX") ? "selected" : ""%>>Designer UX</option>
                                             <option <%= currentTechnology.equals("Dev. ODI") ? "selected" : ""%>>Dev. ODI</option>
@@ -117,10 +120,10 @@
                 </div>
                 <!---------- Consulta de Vagas - Fim ---------->
                 <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
-                    <div class="col-9">
+                    <div class="col-md-9">
                         <h2 class="ibmec-title my-2">Vagas Filtradas</h2>
                     </div>
-                    <div class="col-3 pl-0">
+                    <div class="col-xs-12 offset-xs-1 col-md-3 pl-md-0">
                         <a href="./VacancyReport?rf=<%=currentFilter%>&ra=<%=currentArea%>&rs=<%=currentStatus%>&rt=<%=currentTechnology%>" class="btn btn-block ibmec-btn">Gerar Relatório de Vagas</a>
                     </div>
                 </div>
@@ -133,8 +136,8 @@
                                     <tr class="list-ibmec">
                                         <th>Status</th>
                                         <th>PMP</th>
-                                        <th>Tecnologia</th>
                                         <th>Área</th>
+                                        <th>Tecnologia</th>
                                         <th>Opções</th>
                                     </tr>
                                 </thead> <!---------- Vagas Cadastradas - Cabeçalho da tabela - Fim ---------->
@@ -154,8 +157,8 @@
                                 <tr class="list-row-ibmec"> 
                                     <td><%= v.getStatus()%></td>
                                     <td><%= v.getPmp()%></td>
-                                    <td><%= v.getTecnologia()%></td>
                                     <td><%= v.getArea()%></td>
+                                    <td><%= v.getTecnologia()%></td>
                                     <td class="text-center"> <!---------- Vagas Cadastradas - Botões das Opções - Início ---------->
                                         <span
                                             data-toggle="tooltip"
@@ -231,9 +234,24 @@
                                                 <ul class="list-group">
                                                     <li class="list-group-item">
                                                         <span class="vaga-item"><strong>Categoria: </strong></span><span class="vaga-value"><%= v.getCategoria()%></span> 
+                                                    </li>  
+                                                    <li class="list-group-item">
+                                                        <span class="vaga-item"><strong>Tipo: </strong></span><span class="vaga-value"><%= v.getTipo()%></span>
+                                                    </li> 
+                                                    <li class="list-group-item">
+                                                        <span class="vaga-item"><strong>Banda: </strong></span><span class="vaga-value"><%= v.getBanda()%></span>
+                                                    </li>                                                 
+                                                    <li class="list-group-item">
+                                                        <span class="vaga-item"><strong>Data de Abertura da Vaga: </strong></span><span class="vaga-value"><%= v.getDataDeAbertura()%></span>
                                                     </li>
                                                     <li class="list-group-item">
                                                         <span class="vaga-item"><strong>Expectativa de Entrada: </strong></span><span class="vaga-value"><%= v.getExpectativaDeEntrada()%></span>
+                                                    </li> 
+                                                    <li class="list-group-item">
+                                                        <span class="vaga-item"><strong>Expectativa / Abertura: </strong></span><span class="vaga-value"><%= expectativaVsAbertura%></span>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= v.getRate()%></span>
                                                     </li>
                                                     <li class="list-group-item">
                                                         <span class="vaga-item"><strong>Aprovação Board Brasil: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardBrasil() == null ? "" : v.getAprovacaoBoardBrasil()%></span>
@@ -242,29 +260,17 @@
                                                         <span class="vaga-item"><strong>Aprovação Board Global: </strong></span><span class="vaga-value"><%= v.getAprovacaoBoardGlobal() == null ? "" : v.getAprovacaoBoardGlobal()%></span>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= v.getEntrouNaOperacao() == null ? "" : v.getEntrouNaOperacao()%></span>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= v.getRate()%></span>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <span class="vaga-item"><strong>Expectativa / Abertura: </strong></span><span class="vaga-value"><%= expectativaVsAbertura%></span>
-                                                    </li>  
-                                                    <li class="list-group-item">
-                                                        <span class="vaga-item"><strong>Tipo: </strong></span><span class="vaga-value"><%= v.getTipo()%></span>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <span class="vaga-item"><strong>Banda: </strong></span><span class="vaga-value"><%= v.getBanda()%></span>
-                                                    </li>
-                                                    <li class="list-group-item">
                                                         <span class="vaga-item"><strong>Detalhe: </strong></span><span class="vaga-value"><%= v.getDetalhe()%></span>
                                                     </li>                                                        
                                                 </ul>
                                             </div>
                                             <div class="col-6">
-                                                <ul class="list-group">                                                        
+                                                <ul class="list-group"> 
                                                     <li class="list-group-item">
-                                                        <span class="vaga-item"><strong>Data de Abertura: </strong></span><span class="vaga-value"><%= v.getDataDeAbertura()%></span>
+                                                        <span class="vaga-item"><strong>Profissional Selecionado: </strong></span><span class="vaga-value"><%= v.getProfissionalSelecionado() == null ? "" : v.getProfissionalSelecionado()%></span>
+                                                    </li>    
+                                                    <li class="list-group-item">
+                                                        <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= v.getEntrouNaOperacao() == null ? "" : v.getEntrouNaOperacao()%></span>
                                                     </li>
                                                     <li class="list-group-item">
                                                         <span class="vaga-item"><strong>Desde Expectativa: </strong></span><span class="vaga-value"><%= expectativaDeEntrada%></span>
@@ -281,9 +287,6 @@
                                                     <li class="list-group-item">
                                                         <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value"><%= impactoFinanceiro%></span>
                                                     </li>
-                                                    <li class="list-group-item">
-                                                        <span class="vaga-item"><strong>Profissional Selecionado: </strong></span><span class="vaga-value"><%= v.getProfissionalSelecionado() == null ? "" : v.getProfissionalSelecionado()%></span>
-                                                    </li>                                                        
                                                     <li class="list-group-item">
                                                         <span class="vaga-item"><strong>Comentários: </strong></span><span class="vaga-value"><%= v.getComentario()%></span>
                                                     </li>
@@ -484,22 +487,11 @@
                                         <form class="listar-historico" action="./HistoricoServlet" method="post">                                        
                                             <div class="historico-ibmec">                                                    
                                                 <% List<VagaAudBean> listaVagaAud = (List<VagaAudBean>) request.getAttribute("listaHistoricoVagas" + v.getId()); %>
-                                                <%int i = 0;
-                                                    BigInteger b1 = new BigInteger("1");
-                                                    Long l1;
-                                                    Timestamp timestamp;
-                                                    Date dataT;%>
+                                                <%int i = 0;%>
                                                 <% for (VagaAudBean vagaAud : listaVagaAud) {%>
-                                                <!----------------- EU FIZ MAS NAO ME ORGULHO... --------------------->
-                                                <% b1 = vagaAud.getRevinfo().getRevtstmp();
-                                                    l1 = b1.longValue();
-                                                    timestamp = new Timestamp(l1);
-                                                    dataT = new Date(timestamp.getTime());%>
-                                                <!----------------- EU FIZ MAS NAO ME ORGULHO... ---------------------->
                                                 <div class="form-group col-12">
                                                     <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">                                                        
-                                                        <%=vagaAud.getDataAudit() == null
-                                                                ? dataT : vagaAud.getDataAudit()%></span>
+                                                        <%=vagaAud.getDataAudit()%></span>
                                                 </div>
                                                 <div class="form-group col-12">
                                                     <div id="motivo" name="motivo" class="motivo-ibmec"><%=vagaAud.getMotivoAtualizacao() == null ? "Vaga Cadastrada" : vagaAud.getMotivoAtualizacao()%></div>                                                       
