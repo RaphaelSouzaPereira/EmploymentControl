@@ -25,15 +25,6 @@
                     <form class="cadastra-vagas" action="./ControlServlet" method="post" onchange="validaCamposDeCadastroDeVagas()">
                         <div class="form-row">
                             <div class="form-group col-xs-12 col-md-3">
-                                <label for="inputCategoria">Categoria:</label>
-                                <select id="inputCategoria" class="form-control" name="categoria" required>
-                                    <!-- TODO: pegar valores de um Enum? Ou deixamos chumbado aqui? -->
-                                    <option value="">Selecione...</option>
-                                    <option>Regular</option>
-                                    <option>BTP</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-xs-12 col-md-3">
                                 <label for="inputStatus">Status:</label>
                                 <select id="inputStatus" class="form-control" name="status">
                                     <!-- TODO: pegar valores do Enum? Ou deixamos chumbado aqui? -->
@@ -44,8 +35,21 @@
                                 </select>
                             </div>
                             <div class="form-group col-xs-12 col-md-3">
-                                <label for="inputDtAbertura">Data Abertura:</label>
-                                <input type="date" class="form-control" id="inputDtAbertura" name="data_abertura" required>
+                                <label for="inputCategoria">Categoria:</label>
+                                <select id="inputCategoria" class="form-control" name="categoria" required>
+                                    <!-- TODO: pegar valores de um Enum? Ou deixamos chumbado aqui? -->
+                                    <option value="">Selecione...</option>
+                                    <option>Regular</option>
+                                    <option>BTP</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-3">
+                                <label for="inputTipo">Tipo:</label>
+                                <select id="inputTipo" class="form-control" name="tipo" required>
+                                    <option value="">Selecione...</option>
+                                    <option>Backfill</option>
+                                    <option>Growth</option>
+                                </select>
                             </div>
                             <div class="form-group col-xs-12 col-md-3">
                                 <label for="inputArea">Área:</label>
@@ -69,7 +73,7 @@
                                     <option value="">Selecione...</option>
                                     <!-- TODO: pegar valores da tabela Tecnologia -->
                                     <option>Java</option>
-                                    <option>Analista de Automacao</option>
+                                    <option>Analista de Automação</option>
                                     <option>Especialista Mobilidade</option>
                                     <option>Designer UX</option>
                                     <option>Dev. ODI</option>
@@ -77,16 +81,12 @@
                                 </select>
                             </div>
                             <div class="form-group col-xs-12 col-md-4">
-                                <label for="inputDtExpecEntrada">Expectativa Entrada:</label>
-                                <input type="date" class="form-control" id="inputDtExpecEntrada" name="data_exp_entrada" required>
+                                <label for="inputDtAbertura">Data Abertura:</label>
+                                <input type="date" class="form-control" id="inputDtAbertura" name="data_abertura" required>
                             </div>
                             <div class="form-group col-xs-12 col-md-4">
-                                <label for="inputTipo">Tipo:</label>
-                                <select id="inputTipo" class="form-control" name="tipo" required>
-                                    <option value="">Selecione...</option>
-                                    <option>Backfill</option>
-                                    <option>Growth</option>
-                                </select>
+                                <label for="inputDtExpecEntrada">Expectativa Entrada:</label>
+                                <input type="date" class="form-control" id="inputDtExpecEntrada" name="data_exp_entrada" required>
                             </div>
                         </div>
                         <div class="form-row">
@@ -115,7 +115,7 @@
                         <div class="form-row">
                             <div class="form-group col-xs-12 col-md-12">
                                 <label for="inputDetalhe">Detalhe:</label>
-                                <textarea class="form-control" id="inputDetalhe" rows="3" name="detalhe"></textarea>
+                                <textarea class="form-control" id="inputDetalhe" rows="3"placeholder="Detalhes" name="detalhe"></textarea>
                             </div>
                         </div>
                         <div class="form-row">
