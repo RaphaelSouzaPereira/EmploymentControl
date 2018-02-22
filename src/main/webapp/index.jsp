@@ -386,7 +386,7 @@
                                                 <div class="form-group col-xs-12 col-md-3">
                                                     <%ArrayList<CandidatoBean> CandidatosVinculadosNaVaga = (ArrayList<CandidatoBean>) request.getAttribute("listaCandidatosVagas" + v.getId());%>
                                                     <label for="inputProfissionalSelecionado">Profissional Selecionado:</label>
-                                                    <select id="inputProfissionalSelecionado" class="form-control" name="profissionalSelecionado" required>
+                                                    <select id="inputProfissionalSelecionado" class="form-control" name="profissionalSelecionado">
                                                         <option value="<%=v.getProfissionalSelecionado() == null ? "" : v.getProfissionalSelecionado()%>"><%=v.getProfissionalSelecionado() == null ? "NENHUM SELECIONADO" : v.getProfissionalSelecionado()%></option>
                                                         <% for (CandidatoBean cand : CandidatosVinculadosNaVaga) {%>
                                                         <option> <%= cand.getNome()%> </option>
