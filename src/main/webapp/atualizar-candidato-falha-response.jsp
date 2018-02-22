@@ -32,7 +32,7 @@
                         <button type="button" class="btn btn-ibmec" data-dismiss="modal" 
                                 onClick="redireciona('ListaCandidatoServlet')">Sim</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal"
-                                onClick="redireciona('./')">Não</button>
+                                onClick="redireciona('./ListaServlet')">Não</button>
                     </div>
                 </div>
             </div>

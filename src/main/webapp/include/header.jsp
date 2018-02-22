@@ -11,7 +11,7 @@
             <a class="nav-link py-4 px-4 menu-link ibmec-menu-link" data-toggle="dropdown">Vagas</a>
             <ul class="dropdown-menu mt-0 ibmec-menu-dropdown">
                 <li><a class="nav-link py-2 px-3 menu-link ibmec-menu-link" href="./cadastro-vagas.jsp">Cadastrar</a></li>
-                <li><a class="nav-link py-2 px-3 menu-link ibmec-menu-link" href="./">Visualizar</a></li>
+                <li><a class="nav-link py-2 px-3 menu-link ibmec-menu-link" href="./ListaServlet">Visualizar</a></li>
             </ul>
         </li>
         <li class="dropdown">

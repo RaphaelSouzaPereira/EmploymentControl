@@ -42,6 +42,9 @@ public class CandidatosNaVagaServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String login = (String) request.getSession().getAttribute("usuarioLogado");
+        request.getSession().setAttribute("usuarioLogado", login);
 
         //Inicialização de configurações de persistência
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
@@ -104,7 +107,7 @@ public class CandidatosNaVagaServlet extends HttpServlet {
             out.println("<body>");
             //out.println("<a href='./'>Voltar para a Home</a>");
             out.println("<script type=\"text/javascript\">");
-            out.println("setTimeout(function(){window.location.href='./';},200)");
+            out.println("setTimeout(function(){window.location.href='./ListaServlet';},200)");
             out.println("</script>");
             out.println("</body>");
             out.println("</html>");

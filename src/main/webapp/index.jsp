@@ -54,7 +54,7 @@
                         <h2 class="ibmec-title mb-3">Consultar Vagas Cadastradas</h2>
                         <hr>
                         <h3 class="mb-3 ibmec-subtitle">Filtrar por...</h2>
-                            <form class="consulta-vagas" action="./" method="post">
+                            <form class="consulta-vagas" action="./ListaServlet" method="post">
                                 <div class="form-row mb-4">
                                     <div class="form-group col-xs-12 col-md-12">
                                         <div class="custom-control custom-radio custom-control-inline">
@@ -529,11 +529,11 @@
                                     int previousPage = currentPage == 1 ? 1 : currentPage - 1;
                                     int nextPage = pageNumbers.size() == currentPage ? currentPage : currentPage + 1;
                                 %>
-                                <li class="page-item"><a class="page-link" href="./?pn=<%=previousPage%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=previousPage%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>">Previous</a></li>
                                     <%for (int i = 0; i < pageNumbers.size(); i++) {%>                           
-                                <li class="page-item"><a class="page-link" href="./?pn=<%=pageNumbers.get(i)%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>"><%=pageNumbers.get(i)%></a></li>
+                                <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=pageNumbers.get(i)%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>"><%=pageNumbers.get(i)%></a></li>
                                     <%}%>
-                                <li class="page-item"><a class="page-link" href="./?pn=<%=nextPage%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>">Next</a></li>
+                                <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=nextPage%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>">Next</a></li>
                             </ul>
                         </nav>
                     </div>

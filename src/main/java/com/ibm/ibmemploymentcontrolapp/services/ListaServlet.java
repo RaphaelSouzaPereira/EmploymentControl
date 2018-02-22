@@ -51,6 +51,9 @@ public class ListaServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+            String login = (String) request.getSession().getAttribute("usuarioLogado");
+            request.getSession().setAttribute("usuarioLogado", login);
+            
             response.setContentType("text/html;charset=UTF-8");
             //Declaração de variáveis
             int maxEntriesPerPage = 5;
