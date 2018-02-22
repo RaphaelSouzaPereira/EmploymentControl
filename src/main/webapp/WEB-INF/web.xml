@@ -103,6 +103,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/ListaServlet</welcome-file>
+        <welcome-file>faces/login.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

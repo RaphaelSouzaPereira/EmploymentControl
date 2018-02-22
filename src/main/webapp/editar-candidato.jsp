@@ -19,7 +19,15 @@
         <link rel="stylesheet" href="css/style.css">
         <title>Alterar Candidato</title>
     </head>
-
+       <%  //validacão momentanea para testes
+            String validacaoUser = "usuario01";
+            String validacaoPass = "1234";
+            
+            String login = (String) request.getSession().getAttribute("usuarioLogado");
+            
+            if (login != null && login.equals(validacaoUser)) {
+                request.getSession().setAttribute("usuarioLogado", login);
+        %>
     <jsp:include page = "include/header.jsp" />
     <div class="container">
         <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
@@ -44,7 +52,7 @@
                             <tr class="list-row-ibmec">
                                 <td><%= c.getNome()%></td>
                                 <td><%= c.getEmail()%></td>   
-                                <td class="text-center"> <!---------- Candidatos Cadastradas - Botões das Opções - Início ---------->
+                                <td class="text-center"> <!---------- Candidatos Cadastrados - Botões das Opções - Início ---------->
                                     <span
                                         data-toggle="tooltip"
                                         data-placement="top"
@@ -82,7 +90,7 @@
                                                         <input value="<%=c.getEmail()%>" type="text" class="form-control" id="inputEmail" placeholder="E-mail" name="email">
                                                     </div>
                                                     <div class="form-group col-xs-12 col-md-9 text-xs-center">
-                                                        <button type="submit" class="btn btn-ibmec" id="btn-salvar-candidato" disabled>Salvar</button>
+                                                        <button type="submit" class="btn btn-ibmec" id="btn-editar-candidato">Salvar</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -102,4 +110,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
     <jsp:include page = "include/footer.jsp" />
+        <%} else {
+                RequestDispatcher view = request.getRequestDispatcher("./login.jsp");
+                view.forward(request, response);
+            }
+        %>
+    
 </html>

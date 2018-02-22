@@ -65,7 +65,7 @@
                             <span class="vaga-item"><strong>Rate: </strong></span><span class="vaga-value"><%= vagaAudBean.getRate()%></span>
                         </li>
                         <li class="list-group-item">                                
-                                <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value"><%= "R$ "
+                            <span class="vaga-item"><strong>Impacto Financeiro: </strong></span><span class="vaga-value"><%= "R$ "
                                         + (vagaAudBean.getImpactoFinanceiro() == null ? "0" : formatoNumero.format(vagaAudBean.getImpactoFinanceiro()))%></span>
                         </li>
                     </ul>
@@ -82,7 +82,7 @@
                             <span class="vaga-item"><strong>Comentários: </strong></span><span class="vaga-value"><%= vagaAudBean.getComentario()%></span>
                         </li>
                         <li class="list-group-item">
-                            <span class="vaga-item"><strong>Motivo(s) da(s) Alteração(ões): </strong></span><span class="vaga-value"><%= vagaAudBean.getMotivoAtualizacao()%></span>
+                                <span class="vaga-item"><strong>Motivo(s) da(s) Alteração(ões): </strong></span><span class="vaga-value"><%=vagaAudBean.getMotivoAtualizacao() == null ? "" : vagaAudBean.getMotivoAtualizacao()%></span>
                         </li>
                     </ul>
                 </div>

@@ -4,6 +4,8 @@
     Author     : PriscilaRicardoArrud
 --%>
 
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Locale"%>
 <%@page import="com.ibm.ibmemploymentcontrolapp.dao.VagaAudDAO"%>
 <%@page import="java.math.BigInteger"%>
 <%@page import="java.util.Date"%>
@@ -28,6 +30,15 @@
         <title>Home</title>
     </head>
     <body>
+        <%  //validacão momentanea para testes
+            String validacaoUser = "usuario01";
+            String validacaoPass = "1234";
+            
+            String login = (String) request.getSession().getAttribute("usuarioLogado");
+            
+            if (login != null && login.equals(validacaoUser)) {
+                request.getSession().setAttribute("usuarioLogado", login);
+        %>
         <jsp:include page = "include/header.jsp" />
         <div class="container"> <!---------- Container - Início ---------->
             <div class="panel-group" id="accordion">
@@ -109,10 +120,10 @@
                 </div>
                 <!---------- Consulta de Vagas - Fim ---------->
                 <div class="row"> <!---------- Vagas Cadastradas - Início ---------->
-                    <div class="col-9">
+                    <div class="col-md-9">
                         <h2 class="ibmec-title my-2">Vagas Filtradas</h2>
                     </div>
-                    <div class="col-3 pl-0">
+                    <div class="col-xs-12 offset-xs-1 col-md-3 pl-md-0">
                         <a href="./VacancyReport?rf=<%=currentFilter%>&ra=<%=currentArea%>&rs=<%=currentStatus%>&rt=<%=currentTechnology%>" class="btn btn-block ibmec-btn">Gerar Relatório de Vagas</a>
                     </div>
                 </div>
@@ -476,22 +487,11 @@
                                         <form class="listar-historico" action="./HistoricoServlet" method="post">                                        
                                             <div class="historico-ibmec">                                                    
                                                 <% List<VagaAudBean> listaVagaAud = (List<VagaAudBean>) request.getAttribute("listaHistoricoVagas" + v.getId()); %>
-                                                <%int i = 0;
-                                                    BigInteger b1 = new BigInteger("1");
-                                                    Long l1;
-                                                    Timestamp timestamp;
-                                                    Date dataT;%>
+                                                <%int i = 0;%>
                                                 <% for (VagaAudBean vagaAud : listaVagaAud) {%>
-                                                <!----------------- EU FIZ MAS NAO ME ORGULHO... --------------------->
-                                                <% b1 = vagaAud.getRevinfo().getRevtstmp();
-                                                    l1 = b1.longValue();
-                                                    timestamp = new Timestamp(l1);
-                                                    dataT = new Date(timestamp.getTime());%>
-                                                <!----------------- EU FIZ MAS NAO ME ORGULHO... ---------------------->
                                                 <div class="form-group col-12">
                                                     <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">                                                        
-                                                        <%=vagaAud.getDataAudit() == null
-                                                                ? dataT : vagaAud.getDataAudit()%></span>
+                                                        <%=vagaAud.getDataAudit()%></span>
                                                 </div>
                                                 <div class="form-group col-12">
                                                     <div id="motivo" name="motivo" class="motivo-ibmec"><%=vagaAud.getMotivoAtualizacao() == null ? "Vaga Cadastrada" : vagaAud.getMotivoAtualizacao()%></div>                                                       
@@ -537,5 +537,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="js/script.js"></script>
+        <%} else {
+                RequestDispatcher view = request.getRequestDispatcher("./login.jsp");
+                view.forward(request, response);
+            }
+        %>
     </body>
 </html>

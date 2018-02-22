@@ -31,14 +31,18 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("emailProfissional");
+        
+        String validacaoUser = "usuario01";
+        String validacaoPass = "1234";
+        
+        String login = request.getParameter("emailProfissional");
         String senha = request.getParameter("senhaProfissional");
-        String erro;
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             //situaçao provisoria, para testar o layout do login
-            if (email.equals("viviane@ibm.com") && senha.equals("1234")){
+            if (login.equals(validacaoUser) && senha.equals(validacaoPass)){
+            request.getSession().setAttribute("usuarioLogado", login);
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -50,8 +54,6 @@ public class LoginServlet extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         }else{
-            erro = " *Login ou senha estão incorretos...";
-            request.setAttribute("erro", erro);
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
