@@ -30,6 +30,15 @@
         <title>Home</title>
     </head>
     <body>
+        <%  //validacão momentanea para testes
+            String validacaoUser = "usuario01";
+            String validacaoPass = "1234";
+            
+            String login = (String) request.getSession().getAttribute("usuarioLogado");
+            
+            if (login != null && login.equals(validacaoUser)) {
+                request.getSession().setAttribute("usuarioLogado", login);
+        %>
         <jsp:include page = "include/header.jsp" />
         <div class="container"> <!---------- Container - Início ---------->
             <div class="panel-group" id="accordion">
@@ -529,5 +538,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
         <script src="js/script.js"></script>
+        <%} else {
+                RequestDispatcher view = request.getRequestDispatcher("./login.jsp");
+                view.forward(request, response);
+            }
+        %>
     </body>
 </html>
