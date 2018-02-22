@@ -13,7 +13,7 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
-        <title>JSP Page</title>
+        <title>Login</title>
     </head>
     <body>
         <header class="navbar navbar-expand navbar-dark flex-column flex-md-row mb-5 py-0 px-5 ibmec-menu">
