@@ -4,7 +4,7 @@
     Author     : PriscilaRicardoArrud
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=ISO-8859-1" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage=""%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,15 +19,14 @@
         <jsp:include page = "include/header.jsp" />
         <div class="container">
             <div class="row">
-                <div class="offset-md-1 col-md-10">
+                <div class="col-md-12">
                     <h2 class="ibmec-title mb-3">Cadastro de Vagas</h2>
                     <hr>                   
                     <form class="cadastra-vagas" action="./ControlServlet" method="post" onchange="validaCamposDeCadastroDeVagas()">
                         <div class="form-row">
                             <div class="form-group col-xs-12 col-md-3">
                                 <label for="inputStatus">Status:</label>
-                                <select id="inputStatus" class="form-control" name="status">
-                                    <!-- TODO: pegar valores do Enum? Ou deixamos chumbado aqui? -->
+                                <select id="inputStatus" class="form-control" name="status">                                    
                                     <option selected>Open</option>
                                     <option>Closed</option>
                                     <option>On hold</option>
@@ -58,11 +57,12 @@
                                     <!-- TODO: pegar valores do Enum? Ou deixamos chumbado aqui? -->
                                     <option>Arquitetura</option>
                                     <option>Canais</option>
+                                    <option>CRM</option>
+                                    <option>Desk</option>
                                     <option>Digital</option>
                                     <option>Especial</option>
-                                    <option>Suporte</option>
-                                    <option>CRM</option>
                                     <option>Legado</option>
+                                    <option>Suporte</option>
                                 </select>
                             </div>
                         </div>
@@ -71,13 +71,16 @@
                                 <label for="inputTec">Tecnologia:</label>
                                 <select id="inputTec" class="form-control" name="tecnologia" required>
                                     <option value="">Selecione...</option>
-                                    <!-- TODO: pegar valores da tabela Tecnologia -->
-                                    <option>Java</option>
+
+                                    <!-- TODO: Cadastrar valores em tabela Tecnologia -->                                    
                                     <option>Analista de Automação</option>
-                                    <option>Especialista Mobilidade</option>
+                                    <option>Atendente</option>
+                                    <option>Clipper</option>
                                     <option>Designer UX</option>
-                                    <option>Dev. ODI</option>
-                                    <option>...</option>
+                                    <option>Especialista Mobilidade</option>
+                                    <option>Java</option>
+                                    <option>Java Backend</option>
+                                    <option>ODI</option>
                                 </select>
                             </div>
                             <div class="form-group col-xs-12 col-md-4">
@@ -98,7 +101,12 @@
                                     <option>4</option>
                                     <option>5</option>
                                     <option>6</option>
+                                    <option>6A</option>
+                                    <option>6B</option>
+                                    <option>6BP</option>
                                     <option>7</option>
+                                    <option>7A</option>
+                                    <option>7B</option>
                                     <option>8</option>
                                     <option>9</option>
                                 </select>
