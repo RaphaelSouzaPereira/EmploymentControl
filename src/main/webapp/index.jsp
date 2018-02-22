@@ -33,9 +33,9 @@
         <%  //validacão momentanea para testes
             String validacaoUser = "usuario01";
             String validacaoPass = "1234";
-            
+
             String login = (String) request.getSession().getAttribute("usuarioLogado");
-            
+
             if (login != null && login.equals(validacaoUser)) {
                 request.getSession().setAttribute("usuarioLogado", login);
         %>
@@ -336,11 +336,12 @@
                                                         <option value="<%=v.getArea()%>"><%=v.getArea()%></option>
                                                         <option>Arquitetura</option>
                                                         <option>Canais</option>
+                                                        <option>CRM</option>
+                                                        <option>Desk</option>
                                                         <option>Digital</option>
                                                         <option>Especial</option>
-                                                        <option>Suporte</option>
-                                                        <option>CRM</option>
                                                         <option>Legado</option>
+                                                        <option>Suporte</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -349,12 +350,14 @@
                                                     <label for="inputTec">Tecnologia:</label>
                                                     <select id="inputTec" class="form-control" name="tecnologia" required>
                                                         <option value="<%=v.getTecnologia()%>"><%=v.getTecnologia()%></option>
-                                                        <option>Java</option>
                                                         <option>Analista de Automação</option>
-                                                        <option>Especialista Mobilidade</option>
+                                                        <option>Atendente</option>
+                                                        <option>Clipper</option>
                                                         <option>Designer UX</option>
-                                                        <option>Dev. ODI</option>
-                                                        <option>...</option>
+                                                        <option>Especialista Mobilidade</option>
+                                                        <option>Java</option>
+                                                        <option>Java Backend</option>
+                                                        <option>ODI</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-xs-12 col-md-4">
@@ -379,7 +382,12 @@
                                                         <option>4</option>
                                                         <option>5</option>
                                                         <option>6</option>
+                                                        <option>6A</option>
+                                                        <option>6B</option>
+                                                        <option>6BP</option>
                                                         <option>7</option>
+                                                        <option>7A</option>
+                                                        <option>7B</option>
                                                         <option>8</option>
                                                         <option>9</option>
                                                     </select>

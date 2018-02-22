@@ -80,7 +80,6 @@
                                 <label for="inputTec">Tecnologia:</label>
                                 <select id="inputTec" class="form-control" name="tecnologia" required>
                                     <option value="">Selecione...</option>
-
                                     <!-- TODO: Cadastrar valores em tabela Tecnologia -->                                    
                                     <option>Analista de Automação</option>
                                     <option>Atendente</option>
