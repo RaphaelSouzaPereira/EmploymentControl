@@ -129,10 +129,6 @@ public class AtualizacaoServlet extends HttpServlet {
         impactoFinanceiro = diasExpectativaEntrada * rateConverted * 8.8;
         vaga.setExpectativaDeAbertura(expectativaDeAbertura);
         vaga.setImpactoFinanceiro(impactoFinanceiro);
-        
-       
-
-        System.out.println("IMPACTO AFU: " + impactoFinanceiro);
 
         // Atualiza no banco
         vagaDAO.atualizarVaga(vaga);
