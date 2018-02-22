@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn ibmec-btn" data-dismiss="modal" 
-                                            onClick="redireciona('./')">Sim</button>
+                                            onClick="redireciona('./ListaServlet')">Sim</button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
                                 </div>
                             </div>

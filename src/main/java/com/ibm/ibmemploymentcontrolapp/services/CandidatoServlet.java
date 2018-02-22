@@ -35,6 +35,9 @@ public class CandidatoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String login = (String) request.getSession().getAttribute("usuarioLogado");
+        request.getSession().setAttribute("usuarioLogado", login);
 
         //campos obrigatorios no cadastro
         String nome = request.getParameter("nomeCandidato");

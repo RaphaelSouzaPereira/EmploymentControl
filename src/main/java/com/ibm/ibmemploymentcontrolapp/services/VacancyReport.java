@@ -39,6 +39,9 @@ public class VacancyReport extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        String login = (String) request.getSession().getAttribute("usuarioLogado");
+        request.getSession().setAttribute("usuarioLogado", login);
+        
         //Pega parametros da jsp
         String reportFilter = request.getParameter("rf");
         String reportArea = request.getParameter("ra");

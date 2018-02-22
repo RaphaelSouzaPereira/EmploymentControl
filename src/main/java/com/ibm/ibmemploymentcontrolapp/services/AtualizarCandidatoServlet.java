@@ -33,7 +33,10 @@ public class AtualizarCandidatoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        String login = (String) request.getSession().getAttribute("usuarioLogado");
+        request.getSession().setAttribute("usuarioLogado", login);
+        
         String id = request.getParameter("id_candidato");
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
