@@ -7,7 +7,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=ISO-8859-1" language="java" pageEncoding="UTF-8" import="java.sql.*" errorPage=""%>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
