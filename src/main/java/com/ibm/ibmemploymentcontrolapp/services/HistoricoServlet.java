@@ -39,6 +39,9 @@ public class HistoricoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        String login = (String) request.getSession().getAttribute("usuarioLogado");
+        request.getSession().setAttribute("usuarioLogado", login);
 
         //String id = request.getParameter("id_vaga");
         // String dataFront = request.getParameter("dataModificacao");

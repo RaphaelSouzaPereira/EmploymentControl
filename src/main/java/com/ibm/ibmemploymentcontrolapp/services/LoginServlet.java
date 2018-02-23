@@ -5,23 +5,21 @@
  */
 package com.ibm.ibmemploymentcontrolapp.services;
 
-import com.ibm.ibmemploymentcontrolapp.beans.CandidatoBean;
-import com.ibm.ibmemploymentcontrolapp.dao.CandidatoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
+ * @author RenanFontouraBoldrin
  */
-public class AtualizarCandidatoServlet extends HttpServlet {
-
+//Servlet Provisorio para teste do login
+@WebServlet(name = "Login", urlPatterns = {"/Login"})
+public class LoginServlet extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,59 +32,42 @@ public class AtualizarCandidatoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String login = (String) request.getSession().getAttribute("usuarioLogado");
-        request.getSession().setAttribute("usuarioLogado", login);
+        String validacaoUser = "usuario01";
+        String validacaoPass = "1234";
         
-        String id = request.getParameter("id_candidato");
-        String nome = request.getParameter("nome");
-        String email = request.getParameter("email");
+        String login = request.getParameter("emailProfissional");
+        String senha = request.getParameter("senhaProfissional");
 
-        //Inicializa configuracoes de persistencia
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
-
-        //Instancia uma VagaDAO
-        CandidatoDAO candidatoDAO = new CandidatoDAO(emf.createEntityManager());
-        CandidatoBean candidato = new CandidatoBean();
-
-        candidato.setId(Integer.parseInt(id));
-        candidato.setNome(nome);
-        candidato.setEmail(email);
-
-        
-        try {
-            candidatoDAO.atualizarCandidato(candidato);
-            PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            //situaçao provisoria, para testar o layout do login
+            if (login.equals(validacaoUser) && senha.equals(validacaoPass)){
+            request.getSession().setAttribute("usuarioLogado", login);
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("</head>");
             out.println("<body>");
             out.println("<script type=\"text/javascript\">");
-            out.println("setTimeout(function(){window.location.href='atualizar-candidato-response.jsp';},100)");
+            out.println("setTimeout(function(){window.location.href='./ListaServlet';},100)");
             out.println("</script>");
             out.println("</body>");
             out.println("</html>");
-        } catch (Exception ex) {
-            PrintWriter out = response.getWriter();
+        }else{
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("</head>");
             out.println("<body>");
             out.println("<script type=\"text/javascript\">");
-            out.println("setTimeout(function(){window.location.href='atualizar-candidato-falha-response.jsp';},100)");
+            out.println("setTimeout(function(){window.location.href='./login.jsp';},100)");
             out.println("</script>");
             out.println("</body>");
             out.println("</html>");
         }
-        emf.close();
-
-        candidato = null;
-        candidatoDAO = null;
-        emf = null;
-
-        response.setContentType("text/html;charset=UTF-8");
-
+            
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

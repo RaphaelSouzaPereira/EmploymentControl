@@ -23,7 +23,7 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Editar candidato com sucesso!</h4>
+                        <h4 class="modal-title">Candidato atualizado com sucesso!</h4>
                     </div>
                     <div class="modal-body">
                         <p>Deseja atualizar mais candidatos?</p>
@@ -32,12 +32,11 @@
                         <button type="button" class="btn btn-ibmec" data-dismiss="modal" 
                                 onClick="redireciona('./ListaCandidatoServlet')">Sim</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal"
-                                onClick="redireciona('./')">Não</button>
+                                onClick="redireciona('./ListaServlet')">Não</button>
                     </div>
                 </div>
             </div>
         </div>
-        <jsp:include page = "include/footer.jsp" />
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>

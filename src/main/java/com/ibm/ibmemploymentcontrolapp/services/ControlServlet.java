@@ -40,6 +40,9 @@ public class ControlServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String login = (String) request.getSession().getAttribute("usuarioLogado");
+        request.getSession().setAttribute("usuarioLogado", login);
 
         double rateConverted;
 
@@ -71,6 +74,7 @@ public class ControlServlet extends HttpServlet {
         Date dateAprovacaoBr = null;
         Date dateAprovacaoGlobal = null;
         Date dateEntrouOperacao = null;
+        
         
         // Variaveis datas sendo convertidas
         dateAbertura = conversaoData(dataAberturaForm, dateAbertura);
@@ -111,6 +115,7 @@ public class ControlServlet extends HttpServlet {
 
         // campos de calculo de data
         vaga.setExpectativaDeAbertura(expectativaDeAbertura);
+        vaga.setDataAudit(new Date()); // para o cadastro da vaga, a primeira "modificacao"
 
         // salva no banco
         vagaDAO.salvarVaga(vaga);
