@@ -86,8 +86,11 @@
                                         <select id="inputAreaConsulta" class="form-control" name="sa">
                                             <option <%= currentArea.equals("Arquitetura") ? "selected" : ""%>>Arquitetura</option>
                                             <option <%= currentArea.equals("Canais") ? "selected" : ""%>>Canais</option>
+                                            <option <%= currentArea.equals("CRM") ? "selected" : ""%>>CRM</option>
+                                            <option <%= currentArea.equals("Desk") ? "selected" : ""%>>Desk</option>
                                             <option <%= currentArea.equals("Digital") ? "selected" : ""%>>Digital</option>
                                             <option <%= currentArea.equals("Especial") ? "selected" : ""%>>Especial</option>
+                                            <option <%= currentArea.equals("Legado") ? "selected" : ""%>>Legado</option>
                                             <option <%= currentArea.equals("Suporte") ? "selected" : ""%>>Suporte</option>
                                         </select>
                                     </div>
@@ -106,9 +109,13 @@
                                             <option <%= currentTechnology.equals("Java") ? "selected" : ""%>>Java</option>
                                             <!--TODO - Tratar acentuacao-->
                                             <option <%= currentTechnology.equals("Analista de Automacao") ? "selected" : ""%>>Analista de Automação</option>
-                                            <option <%= currentTechnology.equals("Especialista Mobilidade") ? "selected" : ""%>>Especialista Mobilidade</option>
+                                            <option <%= currentTechnology.equals("Atendente") ? "selected" : ""%>>Atendente</option>
+                                            <option <%= currentTechnology.equals("Clipper") ? "selected" : ""%>>Clipper</option>
                                             <option <%= currentTechnology.equals("Designer UX") ? "selected" : ""%>>Designer UX</option>
-                                            <option <%= currentTechnology.equals("Dev. ODI") ? "selected" : ""%>>Dev. ODI</option>
+                                            <option <%= currentTechnology.equals("Especialista Mobilidade") ? "selected" : ""%>>Especialista Mobilidade</option>
+                                            <option <%= currentTechnology.equals("Java") ? "selected" : ""%>>Java</option>
+                                            <option <%= currentTechnology.equals("Java Backend") ? "selected" : ""%>>Java Backend</option>
+                                            <option <%= currentTechnology.equals("ODI") ? "selected" : ""%>>ODI</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-xs-12 col-md-3">
