@@ -60,51 +60,17 @@
                                         <input type="radio" id="OpenAndOnHoldOption" name="sf" class="custom-control-input" value="Status Open e On Hold" <%= currentFilter.equals("Status Open e On Hold") ? "checked" : ""%>>
                                         <label class="custom-control-label" for="OpenAndOnHoldOption">Status Open e On Hold</label>
                                     </div>
-<<<<<<< HEAD
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="AreaOption" name="sf" class="custom-control-input" value="Area" <%= currentFilter.equals("Area") ? "checked" : ""%>>
                                         <label class="custom-control-label" for="AreaOption">Area</label>
-=======
-                                </div>
-                                <div class="form-row mb-4">
-                                    <div class="form-group col-xs-12 col-md-3">
-                                        <label for="inputStatus">Área:</label>
-                                        <select id="inputAreaConsulta" class="form-control" name="sa">
-                                            <option <%= currentArea.equals("Arquitetura") ? "selected" : ""%>>Arquitetura</option>
-                                            <option <%= currentArea.equals("Canais") ? "selected" : ""%>>Canais</option>
-                                            <option <%= currentArea.equals("CRM") ? "selected" : ""%>>CRM</option>
-                                            <option <%= currentArea.equals("Desk") ? "selected" : ""%>>Desk</option>
-                                            <option <%= currentArea.equals("Digital") ? "selected" : ""%>>Digital</option>
-                                            <option <%= currentArea.equals("Especial") ? "selected" : ""%>>Especial</option>
-                                            <option <%= currentArea.equals("Legado") ? "selected" : ""%>>Legado</option>
-                                            <option <%= currentArea.equals("Suporte") ? "selected" : ""%>>Suporte</option>
-                                        </select>
->>>>>>> 28db5a0a9100fe829c9432b671aebbd8a91bda54
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="StatusOption" name="sf" class="custom-control-input" value="Status" <%= currentFilter.equals("Status") ? "checked" : ""%>>
                                         <label class="custom-control-label" for="StatusOption">Status</label>
                                     </div>
-<<<<<<< HEAD
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="TecnologiaOption" name="sf" class="custom-control-input" value="Tecnologia" <%= currentFilter.equals("Tecnologia") ? "checked" : ""%>>
                                         <label class="custom-control-label" for="TecnologiaOption">Tecnologia</label>
-=======
-                                    <div class="form-group col-xs-12 col-md-3">
-                                        <label for="inputStatus">Tecnologia:</label>
-                                        <select id="inputTecnologiaConsulta" class="form-control" name="st">
-                                            <option <%= currentTechnology.equals("Java") ? "selected" : ""%>>Java</option>
-                                            <!--TODO - Tratar acentuacao-->
-                                            <option <%= currentTechnology.equals("Analista de Automacao") ? "selected" : ""%>>Analista de Automação</option>
-                                            <option <%= currentTechnology.equals("Atendente") ? "selected" : ""%>>Atendente</option>
-                                            <option <%= currentTechnology.equals("Clipper") ? "selected" : ""%>>Clipper</option>
-                                            <option <%= currentTechnology.equals("Designer UX") ? "selected" : ""%>>Designer UX</option>
-                                            <option <%= currentTechnology.equals("Especialista Mobilidade") ? "selected" : ""%>>Especialista Mobilidade</option>
-                                            <option <%= currentTechnology.equals("Java") ? "selected" : ""%>>Java</option>
-                                            <option <%= currentTechnology.equals("Java Backend") ? "selected" : ""%>>Java Backend</option>
-                                            <option <%= currentTechnology.equals("ODI") ? "selected" : ""%>>ODI</option>
-                                        </select>
->>>>>>> 28db5a0a9100fe829c9432b671aebbd8a91bda54
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="AllOptions" name="sf" class="custom-control-input" value="Area, Status e Tecnologia" <%= currentFilter.equals("Area, Status e Tecnologia") ? "checked" : ""%>>
