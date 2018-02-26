@@ -1,11 +1,78 @@
 html, body {
     height:100%;
+    min-height: 100%;
 }
 
 .container {
     min-height:100%;
     position:relative;
 }
+
+/*---------- Login - Beginning ----------*/
+.ibmec-login-wrapper {
+    align-items: center;
+    background-image: url("../image/ibmec-background.jpeg");
+    background-size: cover;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    height: 100%;
+    min-height: 100%;
+    -webkit-align-items: center;
+    -webkit-justify-content: center;
+}
+
+.ibmec-login {
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.ibmec-login-logo {
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 100%;
+    color: #a4a4a4;
+    font-size: 4rem;
+    height: 6rem;
+    padding: 1rem;
+    position: relative;
+    top: -65px;
+    width: 6rem;
+}
+
+.ibmec-login-hr {
+    border-color: rgba(200,200,200,.1);
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.ibmec-login-input {
+    background-color: rgba(0,0,0,0.8);
+    border: none;
+    border-radius: 2px;
+}
+
+.ibmec-login-input:focus {
+    color: #cccccc;
+    background-color: rgba(0,0,0,0.9);
+    border-color: #cccccc;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(200,200,200,.25);
+}
+
+.ibmec-btn-login {
+    background-color: rgba(0,0,0,0.5);
+    border-color: #ccc;
+    color: #ccc;
+}
+
+.ibmec-btn-login:hover {
+    background-color: #45B3D6;
+    border-color: #45B3D6;
+    box-shadow: 0 0 0 0.2rem rgba(0,0,0,.25);
+    color: #000;
+}
+/*---------- Login - End ----------*/
 
 /*---------- Menu - Beginning ----------*/
 .ibmec-menu {
@@ -54,6 +121,13 @@ html, body {
     color: rgb(0,120,215);
     font-size: 18px;
 }
+
+.ibmec-title-login {
+    color: #eee;
+    font-size: 18px;
+    margin-top: -20px;
+}
+
 .ibmec-subtitle {
     font-size: 16px;
 }
