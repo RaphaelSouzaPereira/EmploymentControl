@@ -19,9 +19,9 @@
         <%  //validacão momentanea para testes
             String validacaoUser = "usuario01";
             String validacaoPass = "1234";
-            
+
             String login = (String) request.getSession().getAttribute("usuarioLogado");
-            
+
             if (login != null && login.equals(validacaoUser)) {
                 request.getSession().setAttribute("usuarioLogado", login);
         %>
@@ -82,12 +82,20 @@
                                     <option value="">Selecione...</option>
                                     <!-- TODO: Cadastrar valores em tabela Tecnologia -->                                    
                                     <option>Analista de Automação</option>
+                                    <option>Analista Funcional</option>
+                                    <option>Arquiteto</option>
                                     <option>Atendente</option>
+                                    <option>Automação Testes</option>
                                     <option>Clipper</option>
                                     <option>Designer UX</option>
                                     <option>Especialista Mobilidade</option>
                                     <option>Java</option>
                                     <option>Java Backend</option>
+                                    <option>Java Frontend</option>
+                                    <option>Mobile</option>
+                                    <option>Mobile Android</option>
+                                    <option>Mobile Híbrido</option>
+                                    <option>Mobile iOS</option>
                                     <option>ODI</option>
                                 </select>
                             </div>
@@ -189,9 +197,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
     <%} else {
-                RequestDispatcher view = request.getRequestDispatcher("./login.jsp");
-                view.forward(request, response);
-            }
+            RequestDispatcher view = request.getRequestDispatcher("./login.jsp");
+            view.forward(request, response);
+        }
     %>
 </body>
 </html>
