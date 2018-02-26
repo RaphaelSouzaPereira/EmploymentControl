@@ -446,11 +446,11 @@
                                                 <div class="form-row">
                                                     <div class="form-group col-xs-12 col-md-4">
                                                         <label for="inputDtAprovaBrasil">Aprovação Board Brasil:</label>
-                                                        <input value="<%=v.getAprovacaoBoardBrasil()%>" type="date" class="form-control" id="inputDtAprovaBrasil" name="aprovacao_board_brasil">
+                                                        <input value="<%=v.getAprovacaoBoardBrasil() == null ? "" : v.getAprovacaoBoardBrasil()%>" type="date" class="form-control" id="inputDtAprovaBrasil" name="aprovacao_board_brasil">
                                                     </div>
                                                     <div class="form-group col-xs-12 col-md-4">
                                                         <label for="inputDtAprovaGlobal">Aprovação Board Global:</label>
-                                                        <input value="<%=v.getAprovacaoBoardGlobal()%>" type="date" class="form-control" id="inputDtAprovaGlobal" name="aprovacao_board_global">
+                                                        <input value="<%=v.getAprovacaoBoardGlobal()  == null ? "" : v.getAprovacaoBoardGlobal()%>" type="date" class="form-control" id="inputDtAprovaGlobal" name="aprovacao_board_global">
                                                     </div>
                                                     <div class="form-group col-xs-12 col-md-4">
                                                         <label for="inputDtEntrouOperac">Entrou na Operação:</label>

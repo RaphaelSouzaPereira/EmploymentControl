@@ -42,7 +42,7 @@ public class AtualizacaoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String login = (String) request.getSession().getAttribute("usuarioLogado");
         request.getSession().setAttribute("usuarioLogado", login);
 
@@ -156,25 +156,29 @@ public class AtualizacaoServlet extends HttpServlet {
 
     /**
      * Converte as datas que vem da pagina web no form.
+     *
      * @param form String pega do form feito no jsp
      * @param date variavel criada para receber a data convertida
      * @return uma data convertidada para o padrao yyyy/MM/dd
      */
     public Date conversaoData(String form, Date date) {
-        String corrigida = form.replace('-', '/');
-        try {
-            date = new SimpleDateFormat("yyyy/MM/dd").parse(corrigida);
-        } catch (ParseException e) {
-            // TODO : TRATAR EXCEPTION COM MODAL
-            System.out.println("Erro no parse" + corrigida);
-
+        if (form != null) {
+            String corrigida = form.replace('-', '/');
+            try {
+                date = new SimpleDateFormat("yyyy/MM/dd").parse(corrigida);
+            } catch (ParseException e) {
+                System.out.println("Erro no parse" + corrigida);
+            }
+            return date;
         }
-
-        return date;
+        else 
+            return null;
     }
 
     /**
-     * Converte valor do rate com virgula que vem do form para rate com ponto no lugar.
+     * Converte valor do rate com virgula que vem do form para rate com ponto no
+     * lugar.
+     *
      * @param rate
      * @return valor da rate sem virgula
      */
@@ -185,6 +189,7 @@ public class AtualizacaoServlet extends HttpServlet {
 
     /**
      * Calcula a diferença entre datas
+     *
      * @param dataAbertura
      * @param dataExpectativa
      * @return retorna a diferenca, em dias, da data Expectativa de entrada x
@@ -249,15 +254,11 @@ public class AtualizacaoServlet extends HttpServlet {
 
     public int CalculoDatas(String abertura, String aprovacao) {
         int resultadoDiasUteis = 0;
-//        String d = abertura.toString();
-        System.out.println("DENTRO DO CALCULO: " + abertura);
         LocalDate dataAbertura = LocalDate.parse(abertura);
         LocalDate hoje = LocalDate.now();
-
         if (aprovacao == null || aprovacao.isEmpty()) {
             resultadoDiasUteis = calculoDiasUteis(dataAbertura, hoje);
         } else {
-//            String b = aprovacaotoString();
             LocalDate dataAprovacaoBrasil = LocalDate.parse(aprovacao);
             resultadoDiasUteis = calculoDiasUteis(dataAbertura, dataAprovacaoBrasil);
         }
