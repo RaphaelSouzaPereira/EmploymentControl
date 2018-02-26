@@ -266,14 +266,14 @@
                                                             <span class="vaga-item"><strong>Detalhe: </strong></span><span class="vaga-value"><%= v.getDetalhe()%></span>
                                                         </li>                                                        
                                                     </ul>
-                                            </div>
-                                            <div class="col-6">
-                                                <ul class="list-group">                                                     
+                                                </div>
+                                                <div class="col-6">
+                                                    <ul class="list-group">                                                     
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Profissional Selecionado: </strong></span><span class="vaga-value"><%= v.getProfissionalSelecionado() == null ? "" : v.getProfissionalSelecionado()%></span>
                                                         </li>                                                        
                                                         <li class="list-group-item">
-                                                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= v.getEntrouNaOperacao() == null ? "" : v.getEntrouNaOperacao() %></span>
+                                                            <span class="vaga-item"><strong>Entrou na Operação: </strong></span><span class="vaga-value"><%= v.getEntrouNaOperacao() == null ? "" : v.getEntrouNaOperacao()%></span>
                                                         </li>                                                        
                                                         <li class="list-group-item">
                                                             <span class="vaga-item"><strong>Desde Expectativa: </strong></span><span class="vaga-value"><%= expectativaDeEntrada%></span>
@@ -498,22 +498,11 @@
                                             <form class="listar-historico" action="./HistoricoServlet" method="post">                                        
                                                 <div class="historico-ibmec">                                                    
                                                     <% List<VagaAudBean> listaVagaAud = (List<VagaAudBean>) request.getAttribute("listaHistoricoVagas" + v.getId()); %>
-                                                    <%int i = 0;
-                                                        BigInteger b1 = new BigInteger("1");
-                                                        Long l1;
-                                                        Timestamp timestamp;
-                                                        Date dataT;%>
-                                                    <% for (VagaAudBean vagaAud : listaVagaAud) {%>
-                                                    <!----------------- EU FIZ MAS NAO ME ORGULHO... --------------------->
-                                                    <% b1 = vagaAud.getRevinfo().getRevtstmp();
-                                                        l1 = b1.longValue();
-                                                        timestamp = new Timestamp(l1);
-                                                        dataT = new Date(timestamp.getTime());%>
-                                                    <!----------------- EU FIZ MAS NAO ME ORGULHO... ---------------------->
+                                                    <%int i = 0;%>
+                                                    <% for (VagaAudBean vagaAud : listaVagaAud) {%>                                                  
                                                     <div class="form-group col-12">
                                                         <span id="dataModificacao" class="historico-ibmec-data" name="dataModificacao">                                                        
-                                                            <%=vagaAud.getDataAudit() == null
-                                                                    ? dataT : vagaAud.getDataAudit()%></span>
+                                                            <%=vagaAud.getDataAudit()%></span>
                                                     </div>
                                                     <div class="form-group col-12">
                                                         <div id="motivo" name="motivo" class="motivo-ibmec"><%=vagaAud.getMotivoAtualizacao() == null ? "Vaga Cadastrada" : vagaAud.getMotivoAtualizacao()%></div>                                                       
