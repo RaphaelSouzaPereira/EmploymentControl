@@ -40,7 +40,7 @@ public class ControlServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String login = (String) request.getSession().getAttribute("usuarioLogado");
         request.getSession().setAttribute("usuarioLogado", login);
 
@@ -74,8 +74,7 @@ public class ControlServlet extends HttpServlet {
         Date dateAprovacaoBr = null;
         Date dateAprovacaoGlobal = null;
         Date dateEntrouOperacao = null;
-        
-        
+
         // Variaveis datas sendo convertidas
         dateAbertura = conversaoData(dataAberturaForm, dateAbertura);
         dateExpectativaEntrada = conversaoData(dataExpectativaEntradaForm, dateExpectativaEntrada);
@@ -102,10 +101,10 @@ public class ControlServlet extends HttpServlet {
         vaga.setBanda(banda);
         vaga.setDetalhe(detalhe);
 
-        rateConverted = Double.parseDouble(rate);
+        rateConverted = ParseDouble(rate);
 
         // nao obrigatorios:
-        vaga.setPmp(NumberUtils.toInt(pmp, 0));        
+        vaga.setPmp(NumberUtils.toInt(pmp, 0));
         vaga.setAprovacaoBoardBrasil(dateAprovacaoBr);
         vaga.setAprovacaoBoardGlobal(dateAprovacaoGlobal);
         vaga.setEntrouNaOperacao(dateEntrouOperacao);
@@ -143,6 +142,7 @@ public class ControlServlet extends HttpServlet {
     // fazendo a conversão da data   
     /**
      * Método que faz a conversão da data
+     *
      * @param form String pega do form feito no jsp
      * @param date variavel criada para receber a data convertida
      * @return uma data convertidada para o padrao yyyy/MM/dd
@@ -162,6 +162,7 @@ public class ControlServlet extends HttpServlet {
 
     /**
      * Método que faz a conversao do rate
+     *
      * @param rate
      * @return rate convertido
      */
@@ -170,11 +171,21 @@ public class ControlServlet extends HttpServlet {
         return rateSemVirgula;
     }
 
+    double ParseDouble(String strNumber) {
+        if (strNumber != null && strNumber.length() > 0) {
+            return Double.parseDouble(strNumber);
+        } else {
+            return 0;
+        }
+    }
+
     /**
      * Método que calcula a diferença da "dataAbertura" x "dataExpectativa"
+     *
      * @param dataAbertura
      * @param dataExpectativa
-     * @return retorna a diferença, em dias, da data Expectativa de entrada x Abertura da vaga
+     * @return retorna a diferença, em dias, da data Expectativa de entrada x
+     * Abertura da vaga
      */
     public int diferencaDatas(Date dataAbertura, Date dataExpectativa) {
         long dif = dataExpectativa.getTime() - dataAbertura.getTime();

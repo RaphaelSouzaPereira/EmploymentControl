@@ -105,13 +105,28 @@
                                     <label for="inputStatus">Tecnologia:</label>
                                     <select id="inputTecnologiaConsulta" class="form-control" name="st">
                                         <option <%= currentTechnology.equals("Analista de Automacao") ? "selected" : ""%>>Analista de Automacao</option>
+                                        <option <%= currentTechnology.equals("Analista Funcional") ? "selected" : ""%>>Analista Funcional</option>
+                                        <option <%= currentTechnology.equals("Arquiteto") ? "selected" : ""%>>Arquiteto</option>
                                         <option <%= currentTechnology.equals("Atendente") ? "selected" : ""%>>Atendente</option>
+                                        <option <%= currentTechnology.equals("Automacao Testes") ? "selected" : ""%>>Automação Testes</option>
                                         <option <%= currentTechnology.equals("Clipper") ? "selected" : ""%>>Clipper</option>
                                         <option <%= currentTechnology.equals("Designer UX") ? "selected" : ""%>>Designer UX</option>
                                         <option <%= currentTechnology.equals("Especialista Mobilidade") ? "selected" : ""%>>Especialista Mobilidade</option>
                                         <option <%= currentTechnology.equals("Java") ? "selected" : ""%>>Java</option>
                                         <option <%= currentTechnology.equals("Java Backend") ? "selected" : ""%>>Java Backend</option>
+                                        <option <%= currentTechnology.equals("Java Frontend") ? "selected" : ""%>>Java Frontend</option>
+                                        <option <%= currentTechnology.equals("Mobile") ? "selected" : ""%>>Mobile</option>
+                                        <option <%= currentTechnology.equals("Mobile Android") ? "selected" : ""%>>Mobile Android</option>
+                                        <option <%= currentTechnology.equals("Mobile Hibrido") ? "selected" : ""%>>Mobile Híbrido</option>
+                                        <option <%= currentTechnology.equals("Mobile iOS") ? "selected" : ""%>>Mobile iOS</option>
                                         <option <%= currentTechnology.equals("ODI") ? "selected" : ""%>>ODI</option>
+                                        <option>Analista Funcional</option>
+
+
+
+
+
+
                                     </select>
                                 </div>
                                 <div class="form-group col-xs-12 col-md-3">
@@ -354,12 +369,20 @@
                                                         <select id="inputTec" class="form-control" name="tecnologia" required>
                                                             <option value="<%=v.getTecnologia()%>"><%=v.getTecnologia()%></option>
                                                             <option>Analista de Automação</option>
+                                                            <option>Analista Funcional</option>
+                                                            <option>Arquiteto</option>
                                                             <option>Atendente</option>
+                                                            <option>Automação Testes</option>
                                                             <option>Clipper</option>
                                                             <option>Designer UX</option>
                                                             <option>Especialista Mobilidade</option>
                                                             <option>Java</option>
                                                             <option>Java Backend</option>
+                                                            <option>Java Frontend</option>
+                                                            <option>Mobile</option>
+                                                            <option>Mobile Android</option>
+                                                            <option>Mobile Híbrido</option>
+                                                            <option>Mobile iOS</option>
                                                             <option>ODI</option>
                                                         </select>
                                                     </div>
