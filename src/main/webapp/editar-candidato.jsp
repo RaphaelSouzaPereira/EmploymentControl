@@ -40,6 +40,7 @@
                             <tr>
                                 <th class="ibmec-thead-th">Nome</th>
                                 <th class="ibmec-thead-th">E-mail</th>
+                                <th class="ibmec-thead-th">Comentários</th>
                                 <th class="ibmec-thead-th">Editar</th>
                             </tr>
                         </thead> <!---------- Candidatos Cdastrados - Cabeçalho da tabela - Fim ---------->
@@ -52,7 +53,7 @@
                             <tr>
                                 <td class="ibmec-tbody-td"><%= c.getNome()%></td>
                                 <td class="ibmec-tbody-td"><%= c.getEmail()%></td>
-                                <td class="ibmec-tbody-td"><%= c.getComentarios()%></td>
+                                <td class="ibmec-tbody-td"><%= c.getComentarios()== null ? "" : c.getComentarios()%></td>
                                 <td class="text-center ibmec-tbody-td"> <!---------- Candidatos Cadastradas - Botões das Opções - Início ---------->
                                     <span
                                         data-toggle="tooltip"
@@ -91,8 +92,8 @@
                                                         <input value="<%=c.getEmail()%>" type="text" class="form-control" id="inputEmail" placeholder="E-mail" name="email">
                                                     </div>
                                                     <div class="form-group col-xs-12 col-md-4">
-                                                        <label for="inputComentarios">E-mail:</label>
-                                                        <input value="<%=c.getComentarios()%>" type="text" class="form-control" id="inputComentarios" placeholder="Comentários" name="comentarios">
+                                                        <label for="inputComentarios">Comentários:</label>
+                                                        <input value="<%=c.getComentarios() == null ? "" : c.getComentarios()%>" type="text" class="form-control" id="inputComentarios" placeholder="Comentários" name="comentarios">
                                                     </div>
                                                     <div class="form-group col-xs-12 col-md-9 text-xs-center">
                                                         <button type="submit" class="btn btn-ibmec" id="btn-salvar-candidato">Salvar</button>
