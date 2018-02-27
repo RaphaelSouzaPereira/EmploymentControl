@@ -500,7 +500,7 @@
                                                     </div>
                                                     <div class="form-group col-12">
                                                         <div id="motivo" name="motivo" class="motivo-ibmec"><%=vagaAud.getMotivoAtualizacao() == null ? "Vaga Cadastrada" : vagaAud.getMotivoAtualizacao()%></div>                                                       
-                                                        <a class="historico-ibmec-ver-mais" href="./HistoricoServlet?indiceLista=<%=i%>&idVaga=<%=vagaAud.getVagaAudBeanPK().getId()%>">Ver mais</a>                                                 
+                                                        <a class="historico-ibmec-ver-mais" href="./HistoricoServlet?indiceLista=<%=i%>&idVaga=<%=vagaAud.getVagaAudBeanPK().getId()%>" target="_blank">Ver mais</a>                                                 
                                                     </div>
                                                     <hr>
                                                     <%i++;%>
