@@ -149,7 +149,7 @@ public class ListaServlet extends HttpServlet {
             impactoFinanceiro = (resultadoDiasUteis * listaVagas.get(j).getRate() * 8.8); // Desde Expectativa * rate * 8.8            
             request.setAttribute("impactoFinanceiro" + listaVagas.get(j).getId(), "R$ " + numberFormat.format(impactoFinanceiro) + " "); // passando o Impacto Financeiro
         }
-        
+
         request.setAttribute("listaCandidatos", listaCandidatos);
 
         HttpSession httpSession = request.getSession();
@@ -161,18 +161,17 @@ public class ListaServlet extends HttpServlet {
         httpSession.setAttribute("currentTechnology", searchTechnology);
 
         if (login.equals("usuario01")) {
+            emf.close();
+            emf = null;
             RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
             view.forward(request, response);
         }
         if (login.equals("usuario02")) {
+            emf.close();
+            emf = null;
             RequestDispatcher view = request.getRequestDispatcher("./index-consulta.jsp");
             view.forward(request, response);
         }
-        RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
-        view.forward(request, response);
-
-        emf.close();
-        emf = null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
