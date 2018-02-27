@@ -258,11 +258,6 @@ public class VagaDAO {
         String status2 = "";
         String status3 = "";
 
-        System.out.println("Antes");
-        System.out.println(area);
-        System.out.println(status);
-        System.out.println(tecnologia);
-
         if (area.equals("All")) {
             area = "%%";
         }
@@ -296,14 +291,7 @@ public class VagaDAO {
                 status2 = "On hold";
                 break;
         }
-
-        System.out.println("Depois");
-        System.out.println(area);
-        System.out.println(status1);
-        System.out.println(status2);
-        System.out.println(status3);
-        System.out.println(tecnologia);
-
+        
         query = emExterno.createNamedQuery("Vaga.findByAreaStatusAndTecnologia")
                 .setParameter("area", area)
                 .setParameter("tecnologia", tecnologia)

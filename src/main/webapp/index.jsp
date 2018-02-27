@@ -43,7 +43,6 @@
         <div class="container"> <!---------- Container - Início ---------->
             <!---------- Consulta de Vagas - Início ---------->
             <%
-                //String currentFilter = (String) session.getAttribute("currentFilter");
                 String currentArea = (String) session.getAttribute("currentArea");
                 String currentStatus = (String) session.getAttribute("currentStatus");
                 String currentTechnology = (String) session.getAttribute("currentTechnology");
@@ -61,7 +60,6 @@
                                         <option <%= currentArea.equals("Arquitetura") ? "selected" : ""%>>Arquitetura</option>
                                         <option <%= currentArea.equals("Canais") ? "selected" : ""%>>Canais</option>
                                         <option <%= currentArea.equals("CRM") ? "selected" : ""%>>CRM</option>
-                                        <option <%= currentArea.equals("Desk") ? "selected" : ""%>>Desk</option>
                                         <option <%= currentArea.equals("Digital") ? "selected" : ""%>>Digital</option>
                                         <option <%= currentArea.equals("Especial") ? "selected" : ""%>>Especial</option>
                                         <option <%= currentArea.equals("Legado") ? "selected" : ""%>>Legado</option>

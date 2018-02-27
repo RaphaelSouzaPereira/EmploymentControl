@@ -62,15 +62,9 @@ public class ListaServlet extends HttpServlet {
 
         //Pega parametros da jsp
         String pageNumber = request.getParameter("pn");
-       // String searchFilter = request.getParameter("sf");
         String searchArea = request.getParameter("sa");
         String searchStatus = request.getParameter("ss");
         String searchTechnology = request.getParameter("st");
-
-        //Verifica se o filtro está vindo como null e seta um valor padrão
-        /*if (searchFilter == null) {
-            searchFilter = "Status Open e On Hold";
-        }*/
 
         if (searchArea == null) {
             searchArea = "All";
@@ -162,7 +156,6 @@ public class ListaServlet extends HttpServlet {
         httpSession.setAttribute("currentPage", Integer.toString(page));
         httpSession.setAttribute("pageNumbers", getPages(listaVagas));
         httpSession.setAttribute("listaDeVagasPorPagina", listaDeVagasPorPagina);
-        //httpSession.setAttribute("currentFilter", searchFilter);
         httpSession.setAttribute("currentArea", searchArea);
         httpSession.setAttribute("currentStatus", searchStatus);
         httpSession.setAttribute("currentTechnology", searchTechnology);
