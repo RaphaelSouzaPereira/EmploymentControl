@@ -170,8 +170,8 @@ public class VagaDAO {
     }
 
     /**
-     * Método que listas as vagas com base nos filtros selecionados: "area", "status" e
-     * "tecnologia".
+     * Método que listas as vagas com base nos filtros selecionados: "area",
+     * "status" e "tecnologia".
      *
      * @param emExterno
      * @param area
@@ -180,29 +180,52 @@ public class VagaDAO {
      * @param filtro
      * @return lista com os filtros aplicados
      */
-    public List<VagaBean> listarVagasComFiltro(EntityManager emExterno, String area, String status, String tecnologia, String filtro) {
+    public List<VagaBean> listarVagasComFiltro(EntityManager emExterno, String area, String status, String tecnologia) {
         Query query = null;
+        String status1 = "";
+        String status2 = "";
+        String status3 = "";
 
-        switch (filtro) {
-            case "Status Open e On Hold":
-                query = emExterno.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa");
+        if (area.equals("All")) {
+            area = "%%";
+        }
+
+        if (tecnologia.equals("All")) {
+            tecnologia = "%%";
+        }
+
+        switch (status) {
+            case "Open":
+                status1 = "Open";
                 break;
-            case "Area":
-                query = emExterno.createNamedQuery("Vaga.findByArea").setParameter("area", area);
+            case "Closed":
+                status1 = "Closed";
                 break;
-            case "Status":
-                query = emExterno.createNamedQuery("Vaga.findByStatus").setParameter("status", status);
+            case "On hold":
+                status1 = "On hold";
                 break;
-            case "Tecnologia":
-                query = emExterno.createNamedQuery("Vaga.findByTecnologia").setParameter("tecnologia", tecnologia);
+            case "Cancelada":
+                status1 = "Cancelada";
                 break;
-            case "Area, Status e Tecnologia":
-                query = emExterno.createNamedQuery("Vaga.findByAreaStatusAndTecnologia").setParameter("area", area).setParameter("status", status).setParameter("tecnologia", tecnologia);
+            case "Open e On Hold":
+                status1 = "Open";
+                status2 = "On hold";
+                break;
+            case "All":
+                status3 = "%%";
                 break;
             default:
-                query = emExterno.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa");
+                status1 = "Open";
+                status2 = "On hold";
                 break;
         }
+
+        query = emExterno.createNamedQuery("Vaga.findByAreaStatusAndTecnologia")
+                .setParameter("area", area)
+                .setParameter("tecnologia", tecnologia)
+                .setParameter("status1", status1)
+                .setParameter("status2", status2)
+                .setParameter("status3", status3);
 
         List<VagaBean> listarComFiltro = new ArrayList<VagaBean>();
 
@@ -217,8 +240,8 @@ public class VagaDAO {
     }
 
     /**
-     * Método que lista as vagas por página com base nos filtros selecionados: "area", "status" e
-     * "tecnologia".
+     * Método que lista as vagas por página com base nos filtros selecionados:
+     * "area", "status" e "tecnologia".
      *
      * @param emExterno
      * @param maxResults
@@ -229,30 +252,65 @@ public class VagaDAO {
      * @param filtro
      * @return lissta com os filtros aplicados e por página
      */
-    public List<VagaBean> listarVagasPorPaginaComFiltro(EntityManager emExterno, int maxResults, int offset, String area, String status, String tecnologia, String filtro) {
+    public List<VagaBean> listarVagasPorPaginaComFiltro(EntityManager emExterno, int maxResults, int offset, String area, String status, String tecnologia) {
         Query query = null;
+        String status1 = "";
+        String status2 = "";
+        String status3 = "";
 
-        switch (filtro) {
-            case "Status Open e On Hold":
-                query = emExterno.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa").setMaxResults(maxResults).setFirstResult(offset);
+        System.out.println("Antes");
+        System.out.println(area);
+        System.out.println(status);
+        System.out.println(tecnologia);
+
+        if (area.equals("All")) {
+            area = "%%";
+        }
+
+        if (tecnologia.equals("All")) {
+            tecnologia = "%%";
+        }
+
+        switch (status) {
+            case "Open":
+                status1 = "Open";
                 break;
-            case "Area":
-                query = emExterno.createNamedQuery("Vaga.findByArea").setMaxResults(maxResults).setFirstResult(offset).setParameter("area", area);
+            case "Closed":
+                status1 = "Closed";
                 break;
-            case "Status":
-                query = emExterno.createNamedQuery("Vaga.findByStatus").setMaxResults(maxResults).setFirstResult(offset).setParameter("status", status);
+            case "On hold":
+                status1 = "On hold";
                 break;
-            case "Tecnologia":
-                query = emExterno.createNamedQuery("Vaga.findByTecnologia").setMaxResults(maxResults).setFirstResult(offset).setParameter("tecnologia", tecnologia);
+            case "Cancelada":
+                status1 = "Cancelada";
                 break;
-            case "Area, Status e Tecnologia":
-                query = emExterno.createNamedQuery("Vaga.findByAreaStatusAndTecnologia").setMaxResults(maxResults).setFirstResult(offset).setParameter("area", area).setParameter("status", status).setParameter("tecnologia", tecnologia);
+            case "Open e On Hold":
+                status1 = "Open";
+                status2 = "On hold";
+                break;
+            case "All":
+                status3 = "%%";
                 break;
             default:
-                query = emExterno.createNamedQuery("Vaga.findOpenOnHoldByAreaExpectativa").setMaxResults(maxResults).setFirstResult(offset);
+                status1 = "Open";
+                status2 = "On hold";
                 break;
         }
-        
+
+        System.out.println("Depois");
+        System.out.println(area);
+        System.out.println(status1);
+        System.out.println(status2);
+        System.out.println(status3);
+        System.out.println(tecnologia);
+
+        query = emExterno.createNamedQuery("Vaga.findByAreaStatusAndTecnologia")
+                .setParameter("area", area)
+                .setParameter("tecnologia", tecnologia)
+                .setParameter("status1", status1)
+                .setParameter("status2", status2)
+                .setParameter("status3", status3);
+
         List<VagaBean> listarPorPaginaComFiltro = new ArrayList<VagaBean>();
 
         for (Vaga vagas : (List<Vaga>) query.getResultList()) {

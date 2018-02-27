@@ -43,16 +43,11 @@ public class VacancyReport extends HttpServlet {
         request.getSession().setAttribute("usuarioLogado", login);
         
         //Pega parametros da jsp
-        String reportFilter = request.getParameter("rf");
         String reportArea = request.getParameter("ra");
         String reportStatus = request.getParameter("rs");
         String reportTechnology = request.getParameter("rt");
         
         //Verifica se o filtro está vindo como null e seta um valor padrão
-        if (reportFilter == null) {
-            reportFilter = "Status Open e On Hold";
-        }
-
         if (reportArea == null) {
             reportArea = "";
         }
@@ -74,7 +69,7 @@ public class VacancyReport extends HttpServlet {
         //Instancia os Beans
         List<VagaBean> listOfVacancies = new ArrayList<VagaBean>();
         
-        listOfVacancies = vacancieDAO.listarVagasComFiltro(emf.createEntityManager(), reportArea, reportStatus, reportTechnology, reportFilter);
+        listOfVacancies = vacancieDAO.listarVagasComFiltro(emf.createEntityManager(), reportArea, reportStatus, reportTechnology);
         
         HttpSession httpSession = request.getSession();
         

@@ -62,26 +62,26 @@ public class ListaServlet extends HttpServlet {
 
         //Pega parametros da jsp
         String pageNumber = request.getParameter("pn");
-        String searchFilter = request.getParameter("sf");
+       // String searchFilter = request.getParameter("sf");
         String searchArea = request.getParameter("sa");
         String searchStatus = request.getParameter("ss");
         String searchTechnology = request.getParameter("st");
 
         //Verifica se o filtro está vindo como null e seta um valor padrão
-        if (searchFilter == null) {
+        /*if (searchFilter == null) {
             searchFilter = "Status Open e On Hold";
-        }
+        }*/
 
         if (searchArea == null) {
-            searchArea = "";
+            searchArea = "All";
         }
 
         if (searchStatus == null) {
-            searchStatus = "";
+            searchStatus = "Open e On hold";
         }
 
         if (searchTechnology == null) {
-            searchTechnology = "";
+            searchTechnology = "All";
         }
 
         //Seta a página como Integer
@@ -114,8 +114,8 @@ public class ListaServlet extends HttpServlet {
         List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
 
         //instancia variaveis envolvidas nos request's
-        listaVagas = vagaDAO.listarVagasComFiltro(emf.createEntityManager(), searchArea, searchStatus, searchTechnology, searchFilter);
-        listaDeVagasPorPagina = vagaDAO.listarVagasPorPaginaComFiltro(emf.createEntityManager(), this.length, this.offset, searchArea, searchStatus, searchTechnology, searchFilter);
+        listaVagas = vagaDAO.listarVagasComFiltro(emf.createEntityManager(), searchArea, searchStatus, searchTechnology);
+        listaDeVagasPorPagina = vagaDAO.listarVagasPorPaginaComFiltro(emf.createEntityManager(), this.length, this.offset, searchArea, searchStatus, searchTechnology);
         listaCandidatos = candidatoDAO.listarCandidatos();
 
         ArrayList<CandidatoBean> listaCandidatosV = new ArrayList<CandidatoBean>();
@@ -155,14 +155,14 @@ public class ListaServlet extends HttpServlet {
             impactoFinanceiro = (resultadoDiasUteis * listaVagas.get(j).getRate() * 8.8); // Desde Expectativa * rate * 8.8            
             request.setAttribute("impactoFinanceiro" + listaVagas.get(j).getId(), "R$ " + numberFormat.format(impactoFinanceiro) + " "); // passando o Impacto Financeiro
         }
-
+        
         request.setAttribute("listaCandidatos", listaCandidatos);
 
         HttpSession httpSession = request.getSession();
         httpSession.setAttribute("currentPage", Integer.toString(page));
         httpSession.setAttribute("pageNumbers", getPages(listaVagas));
         httpSession.setAttribute("listaDeVagasPorPagina", listaDeVagasPorPagina);
-        httpSession.setAttribute("currentFilter", searchFilter);
+        //httpSession.setAttribute("currentFilter", searchFilter);
         httpSession.setAttribute("currentArea", searchArea);
         httpSession.setAttribute("currentStatus", searchStatus);
         httpSession.setAttribute("currentTechnology", searchTechnology);

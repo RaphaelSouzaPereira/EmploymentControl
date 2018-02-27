@@ -43,7 +43,7 @@
         <div class="container"> <!---------- Container - Início ---------->
             <!---------- Consulta de Vagas - Início ---------->
             <%
-                String currentFilter = (String) session.getAttribute("currentFilter");
+                //String currentFilter = (String) session.getAttribute("currentFilter");
                 String currentArea = (String) session.getAttribute("currentArea");
                 String currentStatus = (String) session.getAttribute("currentStatus");
                 String currentTechnology = (String) session.getAttribute("currentTechnology");
@@ -54,30 +54,6 @@
                     <hr>
                     <h3 class="mb-3 ibmec-subtitle">Filtrar por...</h2>
                         <form class="consulta-vagas" action="./ListaServlet" method="post">
-                            <div class="form-row mb-4">
-                                <div class="form-group col-xs-12 col-md-12">
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="OpenAndOnHoldOption" name="sf" class="custom-control-input" value="Status Open e On Hold" <%= currentFilter.equals("Status Open e On Hold") ? "checked" : ""%>>
-                                        <label class="custom-control-label" for="OpenAndOnHoldOption">Status Open e On Hold</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="AreaOption" name="sf" class="custom-control-input" value="Area" <%= currentFilter.equals("Area") ? "checked" : ""%>>
-                                        <label class="custom-control-label" for="AreaOption">Area</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="StatusOption" name="sf" class="custom-control-input" value="Status" <%= currentFilter.equals("Status") ? "checked" : ""%>>
-                                        <label class="custom-control-label" for="StatusOption">Status</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="TecnologiaOption" name="sf" class="custom-control-input" value="Tecnologia" <%= currentFilter.equals("Tecnologia") ? "checked" : ""%>>
-                                        <label class="custom-control-label" for="TecnologiaOption">Tecnologia</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="AllOptions" name="sf" class="custom-control-input" value="Area, Status e Tecnologia" <%= currentFilter.equals("Area, Status e Tecnologia") ? "checked" : ""%>>
-                                        <label class="custom-control-label" for="AllOptions">Area, Status e Tecnologia</label>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-row mb-4">
                                 <div class="form-group col-xs-12 col-md-3">
                                     <label for="inputStatus">Área:</label>
@@ -90,6 +66,7 @@
                                         <option <%= currentArea.equals("Especial") ? "selected" : ""%>>Especial</option>
                                         <option <%= currentArea.equals("Legado") ? "selected" : ""%>>Legado</option>
                                         <option <%= currentArea.equals("Suporte") ? "selected" : ""%>>Suporte</option>
+                                        <option <%= currentArea.equals("All") ? "selected" : ""%>>All</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-xs-12 col-md-3">
@@ -99,6 +76,8 @@
                                         <option <%= currentStatus.equals("Closed") ? "selected" : ""%>>Closed</option>
                                         <option <%= currentStatus.equals("On hold") ? "selected" : ""%>>On hold</option>
                                         <option <%= currentStatus.equals("Cancelada") ? "selected" : ""%>>Cancelada</option>
+                                        <option <%= currentStatus.equals("Open e On hold") ? "selected" : ""%>>Open e On hold</option>
+                                        <option <%= currentStatus.equals("All") ? "selected" : ""%>>All</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-xs-12 col-md-3">
@@ -120,13 +99,7 @@
                                         <option <%= currentTechnology.equals("Mobile Hibrido") ? "selected" : ""%>>Mobile Híbrido</option>
                                         <option <%= currentTechnology.equals("Mobile iOS") ? "selected" : ""%>>Mobile iOS</option>
                                         <option <%= currentTechnology.equals("ODI") ? "selected" : ""%>>ODI</option>
-                                        <option>Analista Funcional</option>
-
-
-
-
-
-
+                                        <option <%= currentTechnology.equals("All") ? "selected" : ""%>>All</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-xs-12 col-md-3">
@@ -142,7 +115,7 @@
                     <h2 class="ibmec-title my-2">Vagas Filtradas</h2>
                 </div>
                 <div class="col-xs-12 offset-xs-1 col-md-3 pl-md-0">
-                    <a href="./VacancyReport?rf=<%=currentFilter%>&ra=<%=currentArea%>&rs=<%=currentStatus%>&rt=<%=currentTechnology%>" class="btn btn-block ibmec-btn">Gerar Relatório de Vagas</a>
+                    <a href="./VacancyReport?ra=<%=currentArea%>&rs=<%=currentStatus%>&rt=<%=currentTechnology%>" class="btn btn-block ibmec-btn">Gerar Relatório de Vagas</a>
                 </div>
             </div>
             <div class="row">
@@ -557,11 +530,11 @@
                                 int previousPage = currentPage == 1 ? 1 : currentPage - 1;
                                 int nextPage = pageNumbers.size() == currentPage ? currentPage : currentPage + 1;
                             %>
-                            <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=previousPage%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=previousPage%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>">Previous</a></li>
                                 <%for (int i = 0; i < pageNumbers.size(); i++) {%>                           
-                            <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=pageNumbers.get(i)%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>"><%=pageNumbers.get(i)%></a></li>
+                            <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=pageNumbers.get(i)%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>"><%=pageNumbers.get(i)%></a></li>
                                 <%}%>
-                            <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=nextPage%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>">Next</a></li>
+                            <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=nextPage%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>">Next</a></li>
                         </ul>
                     </nav>
                 </div>

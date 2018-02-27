@@ -65,7 +65,7 @@ import org.hibernate.envers.Audited;
     , @NamedQuery(name = "Vaga.findByTipo", query = "SELECT v FROM Vaga v WHERE v.tipo = :tipo")
     , @NamedQuery(name = "Vaga.findByDataAudit", query = "SELECT v FROM Vaga v WHERE v.dataAudit = :dataAudit")
     , @NamedQuery(name = "Vaga.findOpenOnHoldByAreaExpectativa", query = "SELECT v FROM Vaga v WHERE v.status = 'Open' OR v.status = 'On Hold' ORDER BY v.area, v.expectativaDeEntrada")
-    , @NamedQuery(name = "Vaga.findByAreaStatusAndTecnologia", query = "SELECT v FROM Vaga v WHERE v.area = :area AND v.status = :status AND v.tecnologia = :tecnologia")
+    , @NamedQuery(name = "Vaga.findByAreaStatusAndTecnologia", query = "SELECT v FROM Vaga v WHERE v.area LIKE :area AND v.tecnologia LIKE :tecnologia AND (v.status IN (:status1, :status2) OR v.status LIKE :status3)")
     , @NamedQuery(name = "Vaga.findByMotivoAtualizacao", query = "SELECT v FROM Vaga v WHERE v.motivoAtualizacao = :motivoAtualizacao")})
 public class Vaga implements Serializable {
 
