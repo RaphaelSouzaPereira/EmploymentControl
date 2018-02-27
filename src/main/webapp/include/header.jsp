@@ -5,7 +5,7 @@
 --%>
 
 <header class="navbar navbar-expand navbar-dark flex-column flex-md-row mb-5 py-0 px-5 ibmec-menu">
-    <h1 class="navbar-brand mr-0 mr-md-2 m-0 ibmec-menu-logo"><span class="ibmec-menu-logo-ibm">IBM </span>Employment Control</h1>
+    <a href="./ListaServlet"><h1 class="navbar-brand mr-0 mr-md-2 m-0 ibmec-menu-logo"><span class="ibmec-menu-logo-ibm">IBM </span>Employment Control</h1></a>
     <ul class="navbar-nav flex-row ml-md-auto d-md-none d-md-flex">
         <li class="dropdown">
             <a class="nav-link py-4 px-4 menu-link ibmec-menu-link" data-toggle="dropdown">Vagas</a>
