@@ -113,16 +113,19 @@
                                 <label for="inputBanda">Banda:</label>
                                 <select id="inputBanda" class="form-control" name="banda" required>
                                     <option value="">Selecione...</option>
+                                    <option>BTP</option>
                                     <option>3</option>
                                     <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
+                                    <option>5</option>                                                            
                                     <option>6A</option>
+                                    <option>6A Premium</option>
                                     <option>6B</option>
+                                    <option>6B Premium</option>
                                     <option>6BP</option>
-                                    <option>7</option>
                                     <option>7A</option>
+                                    <option>7A Premium</option>
                                     <option>7B</option>
+                                    <option>7B Premium</option>
                                     <option>8</option>
                                     <option>9</option>
                                 </select>
