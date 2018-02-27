@@ -325,8 +325,7 @@
                                                             <option value="<%=v.getArea()%>"><%=v.getArea()%></option>
                                                             <option>Arquitetura</option>
                                                             <option>Canais</option>
-                                                            <option>CRM</option>
-                                                            <option>Desk</option>
+                                                            <option>CRM</option>                                                            
                                                             <option>Digital</option>
                                                             <option>Especial</option>
                                                             <option>Legado</option>
