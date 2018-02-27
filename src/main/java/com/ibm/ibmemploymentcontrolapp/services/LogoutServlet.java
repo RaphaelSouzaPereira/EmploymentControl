@@ -7,27 +7,18 @@ package com.ibm.ibmemploymentcontrolapp.services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author RenanFontouraBoldrin
+ * @author FabioHenriqueGoulart
  */
-//Servlet Provisorio para teste do login
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class LoginServlet extends HttpServlet {
-    
-    private static final String USER_ADMIN = "usuario01";
-    private static final String PASS_ADMIN = "1234";
-    
-    private static final String USER_SIMPLES = "usuario02";
-    private static final String PASS_SIMPLES = "4321";
-    
-    
+public class LogoutServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,41 +30,11 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String login = request.getParameter("emailProfissional");
-        String senha = request.getParameter("senhaProfissional");
-
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            //situaçao provisoria, para testar o layout do login
-            if ((login.equals(USER_ADMIN) && senha.equals(PASS_ADMIN)) || 
-                    (login.equals(USER_SIMPLES) && senha.equals(PASS_SIMPLES))){
-            request.getSession().setAttribute("usuarioLogado", login);
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<script type=\"text/javascript\">");
-            out.println("setTimeout(function(){window.location.href='./ListaServlet';},100)");
-            out.println("</script>");
-            out.println("</body>");
-            out.println("</html>");
-        }else{
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<script type=\"text/javascript\">");
-            out.println("setTimeout(function(){window.location.href='./login.jsp';},100)");
-            out.println("</script>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-            
-        }
         
+        request.getSession().invalidate();
+        
+        RequestDispatcher view = request.getRequestDispatcher("./login.jsp");
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

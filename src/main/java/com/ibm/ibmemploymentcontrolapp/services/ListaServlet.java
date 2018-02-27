@@ -50,128 +50,136 @@ public class ListaServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-            String login = (String) request.getSession().getAttribute("usuarioLogado");
-            request.getSession().setAttribute("usuarioLogado", login);
-            
-            response.setContentType("text/html;charset=UTF-8");
-            //Declaração de variáveis
-            int maxEntriesPerPage = 5;
-            int page = 1;
-            DecimalFormat numberFormat = new DecimalFormat("#.00");
 
-            //Pega parametros da jsp
-            String pageNumber = request.getParameter("pn");
-            String searchFilter = request.getParameter("sf");
-            String searchArea = request.getParameter("sa");
-            String searchStatus = request.getParameter("ss");
-            String searchTechnology = request.getParameter("st");
+        String login = (String) request.getSession().getAttribute("usuarioLogado");
+        request.getSession().setAttribute("usuarioLogado", login);
 
-            //Verifica se o filtro está vindo como null e seta um valor padrão
-            if (searchFilter == null) {
-                searchFilter = "Status Open e On Hold";
+        response.setContentType("text/html;charset=UTF-8");
+        //Declaração de variáveis
+        int maxEntriesPerPage = 5;
+        int page = 1;
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+
+        //Pega parametros da jsp
+        String pageNumber = request.getParameter("pn");
+        String searchFilter = request.getParameter("sf");
+        String searchArea = request.getParameter("sa");
+        String searchStatus = request.getParameter("ss");
+        String searchTechnology = request.getParameter("st");
+
+        //Verifica se o filtro está vindo como null e seta um valor padrão
+        if (searchFilter == null) {
+            searchFilter = "Status Open e On Hold";
+        }
+
+        if (searchArea == null) {
+            searchArea = "";
+        }
+
+        if (searchStatus == null) {
+            searchStatus = "";
+        }
+
+        if (searchTechnology == null) {
+            searchTechnology = "";
+        }
+
+        //Seta a página como Integer
+        if (pageNumber != null) {
+            try {
+                page = Integer.parseInt(pageNumber);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
+        }
 
-            if (searchArea == null) {
-                searchArea = "";
-            }
+        //Define o offset e do limite de entradas por página
+        int offset = maxEntriesPerPage * (page - 1);
+        this.offset = offset;
+        this.length = maxEntriesPerPage;
 
-            if (searchStatus == null) {
-                searchStatus = "";
-            }
+        //Inicializa configuracoes de persistencia
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
 
-            if (searchTechnology == null) {
-                searchTechnology = "";
-            }
+        //Instancia os DAOs
+        VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
+        VagaAudDAO vagaAudDAO = new VagaAudDAO(emf.createEntityManager());
+        CandidatoDAO candidatoDAO = new CandidatoDAO(emf.createEntityManager());
+        CandidatoVagaDAO candidatoVagaDAO = new CandidatoVagaDAO(emf.createEntityManager());
 
-            //Seta a página como Integer
-            if (pageNumber != null) {
-                try {
-                    page = Integer.parseInt(pageNumber);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-            }
+        //Instancia os Beans
+        List<VagaBean> listaVagas = new ArrayList<VagaBean>();
+        List<VagaBean> listaDeVagasPorPagina = new ArrayList<VagaBean>();
+        List<VagaAudBean> listaHistoricoVaga = new ArrayList<VagaAudBean>();
+        List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
 
-            //Define o offset e do limite de entradas por página
-            int offset = maxEntriesPerPage * (page - 1);
-            this.offset = offset;
-            this.length = maxEntriesPerPage;
+        //instancia variaveis envolvidas nos request's
+        listaVagas = vagaDAO.listarVagasComFiltro(emf.createEntityManager(), searchArea, searchStatus, searchTechnology, searchFilter);
+        listaDeVagasPorPagina = vagaDAO.listarVagasPorPaginaComFiltro(emf.createEntityManager(), this.length, this.offset, searchArea, searchStatus, searchTechnology, searchFilter);
+        listaCandidatos = candidatoDAO.listarCandidatos();
 
-            //Inicializa configuracoes de persistencia
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
+        ArrayList<CandidatoBean> listaCandidatosV = new ArrayList<CandidatoBean>();
+        VagaBean vag = new VagaBean();
 
-            //Instancia os DAOs
-            VagaDAO vagaDAO = new VagaDAO(emf.createEntityManager());
-            VagaAudDAO vagaAudDAO = new VagaAudDAO(emf.createEntityManager());
-            CandidatoDAO candidatoDAO = new CandidatoDAO(emf.createEntityManager());
-            CandidatoVagaDAO candidatoVagaDAO = new CandidatoVagaDAO(emf.createEntityManager());
+        int resultadoDiasUteis;
+        double impactoFinanceiro;
 
-            //Instancia os Beans
-            List<VagaBean> listaVagas = new ArrayList<VagaBean>();
-            List<VagaBean> listaDeVagasPorPagina = new ArrayList<VagaBean>();
-            List<VagaAudBean> listaHistoricoVaga = new ArrayList<VagaAudBean>();
-            List<CandidatoBean> listaCandidatos = new ArrayList<CandidatoBean>();
+        //Seta os atributos que serão utilizados nos jsp
+        for (int j = 0; j < listaVagas.size(); j++) {
+            // parte incluida para fazer a listagem dos candidatos vinculados a vaga...
+            vag = vagaDAO.buscarVagaPorIdExistente(listaVagas.get(j).getId(), emf.createEntityManager());
+            listaCandidatosV = candidatoVagaDAO.listarCandidatosNaVaga(vag, emf.createEntityManager());
+            request.setAttribute("listaCandidatosVagas" + listaVagas.get(j).getId(), listaCandidatosV);
 
-            //instancia variaveis envolvidas nos request's
-            listaVagas = vagaDAO.listarVagasComFiltro(emf.createEntityManager(), searchArea, searchStatus, searchTechnology, searchFilter);
-            listaDeVagasPorPagina = vagaDAO.listarVagasPorPaginaComFiltro(emf.createEntityManager(), this.length, this.offset, searchArea, searchStatus, searchTechnology, searchFilter);
-            listaCandidatos = candidatoDAO.listarCandidatos();
+            // para a listagem do historico de cada vaga...
+            listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(listaVagas.get(j).getId(), emf.createEntityManager());
+            request.setAttribute("listaHistoricoVagas" + listaVagas.get(j).getId(), listaHistoricoVaga);
 
-            ArrayList<CandidatoBean> listaCandidatosV = new ArrayList<CandidatoBean>();
-            VagaBean vag = new VagaBean();
+            // calculo elaborado com as datas
+            resultadoDiasUteis = diferencaDatas(listaVagas.get(j).getDataDeAbertura(), listaVagas.get(j).getExpectativaDeEntrada());
+            request.setAttribute("expectativaVsAbertura" + listaVagas.get(j).getId(), resultadoDiasUteis); // somente diferenca entre datas com DIAS CORRIDOS
 
-            int resultadoDiasUteis;
-            double impactoFinanceiro;
+            resultadoDiasUteis = CalculoDatas(listaVagas.get(j).getDataDeAbertura(), listaVagas.get(j).getAprovacaoBoardBrasil());
+            request.setAttribute("desdeAberturaBrasil" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis boardBrasil
 
-            //Seta os atributos que serão utilizados nos jsp
-            for (int j = 0; j < listaVagas.size(); j++) {
-                // parte incluida para fazer a listagem dos candidatos vinculados a vaga...
-                vag = vagaDAO.buscarVagaPorIdExistente(listaVagas.get(j).getId(), emf.createEntityManager());
-                listaCandidatosV = candidatoVagaDAO.listarCandidatosNaVaga(vag, emf.createEntityManager());
-                request.setAttribute("listaCandidatosVagas" + listaVagas.get(j).getId(), listaCandidatosV);
+            resultadoDiasUteis = CalculoDatas(listaVagas.get(j).getDataDeAbertura(), listaVagas.get(j).getAprovacaoBoardGlobal());
+            request.setAttribute("desdeAberturaGlobal" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis boardGlobal
 
-                // para a listagem do historico de cada vaga...
-                listaHistoricoVaga = vagaAudDAO.listarHistoricoDaVaga(listaVagas.get(j).getId(), emf.createEntityManager());
-                request.setAttribute("listaHistoricoVagas" + listaVagas.get(j).getId(), listaHistoricoVaga);
+            resultadoDiasUteis = CalculoDatas(listaVagas.get(j).getDataDeAbertura(), listaVagas.get(j).getEntrouNaOperacao());
+            request.setAttribute("desdeAberturaEntrouNaOperacao" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis entrouNaOperacao
 
-                // calculo elaborado com as datas
-                resultadoDiasUteis = diferencaDatas(listaVagas.get(j).getDataDeAbertura(), listaVagas.get(j).getExpectativaDeEntrada());
-                request.setAttribute("expectativaVsAbertura" + listaVagas.get(j).getId(), resultadoDiasUteis); // somente diferenca entre datas com DIAS CORRIDOS
+            resultadoDiasUteis = CalculoDatasExpectativa(listaVagas.get(j).getExpectativaDeEntrada(), listaVagas.get(j).getEntrouNaOperacao());
+            request.setAttribute("expectativaDeEntrada" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis expectativaentrada
 
-                resultadoDiasUteis = CalculoDatas(listaVagas.get(j).getDataDeAbertura(), listaVagas.get(j).getAprovacaoBoardBrasil());
-                request.setAttribute("desdeAberturaBrasil" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis boardBrasil
+            // calculo impacto financeiro
+            impactoFinanceiro = (resultadoDiasUteis * listaVagas.get(j).getRate() * 8.8); // Desde Expectativa * rate * 8.8            
+            request.setAttribute("impactoFinanceiro" + listaVagas.get(j).getId(), "R$ " + numberFormat.format(impactoFinanceiro) + " "); // passando o Impacto Financeiro
+        }
 
-                resultadoDiasUteis = CalculoDatas(listaVagas.get(j).getDataDeAbertura(), listaVagas.get(j).getAprovacaoBoardGlobal());
-                request.setAttribute("desdeAberturaGlobal" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis boardGlobal
+        request.setAttribute("listaCandidatos", listaCandidatos);
 
-                resultadoDiasUteis = CalculoDatas(listaVagas.get(j).getDataDeAbertura(), listaVagas.get(j).getEntrouNaOperacao());
-                request.setAttribute("desdeAberturaEntrouNaOperacao" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis entrouNaOperacao
+        HttpSession httpSession = request.getSession();
+        httpSession.setAttribute("currentPage", Integer.toString(page));
+        httpSession.setAttribute("pageNumbers", getPages(listaVagas));
+        httpSession.setAttribute("listaDeVagasPorPagina", listaDeVagasPorPagina);
+        httpSession.setAttribute("currentFilter", searchFilter);
+        httpSession.setAttribute("currentArea", searchArea);
+        httpSession.setAttribute("currentStatus", searchStatus);
+        httpSession.setAttribute("currentTechnology", searchTechnology);
 
-                resultadoDiasUteis = CalculoDatasExpectativa(listaVagas.get(j).getExpectativaDeEntrada(), listaVagas.get(j).getEntrouNaOperacao());
-                request.setAttribute("expectativaDeEntrada" + listaVagas.get(j).getId(), resultadoDiasUteis); // passando os dias uteis expectativaentrada
-
-                // calculo impacto financeiro
-                impactoFinanceiro = (resultadoDiasUteis * listaVagas.get(j).getRate() * 8.8); // Desde Expectativa * rate * 8.8            
-                request.setAttribute("impactoFinanceiro" + listaVagas.get(j).getId(), "R$ " + numberFormat.format(impactoFinanceiro) + " "); // passando o Impacto Financeiro
-            }
-
-            request.setAttribute("listaCandidatos", listaCandidatos);
-
-            HttpSession httpSession = request.getSession();
-            httpSession.setAttribute("currentPage", Integer.toString(page));
-            httpSession.setAttribute("pageNumbers", getPages(listaVagas));
-            httpSession.setAttribute("listaDeVagasPorPagina", listaDeVagasPorPagina);
-            httpSession.setAttribute("currentFilter", searchFilter);
-            httpSession.setAttribute("currentArea", searchArea);
-            httpSession.setAttribute("currentStatus", searchStatus);
-            httpSession.setAttribute("currentTechnology", searchTechnology);
-
+        if (login.equals("usuario01")) {
             RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
             view.forward(request, response);
+        }
+        if (login.equals("usuario02")) {
+            RequestDispatcher view = request.getRequestDispatcher("./index-consulta.jsp");
+            view.forward(request, response);
+        }
+        RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
+        view.forward(request, response);
 
-            emf.close();
-            emf = null;
+        emf.close();
+        emf = null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -54,6 +54,10 @@
         <servlet-name>VacancyReport</servlet-name>
         <servlet-class>com.ibm.ibmemploymentcontrolapp.services.VacancyReport</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.ibm.ibmemploymentcontrolapp.services.LogoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -97,6 +101,10 @@
     <servlet-mapping>
         <servlet-name>VacancyReport</servlet-name>
         <url-pattern>/VacancyReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
