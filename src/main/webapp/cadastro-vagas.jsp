@@ -66,8 +66,7 @@
                                     <!-- TODO: pegar valores do Enum? Ou deixamos chumbado aqui? -->
                                     <option>Arquitetura</option>
                                     <option>Canais</option>
-                                    <option>CRM</option>
-                                    <option>Desk</option>
+                                    <option>CRM</option>                                    
                                     <option>Digital</option>
                                     <option>Especial</option>
                                     <option>Legado</option>
@@ -100,7 +99,7 @@
                                 </select>
                             </div>
                             <div class="form-group col-xs-12 col-md-4">
-                                <label for="inputDtAbertura">Data Abertura:</label>
+                                <label for="inputDtAbertura">Data Abertura:</label>                                
                                 <input type="date" class="form-control" id="inputDtAbertura" name="data_abertura" required>
                             </div>
                             <div class="form-group col-xs-12 col-md-4">
