@@ -41,6 +41,10 @@
                             <input type="email" class="form-control" id="inputEmail" placeholder="E-mail do candidato" name="emailCandidato" required>
                         </div>
                         <div class="form-group col-xs-12 col-md-9">
+                            <label for="inputComentarios">Comentários:</label>
+                            <input type="text" class="form-control" id="inputComentarios" placeholder="Comentários" name="comentarios">
+                        </div>
+                        <div class="form-group col-xs-12 col-md-9">
                             <button type="submit" class="btn ibmec-btn" id="btn-salvar-candidato" disabled>Salvar</button>
                             <button type="button" class="btn btn-default" id="reset" data-toggle="modal" data-target="#myModal">Cancelar</button>
                         </div>

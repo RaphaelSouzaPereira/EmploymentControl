@@ -20,13 +20,13 @@ public class CandidatoBean implements Serializable{
     private Integer id;
     private String email;
     private String nome;
-    private String observacao;
+    private String comentarios;
     private Collection<Vaga> vagaCollection;
 
-    public CandidatoBean(String email, String nome, String observacao, Collection<Vaga> vagaCollection) {
+    public CandidatoBean(String email, String nome, String comentarios, Collection<Vaga> vagaCollection) {
         this.email = email;
         this.nome = nome;
-        this.observacao = observacao;
+        this.comentarios = comentarios;
         this.vagaCollection = vagaCollection;
     }
 
@@ -61,12 +61,12 @@ public class CandidatoBean implements Serializable{
         this.nome = nome;
     }
 
-    public String getObservacao() {
-        return observacao;
+    public String getComentarios() {
+        return comentarios;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
     }
 
     public Collection<Vaga> getVagaCollection() {

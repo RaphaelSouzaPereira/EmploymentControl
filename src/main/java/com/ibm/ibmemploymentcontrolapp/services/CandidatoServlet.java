@@ -42,6 +42,8 @@ public class CandidatoServlet extends HttpServlet {
         //campos obrigatorios no cadastro
         String nome = request.getParameter("nomeCandidato");
         String email = request.getParameter("emailCandidato");
+        String comentarios = request.getParameter("comentarios");
+        
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
 
         //instacia do DAO e BEAN do candidato para fazer o cadastro
@@ -50,6 +52,7 @@ public class CandidatoServlet extends HttpServlet {
 
         candidato.setNome(nome);
         candidato.setEmail(email);
+        candidato.setComentarios(comentarios);
 
         //salva no banco o novo candidato
         try {

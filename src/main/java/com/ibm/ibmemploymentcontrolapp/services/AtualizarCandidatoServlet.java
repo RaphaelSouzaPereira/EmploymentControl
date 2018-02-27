@@ -40,6 +40,7 @@ public class AtualizarCandidatoServlet extends HttpServlet {
         String id = request.getParameter("id_candidato");
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
+        String comentarios = request.getParameter("comentarios");
 
         //Inicializa configuracoes de persistencia
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.ibm_IBMEmploymentControlAPP_war_1.0-SNAPSHOTPU");
@@ -51,6 +52,7 @@ public class AtualizarCandidatoServlet extends HttpServlet {
         candidato.setId(Integer.parseInt(id));
         candidato.setNome(nome);
         candidato.setEmail(email);
+        candidato.setComentarios(comentarios);
 
         
         try {

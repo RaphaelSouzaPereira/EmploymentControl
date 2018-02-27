@@ -3,36 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.ibm.ibmemploymentcontrolapp.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import org.hibernate.envers.Audited;
 
 /**
  *
-<<<<<<< HEAD
  * @author PriscilaRicardoArrud
-=======
- * @author Raphael de Souza Pereira <raphael.pereira@ibm.com>
- * @param
- * @return   
->>>>>>> 86ff296268d20d1cd69bc85fee5083c0814db690
  */
 @Entity
 @Audited
@@ -43,7 +32,8 @@ import org.hibernate.envers.Audited;
     , @NamedQuery(name = "Candidato.findById", query = "SELECT c FROM Candidato c WHERE c.id = :id")
     , @NamedQuery(name = "Candidato.findByEmail", query = "SELECT c FROM Candidato c WHERE c.email = :email")
     , @NamedQuery(name = "Candidato.findByNome", query = "SELECT c FROM Candidato c WHERE c.nome = :nome")
-    , @NamedQuery(name = "Candidato.findByFilter", query = "SELECT c FROM Candidato c WHERE c.nome LIKE :nome")})
+    , @NamedQuery(name = "Candidato.findByComentarios", query = "SELECT c FROM Candidato c WHERE c.comentarios = :comentarios")
+    ,@NamedQuery(name = "Candidato.findByFilter", query = "SELECT c FROM Candidato c WHERE c.nome LIKE :nome")})
 public class Candidato implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,8 +49,9 @@ public class Candidato implements Serializable {
     @Size(max = 255)
     @Column(name = "nome")
     private String nome;
-    @ManyToMany(mappedBy = "candidatoCollection", fetch = FetchType.EAGER)
-    private Collection<Vaga> vagaCollection;
+    @Size(max = 255)
+    @Column(name = "comentarios")
+    private String comentarios;
 
     public Candidato() {
     }
@@ -93,13 +84,12 @@ public class Candidato implements Serializable {
         this.nome = nome;
     }
 
-    @XmlTransient
-    public Collection<Vaga> getVagaCollection() {
-        return vagaCollection;
+    public String getComentarios() {
+        return comentarios;
     }
 
-    public void setVagaCollection(Collection<Vaga> vagaCollection) {
-        this.vagaCollection = vagaCollection;
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
     }
 
     @Override
