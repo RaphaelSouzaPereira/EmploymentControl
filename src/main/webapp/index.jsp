@@ -51,60 +51,59 @@
                 <div class="col-12">
                     <h2 class="ibmec-title mb-3">Consultar Vagas Cadastradas</h2>
                     <hr>
-                    <h3 class="mb-3 ibmec-subtitle">Filtrar por...</h2>
-                        <form class="consulta-vagas" action="./ListaServlet" method="post">
-                            <div class="form-row mb-4">
-                                <div class="form-group col-xs-12 col-md-3">
-                                    <label for="inputStatus">Área:</label>
-                                    <select id="inputAreaConsulta" class="form-control" name="sa">
-                                        <option <%= currentArea.equals("Arquitetura") ? "selected" : ""%>>Arquitetura</option>
-                                        <option <%= currentArea.equals("Canais") ? "selected" : ""%>>Canais</option>
-                                        <option <%= currentArea.equals("CRM") ? "selected" : ""%>>CRM</option>
-                                        <option <%= currentArea.equals("Digital") ? "selected" : ""%>>Digital</option>
-                                        <option <%= currentArea.equals("Especial") ? "selected" : ""%>>Especial</option>
-                                        <option <%= currentArea.equals("Legado") ? "selected" : ""%>>Legado</option>
-                                        <option <%= currentArea.equals("Suporte") ? "selected" : ""%>>Suporte</option>
-                                        <option <%= currentArea.equals("All") ? "selected" : ""%>>All</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-xs-12 col-md-3">
-                                    <label for="inputStatus">Status:</label>
-                                    <select id="inputStatusConsulta" class="form-control" name="ss">
-                                        <option <%= currentStatus.equals("Open") ? "selected" : ""%>>Open</option>
-                                        <option <%= currentStatus.equals("Closed") ? "selected" : ""%>>Closed</option>
-                                        <option <%= currentStatus.equals("On hold") ? "selected" : ""%>>On hold</option>
-                                        <option <%= currentStatus.equals("Cancelada") ? "selected" : ""%>>Cancelada</option>
-                                        <option <%= currentStatus.equals("Open e On hold") ? "selected" : ""%>>Open e On hold</option>
-                                        <option <%= currentStatus.equals("All") ? "selected" : ""%>>All</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-xs-12 col-md-3">
-                                    <label for="inputStatus">Tecnologia:</label>
-                                    <select id="inputTecnologiaConsulta" class="form-control" name="st">
-                                        <option <%= currentTechnology.equals("Analista de Automacao") ? "selected" : ""%>>Analista de Automacao</option>
-                                        <option <%= currentTechnology.equals("Analista Funcional") ? "selected" : ""%>>Analista Funcional</option>
-                                        <option <%= currentTechnology.equals("Arquiteto") ? "selected" : ""%>>Arquiteto</option>
-                                        <option <%= currentTechnology.equals("Atendente") ? "selected" : ""%>>Atendente</option>
-                                        <option <%= currentTechnology.equals("Automacao Testes") ? "selected" : ""%>>Automação Testes</option>
-                                        <option <%= currentTechnology.equals("Clipper") ? "selected" : ""%>>Clipper</option>
-                                        <option <%= currentTechnology.equals("Designer UX") ? "selected" : ""%>>Designer UX</option>
-                                        <option <%= currentTechnology.equals("Especialista Mobilidade") ? "selected" : ""%>>Especialista Mobilidade</option>
-                                        <option <%= currentTechnology.equals("Java") ? "selected" : ""%>>Java</option>
-                                        <option <%= currentTechnology.equals("Java Backend") ? "selected" : ""%>>Java Backend</option>
-                                        <option <%= currentTechnology.equals("Java Frontend") ? "selected" : ""%>>Java Frontend</option>
-                                        <option <%= currentTechnology.equals("Mobile") ? "selected" : ""%>>Mobile</option>
-                                        <option <%= currentTechnology.equals("Mobile Android") ? "selected" : ""%>>Mobile Android</option>
-                                        <option <%= currentTechnology.equals("Mobile Hibrido") ? "selected" : ""%>>Mobile Híbrido</option>
-                                        <option <%= currentTechnology.equals("Mobile iOS") ? "selected" : ""%>>Mobile iOS</option>
-                                        <option <%= currentTechnology.equals("ODI") ? "selected" : ""%>>ODI</option>
-                                        <option <%= currentTechnology.equals("All") ? "selected" : ""%>>All</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-xs-12 col-md-3">
-                                    <button type="submit" class="btn btn-block ibmec-btn" style="margin-top:32px" name="botao-de-consulta" value="Consultar">Consultar</button>
-                                </div>
+                    <form class="consulta-vagas" action="./ListaServlet" method="post">
+                        <div class="form-row mb-4">
+                            <div class="form-group col-xs-12 col-md-3">
+                                <label for="inputStatus">Área:</label>
+                                <select id="inputAreaConsulta" class="form-control" name="sa">
+                                    <option <%= currentArea.equals("Arquitetura") ? "selected" : ""%>>Arquitetura</option>
+                                    <option <%= currentArea.equals("Canais") ? "selected" : ""%>>Canais</option>
+                                    <option <%= currentArea.equals("CRM") ? "selected" : ""%>>CRM</option>
+                                    <option <%= currentArea.equals("Digital") ? "selected" : ""%>>Digital</option>
+                                    <option <%= currentArea.equals("Especial") ? "selected" : ""%>>Especial</option>
+                                    <option <%= currentArea.equals("Legado") ? "selected" : ""%>>Legado</option>
+                                    <option <%= currentArea.equals("Suporte") ? "selected" : ""%>>Suporte</option>
+                                    <option <%= currentArea.equals("All") ? "selected" : ""%>>All</option>
+                                </select>
                             </div>
-                        </form>
+                            <div class="form-group col-xs-12 col-md-3">
+                                <label for="inputStatus">Status:</label>
+                                <select id="inputStatusConsulta" class="form-control" name="ss">
+                                    <option <%= currentStatus.equals("Open") ? "selected" : ""%>>Open</option>
+                                    <option <%= currentStatus.equals("Closed") ? "selected" : ""%>>Closed</option>
+                                    <option <%= currentStatus.equals("On hold") ? "selected" : ""%>>On hold</option>
+                                    <option <%= currentStatus.equals("Cancelada") ? "selected" : ""%>>Cancelada</option>
+                                    <option <%= currentStatus.equals("Open e On hold") ? "selected" : ""%>>Open e On hold</option>
+                                    <option <%= currentStatus.equals("All") ? "selected" : ""%>>All</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-3">
+                                <label for="inputStatus">Tecnologia:</label>
+                                <select id="inputTecnologiaConsulta" class="form-control" name="st">
+                                    <option <%= currentTechnology.equals("Analista de Automacao") ? "selected" : ""%>>Analista de Automacao</option>
+                                    <option <%= currentTechnology.equals("Analista Funcional") ? "selected" : ""%>>Analista Funcional</option>
+                                    <option <%= currentTechnology.equals("Arquiteto") ? "selected" : ""%>>Arquiteto</option>
+                                    <option <%= currentTechnology.equals("Atendente") ? "selected" : ""%>>Atendente</option>
+                                    <option <%= currentTechnology.equals("Automacao Testes") ? "selected" : ""%>>Automação Testes</option>
+                                    <option <%= currentTechnology.equals("Clipper") ? "selected" : ""%>>Clipper</option>
+                                    <option <%= currentTechnology.equals("Designer UX") ? "selected" : ""%>>Designer UX</option>
+                                    <option <%= currentTechnology.equals("Especialista Mobilidade") ? "selected" : ""%>>Especialista Mobilidade</option>
+                                    <option <%= currentTechnology.equals("Java") ? "selected" : ""%>>Java</option>
+                                    <option <%= currentTechnology.equals("Java Backend") ? "selected" : ""%>>Java Backend</option>
+                                    <option <%= currentTechnology.equals("Java Frontend") ? "selected" : ""%>>Java Frontend</option>
+                                    <option <%= currentTechnology.equals("Mobile") ? "selected" : ""%>>Mobile</option>
+                                    <option <%= currentTechnology.equals("Mobile Android") ? "selected" : ""%>>Mobile Android</option>
+                                    <option <%= currentTechnology.equals("Mobile Hibrido") ? "selected" : ""%>>Mobile Híbrido</option>
+                                    <option <%= currentTechnology.equals("Mobile iOS") ? "selected" : ""%>>Mobile iOS</option>
+                                    <option <%= currentTechnology.equals("ODI") ? "selected" : ""%>>ODI</option>
+                                    <option <%= currentTechnology.equals("All") ? "selected" : ""%>>All</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-3">
+                                <button type="submit" class="btn btn-block ibmec-btn" style="margin-top:32px" name="botao-de-consulta" value="Consultar">Consultar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <!---------- Consulta de Vagas - Fim ---------->

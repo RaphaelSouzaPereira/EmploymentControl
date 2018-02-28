@@ -30,7 +30,7 @@
         <title>Home</title>
     </head>
     <body>
-        <% 
+        <%
             String validacaoUser = "usuario02";
             String validacaoPass = "4321";
 
@@ -44,7 +44,6 @@
             <div class="panel-group" id="accordion">
                 <!---------- Consulta de Vagas - Início ---------->
                 <%
-                    String currentFilter = (String) session.getAttribute("currentFilter");
                     String currentArea = (String) session.getAttribute("currentArea");
                     String currentStatus = (String) session.getAttribute("currentStatus");
                     String currentTechnology = (String) session.getAttribute("currentTechnology");
@@ -53,33 +52,7 @@
                     <div class="col-12">
                         <h2 class="ibmec-title mb-3">Consultar Vagas Cadastradas</h2>
                         <hr>
-                        <h3 class="mb-3 ibmec-subtitle">Filtrar por...</h2>
                             <form class="consulta-vagas" action="./ListaServlet" method="post">
-                                <div class="form-row mb-4">
-                                    <div class="form-group col-xs-12 col-md-12">
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="OpenAndOnHoldOption" name="sf" class="custom-control-input" value="Status Open e On Hold" <%= currentFilter.equals("Status Open e On Hold") ? "checked" : ""%>>
-                                            <label class="custom-control-label" for="OpenAndOnHoldOption">Status Open e On Hold</label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline">
-
-                                            <input type="radio" id="AreaOption" name="sf" class="custom-control-input" value="Area" <%= currentFilter.equals("Area") ? "checked" : ""%>>
-                                            <label class="custom-control-label" for="AreaOption">Area</label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="StatusOption" name="sf" class="custom-control-input" value="Status" <%= currentFilter.equals("Status") ? "checked" : ""%>>
-                                            <label class="custom-control-label" for="StatusOption">Status</label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="TecnologiaOption" name="sf" class="custom-control-input" value="Tecnologia" <%= currentFilter.equals("Tecnologia") ? "checked" : ""%>>
-                                            <label class="custom-control-label" for="TecnologiaOption">Tecnologia</label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="AllOptions" name="sf" class="custom-control-input" value="Area, Status e Tecnologia" <%= currentFilter.equals("Area, Status e Tecnologia") ? "checked" : ""%>>
-                                            <label class="custom-control-label" for="AllOptions">Area, Status e Tecnologia</label>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="form-row mb-4">
                                     <div class="form-group col-xs-12 col-md-3">
                                         <label for="inputStatus">Área:</label>
@@ -87,11 +60,11 @@
                                             <option <%= currentArea.equals("Arquitetura") ? "selected" : ""%>>Arquitetura</option>
                                             <option <%= currentArea.equals("Canais") ? "selected" : ""%>>Canais</option>
                                             <option <%= currentArea.equals("CRM") ? "selected" : ""%>>CRM</option>
-                                            <option <%= currentArea.equals("Desk") ? "selected" : ""%>>Desk</option>
                                             <option <%= currentArea.equals("Digital") ? "selected" : ""%>>Digital</option>
                                             <option <%= currentArea.equals("Especial") ? "selected" : ""%>>Especial</option>
                                             <option <%= currentArea.equals("Legado") ? "selected" : ""%>>Legado</option>
                                             <option <%= currentArea.equals("Suporte") ? "selected" : ""%>>Suporte</option>
+                                            <option <%= currentArea.equals("All") ? "selected" : ""%>>All</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-xs-12 col-md-3">
@@ -101,21 +74,30 @@
                                             <option <%= currentStatus.equals("Closed") ? "selected" : ""%>>Closed</option>
                                             <option <%= currentStatus.equals("On hold") ? "selected" : ""%>>On hold</option>
                                             <option <%= currentStatus.equals("Cancelada") ? "selected" : ""%>>Cancelada</option>
+                                            <option <%= currentStatus.equals("Open e On hold") ? "selected" : ""%>>Open e On hold</option>
+                                            <option <%= currentStatus.equals("All") ? "selected" : ""%>>All</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-xs-12 col-md-3">
                                         <label for="inputStatus">Tecnologia:</label>
                                         <select id="inputTecnologiaConsulta" class="form-control" name="st">
-                                            <option <%= currentTechnology.equals("Java") ? "selected" : ""%>>Java</option>
-                                            <!--TODO - Tratar acentuacao-->
-                                            <option <%= currentTechnology.equals("Analista de Automacao") ? "selected" : ""%>>Analista de Automação</option>
+                                            <option <%= currentTechnology.equals("Analista de Automacao") ? "selected" : ""%>>Analista de Automacao</option>
+                                            <option <%= currentTechnology.equals("Analista Funcional") ? "selected" : ""%>>Analista Funcional</option>
+                                            <option <%= currentTechnology.equals("Arquiteto") ? "selected" : ""%>>Arquiteto</option>
                                             <option <%= currentTechnology.equals("Atendente") ? "selected" : ""%>>Atendente</option>
+                                            <option <%= currentTechnology.equals("Automacao Testes") ? "selected" : ""%>>Automação Testes</option>
                                             <option <%= currentTechnology.equals("Clipper") ? "selected" : ""%>>Clipper</option>
                                             <option <%= currentTechnology.equals("Designer UX") ? "selected" : ""%>>Designer UX</option>
                                             <option <%= currentTechnology.equals("Especialista Mobilidade") ? "selected" : ""%>>Especialista Mobilidade</option>
                                             <option <%= currentTechnology.equals("Java") ? "selected" : ""%>>Java</option>
                                             <option <%= currentTechnology.equals("Java Backend") ? "selected" : ""%>>Java Backend</option>
+                                            <option <%= currentTechnology.equals("Java Frontend") ? "selected" : ""%>>Java Frontend</option>
+                                            <option <%= currentTechnology.equals("Mobile") ? "selected" : ""%>>Mobile</option>
+                                            <option <%= currentTechnology.equals("Mobile Android") ? "selected" : ""%>>Mobile Android</option>
+                                            <option <%= currentTechnology.equals("Mobile Hibrido") ? "selected" : ""%>>Mobile Híbrido</option>
+                                            <option <%= currentTechnology.equals("Mobile iOS") ? "selected" : ""%>>Mobile iOS</option>
                                             <option <%= currentTechnology.equals("ODI") ? "selected" : ""%>>ODI</option>
+                                            <option <%= currentTechnology.equals("All") ? "selected" : ""%>>All</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-xs-12 col-md-3">
@@ -271,11 +253,11 @@
                                     int previousPage = currentPage == 1 ? 1 : currentPage - 1;
                                     int nextPage = pageNumbers.size() == currentPage ? currentPage : currentPage + 1;
                                 %>
-                                <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=previousPage%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=previousPage%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>">Previous</a></li>
                                     <%for (int i = 0; i < pageNumbers.size(); i++) {%>                           
-                                <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=pageNumbers.get(i)%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>"><%=pageNumbers.get(i)%></a></li>
+                                <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=pageNumbers.get(i)%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>"><%=pageNumbers.get(i)%></a></li>
                                     <%}%>
-                                <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=nextPage%>&sf=<%=currentFilter%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>">Next</a></li>
+                                <li class="page-item"><a class="page-link" href="./ListaServlet?pn=<%=nextPage%>&sa=<%=currentArea%>&ss=<%=currentStatus%>&st=<%=currentTechnology%>">Next</a></li>
                             </ul>
                         </nav>
                     </div>
