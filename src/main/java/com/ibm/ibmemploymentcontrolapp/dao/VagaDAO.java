@@ -297,7 +297,9 @@ public class VagaDAO {
                 .setParameter("tecnologia", tecnologia)
                 .setParameter("status1", status1)
                 .setParameter("status2", status2)
-                .setParameter("status3", status3);
+                .setParameter("status3", status3)
+                .setMaxResults(maxResults)
+                .setFirstResult(offset);
 
         List<VagaBean> listarPorPaginaComFiltro = new ArrayList<VagaBean>();
 

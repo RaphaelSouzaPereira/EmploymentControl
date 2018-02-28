@@ -21,5 +21,8 @@
                 <li><a class="nav-link py-2 px-3 menu-link ibmec-menu-link" href="./ListaCandidatoServlet">Visualizar</a></li>
             </ul>
         </li>
+        <li class="dropdown">
+            <a class="nav-link py-4 px-4 menu-link ibmec-menu-link" href="./LogoutServlet">Logout</a>
+        </li>
     </ul>
 </header>
