@@ -160,18 +160,23 @@ public class ListaServlet extends HttpServlet {
         httpSession.setAttribute("currentStatus", searchStatus);
         httpSession.setAttribute("currentTechnology", searchTechnology);
 
-        if (login.equals("usuario01")) {
+        
+        if (login != null && login.equals("usuario01")) {
             emf.close();
             emf = null;
             RequestDispatcher view = request.getRequestDispatcher("./index.jsp");
             view.forward(request, response);
         }
-        if (login.equals("usuario02")) {
+        if (login != null && login.equals("usuario02")) {
             emf.close();
             emf = null;
             RequestDispatcher view = request.getRequestDispatcher("./index-consulta.jsp");
             view.forward(request, response);
         }
+        emf.close();
+        emf = null;
+        RequestDispatcher view = request.getRequestDispatcher("./login.jsp");
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
